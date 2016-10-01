@@ -9,10 +9,12 @@
 
 ### Integrantes del equipo
 
-* XXXX
-* XXXX
-* XXXX
-* XXXX
+* Leonardo Lanzieri ([LLanzieri](https://github.com/LLanzieri))
+* Gustavo Gonzalez ([escurragonzalez](https://github.com/escurragonzalez))
+* Mauro Trotta ([mauroat](https://github.com/mauroat))
+* Cristian Gabriel Vera ([CristianGVera](https://github.com/CristianGVera))
+* Ignacio Landaburu ([ilandaburu](https://github.com/ilandaburu))
+* Santiago Valenzuela ([jsvalenzuela](https://github.com/jsvalenzuela))
 
 ## Sobre la tecnología
 
