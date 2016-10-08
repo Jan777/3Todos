@@ -1,4 +1,4 @@
-# [Nombre del juego]
+# BloodyWars
 
 ## Sobre las personas
 
