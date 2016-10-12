@@ -1,5 +1,12 @@
 # BloodyWars
 
+Hace 5000 años durante la Era del Amanecer, los primeros habitantes de la inhóspita Tierra, se encontraban en una batalla constante contra el Imperio que los subyugaba.  
+De la armadura de los luchadores derrotados en batalla se fundió la mejor espada jamás creada que fue otorgada a Kung Fury, el mejor combatiente de todos los tiempos.  
+Pasaron los años y Kung Fury ya de anciano muere dejando como legado su espada legendaria a la orden de los mortales. 
+Es así como todos los peleadores de la nueva era se encuentran en búsqueda de la poderosa espada.  
+
+Los jugadores de BloodyWars controlan un avatar dentro de un mundo explorando el entorno, combatiendo contra varios monstruos y jugadores e interactuando con personajes. Las batallas ayudarán a los jugadores a poder subir de nivel y de esta forma, podrán conseguir equipamiento que les ayudará más adelante a combatir a las distintas criaturas que vayan apareciendo en su camino.
+
 ## Sobre las personas
 
 ### Docentes del Taller
