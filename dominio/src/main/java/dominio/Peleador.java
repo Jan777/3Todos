@@ -4,5 +4,5 @@ public interface Peleador {
 
 	public void atacar(Peleador victima);
 	public void serAtacado(int dano);
-	public void dejarItem();
+	public PersonajeEquipado dejarItem();
 }

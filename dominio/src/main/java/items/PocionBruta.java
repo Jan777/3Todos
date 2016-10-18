@@ -9,52 +9,24 @@ public class PocionBruta extends PersonajeEquipado{
 	public PocionBruta(Personaje p) {
 		super(p);
 		this.p = p;
+		this.prioridad=2;
 	}
 
 	
 	@Override
 	public int calcularPuntosDeAtaque() {
-		return p.calcularPuntosDeAtaque();
+		return p.calcularPuntosDeAtaque()-2;
 	}
 
 	@Override
 	public int calcularPuntosDeDefensa() {
-		// TODO Auto-generated method stub
-		return 0;
+		return p.calcularPuntosDeDefensa()+4;
 	}
 
 	@Override
 	public int calcularPuntosDeMagia() {
-		// TODO Auto-generated method stub
-		return 0;
+		return p.calcularPuntosDeMagia()+2;
 	}
 
-
-	@Override
-	public void atacar(Peleador victima) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void dejarItem() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void despuesDeAtacar() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	protected boolean puedeAtacar() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 }

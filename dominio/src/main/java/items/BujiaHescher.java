@@ -2,31 +2,32 @@ package items;
 
 import dominio.*;
 
-
-public class BastonDeSaruman extends PersonajeEquipado{
-
+public class BujiaHescher extends PersonajeEquipado {
+	
 	private Personaje p;
 	
-	public BastonDeSaruman(Personaje p) {
+	public BujiaHescher(Personaje p) {
 		super(p);
+		super.agregarALista(this);
+		super.prioridad=5;		
 		this.p = p;
-		this.prioridad=5;
+		
+		
 	}
-
 
 	@Override
 	public int calcularPuntosDeAtaque() {
-		return p.calcularPuntosDeAtaque()+1;
+		return super.calcularPuntosDeAtaque()+1;
 	}
 
 	@Override
 	public int calcularPuntosDeDefensa() {
-		return p.calcularPuntosDeDefensa();
+		return super.calcularPuntosDeDefensa()+1;
 	}
 
 	@Override
 	public int calcularPuntosDeMagia() {
-		return p.calcularPuntosDeMagia()+4;
+		return super.calcularPuntosDeMagia()+1;
 	}
 
 	@Override

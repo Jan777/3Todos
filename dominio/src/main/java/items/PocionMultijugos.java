@@ -7,48 +7,23 @@ public class PocionMultijugos extends PersonajeEquipado{
 	public PocionMultijugos(Personaje p) {
 		super(p);
 		this.p =p;
+		this.prioridad=1;
 	}
 
-	@Override
-	public void atacar(Peleador victima) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void dejarItem() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public int calcularPuntosDeAtaque() {
-		// TODO Auto-generated method stub
-		return 0;
+		return p.calcularPuntosDeAtaque();
 	}
 
 	@Override
 	public int calcularPuntosDeDefensa() {
-		// TODO Auto-generated method stub
-		return 0;
+		return p.calcularPuntosDeDefensa()+3;
 	}
 
 	@Override
 	public int calcularPuntosDeMagia() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void despuesDeAtacar() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected boolean puedeAtacar() {
-		// TODO Auto-generated method stub
-		return false;
+		return p.calcularPuntosDeMagia()+3;
 	}
 
 }

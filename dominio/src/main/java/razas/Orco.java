@@ -6,7 +6,41 @@ public class Orco extends Personaje{
 
 	public Orco(String username, String password) {
 		super(username, password);
-		// TODO Auto-generated constructor stub
+		this.setRaza("Orco");
+	}
+	
+	public Orco(Personaje p) {
+		super(p);
+		this.setRaza("Orco");
+	}
+	
+
+	@Override
+	public void despuesDeAtacar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	// Cuando llega acá compara con la energia del personajeDecorado que siempre es 100.
+	@Override
+	protected  boolean puedeAtacar() {
+		return super.energia > 10 + this.calcularPuntosDeAtaque();
+	}
+	
+	
+	@Override
+	public int calcularPuntosDeAtaque() {
+		return 12;
+	}
+
+	@Override
+	public int calcularPuntosDeDefensa() {
+		return 5;
+	}
+
+	@Override
+	public int calcularPuntosDeMagia() {
+		return 3;
 	}
 
 	@Override
@@ -16,21 +50,12 @@ public class Orco extends Personaje{
 	}
 
 	@Override
-	public void dejarItem() {
-		// TODO Auto-generated method stub
-		
+	public PersonajeEquipado dejarItem() {
+		return null;		
 	}
-
+	
 	@Override
-	public void despuesDeAtacar() {
-		// TODO Auto-generated method stub
-		
+	public String getRaza() {
+		return "Orco";
 	}
-
-	@Override
-	protected boolean puedeAtacar() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }

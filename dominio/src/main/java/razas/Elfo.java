@@ -1,12 +1,31 @@
 package razas;
 
 import dominio.*;
-
 public class Elfo extends Personaje{
 
 	public Elfo(String username, String password) {
 		super(username, password);
-		// TODO Auto-generated constructor stub
+		this.setRaza("Elfo");
+	}
+	
+	public Elfo(Usuario u) {
+		super(u.getUsername(),u.getPassword());
+		this.setRaza("Elfo");
+	}
+
+	@Override
+	public PersonajeEquipado dejarItem() {
+		return null;
+	}
+
+	@Override
+	public void despuesDeAtacar() {
+		// TODO Auto-generated method stub		
+	}
+
+	@Override
+	protected boolean puedeAtacar() {
+		return energia >= 10;
 	}
 
 	@Override
@@ -16,21 +35,23 @@ public class Elfo extends Personaje{
 	}
 
 	@Override
-	public void dejarItem() {
-		// TODO Auto-generated method stub
-		
+	public int calcularPuntosDeAtaque() {
+		return 5;
 	}
 
 	@Override
-	public void despuesDeAtacar() {
-		// TODO Auto-generated method stub
-		
+	public int calcularPuntosDeDefensa() {
+		return 5;
 	}
 
 	@Override
-	protected boolean puedeAtacar() {
-		// TODO Auto-generated method stub
-		return false;
+	public int calcularPuntosDeMagia() {
+		return 10;
+	}
+
+	@Override
+	public String getRaza() {
+		return "Elfo";
 	}
 
 }

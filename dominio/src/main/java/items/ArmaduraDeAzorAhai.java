@@ -1,33 +1,53 @@
 package items;
 
 import dominio.*;
+import razas.*;
 
 public class ArmaduraDeAzorAhai extends PersonajeEquipado{
 
-	
 	private Personaje p;
+	
+	/* @Mauro - 17-10-16 -  
+	 * Creo un constructor para cada subpersonaje ya que de lo contrario, al aplicar decorator
+	 * no guarda la raza del personaje. 
+	 * */
 	
 	public ArmaduraDeAzorAhai(Personaje p) {
 		super(p);
-		this.p = p;
+		super.agregarALista(this);
+		this.p = p;		
+		this.prioridad = 3;
 	}
+	
+	public ArmaduraDeAzorAhai(Orco p) {
+		super(p);
+		this.p = p;
+		this.p.agregarALista(this);
+		this.prioridad = 3;
+		
+	}
+	
+	public ArmaduraDeAzorAhai(Humano p) {
+		super(p);
+		this.p = p;
+		this.p.agregarALista(this);
+		this.prioridad = 3;
+	}
+	
 
 	@Override
 	public int calcularPuntosDeAtaque() {
-		// TODO Auto-generated method stub
-		return 0;
+		return p.calcularPuntosDeAtaque();
 	}
 
 	@Override
 	public int calcularPuntosDeDefensa() {
-		// TODO Auto-generated method stub
-		return 0;
+		return p.calcularPuntosDeDefensa()+6;
 	}
 
 	@Override
 	public int calcularPuntosDeMagia() {
-		// TODO Auto-generated method stub
-		return 0;
+		return p.calcularPuntosDeMagia()+1;
 	}
 
 	@Override
@@ -37,21 +57,15 @@ public class ArmaduraDeAzorAhai extends PersonajeEquipado{
 	}
 
 	@Override
-	public void dejarItem() {
-		// TODO Auto-generated method stub
-		
+	public PersonajeEquipado dejarItem() {
+		return (PersonajeEquipado) p;	
 	}
 
-	@Override
-	public void despuesDeAtacar() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
-	protected boolean puedeAtacar() {
-		// TODO Auto-generated method stub
-		return false;
+	public String getRaza() {
+		return p.getRaza();
 	}
+
 
 }

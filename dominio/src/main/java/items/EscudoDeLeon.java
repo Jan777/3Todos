@@ -3,53 +3,28 @@ package items;
 import dominio.*;
 
 public class EscudoDeLeon extends PersonajeEquipado{
-	private Personaje p;
 	
 	public EscudoDeLeon(Personaje p) {
 		super(p);
-		this.p = p;
+		super.agregarALista(this);
+		super.prioridad=5;		
 	}
 
-	@Override
-	public void atacar(Peleador victima) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void dejarItem() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public int calcularPuntosDeAtaque() {
-		// TODO Auto-generated method stub
-		return 0;
+		return super.calcularPuntosDeAtaque();
 	}
 
 	@Override
 	public int calcularPuntosDeDefensa() {
-		// TODO Auto-generated method stub
-		return 0;
+		return super.calcularPuntosDeDefensa()+4;
 	}
 
 	@Override
 	public int calcularPuntosDeMagia() {
-		// TODO Auto-generated method stub
-		return 0;
+		return super.calcularPuntosDeMagia();
 	}
 
-	@Override
-	public void despuesDeAtacar() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected boolean puedeAtacar() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
 }

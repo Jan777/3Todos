@@ -2,12 +2,38 @@ package razas;
 
 import dominio.*;
 
-public class Humano extends Personaje{
-
-	public Humano(String username, String password) {
-		super(username, password);
-		// TODO Auto-generated constructor stub
+public class Humano extends Personaje {
+	
+	public Humano(String nombre, String password){
+		super(nombre,password);
+		this.setRaza("Humano");
 	}
+	
+	public Humano(Personaje p){
+		super(p);
+		this.setRaza("Humano");
+	}
+	
+	@Override
+	public int calcularPuntosDeAtaque() {
+		return 10;
+	}
+
+	@Override
+	protected boolean puedeAtacar() {
+		return energia >= 10;
+	}
+
+	@Override
+	public int calcularPuntosDeDefensa() {
+		return 10;
+	}
+
+	@Override
+	public int calcularPuntosDeMagia() {
+		return this.magia*0;
+	}
+
 
 	@Override
 	public void atacar(Peleador victima) {
@@ -15,22 +41,18 @@ public class Humano extends Personaje{
 		
 	}
 
+
 	@Override
-	public void dejarItem() {
-		// TODO Auto-generated method stub
-		
+	public String getRaza() {
+		return "Humano";
 	}
 
 	@Override
-	public void despuesDeAtacar() {
-		// TODO Auto-generated method stub
-		
+	public PersonajeEquipado dejarItem() {
+		return null;
 	}
 
-	@Override
-	protected boolean puedeAtacar() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
+	
 }
+

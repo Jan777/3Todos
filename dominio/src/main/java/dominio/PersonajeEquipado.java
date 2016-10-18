@@ -1,22 +1,70 @@
 package dominio;
 
-public abstract class PersonajeEquipado extends Personaje{
+public class PersonajeEquipado extends Personaje {
 
-	protected Personaje p; 
+	Personaje personajeDecorado;
 	protected int prioridad;
 	
-	public PersonajeEquipado(Personaje p) {
-		super(p.getUsername(), p.getPassword());
-		this.p = p;
-		this.prioridad = 0;
+	public PersonajeEquipado(Personaje personajeDecorado) {
+		super(personajeDecorado);
+		this.personajeDecorado = personajeDecorado;
 	}
 
-	public abstract int calcularPuntosDeAtaque();
-	public abstract int calcularPuntosDeDefensa();
-	public abstract int calcularPuntosDeMagia();
-	public void dejarMejorItem() {
+	@Override
+	protected boolean puedeAtacar() {
+		return this.personajeDecorado.puedeAtacar();
+	}
+
+	@Override
+	public int calcularPuntosDeAtaque() {
+		return this.personajeDecorado.calcularPuntosDeAtaque();
+	}
+
+
+	@Override
+	public int calcularPuntosDeDefensa() {
+		return this.personajeDecorado.calcularPuntosDeDefensa();
+	}
+
+	@Override
+	public int calcularPuntosDeMagia() {
+		return this.personajeDecorado.calcularPuntosDeMagia();
+	}
+
+	@Override
+	public void atacar(Peleador victima) {
+		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public PersonajeEquipado dejarItem() {
+		this.personajeDecorado.lista.remove(this);
+		return (PersonajeEquipado) personajeDecorado;	
+	}
+
+	@Override
+	public String getRaza() {
+		return personajeDecorado.getRaza();
+	}
+	
+	public void equipar(){
+		this.personajeDecorado.lista.add(this);
+	}
+	
+
+	public int getPrioridad() {
+		return this.prioridad;
+	}
+
+	public PersonajeEquipado dejarMejorItem(){
+		this.lista.remove(getItemMasPrioritario());
+		return this.dejarItem();
+		 
 	}
 	
 	
 }
+
+	
+
