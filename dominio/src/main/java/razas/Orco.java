@@ -16,14 +16,7 @@ public class Orco extends Personaje{
 	
 
 	@Override
-	public void despuesDeAtacar() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	// Cuando llega acá compara con la energia del personajeDecorado que siempre es 100.
-	@Override
-	protected  boolean puedeAtacar() {
+	public  boolean puedeAtacar() {
 		return this.energia > (10 + this.calcularPuntosDeAtaque());
 	}
 	
@@ -45,8 +38,7 @@ public class Orco extends Personaje{
 
 	@Override
 	public void atacar(Peleador victima) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
 
 	@Override

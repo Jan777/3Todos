@@ -20,10 +20,10 @@ public abstract class Personaje extends Usuario implements Peleador {
 				  experiencia,
 				  nivel,
 				  energia, 
-				  ataque,
+				  ataque, 
 				  defensa,
 				  magia,
-				  daño, // @Mauro - Este atributo me parece al dope
+				  //daño, // @Mauro - Este atributo me parece al dope
 				  destreza,
 				  velocidad,
 				  potencia;
@@ -48,16 +48,61 @@ public abstract class Personaje extends Usuario implements Peleador {
 		this.nivel = 1;	
 	}
 	
+	/* @mauroat - 18/10/16
+	 * Se modifica este método para que se sume más experiencia en caso que mate al atacado. 
+	 * Mi idea es que cuando esten implementadas las razas tambien afecten la experiencia.
+	 * 
+	 * */
 	
 	// Esto recibia un Atacable
 	public final void atacar(Personaje atacado) throws FileNotFoundException {
 		if(atacado.estaVivo()){
 			if (this.puedeAtacar()) {
 				atacado.serAtacado(calcularPuntosDeAtaque());
+				// El siguiente metodo podrá implementarse cuando definamos la ubicación de los personajes
+				//atacado.despuesDeSerAtacado();
 				this.energia -= calcularPuntosDeAtaque();
-				if(atacado.estaVivo())
-				// Si mato al atacado, sube la experiencia del atancante en 10+10*el nivel del atacado
-					this.experiencia+=10+(atacado.getNivel()*10);
+				
+				if(atacado.estaVivo()){
+					// Por cada ataque que haga, mi experiencia sube en 8
+					this.experiencia += 8;
+					
+				} else {
+					// Si en cambio, mato al atacado, mi experiencia sube en 10*el nivel del atacado
+					this.experiencia+=(atacado.getNivel()*10);
+				}
+	
+				this.despuesDeAtacar();	
+				
+			} else{
+				
+				System.out.println(this.getUsername()+" no tiene energía suficiente para atacar!");
+			}
+		}
+		else{
+			// Esta linea se va a comentar
+			System.out.println("El atacado está muerto, no se lo puede atacar.");
+		}
+	}
+
+	/* @mauroat - 18/10/16
+	 * Se sobrecarga el método atacar, para que se apliquen los daños causados por los ataques que posee cada personaje.
+	 * */
+	public final void atacar(Personaje atacado, Ataque a) throws FileNotFoundException {
+		if(atacado.estaVivo()){
+			if (this.puedeAtacar()) {
+				atacado.serAtacado(calcularPuntosDeAtaque()+a.aplicarAtaque());
+				// El siguiente método podrá implementarse cuando definamos la ubicación de los personajes
+				//atacado.despuesDeSerAtacado();
+				this.energia -= calcularPuntosDeAtaque()+a.aplicarAtaque();
+				if(atacado.estaVivo()){
+					// Por cada ataque que haga, mi experiencia sube en 8
+					this.experiencia += 8;					
+				} else {
+					// Si en cambio, mato al atacado, mi experiencia sube en 10*el nivel del atacado
+					this.experiencia+=(atacado.getNivel()*10);
+				}
+	
 				this.despuesDeAtacar();	
 			} else{
 				System.out.println(this.getUsername()+" no tiene energía suficiente para atacar!");
@@ -68,7 +113,11 @@ public abstract class Personaje extends Usuario implements Peleador {
 			System.out.println("El atacado está muerto, no se lo puede atacar.");
 		}
 	}
-
+	
+	public void despuesDeSerAtacado(){
+		if(this.vida <=0)
+			this.morir();
+	}
 	
 	public void verEstado(){
 		System.out.println("Personaje: "+this.getUsername());
@@ -91,15 +140,15 @@ public abstract class Personaje extends Usuario implements Peleador {
 	
 	
 	
-	protected void despuesDeAtacar() throws FileNotFoundException { 
+	public void despuesDeAtacar() throws FileNotFoundException { 
 		this.verificarNivel();
 		
 	}	
+	
 	private void verificarNivel() throws FileNotFoundException {
 		if(this.experiencia >= experienciaRequerida(this.nivel)){
 			this.nivel++;
-		}
-		
+		}		
 	}
 	
 	private int experienciaRequerida(int nivel) throws FileNotFoundException{
@@ -119,7 +168,7 @@ public abstract class Personaje extends Usuario implements Peleador {
 		return 0;
 	}
 
-	protected abstract boolean puedeAtacar();
+	public abstract boolean puedeAtacar();
 	public abstract int calcularPuntosDeAtaque();
 	public abstract int calcularPuntosDeDefensa();
 	public abstract int calcularPuntosDeMagia();
@@ -146,9 +195,12 @@ public abstract class Personaje extends Usuario implements Peleador {
 		return this.vida > 0;
 	}
 	
+	/* @mauroat - 18/10/16
+	 * Modifico este método para que los puntos de defensa amortiguen el daño recibido en los ataques
+	 * */
 	@Override
 	public void serAtacado(int daño) {
-		this.vida -= daño;
+		this.vida -= daño-this.calcularPuntosDeDefensa();
 	}
 
 	public void serCurado() {
@@ -245,6 +297,7 @@ public abstract class Personaje extends Usuario implements Peleador {
 	}
 
 	public void agregarALista(PersonajeEquipado pe) {
+		//this.lista.add(pe);
 		this.lista.addAll(Arrays.asList(pe));
 	}
 
@@ -269,5 +322,22 @@ public abstract class Personaje extends Usuario implements Peleador {
 	public void quitarAtaque(Ataque a){
 		this.ataques.remove(a.getNombre());
 	}
+	
+	public void getListaAtaques(){
+		int i = 1;
+		for (Map.Entry<String, Ataque> entry : this.ataques.entrySet()) {
+		    System.out.println("Ataque "+i+": "+entry.getKey());
+		    i++;
+		}
+	}
+	
+	public int getCantidadAtaques(){
+		return this.ataques.size();
+	}
+	
+	public Ataque getAtaque(String ataque){
+		return this.ataques.get(ataque);		
+	}
+	
 	
 }

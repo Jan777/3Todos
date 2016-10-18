@@ -4,13 +4,11 @@ import dominio.*;
 
 public class BujiaHescher extends PersonajeEquipado {
 	
-	private Personaje p;
-	
 	public BujiaHescher(Personaje p) {
 		super(p);
-		super.agregarALista(this);
-		this.prioridad=5;		
-	//	this.p = p;	
+		this.prioridad = 5;
+		this.agregarALista(this);
+		//super.agregarALista(this);
 	}
 
 	@Override
@@ -28,10 +26,10 @@ public class BujiaHescher extends PersonajeEquipado {
 		return super.calcularPuntosDeMagia()+1;
 	}
 
-	@Override
-	public PersonajeEquipado dejarItem() {
-		return (PersonajeEquipado) p;	
-	}
+	//@Override
+	//public PersonajeEquipado dejarItem() {
+	//	return (PersonajeEquipado) p;	
+	//}
 	
 	@Override
 	public void getLista() {

@@ -24,8 +24,8 @@ public class Elfo extends Personaje{
 	}
 
 	@Override
-	protected boolean puedeAtacar() {
-		return energia >= 10;
+	public boolean puedeAtacar() {
+		return energia > (10 + this.calcularPuntosDeAtaque());
 	}
 
 	@Override

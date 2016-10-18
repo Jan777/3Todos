@@ -4,6 +4,7 @@ public abstract class Ataque {
 	
 	protected int idAtaque;
 	protected String nombre;
+	protected int daño;
 	
 	public Ataque(){
 	}

@@ -20,7 +20,7 @@ public class Humano extends Personaje {
 	}
 
 	@Override
-	protected boolean puedeAtacar() {
+	public boolean puedeAtacar() {
 		return energia > (10 + this.calcularPuntosDeAtaque());
 	}
 

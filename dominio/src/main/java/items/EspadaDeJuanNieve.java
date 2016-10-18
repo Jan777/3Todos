@@ -3,28 +3,27 @@ package items;
 import dominio.*;
 
 public class EspadaDeJuanNieve extends PersonajeEquipado{
-	private Personaje p;
+
 	public EspadaDeJuanNieve(Personaje p) {
 		super(p);
-		this.p = p;
-		super.agregarALista(this);
-		this.prioridad=7;
+		this.prioridad = 6;
+		this.agregarALista(this);
 	}
 
 
 	@Override
 	public int calcularPuntosDeAtaque() {
-		return p.calcularPuntosDeAtaque()+5;
+		return super.calcularPuntosDeAtaque()+5;
 	}
 
 	@Override
 	public int calcularPuntosDeDefensa() {
-		return p.calcularPuntosDeDefensa();
+		return super.calcularPuntosDeDefensa();
 	}
 
 	@Override
 	public int calcularPuntosDeMagia() {
-		return p.calcularPuntosDeMagia();
+		return super.calcularPuntosDeMagia();
 	}
 	
 	@Override

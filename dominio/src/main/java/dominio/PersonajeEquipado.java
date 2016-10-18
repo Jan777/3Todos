@@ -1,17 +1,22 @@
 package dominio;
 
+import java.util.ArrayList;
+
 public class PersonajeEquipado extends Personaje {
 
 	protected Personaje personajeDecorado;
 	protected int prioridad;
 	
+	
 	public PersonajeEquipado(Personaje personajeDecorado) {
-		super(personajeDecorado);
+		super(personajeDecorado);		
 		this.personajeDecorado = personajeDecorado;
+		//this.agregarALista(this);
+		
 	}
 
 	@Override
-	protected boolean puedeAtacar() {
+	public boolean puedeAtacar() {
 		return personajeDecorado.puedeAtacar();
 	}
 
@@ -62,6 +67,8 @@ public class PersonajeEquipado extends Personaje {
 		return this.dejarItem();
 		 
 	}
+	
+	
 	
 	
 }
