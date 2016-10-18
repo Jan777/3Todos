@@ -5,12 +5,13 @@ import java.security.NoSuchAlgorithmException;
 
 public class Usuario {
 
+	private int idUsuario;
 	private String username;
 	private String password;
 
 	public Usuario(String username, String password) {
 		this.username = username;
-		hashPasword(password);
+		hashPassword(password);
 	}
 
 	public String getUsername() {
@@ -26,7 +27,7 @@ public class Usuario {
 	}
 
 	public void setPassword(String password) {
-		hashPasword(password);
+		hashPassword(password);
 	}
 
 	public int guardarUsuario() {
@@ -37,7 +38,7 @@ public class Usuario {
 		return 0;
 	}
 
-	private void hashPasword(String pas) {
+	private void hashPassword(String pas) {
 		String passwordToHash = pas;
 		String generatedPassword = null;
 		try {

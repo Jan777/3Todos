@@ -1,13 +1,18 @@
 package dominio;
 
+import java.util.HashMap;
+import java.util.Map;
+
+
 public abstract class Casta {
 
-	protected int destreza;
-	protected int fuerza;
-	protected int inteligencia;
+	private Map<String, Habilidad> habilidades = new HashMap<String, Habilidad>(); 
 
-	public abstract void aumentarFuerza();
-	public abstract void aumentardestreza();
-	public abstract void aumentarInteligencia();
+	public abstract void agregarHabilidad();
+
+	public void aumentarFuerza() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
