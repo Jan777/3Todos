@@ -28,11 +28,6 @@ public abstract class Personaje extends Usuario implements Peleador {
 				  velocidad,
 				  potencia;
 	protected String raza;
-	public int getVida() {
-		return vida;
-	}
-
-
 	protected Casta clase;
 	protected ArrayList<PersonajeEquipado> lista = new ArrayList<>();
 	protected Map<String, Ataque> ataques = new HashMap<String, Ataque>(); 
@@ -57,14 +52,16 @@ public abstract class Personaje extends Usuario implements Peleador {
 	// Esto recibia un Atacable
 	public final void atacar(Personaje atacado) throws FileNotFoundException {
 		if(atacado.estaVivo()){
-			if (puedeAtacar()) {
+			if (this.puedeAtacar()) {
 				atacado.serAtacado(calcularPuntosDeAtaque());
 				this.energia -= calcularPuntosDeAtaque();
 				if(atacado.estaVivo())
 				// Si mato al atacado, sube la experiencia del atancante en 10+10*el nivel del atacado
 					this.experiencia+=10+(atacado.getNivel()*10);
-				despuesDeAtacar();	
-			}	
+				this.despuesDeAtacar();	
+			} else{
+				System.out.println(this.getUsername()+" no tiene energía suficiente para atacar!");
+			}
 		}
 		else{
 			// Esta linea se va a comentar
@@ -128,7 +125,23 @@ public abstract class Personaje extends Usuario implements Peleador {
 	public abstract int calcularPuntosDeMagia();
 	public abstract String getRaza();
 	
+	public void morir(){
+		this.vida=0;
+		//Tengo que dejar el mejor item
+		//this.dejarItem();
+		this.reaparecer();
+		this.revivir();
+	}
 	
+	private void revivir() {
+		this.serCurado();
+		this.serEnergizado();		
+	}
+
+	private void reaparecer() {
+		// Este método tiene que reubicarme en una zona segura		
+	}
+
 	public boolean estaVivo() {
 		return this.vida > 0;
 	}
@@ -146,6 +159,9 @@ public abstract class Personaje extends Usuario implements Peleador {
 		this.energia = 100;
 	}
 	
+	public int getVida() {
+		return vida;
+	}
 	
 	public int getExperiencia() {
 		return experiencia;

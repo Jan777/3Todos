@@ -9,10 +9,8 @@ public class BujiaHescher extends PersonajeEquipado {
 	public BujiaHescher(Personaje p) {
 		super(p);
 		super.agregarALista(this);
-		super.prioridad=5;		
-		this.p = p;
-		
-		
+		this.prioridad=5;		
+	//	this.p = p;	
 	}
 
 	@Override
@@ -34,5 +32,11 @@ public class BujiaHescher extends PersonajeEquipado {
 	public PersonajeEquipado dejarItem() {
 		return (PersonajeEquipado) p;	
 	}
-
+	
+	@Override
+	public void getLista() {
+		System.out.println("Cantidad de items: "+lista.size());
+		for(int i=0; i<lista.size();i++)
+			System.out.println(lista.get(i));
+	}
 }

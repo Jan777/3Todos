@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class Usuario {
 
+	private int idUsuario;
 	private String username;
 	private String password;
 

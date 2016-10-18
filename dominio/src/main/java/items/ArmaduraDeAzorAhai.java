@@ -15,7 +15,7 @@ public class ArmaduraDeAzorAhai extends PersonajeEquipado{
 	public ArmaduraDeAzorAhai(Personaje p) {
 		super(p);
 		super.agregarALista(this);
-		this.p = p;		
+		this.p = p;
 		this.prioridad = 3;
 	}
 	
@@ -67,5 +67,11 @@ public class ArmaduraDeAzorAhai extends PersonajeEquipado{
 		return p.getRaza();
 	}
 
+	@Override
+	public void getLista() {
+		System.out.println("Cantidad de items: "+lista.size());
+		for(int i=0; i<lista.size();i++)
+			System.out.println(lista.get(i));
+	}
 
 }

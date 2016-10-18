@@ -7,6 +7,7 @@ public class EspadaDeJuanNieve extends PersonajeEquipado{
 	public EspadaDeJuanNieve(Personaje p) {
 		super(p);
 		this.p = p;
+		super.agregarALista(this);
 		this.prioridad=7;
 	}
 
@@ -25,7 +26,13 @@ public class EspadaDeJuanNieve extends PersonajeEquipado{
 	public int calcularPuntosDeMagia() {
 		return p.calcularPuntosDeMagia();
 	}
-
+	
+	@Override
+	public void getLista() {
+		System.out.println("Cantidad de items: "+lista.size());
+		for(int i=0; i<lista.size();i++)
+			System.out.println(lista.get(i));
+	}
 
 
 }

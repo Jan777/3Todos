@@ -2,7 +2,7 @@ package dominio;
 
 public class PersonajeEquipado extends Personaje {
 
-	Personaje personajeDecorado;
+	protected Personaje personajeDecorado;
 	protected int prioridad;
 	
 	public PersonajeEquipado(Personaje personajeDecorado) {
@@ -12,7 +12,7 @@ public class PersonajeEquipado extends Personaje {
 
 	@Override
 	protected boolean puedeAtacar() {
-		return this.personajeDecorado.puedeAtacar();
+		return personajeDecorado.puedeAtacar();
 	}
 
 	@Override
@@ -33,8 +33,7 @@ public class PersonajeEquipado extends Personaje {
 
 	@Override
 	public void atacar(Peleador victima) {
-		// TODO Auto-generated method stub
-		
+		this.atacar(victima);		
 	}
 
 	@Override
@@ -57,6 +56,7 @@ public class PersonajeEquipado extends Personaje {
 		return this.prioridad;
 	}
 
+	/* Este método no está testeado*/
 	public PersonajeEquipado dejarMejorItem(){
 		this.lista.remove(getItemMasPrioritario());
 		return this.dejarItem();

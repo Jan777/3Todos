@@ -24,7 +24,7 @@ public class Orco extends Personaje{
 	// Cuando llega acá compara con la energia del personajeDecorado que siempre es 100.
 	@Override
 	protected  boolean puedeAtacar() {
-		return super.energia > 10 + this.calcularPuntosDeAtaque();
+		return this.energia > (10 + this.calcularPuntosDeAtaque());
 	}
 	
 	

@@ -16,18 +16,11 @@ public class PeleadorTest {
 		Personaje humano = new Humano("Humanazo","123");
 		Personaje humano2 = new Humano("Humanazo2","123");
 
-		// 
-		
 		orco = new EspadaDeJuanNieve(orco);
-		orco.atacar(humano);
-		orco.atacar(humano);
-		orco.atacar(humano);
-		orco.atacar(humano);
-		orco.atacar(humano);
-		orco.atacar(humano);
-		orco.atacar(humano);
-		orco.atacar(humano);
-		orco.verEstado();
+		orco = new BujiaHescher(orco);
+		orco = new EspadaDeJuanNieve(orco);
+		//orco.verEstado();
+		orco.getLista();
 
 	}
 }

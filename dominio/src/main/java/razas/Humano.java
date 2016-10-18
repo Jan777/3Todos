@@ -21,7 +21,7 @@ public class Humano extends Personaje {
 
 	@Override
 	protected boolean puedeAtacar() {
-		return energia >= 10;
+		return energia > (10 + this.calcularPuntosDeAtaque());
 	}
 
 	@Override
@@ -37,8 +37,7 @@ public class Humano extends Personaje {
 
 	@Override
 	public void atacar(Peleador victima) {
-		// TODO Auto-generated method stub
-		
+		//this.atacar(victima);		
 	}
 
 
