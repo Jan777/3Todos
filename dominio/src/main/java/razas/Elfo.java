@@ -14,11 +14,6 @@ public class Elfo extends Personaje{
 	}
 
 	@Override
-	public PersonajeEquipado dejarItem() {
-		return null;
-	}
-
-	@Override
 	public void despuesDeAtacar() {
 		// TODO Auto-generated method stub		
 	}
@@ -53,5 +48,8 @@ public class Elfo extends Personaje{
 	public String getRaza() {
 		return "Elfo";
 	}
+
+
+
 
 }

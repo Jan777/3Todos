@@ -46,11 +46,6 @@ public class Humano extends Personaje {
 		return "Humano";
 	}
 
-	@Override
-	public PersonajeEquipado dejarItem() {
-		return null;
-	}
-
 	
 	
 }

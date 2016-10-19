@@ -76,12 +76,6 @@ public class Generico implements Peleador{
 		// No hace nada		
 	}
 
-	@Override
-	public PersonajeEquipado dejarItem() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 	@Override
 	public boolean estaVivo() {
@@ -188,6 +182,11 @@ public class Generico implements Peleador{
 
 	public void setRaza(String raza) {
 		this.raza = raza;
+	}
+
+	@Override
+	public Personaje dejarMejorItem() {
+		return null;
 	}
 
 	

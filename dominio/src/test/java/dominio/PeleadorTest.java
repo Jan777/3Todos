@@ -74,7 +74,8 @@ public class PeleadorTest {
 		
 		
 		Assert.assertEquals(226, orco.getExperiencia());
-		Assert.assertEquals(2, orco.getNivel());
+		Assert.assertEquals(3, orco.getNivel());
+		Assert.assertEquals(4, orco.getPuntos());
 		//orco.verEstado();
 	}
 	
@@ -82,24 +83,117 @@ public class PeleadorTest {
 	 *  Este test verifica que un personaje aumente la lista de items a medida que se va equipando 
 	 */
 	
-	//@Test
-	public void peleadorTestListaDeItems() throws FileNotFoundException{
+	@Test
+	public void peleadorDejarMejorItem() throws FileNotFoundException{
 	
 		/* @mauroat - 18/10/16
 		 * ERROR: Los items se equipan, sin embargo la lista siempre es reemplazada por el último item y no son agregados.
+		 * @mauroat - 19/10/16
+		 * Solucionado.
 		 * */
 				
 		// Sin items
 		Personaje humano = new Humano("Indio Solari","123");
+		Personaje item;
+		//System.out.println(humano.getLista());
 		Assert.assertEquals(0, humano.getTamañoLista());
-		// 1 item
-		humano = new BujiaHescher(humano);
-		Assert.assertEquals(1, humano.getTamañoLista());
-		// 2 items
-		humano = new ArmaduraDeAzorAhai(humano);
-		Assert.assertEquals(2, humano.getTamañoLista());
-		humano.getLista();
-			
 		
+		// 1 item
+		humano = new BastonDeSaruman(humano);
+		Assert.assertEquals(1, humano.getTamañoLista());		
+		// 2 items
+		humano = new BujiaHescher(humano);		
+		Assert.assertEquals(2, humano.getTamañoLista());		
+		// 3 items
+		humano = new ArmaduraDeAzorAhai(humano);
+		Assert.assertEquals(3, humano.getTamañoLista());
+		//System.out.println(humano.getLista());	
+		
+		// Obtengo mejor item del peleador: Bujia Hescher
+		Assert.assertEquals("Bujía Hescher", humano.dejarMejorItem().getNombreItem());
+				
 	}
+
+	@Test
+	public void peleadorDejarMejorItemDistintasPosiciones() throws FileNotFoundException{
+				
+		// El mejor al comienzo
+		Personaje humano = new Humano("Indio Solari","123");
+
+		humano = new BujiaHescher(humano);	
+		humano = new BastonDeSaruman(humano);
+		humano = new BujiaHescher(humano);		
+		humano = new ArmaduraDeAzorAhai(humano);
+
+		Assert.assertEquals("Bujía Hescher", humano.dejarMejorItem().getNombreItem());
+		
+		// El mejor al comienzo
+		Personaje orco = new Orco("Indio Solari","123");
+		
+		orco = new BastonDeSaruman(orco);
+		orco = new BujiaHescher(orco);		
+		orco = new ArmaduraDeAzorAhai(orco);
+
+		Assert.assertEquals("Bujía Hescher", orco.dejarMejorItem().getNombreItem());
+		
+		// El mejor al final
+		Personaje elfo = new Elfo("Indio Solari","123");
+				
+		elfo = new BastonDeSaruman(elfo);
+		elfo = new BujiaHescher(elfo);		
+		elfo = new ArmaduraDeAzorAhai(elfo);
+
+		Assert.assertEquals("Bujía Hescher", elfo.dejarMejorItem().getNombreItem());
+	}
+	
+	
+	@Test
+	public void peleadorDejarMejorItemSiEstaRepetido() throws FileNotFoundException{
+			
+		// Sin items
+		Personaje humano = new Humano("Indio Solari","123");
+		Personaje item;
+		//System.out.println(humano.getLista());
+		Assert.assertEquals(0, humano.getTamañoLista());
+		
+		// 1 item
+		humano = new BastonDeSaruman(humano);
+		Assert.assertEquals(1, humano.getTamañoLista());		
+		// 2 items
+		humano = new BujiaHescher(humano);		
+		Assert.assertEquals(2, humano.getTamañoLista());		
+		// 3 items
+		humano = new BujiaHescher(humano);
+		Assert.assertEquals(3, humano.getTamañoLista());
+		
+		// Obtengo mejor item del peleador: Bujia Hescher
+		Assert.assertEquals("Bujía Hescher", humano.dejarMejorItem().getNombreItem());
+			
+	}
+	
+	
+	@Test
+	public void peleadorSeDesequipaConMejorItem() throws FileNotFoundException{
+		
+		// El mas importante al final de la lista
+		Personaje humano = new Humano("Indio Solari","123");
+		
+		humano = new BastonDeSaruman(humano);
+		humano = new ArmaduraDeAzorAhai(humano);
+		humano = new BujiaHescher(humano);	
+		humano = humano.desequipar((PersonajeEquipado)humano.dejarMejorItem());
+		//Assert.assertEquals("Humano equipado con: 1- Bastón de Saruman  2- Armadura de Azor Ahai ", humano.getLista());
+		
+		// El mas importante al principio de la lista
+		Personaje orco = new Orco("Skay Beilinson","123");
+		orco = new BujiaHescher(orco);	
+		orco = new BastonDeSaruman(orco);
+		orco = new ArmaduraDeAzorAhai(orco);
+
+		orco = (orco.desequipar((PersonajeEquipado) orco.dejarMejorItem()));
+		System.out.println(orco.getLista());
+		Assert.assertEquals(2, orco.getTamañoLista());
+		Assert.assertEquals("Orco equipado con: 1- Bastón de Saruman  2- Armadura de Azor Ahai ", orco.getLista());
+	}
+
 }
