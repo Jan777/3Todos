@@ -13,7 +13,7 @@ public class OrcoTest {
 	public void constructorOrco(){
 		Personaje o = new Orco("Marciano Aguirre","Lanus");
 		
-		Assert.assertEquals("Marciano Aguirre", o.getUsername());
+		Assert.assertEquals("Marciano Aguirre", o.toString());
 		Assert.assertEquals(100, o.getEnergia());
 		Assert.assertEquals(100, o.getVida());
 		Assert.assertEquals(1, o.getNivel());
