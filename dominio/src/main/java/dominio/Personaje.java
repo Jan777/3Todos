@@ -78,7 +78,7 @@ public abstract class Personaje implements Peleador {
 				this.despuesDeAtacar();	
 				
 			} else{
-				System.out.println(this +" no tiene energía suficiente para atacar!");
+				System.out.println(this.usuarioPersonaje.getUsername() +" no tiene energía suficiente para atacar!");
 				//System.out.println(this.getUsername()+" no tiene energía suficiente para atacar!");
 			}
 		}
