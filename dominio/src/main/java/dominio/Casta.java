@@ -8,17 +8,22 @@ import org.omg.Messaging.SyncScopeHelper;
 
 public abstract class Casta {
 
-	protected Map<String, Habilidad> habilidades = new HashMap<String, Habilidad>(); 
+	protected Map<Integer, Habilidad> habilidades = new HashMap<Integer, Habilidad>(); 
 	protected String nombre;
 	
 	public void agregarHabilidad(Habilidad h) {
-		this.habilidades.put(this.nombre, h);	
+		if(this.habilidades.size()>=3){
+			System.out.println("No puede tener más de 3 habilidades");
+		} else {
+			this.habilidades.put(h.getIdHabilidad(), h);
+		}
+			
 	}
 
 
 	public void getHabilidades(){
 		int i = 1;
-		for (Map.Entry<String, Habilidad> entry : this.habilidades.entrySet()) {
+		for (Map.Entry<Integer, Habilidad> entry : this.habilidades.entrySet()) {
 		    System.out.println("Habilidades "+i+": "+entry.getValue().nombre);
 		    i++;
 		}
