@@ -13,7 +13,7 @@ public class HumanoTest {
 	public void constructorHumano(){
 		Personaje h = new Humano("Chespirito","Acapulco");
 		
-		Assert.assertEquals("Chespirito", h.getUsername());
+		Assert.assertEquals("Chespirito", h.toString());
 		Assert.assertEquals(100, h.getEnergia());
 		Assert.assertEquals(100, h.getVida());
 		Assert.assertEquals(1, h.getNivel());

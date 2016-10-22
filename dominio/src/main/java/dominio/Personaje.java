@@ -14,7 +14,7 @@ import java.util.Map;
 
 import dominio.*;
 
-public abstract class Personaje extends Usuario implements Peleador {
+public abstract class Personaje implements Peleador {
 
 	protected int vida,
 				  experiencia,
@@ -31,9 +31,11 @@ public abstract class Personaje extends Usuario implements Peleador {
 	protected Casta clase;
 	protected ArrayList<PersonajeEquipado> lista = new ArrayList<>();
 	protected Map<String, Ataque> ataques = new HashMap<String, Ataque>(); 
-	
+	protected Usuario usuarioPersonaje;
+	//protected Alianza alianzaActual;
 	public Personaje(String nombre, String password){
-		super(nombre,password);
+		//usuarioPersonaje = new Usuario(username,password);
+		usuarioPersonaje = new Usuario(nombre,password);
 		this.vida = 100;
 		this.energia = 100;
 		this.experiencia = 0;
@@ -41,7 +43,8 @@ public abstract class Personaje extends Usuario implements Peleador {
 	}
 	
 	public Personaje(Personaje p){
-		super(p.getUsername(),p.getPassword());
+		//super(p.getUsername(),p.getPassword());
+		this.usuarioPersonaje = p.usuarioPersonaje;
 		this.vida = 100;
 		this.energia = 100;
 		this.experiencia = 0;
@@ -75,8 +78,8 @@ public abstract class Personaje extends Usuario implements Peleador {
 				this.despuesDeAtacar();	
 				
 			} else{
-				
-				System.out.println(this.getUsername()+" no tiene energía suficiente para atacar!");
+				System.out.println(this.usuarioPersonaje.getUsername() +" no tiene energía suficiente para atacar!");
+				//System.out.println(this.getUsername()+" no tiene energía suficiente para atacar!");
 			}
 		}
 		else{
@@ -105,7 +108,8 @@ public abstract class Personaje extends Usuario implements Peleador {
 	
 				this.despuesDeAtacar();	
 			} else{
-				System.out.println(this.getUsername()+" no tiene energía suficiente para atacar!");
+				System.out.println(this.usuarioPersonaje.getUsername() +" no tiene energía suficiente para atacar!");
+				//System.out.println(this.getUsername()+" no tiene energía suficiente para atacar!");
 			}
 		}
 		else{
@@ -120,7 +124,7 @@ public abstract class Personaje extends Usuario implements Peleador {
 	}
 	
 	public void verEstado(){
-		System.out.println("Personaje: "+this.getUsername());
+		System.out.println("Personaje: "+this.usuarioPersonaje.getUsername());
 		System.out.println("Salud: "+this.vida);
 		System.out.println("Energia: "+this.energia);
 		System.out.println("----------");
@@ -339,5 +343,24 @@ public abstract class Personaje extends Usuario implements Peleador {
 		return this.ataques.get(ataque);		
 	}
 	
+	public String toString()
+    {
+    	return this.usuarioPersonaje.getUsername();
+    }
 	
+	  public boolean inteactuarConOtroPersonaje(Personaje obj)
+	     {
+	        return obj.respuesta(); 	 
+	     }
+	    public boolean respuesta()
+	    {
+		   return true;
+	    }
+	    
+	    public boolean equals(Personaje obj)
+	    {
+	    	if(this.usuarioPersonaje.equals(obj.usuarioPersonaje))
+	    		return true;
+	         return false;	
+	    }
 }

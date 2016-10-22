@@ -46,6 +46,10 @@ public class Orco extends Personaje{
 		return null;		
 	}
 	
+	public boolean respuesta()
+	{
+		return false;
+	}
 	@Override
 	public String getRaza() {
 		return "Orco";
