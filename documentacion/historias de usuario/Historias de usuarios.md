@@ -1,4 +1,4 @@
-﻿## **Historia de usuario** ##  
+﻿## **Historias de usuario** ##  
 
 > Como Jugador, Quiero crear mi personaje, editando sus características principales (como raza y casta) 
 > Resultado: Quiero verme reflejado en mi avatar  
