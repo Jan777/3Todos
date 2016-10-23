@@ -37,6 +37,10 @@ public class Historia04Test {
 			p1.atacar(p3);
 		p1.serEnergizado();
 		
+		/*
+		 * El personaje p1 sube de nivel
+		 * */
+		
 		Assert.assertEquals(2, p1.getNivel());
 		
 	}

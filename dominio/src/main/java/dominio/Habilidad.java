@@ -4,6 +4,7 @@ public abstract class Habilidad {
 
 	protected int idHabilidad;
 	protected String nombre;
+	//protected int puntos;
 	
 	public void afectar(){}
 
