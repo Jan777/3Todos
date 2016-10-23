@@ -4,14 +4,12 @@ public class Alianza {
 	private String nombre;
 	private ArrayList <Personaje> integrantes; 
 	
-	public Alianza(String nombreParametro)
-	{
+	public Alianza(String nombreParametro){
 		nombre=nombreParametro;
 		integrantes = new ArrayList<Personaje>();
 	}
 	
-	public void formarAlianza(Personaje objPersonaje)
-	{
+	public void formarAlianza(Personaje objPersonaje)	{
 		integrantes.add(objPersonaje);
 	}
 	

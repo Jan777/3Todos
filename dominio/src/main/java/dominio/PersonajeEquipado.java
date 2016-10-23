@@ -59,7 +59,6 @@ public class PersonajeEquipado extends Personaje {
 		this.nombreItem = nombreItem;
 	}
 	
-	@Override
 	public Personaje getPersonajeDecorado() {
 		return this.personajeDecorado;
 	}

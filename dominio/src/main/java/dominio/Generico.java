@@ -21,7 +21,10 @@ public class Generico implements Peleador{
 	
 	public Generico(){
 		Random r = new Random();
-		this.nombre = "dde";
+		/*@mauroat - 23/10/16
+		 * Ver como randomear el nombre
+		 * */
+		this.nombre = "";
 		this.vida = 100;
 		this.energia = 100;
 		this.nivel = r.nextInt(5);

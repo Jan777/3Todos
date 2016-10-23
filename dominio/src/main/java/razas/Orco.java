@@ -38,14 +38,13 @@ public class Orco extends Personaje{
 
 	@Override
 	public void atacar(Peleador victima) {
-		// TODO Auto-generated method stub		
+		// Nada	
 	}
-
 	
-	public boolean respuesta()
-	{
+	public boolean respuesta()	{
 		return false;
 	}
+	
 	@Override
 	public String getRaza() {
 		return "Orco";
