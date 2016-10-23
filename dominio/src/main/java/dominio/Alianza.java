@@ -13,31 +13,25 @@ public class Alianza {
 		integrantes.add(objPersonaje);
 	}
 	
-	public void eliminarAlianza()
-	{
+	public void eliminarAlianza(){
 		this.integrantes.clear();
 	}
 	
-	public void dejarAlianza(Personaje objPersonaje)
-	{
+	public void dejarAlianza(Personaje objPersonaje){
 		Iterator<Personaje> iter = integrantes.iterator();
-		while (iter.hasNext()) 
-		{
+		while (iter.hasNext()) 	{
 		    Personaje user = iter.next();
-		    if(user.equals(objPersonaje)) //con personaje veo el usuario
-		    {
-		        iter.remove();
+		    if(user.equals(objPersonaje)) { //con personaje veo el usuario
+		    	iter.remove();
 		    }
-		}	
-		
+		}		
 	}
 	
-	public int cantidadMiembrosAlianza()
-	{
+	public int cantidadMiembrosAlianza(){
 		return this.integrantes.size();
 	}
-	public void verintegrantes()
-	{
+	
+	public void verintegrantes()	{
 	  System.out.println(integrantes);
 	}
 	

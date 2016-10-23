@@ -16,8 +16,7 @@ public abstract class Casta {
 			System.out.println("No puede tener más de 3 habilidades");
 		} else {
 			this.habilidades.put(h.getIdHabilidad(), h);
-		}
-			
+		}			
 	}
 
 

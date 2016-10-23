@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 
 public interface Peleador {
 
-	public void atacar(Peleador victima);
+	public void atacar(Peleador victima) throws FileNotFoundException;
 	
 	public abstract boolean puedeAtacar();
 	public abstract void despuesDeAtacar() throws FileNotFoundException ;

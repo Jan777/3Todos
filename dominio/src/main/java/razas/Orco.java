@@ -38,8 +38,9 @@ public class Orco extends Personaje{
 
 	@Override
 	public void atacar(Peleador victima) {
-		// Nada	
+		this.atacar(victima);
 	}
+	
 	
 	public boolean respuesta()	{
 		return false;
@@ -49,4 +50,5 @@ public class Orco extends Personaje{
 	public String getRaza() {
 		return "Orco";
 	}
+
 }

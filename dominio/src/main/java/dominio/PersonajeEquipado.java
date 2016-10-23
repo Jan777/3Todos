@@ -11,12 +11,14 @@ public class PersonajeEquipado extends Personaje {
 	
 	public PersonajeEquipado(Personaje personajeDecorado) {
 		super(personajeDecorado);		
-		this.personajeDecorado = personajeDecorado;		
+		this.personajeDecorado = personajeDecorado;	
+		this.clase = personajeDecorado.getClase();
 	}
 
 	@Override
 	public boolean puedeAtacar() {
-		return personajeDecorado.puedeAtacar();
+		//return personajeDecorado.puedeAtacar();
+		return this.energia > (10 + this.calcularPuntosDeAtaque());
 	}
 
 	@Override
@@ -37,7 +39,7 @@ public class PersonajeEquipado extends Personaje {
 
 	@Override
 	public void atacar(Peleador victima) {
-		this.atacar(victima);		
+		//this.personajeDecorado.atacar(victima);		
 	}
 
 
@@ -46,7 +48,6 @@ public class PersonajeEquipado extends Personaje {
 		return personajeDecorado.getRaza();
 	}
 	
-
 	public int getPrioridad() {
 		return this.prioridad;
 	}
@@ -63,6 +64,10 @@ public class PersonajeEquipado extends Personaje {
 		return this.personajeDecorado;
 	}
 	
+	@Override
+	public String getNombreClase() {
+		return personajeDecorado.getClase().getNombre();
+	}
 	
 	public void setPersonajeDecorado(Personaje personajeDecorado) {
 		this.personajeDecorado = personajeDecorado;

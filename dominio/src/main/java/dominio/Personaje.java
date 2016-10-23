@@ -57,8 +57,8 @@ public abstract class Personaje extends Usuario implements Peleador {
 	 * 
 	 * */
 	
-	// Esto recibia un Atacable
-	public final void atacar(Personaje atacado) throws FileNotFoundException {
+	// Esto recibia un Peleador
+	public final void atacar (Personaje atacado) throws FileNotFoundException {
 		if(atacado.estaVivo()){
 			if (this.puedeAtacar()) {
 				atacado.serAtacado(calcularPuntosDeAtaque());
@@ -79,12 +79,12 @@ public abstract class Personaje extends Usuario implements Peleador {
 				
 			} else{
 				
-				System.out.println(this.getUsername()+" no tiene energía suficiente para atacar!");
+				//System.out.println(this.getUsername()+" no tiene energía suficiente para atacar!");
 			}
 		}
 		else{
-			// Esta linea se va a comentar
-			System.out.println("El atacado está muerto, no se lo puede atacar.");
+			
+			//System.out.println("El atacado está muerto, no se lo puede atacar.");
 		}
 	}
 
@@ -108,12 +108,11 @@ public abstract class Personaje extends Usuario implements Peleador {
 	
 				this.despuesDeAtacar();	
 			} else{
-				System.out.println(this.getUsername()+" no tiene energía suficiente para atacar!");
+				//System.out.println(this.getUsername()+" no tiene energía suficiente para atacar!");
 			}
 		}
 		else{
-			// Esta linea se va a comentar
-			System.out.println("El atacado está muerto, no se lo puede atacar.");
+			//System.out.println("El atacado está muerto, no se lo puede atacar.");
 		}
 	}
 	
@@ -128,6 +127,7 @@ public abstract class Personaje extends Usuario implements Peleador {
 		System.out.println("Energia: "+this.energia);
 		System.out.println("----------");
 		System.out.println("Raza: "+this.getRaza());
+		System.out.println("Casta: "+this.getClase().getNombre());
 		System.out.println("Nivel: "+this.nivel);
 		System.out.println("Experiencia: "+this.experiencia);
 		System.out.println("----------");
