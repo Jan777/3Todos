@@ -13,5 +13,5 @@ public interface Peleador {
 	public void despuesDeSerAtacado();
 	
 	public boolean estaVivo();
-	public PersonajeEquipado dejarItem();
+	public Personaje dejarMejorItem();
 }

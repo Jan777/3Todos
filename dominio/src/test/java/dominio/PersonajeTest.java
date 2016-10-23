@@ -51,6 +51,10 @@ public class PersonajeTest {
 	/*	@mauroat - 17-10-16:
 	 *  Este test verifica que un personaje aumente sus valores de ataque, defensa y magia acorde a los items que equipa.
 	 *  Asimismo, también verifica que los decremente en la medida que los desequipa. 
+	 *  
+	 *  @mauroat - 19-10-16:
+	 *  Se cambio el método dejarMejorItem para que devuelva el mejor item.
+	 *  
 	 */
 	
 	@Test
@@ -77,28 +81,17 @@ public class PersonajeTest {
 		Assert.assertEquals(1+1,h.calcularPuntosDeMagia());	
 		//h.getLista();
 		
-		// Desequipo Armadura de Azor Ahai, mis valores deben volver al estado anterior
-		h = h.dejarItem();
+		// Desequipo la Bujía Hescher, mis valores deben volver al estado anterior
+		h = h.desequipar((PersonajeEquipado) h.dejarMejorItem());
 		Assert.assertEquals("Humano", h.getRaza());
-		Assert.assertEquals(10+1,h.calcularPuntosDeAtaque());
-		Assert.assertEquals(10+1,h.calcularPuntosDeDefensa());
-		Assert.assertEquals(1,h.calcularPuntosDeMagia());
+		Assert.assertEquals(10,h.calcularPuntosDeAtaque());
+		Assert.assertEquals(10+6,h.calcularPuntosDeDefensa());
+		Assert.assertEquals(1,h.calcularPuntosDeMagia());	
+		Assert.assertEquals(1, h.getTamañoLista());
 		
-		// Equipo al humano ahora con los Guantes de poder
-		h = new GuanteDePoder(h);
-		Assert.assertEquals("Humano", h.getRaza());
-		Assert.assertEquals(10+1+2,h.calcularPuntosDeAtaque());
-		Assert.assertEquals(10+1+1,h.calcularPuntosDeDefensa());
-		Assert.assertEquals(1+3,h.calcularPuntosDeMagia());
-		
+		//System.out.println(h.getLista());
 		//h.verEstado();
-		/* @mauroat - 17-10-16:
-		 * Este me funcionó pero dejó de hacerlo, tengo que ver que modifiqué mal
-		 * 
-		 * Debería tener 2 items: BujiaHescher(*) y GuanteDePoder
-		 * Assert.assertEquals(2, h.getTamañoLista());
-		 * Assert.assertEquals("items.BujiaHescher@443b7951", h.getItemMasPrioritario().toString());
-		 */
+		
 
 	}
 	

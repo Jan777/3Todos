@@ -4,15 +4,12 @@ import dominio.*;
 public class Chaman extends Casta {
 
 	public Chaman() {
-		// TODO Auto-generated constructor stub
+		super.nombre = "Chaman";
 	}
 
-	@Override
-	public void agregarHabilidad() {
-		// TODO Auto-generated method stub
-		
-	}
 
+
+	
 
 
 }

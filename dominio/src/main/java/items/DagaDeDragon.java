@@ -10,8 +10,8 @@ public class DagaDeDragon extends PersonajeEquipado{
 	public DagaDeDragon(Personaje p) {
 		super(p);
 		this.p = p;		
-		super.agregarALista(this);
 		this.prioridad=1;
+		this.nombreItem = "Daga de Dragón";
 	}
 
 	@Override
@@ -30,9 +30,17 @@ public class DagaDeDragon extends PersonajeEquipado{
 	}
 	
 	@Override
-	public PersonajeEquipado dejarItem() {
-		return (PersonajeEquipado) p;	
+	public void setPersonajeDecorado(Personaje personajeDecorado) {
+		this.personajeDecorado = personajeDecorado;
 	}
-
 	
+	@Override
+	public String getLista() {
+		return personajeDecorado.getLista() + " "+getTamañoLista()+"- " +this.nombreItem+ " ";
+	}
+	
+	@Override
+	public int getTamañoLista() {
+		return personajeDecorado.getTamañoLista()+1;
+	}
 }

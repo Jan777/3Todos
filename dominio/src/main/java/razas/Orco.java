@@ -41,10 +41,6 @@ public class Orco extends Personaje{
 		// TODO Auto-generated method stub		
 	}
 
-	@Override
-	public PersonajeEquipado dejarItem() {
-		return null;		
-	}
 	
 	public boolean respuesta()
 	{

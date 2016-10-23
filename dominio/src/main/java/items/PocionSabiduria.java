@@ -8,6 +8,7 @@ public class PocionSabiduria extends PersonajeEquipado{
 		super(p);
 		this.p = p;
 		this.prioridad=3;
+		this.nombreItem = "Poción sabiduría";
 	}
 
 	@Override
@@ -25,6 +26,19 @@ public class PocionSabiduria extends PersonajeEquipado{
 		return p.calcularPuntosDeMagia()+3;
 	}
 
-
+	@Override
+	public void setPersonajeDecorado(Personaje personajeDecorado) {
+		this.personajeDecorado = personajeDecorado;
+	}
+	
+	@Override
+	public String getLista() {
+		return personajeDecorado.getLista() + " "+getTamañoLista()+"- " +this.nombreItem+ " ";
+	}
+	
+	@Override
+	public int getTamañoLista() {
+		return personajeDecorado.getTamañoLista()+1;
+	}
 
 }

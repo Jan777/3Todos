@@ -4,10 +4,13 @@ import dominio.*;
 
 public class EscudoDeLeon extends PersonajeEquipado{
 	
+	private Personaje p;
+	
 	public EscudoDeLeon(Personaje p) {
 		super(p);
-		super.agregarALista(this);
-		super.prioridad=5;		
+		this.p = p;		
+		super.prioridad=5;
+		this.nombreItem = "Escudo de León";
 	}
 
 
@@ -26,5 +29,18 @@ public class EscudoDeLeon extends PersonajeEquipado{
 		return super.calcularPuntosDeMagia();
 	}
 
+	@Override
+	public void setPersonajeDecorado(Personaje personajeDecorado) {
+		this.personajeDecorado = personajeDecorado;
+	}
 	
+	@Override
+	public String getLista() {
+		return personajeDecorado.getLista() + " "+getTamañoLista()+"- " +this.nombreItem+ " ";
+	}
+	
+	@Override
+	public int getTamañoLista() {
+		return personajeDecorado.getTamañoLista()+1;
+	}
 }
