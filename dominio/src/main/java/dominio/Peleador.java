@@ -11,7 +11,7 @@ public interface Peleador {
 	
 	public void serAtacado(int dano);
 	public void despuesDeSerAtacado();
-	
+	public int getNivel();
 	public boolean estaVivo();
 	public Personaje dejarMejorItem();
 }

@@ -24,12 +24,6 @@ public class Elfo extends Personaje{
 	}
 
 	@Override
-	public void atacar(Peleador victima) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public int calcularPuntosDeAtaque() {
 		return 5;
 	}

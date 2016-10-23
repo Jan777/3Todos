@@ -58,7 +58,7 @@ public abstract class Personaje extends Usuario implements Peleador {
 	 * */
 	
 	// Esto recibia un Peleador
-	public final void atacar (Personaje atacado) throws FileNotFoundException {
+	public final void atacar (Peleador atacado) throws FileNotFoundException {
 		if(atacado.estaVivo()){
 			if (this.puedeAtacar()) {
 				atacado.serAtacado(calcularPuntosDeAtaque());
@@ -298,7 +298,6 @@ public abstract class Personaje extends Usuario implements Peleador {
 	public int getPotencia() {
 		return potencia;
 	}
-
 
 	public void setPotencia(int potencia) {
 		this.potencia = potencia;

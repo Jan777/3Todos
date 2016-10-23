@@ -37,12 +37,7 @@ public class PersonajeEquipado extends Personaje {
 		return this.personajeDecorado.calcularPuntosDeMagia();
 	}
 
-	@Override
-	public void atacar(Peleador victima) {
-		//this.personajeDecorado.atacar(victima);		
-	}
-
-
+	
 	@Override
 	public String getRaza() {
 		return personajeDecorado.getRaza();

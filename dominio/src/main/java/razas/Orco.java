@@ -36,12 +36,7 @@ public class Orco extends Personaje{
 		return 3;
 	}
 
-	@Override
-	public void atacar(Peleador victima) {
-		this.atacar(victima);
-	}
-	
-	
+		
 	public boolean respuesta()	{
 		return false;
 	}

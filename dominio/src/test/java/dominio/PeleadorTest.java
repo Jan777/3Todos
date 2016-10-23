@@ -191,7 +191,7 @@ public class PeleadorTest {
 		orco = new ArmaduraDeAzorAhai(orco);
 
 		orco = (orco.desequipar((PersonajeEquipado) orco.dejarMejorItem()));
-		System.out.println(orco.getLista());
+		//System.out.println(orco.getLista());
 		Assert.assertEquals(2, orco.getTamañoLista());
 		Assert.assertEquals("Orco equipado con: 1- Bastón de Saruman  2- Armadura de Azor Ahai ", orco.getLista());
 	}

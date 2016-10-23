@@ -59,12 +59,6 @@ public class ArmaduraDeAzorAhai extends PersonajeEquipado{
 	}
 
 	@Override
-	public void atacar(Peleador victima) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public String getRaza() {
 		return p.getRaza();
 	}
