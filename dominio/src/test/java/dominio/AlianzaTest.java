@@ -40,6 +40,7 @@ public class AlianzaTest {
 		objAlianza.dejarAlianza(objHumano1);
 		Assert.assertEquals(2, objAlianza.cantidadMiembrosAlianza());
 	}
+	
 	@Test
 	public void eliminarAlianza()
 	{

@@ -12,23 +12,26 @@ import java.io.FileNotFoundException;
 import org.junit.Assert;
 import org.junit.Test;
 
+// OK
 
-
-/*
- * 3)	 Atacar personajes.
+/***
+ * 
+ * 3)	 Atacar personajes. 
  * Motivación: Para aumentar mi experiencia.  
  * 
- *
- * ATENCION: Al inicializar un objeto "Generico", el atributo nivel se genera como un valor random entre 1 y 6, lo cual puede hacer que 
- * varíe el resultado exacto de los Asserts.
  * 
- * */
+ ***/
+
+
 public class Historia03Test {
 
+	/***
+	 * 
+	 * 1.	Dado un Orco, cuando gane alguna batalla contra otro Personaje Jugador o Personaje Genérico, entonces el Orco aumentará su 
+	 * 		experiencia acorde al nivel del derrotado.
+	 * 
+	 ***/
 
-	/*1.	Dado un Orco, cuando gane alguna batalla contra otro Personaje Jugador o Personaje Genérico, entonces el Orco aumentará su 
-	 * experiencia acorde al nivel del derrotado.
-	 * */
 	@Test
 	public void historia03Criterio01_Test() throws FileNotFoundException{
 		
@@ -51,18 +54,13 @@ public class Historia03Test {
 		Assert.assertEquals(1, o2.getNivel());
 		
 		// Orco 1 ataca a Orco 2 hasta matarlo
-		o1.atacar(o2);
-		o1.atacar(o2);
-		o1.atacar(o2);
-		o1.atacar(o2);
-		o1.serEnergizado();
-		o1.atacar(o2);
-		o1.atacar(o2);
-		o1.atacar(o2);
-		o1.atacar(o2);
-		o1.serEnergizado();
-		o1.atacar(o2);
-		o1.atacar(o2);
+		while(o2.estaVivo()){
+			o1.atacar(o2);
+			o1.atacar(o2);
+			o1.atacar(o2);
+			o1.atacar(o2);
+			o1.serEnergizado();		
+		}
 		
 		/*
 		 * El Orco 2 muere
@@ -99,17 +97,14 @@ public class Historia03Test {
 		Assert.assertEquals(12+4+5, o3.calcularPuntosDeAtaque());
 		
 		// Orco 3 ataca a Genérico 1 hasta matarlo
-		o3.atacar(g1);
-		o3.atacar(o1);
-		o3.atacar(g1);
-		o3.atacar(g1);
-		o3.atacar(g1);
-		o3.serEnergizado();
-		o3.atacar(g1);
-		o3.atacar(g1);
-		o3.atacar(g1);
-		o3.atacar(g1);
-		o3.atacar(g1);
+		while(g1.estaVivo()){
+			o3.atacar(g1);
+			o3.atacar(g1);
+			o3.atacar(g1);
+			o3.atacar(g1);
+			o3.serEnergizado();		
+		}
+		
 		
 		/*
 		 * Chequeo que el Orco 2 esté muerto 
@@ -127,10 +122,13 @@ public class Historia03Test {
 		
 	}
 	
-	
-	/*2.	Dado un Humano, cuando gane alguna batalla contra otro Personaje Jugador o Personaje Genérico, entonces el Humano 
-	 * aumentará su experiencia acorde al nivel del derrotado.
-	 * */
+	/***
+	 * 
+	 * 2.	Dado un Humano, cuando gane alguna batalla contra otro Personaje Jugador o Personaje Genérico, entonces el Orco aumentará su 
+	 * 		experiencia acorde al nivel del derrotado.
+	 * 
+	 ***/
+
 	@Test
 	public void historia03Criterio02_Test() throws FileNotFoundException{
 		/****************************************************
@@ -165,23 +163,13 @@ public class Historia03Test {
 		 * Humano 1 ataca a Humano 2 hasta matarlo
 		 * */
 		
-		p1.atacar(p2);
-		p1.atacar(p2);
-		p1.atacar(p2);
-		p1.atacar(p2);
-		p1.serEnergizado();
-		p1.atacar(p2);
-		p1.atacar(p2);
-		p1.atacar(p2);
-		p1.serEnergizado();
-		p1.atacar(p2);
-		p1.atacar(p2);
-		p1.atacar(p2);
-		p1.serEnergizado();
-		p1.atacar(p2);
-		p1.atacar(p2);
-		p1.atacar(p2);
-		p1.atacar(p2);
+		while(p2.estaVivo()){
+			p1.atacar(p2);
+			p1.atacar(p2);
+			p1.atacar(p2);
+			p1.atacar(p2);
+			p1.serEnergizado();		
+		}
 		
 		
 		/*
@@ -224,20 +212,13 @@ public class Historia03Test {
 		Assert.assertEquals(10+4+5, p3.calcularPuntosDeAtaque());
 		
 		// Humano 3 ataca a Genérico 1 hasta matarlo
-		p3.atacar(g1);
-		p3.atacar(p1);
-		p3.atacar(g1);
-		p3.atacar(g1);
-		p3.atacar(g1);
-		p3.serEnergizado();
-		p3.atacar(g1);
-		p3.atacar(g1);
-		p3.atacar(g1);
-		p3.atacar(g1);
-		p3.atacar(g1);
-		p3.serEnergizado();
-		p3.atacar(g1);
-		p3.atacar(g1);
+		while(g1.estaVivo()){
+			p3.atacar(g1);
+			p3.atacar(g1);
+			p3.atacar(g1);
+			p3.atacar(g1);
+			p3.serEnergizado();		
+		}
 		
 		/*
 		 * Chequeo que el Generico esté muerto 
@@ -256,9 +237,13 @@ public class Historia03Test {
 		
 	}
 	
-	/*3.	Dado un Elfo, cuando gane alguna batalla contra otro Personaje Jugador o Personaje Genérico, entonces el Elfo aumentará su 
-	 * experiencia acorde al nivel del derrotado..
-	 * */
+	/***
+	 * 
+	 * 3.	Dado un Elfo, cuando gane alguna batalla contra otro Personaje Jugador o Personaje Genérico, entonces el Orco aumentará su 
+	 * 		experiencia acorde al nivel del derrotado.
+	 * 
+	 ***/
+	
 	@Test
 	public void historia03Criterio03_Test() throws FileNotFoundException{
 		/****************************************************
@@ -293,23 +278,13 @@ public class Historia03Test {
 		 * Humano 1 ataca a Humano 2 hasta matarlo
 		 * */
 		
-		e1.atacar(e2);
-		e1.atacar(e2);
-		e1.atacar(e2);
-		e1.atacar(e2);
-		e1.serEnergizado();
-		e1.atacar(e2);
-		e1.atacar(e2);
-		e1.atacar(e2);
-		e1.serEnergizado();
-		e1.atacar(e2);
-		e1.atacar(e2);
-		e1.atacar(e2);
-		e1.serEnergizado();
-		e1.atacar(e2);
-		e1.atacar(e2);
-		e1.atacar(e2);
-		e1.atacar(e2);
+		while(e2.estaVivo()){
+			e1.atacar(e2);
+			e1.atacar(e2);
+			e1.atacar(e2);
+			e1.atacar(e2);
+			e1.serEnergizado();		
+		}
 		
 		
 		/*
@@ -352,22 +327,13 @@ public class Historia03Test {
 		Assert.assertEquals(10+4+5, p3.calcularPuntosDeAtaque());
 		
 		// Humano 3 ataca a Genérico 1 hasta matarlo
-		p3.atacar(g1);
-		p3.atacar(e1);
-		p3.atacar(g1);
-		p3.atacar(g1);
-		p3.atacar(g1);
-		p3.serEnergizado();
-		p3.atacar(g1);
-		p3.atacar(g1);
-		p3.atacar(g1);
-		p3.atacar(g1);
-		p3.atacar(g1);
-		p3.serEnergizado();
-		p3.atacar(g1);
-		p3.atacar(g1);
-		p3.atacar(g1);
-		p3.atacar(g1);
+		while(g1.estaVivo()){
+			p3.atacar(g1);
+			p3.atacar(g1);
+			p3.atacar(g1);
+			p3.atacar(g1);
+			p3.serEnergizado();		
+		}
 		
 		/*
 		 * Chequeo que el Generico esté muerto 

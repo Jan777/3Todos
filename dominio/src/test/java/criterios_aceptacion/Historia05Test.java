@@ -11,6 +11,8 @@ import habilidades.*;
 import items.*;
 import razas.*;
 
+// Falla en el criterio 2.
+
 /***
  * 
  * 5)	 Como Personaje, quiero subir de nivel.  
@@ -33,6 +35,10 @@ public class Historia05Test {
 		Personaje p1 = new Humano("CarlosTevez","VeryDificul");
 		Personaje p2 = new Humano("Dalessandra","Cabezon");
 		Personaje p3 = new Humano("Romagnola","Cabezon");
+		
+		p1.setClase(new Guerrero());
+		p2.setClase(new Guerrero());
+		p3.setClase(new Guerrero());
 		
 		for (int i = 0; i<9;i++)			
 			p1.atacar(p2);
@@ -59,6 +65,7 @@ public class Historia05Test {
 		 * */
 		
 		Assert.assertEquals(2, p1.getPuntos());
+		p2.verEstado();
 		
 	}
 	
