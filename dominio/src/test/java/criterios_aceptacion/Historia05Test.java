@@ -11,7 +11,7 @@ import habilidades.*;
 import items.*;
 import razas.*;
 
-// Falla en el criterio 2.
+// Falla en el criterio 2. Faltan 3 y 4.
 
 /***
  * 

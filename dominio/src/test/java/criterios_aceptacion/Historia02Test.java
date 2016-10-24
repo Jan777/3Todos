@@ -1,5 +1,9 @@
 package criterios_aceptacion;
 
+import castas.*;
+import dominio.*;
+import razas.*;
+
 // Falta todo
 /***
  * 
@@ -48,6 +52,9 @@ public class Historia02Test {
 	 * 
 	 ***/
 	public void historia02Criterio04_Test(){
+		Personaje p1 = new Humano("Ciro","123");
+		p1.setClase(new Hechicero());
+		
 		
 	}
 

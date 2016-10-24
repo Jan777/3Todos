@@ -24,7 +24,7 @@ public abstract class Personaje implements Peleador {
 				  defensa,
 				  magia,
 				  //daño, // @mauroat - Este atributo me parece al dope
-				  puntos,	// @mauroat - agregado 19/10/16
+				  puntos,	// @mauroat - agregado 19/10/16 - modificado 24/10/16
 				  destreza,
 				  velocidad,
 				  potencia;
