@@ -7,26 +7,32 @@ public class Humano extends Personaje {
 	public Humano(String nombre, String password){
 		super(nombre,password);
 		this.setRaza("Humano");
+		this.ataque = 10;
+		this.defensa = 10;
+		this.magia = 0;
 	}
 	
 	public Humano(Personaje p){
 		super(p);
 		this.setRaza("Humano");
+		this.ataque = 10;
+		this.defensa = 10;
+		this.magia = 0;
 	}
 	
-	@Override
-	public int calcularPuntosDeAtaque() {
-		return 10;
-	}
-
 	@Override
 	public boolean puedeAtacar() {
 		return energia > (10 + this.calcularPuntosDeAtaque());
 	}
 
 	@Override
+	public int calcularPuntosDeAtaque() {
+		return this.ataque;
+	}
+
+	@Override
 	public int calcularPuntosDeDefensa() {
-		return 10;
+		return this.defensa;
 	}
 
 	@Override
@@ -35,12 +41,15 @@ public class Humano extends Personaje {
 	}
 
 
+
 	@Override
 	public String getRaza() {
 		return "Humano";
 	}
 
-	
+	public boolean respuesta()	{
+		return false;
+	}
 	
 }
 

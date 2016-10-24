@@ -6,6 +6,9 @@ public class Elfo extends Personaje{
 	public Elfo(String username, String password) {
 		super(username, password);
 		this.setRaza("Elfo");
+		this.ataque = 5;
+		this.defensa = 5;
+		this.magia = 10;
 	}
 	
 	public Elfo(Usuario u) {
@@ -25,17 +28,17 @@ public class Elfo extends Personaje{
 
 	@Override
 	public int calcularPuntosDeAtaque() {
-		return 5;
+		return this.ataque;
 	}
 
 	@Override
 	public int calcularPuntosDeDefensa() {
-		return 5;
+		return this.defensa;
 	}
 
 	@Override
 	public int calcularPuntosDeMagia() {
-		return 10;
+		return this.magia;
 	}
 
 	@Override
@@ -43,5 +46,9 @@ public class Elfo extends Personaje{
 		return "Elfo";
 	}
 
-
+	public boolean respuesta(){
+		return false;
+	}
+	
+	
 }

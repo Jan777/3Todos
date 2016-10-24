@@ -1,6 +1,12 @@
 package dominio;
 
 public abstract class Ataque {
+	/*
+	 *
+	 * Los ataques se podrán agregar cada vez que un personaje llegue a un nivel múltiplo de 5.
+	 * 
+	 * */
+	
 	
 	protected int idAtaque;
 	protected String nombre;

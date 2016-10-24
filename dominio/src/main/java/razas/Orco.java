@@ -7,11 +7,17 @@ public class Orco extends Personaje{
 	public Orco(String username, String password) {
 		super(username, password);
 		this.setRaza("Orco");
+		this.ataque = 12;
+		this.defensa = 5;
+		this.magia = 3;
 	}
 	
 	public Orco(Personaje p) {
 		super(p);
 		this.setRaza("Orco");
+		this.ataque = 12;
+		this.defensa = 5;
+		this.magia = 3;
 	}
 	
 
@@ -23,17 +29,17 @@ public class Orco extends Personaje{
 	
 	@Override
 	public int calcularPuntosDeAtaque() {
-		return 12;
+		return this.ataque;
 	}
 
 	@Override
 	public int calcularPuntosDeDefensa() {
-		return 5;
+		return this.defensa;
 	}
 
 	@Override
 	public int calcularPuntosDeMagia() {
-		return 3;
+		return this.magia;
 	}
 
 		

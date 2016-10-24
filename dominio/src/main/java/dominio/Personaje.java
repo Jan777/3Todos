@@ -14,7 +14,7 @@ import java.util.Map;
 
 import dominio.*;
 
-public abstract class Personaje extends Usuario implements Peleador {
+public abstract class Personaje implements Peleador {
 
 	protected int vida,
 				  experiencia,
@@ -28,30 +28,35 @@ public abstract class Personaje extends Usuario implements Peleador {
 				  destreza,
 				  velocidad,
 				  potencia;
-
+	protected int puedeAgregarAtaque; // @mauroat - 24/10/16 : Esto se crea para satisfacer la historia de usuario 13-
+	protected Usuario usuarioPersonaje;
 	protected String raza;
 	protected Casta clase;
 	protected Map<String, Ataque> ataques = new HashMap<String, Ataque>(); 
 	
 	public Personaje(String nombre, String password){
-		super(nombre,password);
+		this.usuarioPersonaje = new Usuario(nombre,password);
 		this.vida = 100;
 		this.energia = 100;
 		this.experiencia = 0;
 		this.nivel = 1;	
 		this.puntos = 0;
+		this.puedeAgregarAtaque = 0;
 	}
 	
 	public Personaje(Personaje p){
-		super(p.getUsername(),p.getPassword());
+		//super(p.getUsername(),p.getPassword());
+		this.usuarioPersonaje = p.usuarioPersonaje;
 		this.vida = 100;
 		this.energia = 100;
 		this.experiencia = 0;
 		this.nivel = 1;	
 		this.puntos = 0;
+		this.puedeAgregarAtaque = 0;
 	}
 	
-	/* @mauroat - 18/10/16
+	/* 
+	 * @mauroat - 18/10/16
 	 * Se modifica este método para que se sume más experiencia en caso que mate al atacado. 
 	 * Mi idea es que cuando esten implementadas las razas tambien afecten la experiencia.
 	 * 
@@ -73,6 +78,7 @@ public abstract class Personaje extends Usuario implements Peleador {
 				} else {
 					// Si en cambio, mato al atacado, mi experiencia sube en 10*el nivel del atacado
 					this.experiencia+=(atacado.getNivel()*10);
+					
 				}
 	
 				this.despuesDeAtacar();	
@@ -88,8 +94,10 @@ public abstract class Personaje extends Usuario implements Peleador {
 		}
 	}
 
-	/* @mauroat - 18/10/16
+	/* 
+	 * @mauroat - 18/10/16
 	 * Se sobrecarga el método atacar, para que se apliquen los daños causados por los ataques que posee cada personaje.
+	 * 
 	 * */
 	public final void atacar(Personaje atacado, Ataque a) throws FileNotFoundException {
 		if(atacado.estaVivo()){
@@ -122,7 +130,7 @@ public abstract class Personaje extends Usuario implements Peleador {
 	}
 	
 	public void verEstado(){
-		System.out.println("Personaje: "+this.getUsername());
+		System.out.println("Personaje: "+this.usuarioPersonaje.getUsername());
 		System.out.println("Salud: "+this.vida);
 		System.out.println("Energia: "+this.energia);
 		System.out.println("----------");
@@ -142,7 +150,7 @@ public abstract class Personaje extends Usuario implements Peleador {
 	}
 	
 	
-	
+
 	public void despuesDeAtacar() throws FileNotFoundException { 
 		this.verificarNivel();
 		
@@ -155,7 +163,16 @@ public abstract class Personaje extends Usuario implements Peleador {
 	private void verificarNivel() throws FileNotFoundException {
 		if(this.experiencia >= experienciaRequerida(this.nivel)){
 			this.nivel++;
-			this.puntos += 2; 
+			this.puntos += 2;
+			
+			/*
+			 * @mauroat - 24/10/16
+			 * Si el personaje alcanza un nivel multiplo de 5, podrá agregar un ataque. 
+			 * */
+			
+			if(this.nivel % 5 == 0){
+				this.puedeAgregarAtaque += 1;
+			}
 		}		
 	}
 	
@@ -325,13 +342,16 @@ public abstract class Personaje extends Usuario implements Peleador {
 	
 	public void agregarAtaque(Ataque a){
 		this.ataques.put(a.getNombre(), a);
+		this.puedeAgregarAtaque--;
 	}
 	
 	public void quitarAtaque(Ataque a){
-		this.ataques.remove(a.getNombre());
+		this.ataques.remove(a.getNombre());		
+		// Si lo quiere sacar no puede elegir otro, que se joda.
+		//this.puedeAgregarAtaque++;
 	}
 	
-	public void getListaAtaques(){
+	public void verListaAtaques(){
 		int i = 1;
 		for (Map.Entry<String, Ataque> entry : this.ataques.entrySet()) {
 		    System.out.println("Ataque "+i+": "+entry.getKey());
@@ -367,13 +387,44 @@ public abstract class Personaje extends Usuario implements Peleador {
 		// No hace nada
 	}
 	
+	
+	
 	public Personaje desequipar(PersonajeEquipado personaje) {
 		return null;
 	}
 	
 	public String getNombreItem() {
-		return "Sin items";
+		//return "Sin items";
+		return null;
 	}
 	
+	public String toString()   {
+	     	return this.usuarioPersonaje.getUsername();
+	 }
+	  	
+	 public boolean inteactuarConOtroPersonaje(Personaje obj)  {
+	 	return obj.respuesta(); 	 
+	 }
+	 
+	 public boolean respuesta() {
+		 return true;
+	 }
+	 	    
+	 public boolean equals(Personaje obj) {
+	 	if(this.usuarioPersonaje.equals(obj.usuarioPersonaje))
+	 		return true;
+	 	return false;	
+	 }
+
+	public int getPuedeAgregarAtaque() {
+		return puedeAgregarAtaque;
+	}
+
+	public void setPuedeAgregarAtaque(int puedeAgregarAtaque) {
+		this.puedeAgregarAtaque = puedeAgregarAtaque;
+	}
+	
+	 	 
+	 
 	
 }
