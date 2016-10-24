@@ -23,13 +23,14 @@ public abstract class Personaje extends Usuario implements Peleador {
 				  ataque, 
 				  defensa,
 				  magia,
-				  //daño, // @Mauro - Este atributo me parece al dope
+				  //daño, // @mauroat - Este atributo me parece al dope
+				  puntos,	// @mauroat - agregado 19/10/16
 				  destreza,
 				  velocidad,
 				  potencia;
+
 	protected String raza;
 	protected Casta clase;
-	protected ArrayList<PersonajeEquipado> lista = new ArrayList<>();
 	protected Map<String, Ataque> ataques = new HashMap<String, Ataque>(); 
 	
 	public Personaje(String nombre, String password){
@@ -38,6 +39,7 @@ public abstract class Personaje extends Usuario implements Peleador {
 		this.energia = 100;
 		this.experiencia = 0;
 		this.nivel = 1;	
+		this.puntos = 0;
 	}
 	
 	public Personaje(Personaje p){
@@ -46,6 +48,7 @@ public abstract class Personaje extends Usuario implements Peleador {
 		this.energia = 100;
 		this.experiencia = 0;
 		this.nivel = 1;	
+		this.puntos = 0;
 	}
 	
 	/* @mauroat - 18/10/16
@@ -54,8 +57,8 @@ public abstract class Personaje extends Usuario implements Peleador {
 	 * 
 	 * */
 	
-	// Esto recibia un Atacable
-	public final void atacar(Personaje atacado) throws FileNotFoundException {
+	// Esto recibia un Peleador
+	public final void atacar (Peleador atacado) throws FileNotFoundException {
 		if(atacado.estaVivo()){
 			if (this.puedeAtacar()) {
 				atacado.serAtacado(calcularPuntosDeAtaque());
@@ -76,12 +79,12 @@ public abstract class Personaje extends Usuario implements Peleador {
 				
 			} else{
 				
-				System.out.println(this.getUsername()+" no tiene energía suficiente para atacar!");
+				//System.out.println(this.getUsername()+" no tiene energía suficiente para atacar!");
 			}
 		}
 		else{
-			// Esta linea se va a comentar
-			System.out.println("El atacado está muerto, no se lo puede atacar.");
+			
+			//System.out.println("El atacado está muerto, no se lo puede atacar.");
 		}
 	}
 
@@ -105,12 +108,11 @@ public abstract class Personaje extends Usuario implements Peleador {
 	
 				this.despuesDeAtacar();	
 			} else{
-				System.out.println(this.getUsername()+" no tiene energía suficiente para atacar!");
+				//System.out.println(this.getUsername()+" no tiene energía suficiente para atacar!");
 			}
 		}
 		else{
-			// Esta linea se va a comentar
-			System.out.println("El atacado está muerto, no se lo puede atacar.");
+			//System.out.println("El atacado está muerto, no se lo puede atacar.");
 		}
 	}
 	
@@ -125,6 +127,7 @@ public abstract class Personaje extends Usuario implements Peleador {
 		System.out.println("Energia: "+this.energia);
 		System.out.println("----------");
 		System.out.println("Raza: "+this.getRaza());
+		System.out.println("Casta: "+this.getClase().getNombre());
 		System.out.println("Nivel: "+this.nivel);
 		System.out.println("Experiencia: "+this.experiencia);
 		System.out.println("----------");
@@ -145,15 +148,23 @@ public abstract class Personaje extends Usuario implements Peleador {
 		
 	}	
 	
+	/* @mauroat - 19/10/16
+	 * Al subir de nivel se suman dos puntos para sumar a las habilidades
+	 * */
+	
 	private void verificarNivel() throws FileNotFoundException {
 		if(this.experiencia >= experienciaRequerida(this.nivel)){
 			this.nivel++;
+			this.puntos += 2; 
 		}		
 	}
 	
+	/* @mauroat - 17/10/16
+	 * Esto será reemplazado por una consulta a una base de datos
+	 * */ 
 	private int experienciaRequerida(int nivel) throws FileNotFoundException{
 		try{
-			// Esto será reemplazado por una consulta a una base de datos
+			
 			Scanner sc = new Scanner (new File ("config/niveles.cfg"));	
 			while(sc.hasNextLine()){
 				if(nivel == sc.nextInt()){
@@ -249,6 +260,25 @@ public abstract class Personaje extends Usuario implements Peleador {
 		return destreza;
 	}
 
+	public int getPuntos() {
+		return puntos;
+	}
+
+	public void setPuntos(int puntos) {
+		this.puntos = puntos;
+	}
+
+	public Casta getClase() {
+		return clase;
+	}
+	
+	public String getNombreClase() {
+		return clase.getNombre();
+	}
+
+	public void setClase(Casta clase) {
+		this.clase = clase;
+	}
 
 	public void setDestreza(int destreza) {
 		this.destreza = destreza;
@@ -269,16 +299,13 @@ public abstract class Personaje extends Usuario implements Peleador {
 		return potencia;
 	}
 
-
 	public void setPotencia(int potencia) {
 		this.potencia = potencia;
 	}
 
-
 	public void setRaza(String raza) {
 		this.raza = raza;
 	}
-
 
 	public void setVida(int vida) {
 		this.vida = vida;
@@ -286,33 +313,14 @@ public abstract class Personaje extends Usuario implements Peleador {
 
 	/* LISTA DE ITEMS */
 	
-	public void getLista() {
-		System.out.println("Cantidad de items: "+lista.size());
-		for(int i=0; i<lista.size();i++)
-			System.out.println(lista.get(i));
+	public String getLista() {
+		return this.raza +" equipado con:";
 	}
 	
 	public int getTamañoLista() {
-		return lista.size();
+		return 0;
 	}
 
-	public void agregarALista(PersonajeEquipado pe) {
-		//this.lista.add(pe);
-		this.lista.addAll(Arrays.asList(pe));
-	}
-
-	public PersonajeEquipado getItemMasPrioritario() {
-		PersonajeEquipado aux = null;
-		int max = -1;
-		for(int i=0; i<lista.size();i++){
-			if(max < lista.get(i).getPrioridad()){
-				max = lista.get(i).getPrioridad();
-				aux = lista.get(i);
-			}
-		}		
-		return aux;
-	}
-	
 	/* HASMAP DE ATAQUES  */
 	
 	public void agregarAtaque(Ataque a){
@@ -337,6 +345,34 @@ public abstract class Personaje extends Usuario implements Peleador {
 	
 	public Ataque getAtaque(String ataque){
 		return this.ataques.get(ataque);		
+	}
+	
+	public Personaje dejarMejorItem(){
+		return null;
+	}
+	
+	public int getPrioridad() {
+		return 0;
+	}
+	
+	public boolean compararPrioridad(int p1, int p2){
+		return p1 == p2;
+	}
+
+	public Personaje getPersonajeDecorado() {
+		return null;
+	}
+
+	public void setPersonajeDecorado(Personaje p) {
+		// No hace nada
+	}
+	
+	public Personaje desequipar(PersonajeEquipado personaje) {
+		return null;
+	}
+	
+	public String getNombreItem() {
+		return "Sin items";
 	}
 	
 	

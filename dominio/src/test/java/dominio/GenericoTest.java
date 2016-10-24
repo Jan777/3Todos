@@ -8,7 +8,8 @@ public class GenericoTest {
 	@Test
 	public void constructorGenerico(){
 		Generico g1 = new Generico("Pato");
-		//g1.verEstado();
+		
+		g1.verEstado();
 		
 		Generico g2 = new Generico("Peto");
 		//g2.verEstado();

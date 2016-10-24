@@ -13,8 +13,8 @@ public class ElfoTest {
 	@Test
 	public void constructorElfo(){
 		Personaje e = new Elfo("Agente Smith","matrix");
-		
-		Assert.assertEquals("Agente Smith", e.getUsername());
+		//System.out.println(e);
+		Assert.assertEquals("Agente Smith", e.toString());
 		Assert.assertEquals(100, e.getEnergia());
 		Assert.assertEquals(100, e.getVida());
 		Assert.assertEquals(1, e.getNivel());

@@ -3,14 +3,16 @@ package dominio;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
+import castas.*;
 
-public class Generico implements Peleador{
+public class Generico implements Peleador {
 
 	protected String nombre;
 	protected int vida,
 				  nivel,
 				  energia;
 	protected String raza;
+	//protected Casta clase;
 	protected ArrayList<PersonajeEquipado> lista = new ArrayList<>();
 
 	/* @mauroat - 18/10/16:
@@ -21,7 +23,10 @@ public class Generico implements Peleador{
 	
 	public Generico(){
 		Random r = new Random();
-		this.nombre = "dde";
+		/*@mauroat - 23/10/16
+		 * Ver como randomear el nombre
+		 * */
+		this.nombre = "";
 		this.vida = 100;
 		this.energia = 100;
 		this.nivel = r.nextInt(5);
@@ -49,15 +54,32 @@ public class Generico implements Peleador{
 		}
 	}
 
+	/*
+	private Casta setRandomCasta() {
+		Random r = new Random();
+		int aux = r.nextInt(4);
+		if(aux == 1){
+			return (new Hechicero());
+		} else if (aux == 2){
+			return (new Chaman());
+		} else {
+			return (new Guerrero());
+		}
+	}
 
+
+	private void setClase(Casta casta) {
+		this.clase = casta;	
+	}
+	 */
 	@Override
 	public void atacar(Peleador victima){
 		if(victima.estaVivo()){
 			if (this.puedeAtacar()) {
-				victima.serAtacado(calcularPuntosDeAtaque());
+				victima.serAtacado(this.calcularPuntosDeAtaque());
 				// El siguiente metodo podrá implementarse cuando definamos la ubicación de los personajes
 				//victima.despuesDeSerAtacado();
-				this.energia -= calcularPuntosDeAtaque();
+				this.energia -= this.calcularPuntosDeAtaque();
 				this.despuesDeAtacar();					
 			} else{				
 				System.out.println(this.nombre+" no tiene energía suficiente para atacar!");
@@ -74,12 +96,6 @@ public class Generico implements Peleador{
 	@Override
 	public void despuesDeSerAtacado() {
 		// No hace nada		
-	}
-
-	@Override
-	public PersonajeEquipado dejarItem() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 
@@ -138,6 +154,7 @@ public class Generico implements Peleador{
 		System.out.println("Energia: "+this.energia);
 		System.out.println("----------");
 		System.out.println("Raza: "+this.getRaza());
+		//System.out.println("Casta: "+this.getClase().getNombre());
 		System.out.println("Nivel: "+this.nivel);
 		System.out.println("----------");
 		System.out.println("Ataque: "+this.calcularPuntosDeAtaque());
@@ -189,6 +206,13 @@ public class Generico implements Peleador{
 	public void setRaza(String raza) {
 		this.raza = raza;
 	}
+
+	@Override
+	public Personaje dejarMejorItem() {
+		return null;
+	}
+
+	
 
 	
 }

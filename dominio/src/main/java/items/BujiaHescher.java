@@ -1,16 +1,40 @@
 package items;
 
 import dominio.*;
+import razas.*;
 
 public class BujiaHescher extends PersonajeEquipado {
 	
+	private Personaje p;
+	
 	public BujiaHescher(Personaje p) {
-		super(p);
-		this.prioridad = 5;
-		this.agregarALista(this);
-		//super.agregarALista(this);
+		super(p);		
+		this.p = p;
+		this.prioridad=7;
+		this.nombreItem = "Bujía Hescher";
 	}
 
+	public BujiaHescher(Humano p) {
+		super(p);		
+		this.p = p;
+		this.prioridad=7;
+		this.nombreItem = "Bujía Hescher";
+	}
+	
+	public BujiaHescher(Elfo p) {
+		super(p);		
+		this.p = p;
+		this.prioridad=7;
+		this.nombreItem = "Bujía Hescher";
+	}
+
+	public BujiaHescher(Orco p) {
+		super(p);
+		this.p = p;
+		this.prioridad=7;
+		this.nombreItem = "Bujía Hescher";
+	}
+	
 	@Override
 	public int calcularPuntosDeAtaque() {
 		return super.calcularPuntosDeAtaque()+1;
@@ -26,15 +50,18 @@ public class BujiaHescher extends PersonajeEquipado {
 		return super.calcularPuntosDeMagia()+1;
 	}
 
-	//@Override
-	//public PersonajeEquipado dejarItem() {
-	//	return (PersonajeEquipado) p;	
-	//}
+	@Override
+	public void setPersonajeDecorado(Personaje personajeDecorado) {
+		this.personajeDecorado = personajeDecorado;
+	}
 	
 	@Override
-	public void getLista() {
-		System.out.println("Cantidad de items: "+lista.size());
-		for(int i=0; i<lista.size();i++)
-			System.out.println(lista.get(i));
+	public String getLista() {
+		return personajeDecorado.getLista() + " "+getTamañoLista()+"- " +this.nombreItem+ " ";
+	}
+	
+	@Override
+	public int getTamañoLista() {
+		return personajeDecorado.getTamañoLista()+1;
 	}
 }

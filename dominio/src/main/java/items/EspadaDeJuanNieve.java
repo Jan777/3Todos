@@ -4,10 +4,13 @@ import dominio.*;
 
 public class EspadaDeJuanNieve extends PersonajeEquipado{
 
+	private Personaje p ;
+	
 	public EspadaDeJuanNieve(Personaje p) {
 		super(p);
+		this.p = p;		
 		this.prioridad = 6;
-		this.agregarALista(this);
+		this.nombreItem = "Espada de Juan Nieve";
 	}
 
 
@@ -27,11 +30,18 @@ public class EspadaDeJuanNieve extends PersonajeEquipado{
 	}
 	
 	@Override
-	public void getLista() {
-		System.out.println("Cantidad de items: "+lista.size());
-		for(int i=0; i<lista.size();i++)
-			System.out.println(lista.get(i));
+	public void setPersonajeDecorado(Personaje personajeDecorado) {
+		this.personajeDecorado = personajeDecorado;
 	}
-
+	
+	@Override
+	public String getLista() {
+		return personajeDecorado.getLista() + " "+getTamañoLista()+"- " +this.nombreItem+ " ";
+	}
+	
+	@Override
+	public int getTamañoLista() {
+		return personajeDecorado.getTamañoLista()+1;
+	}
 
 }

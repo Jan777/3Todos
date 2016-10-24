@@ -36,19 +36,8 @@ public class Humano extends Personaje {
 
 
 	@Override
-	public void atacar(Peleador victima) {
-		//this.atacar(victima);		
-	}
-
-
-	@Override
 	public String getRaza() {
 		return "Humano";
-	}
-
-	@Override
-	public PersonajeEquipado dejarItem() {
-		return null;
 	}
 
 	

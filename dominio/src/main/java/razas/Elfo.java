@@ -14,11 +14,6 @@ public class Elfo extends Personaje{
 	}
 
 	@Override
-	public PersonajeEquipado dejarItem() {
-		return null;
-	}
-
-	@Override
 	public void despuesDeAtacar() {
 		// TODO Auto-generated method stub		
 	}
@@ -26,12 +21,6 @@ public class Elfo extends Personaje{
 	@Override
 	public boolean puedeAtacar() {
 		return energia > (10 + this.calcularPuntosDeAtaque());
-	}
-
-	@Override
-	public void atacar(Peleador victima) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -53,5 +42,6 @@ public class Elfo extends Personaje{
 	public String getRaza() {
 		return "Elfo";
 	}
+
 
 }

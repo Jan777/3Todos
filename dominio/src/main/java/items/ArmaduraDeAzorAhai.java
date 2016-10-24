@@ -1,5 +1,7 @@
 package items;
 
+import org.omg.Messaging.SyncScopeHelper;
+
 import dominio.*;
 import razas.*;
 
@@ -13,28 +15,34 @@ public class ArmaduraDeAzorAhai extends PersonajeEquipado{
 	 * */
 	
 	public ArmaduraDeAzorAhai(Personaje p) {
-		super(p);
-		super.agregarALista(this);
+		super(p);		
 		this.p = p;
 		this.prioridad = 3;
+		this.nombreItem = "Armadura de Azor Ahai";
 	}
 	
 	public ArmaduraDeAzorAhai(Orco p) {
 		super(p);
-		this.p = p;
-		this.p.agregarALista(this);
+		this.p = p;		
 		this.prioridad = 3;
-		
+		this.nombreItem = "Armadura de Azor Ahai";		
 	}
 	
 	public ArmaduraDeAzorAhai(Humano p) {
-		super(p);
+		super(p);		
 		this.p = p;
-		this.p.agregarALista(this);
 		this.prioridad = 3;
+		this.nombreItem = "Armadura de Azor Ahai";
 	}
 	
 
+	public ArmaduraDeAzorAhai(Elfo p) {
+		super(p);		
+		this.p = p;		
+		this.prioridad = 3;
+		this.nombreItem = "Armadura de Azor Ahai";
+	}	
+	
 	@Override
 	public int calcularPuntosDeAtaque() {
 		return p.calcularPuntosDeAtaque();
@@ -51,27 +59,23 @@ public class ArmaduraDeAzorAhai extends PersonajeEquipado{
 	}
 
 	@Override
-	public void atacar(Peleador victima) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public PersonajeEquipado dejarItem() {
-		return (PersonajeEquipado) p;	
-	}
-
-
-	@Override
 	public String getRaza() {
 		return p.getRaza();
 	}
+	
+	@Override
+	public void setPersonajeDecorado(Personaje personajeDecorado) {
+		this.p = personajeDecorado;
+	}
 
 	@Override
-	public void getLista() {
-		System.out.println("Cantidad de items: "+lista.size());
-		for(int i=0; i<lista.size();i++)
-			System.out.println(lista.get(i));
+	public String getLista() {
+		return p.getLista() + " "+getTamañoLista()+"- " +this.nombreItem+ " ";
+	}
+	
+	@Override
+	public int getTamañoLista() {
+		return p.getTamañoLista()+1;
 	}
 
 }
