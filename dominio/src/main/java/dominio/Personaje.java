@@ -423,6 +423,30 @@ public abstract class Personaje implements Peleador {
 	public void setPuedeAgregarAtaque(int puedeAgregarAtaque) {
 		this.puedeAgregarAtaque = puedeAgregarAtaque;
 	}
+
+	public int getAtaque() {
+		return ataque;
+	}
+
+	public void setAtaque(int ataque) {
+		this.ataque = ataque;
+	}
+
+	public int getDefensa() {
+		return defensa;
+	}
+
+	public void setDefensa(int defensa) {
+		this.defensa = defensa;
+	}
+
+	public int getMagia() {
+		return magia;
+	}
+
+	public void setMagia(int magia) {
+		this.magia = magia;
+	}
 	
 	 	 
 	 

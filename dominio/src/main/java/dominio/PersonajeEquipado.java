@@ -82,6 +82,67 @@ public class PersonajeEquipado extends Personaje {
 		return personajeDecorado.getTamañoLista()+1;
 	}
 	
+	@Override
+	public void setAtaque(int ataque) {
+		this.personajeDecorado.setAtaque(ataque);
+	}
+	
+	@Override
+	public void setMagia(int magia) {
+		this.personajeDecorado.setMagia(magia);;
+	}
+
+	@Override
+	public void setDefensa(int defensa) {
+		this.personajeDecorado.setDefensa(defensa);;
+	}	
+	
+	@Override
+	public void setVelocidad(int velocidad) {
+		this.personajeDecorado.setVelocidad(velocidad);;
+	}	
+	
+	@Override
+	public void setDestreza(int destreza) {
+		this.personajeDecorado.setDestreza(destreza);;
+	}
+	
+	@Override
+	public void setPotencia(int potencia) {
+		this.personajeDecorado.setPotencia(potencia);;
+	}
+	
+	@Override
+	public int getAtaque() {
+		return this.personajeDecorado.getAtaque();
+	}
+	
+	@Override
+	public int getMagia() {
+		return this.personajeDecorado.getMagia();
+	}
+
+	@Override
+	public int getDefensa() {
+		return this.personajeDecorado.getDefensa();
+	}	
+	
+	@Override
+	public int getVelocidad() {
+		return this.personajeDecorado.getVelocidad();
+	}	
+	
+	@Override
+	public int getDestreza() {
+		return this.personajeDecorado.getDestreza();
+	}
+	
+	@Override
+	public int getPotencia() {
+		return this.personajeDecorado.getPotencia();
+	}
+	
+	
 	/*
 	 * @mauroat - 19/10/16
 	 * Corrijo este método. Funciona OK, ver test peleadorDejarMejorItem()

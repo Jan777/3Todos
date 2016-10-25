@@ -40,15 +40,6 @@ public abstract class Casta {
 		this.nombre = nombre;
 	}
 	
-	 /*
-	  * @mauroat - 24/10/16
-	  * Método que aplica al personaje los puntos de cada habilidad
-	  * */
-	 private void aplicarHabilidades(){
-		 
-	 }
-	/*
-	 * Ver que fuckin' métodos le metemos
-	 * */
+	 
 
 }

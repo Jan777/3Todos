@@ -11,7 +11,8 @@ import habilidades.*;
 import items.*;
 import razas.*;
 
-// Falta todo
+// Criterio 1 - OK
+// Criterio 2 - Falta
 
 
 /***
@@ -73,7 +74,7 @@ public class Historia09Test {
 	public void historia09Criterio02_Test() throws FileNotFoundException{
 		/*
 		 * @mauroat - 24/10/16:
-		 * Creo odavía no puede probarse
+		 * Creo todavía no puede probarse
 		 * */
 		
 	}

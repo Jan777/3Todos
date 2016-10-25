@@ -11,7 +11,7 @@ import habilidades.*;
 import items.*;
 import razas.*;
 
-// Falla en el criterio 2. Faltan 3 y 4.
+// Falta el criterio 4
 
 /***
  * 
@@ -65,7 +65,6 @@ public class Historia05Test {
 		 * */
 		
 		Assert.assertEquals(2, p1.getPuntos());
-		p2.verEstado();
 		
 	}
 	
@@ -85,11 +84,16 @@ public class Historia05Test {
 		p1.setClase(new Guerrero());
 		p1.getClase().agregarHabilidad(new Destreza());
 		
+		
 		/*
 		 * Controlo que el personaje p1 tenga una habilidad
 		 * */
 		Assert.assertEquals(1, p1.getClase().getHabilidades().size());
 		
+		
+		/*
+		 * Ataco para subir de nivel
+		 * */
 		
 		for (int i = 0; i<9;i++)			
 			p1.atacar(p2);
@@ -108,8 +112,7 @@ public class Historia05Test {
 		/*
 		 * El personaje p1 sube de nivel
 		 * */
-		Assert.assertEquals(2, p1.getNivel());
-		
+		Assert.assertEquals(2, p1.getNivel());		
 		
 		/*
 		 * El personaje p1 acumula 2 puntos por subir de nivel
@@ -121,12 +124,28 @@ public class Historia05Test {
 		 * El personaje p1 asigna estos puntos a sus habilidades
 		 */
 		
-		// Aquí tenemos que definir como afectan las habilidades en los personajes.
+		p1.getClase().getHabilidades().get(1).afectar(p1);
 		
 		/*
-		 * El personaje p1 no tiene más puntos disponibles
+		 * El personaje p1 queda con un punto disponible
 		 */
-		Assert.assertEquals(0, p1.getPuntos());
+		Assert.assertEquals(1, p1.getPuntos());
+		
+		/*
+		 * El personaje p1 tiene la habilidad Destreza con 2 puntos
+		 */
+		Assert.assertEquals(1, p1.getClase().getHabilidades().get(1).getPuntos());
+		
+		
+		/*
+		 * El personaje p1 mejoró sus atributos gracias a su nueva habilidad
+		 * */
+		Assert.assertEquals(10, p1.calcularPuntosDeAtaque());
+		Assert.assertEquals(10, p1.calcularPuntosDeDefensa());
+		Assert.assertEquals(0, p1.calcularPuntosDeMagia());
+		Assert.assertEquals(0+1, p1.getVelocidad());
+		Assert.assertEquals(0, p1.getDestreza());
+		Assert.assertEquals(0+1, p1.getPotencia());
 	}
 
 	
@@ -137,14 +156,77 @@ public class Historia05Test {
 	 * entonces podrá mejorar sus atributos para el manejo de ciertos items.
 	 * 
 	 ***/
-	/*
-	 *  @mauroat - 23/10/16
-	 *  Hay que ver como "mejora el manejo de ciertos items"
-	 * */
+
 	
 	@Test
 	public void historia05Criterio03_Test() throws FileNotFoundException{
+		Personaje p1 = new Humano("JRR10","VeryDificul");
+		Personaje p2 = new Humano("Yepes","Cabezon");
 		
+		p1.setClase(new Guerrero());
+		p1 = new PocionBruta(p1);
+		
+		p1.getClase().agregarHabilidad(new Inteligencia());
+		
+		
+		/*
+		 * Controlo que el personaje p1 tenga una habilidad
+		 * */
+		Assert.assertEquals(1, p1.getClase().getHabilidades().size());
+		
+		
+		/*
+		 * Ataco para subir de nivel
+		 * */
+		
+		while(p2.estaVivo() && p1.getNivel()<=3){
+			p1.atacar(p2);
+			p1.atacar(p2);
+			p1.atacar(p2);
+			p1.atacar(p2);
+			if(p1.getEnergia() < 10 + p1.calcularPuntosDeAtaque()){
+				p1.serEnergizado();
+			}			
+		}
+		
+		
+		/*
+		 * El personaje p1 sube de nivel
+		 * */
+		Assert.assertEquals(4, p1.getNivel());		
+		
+		/*
+		 * El personaje p1 acumula 6 puntos por subir de nivel
+		 */
+		
+		Assert.assertEquals(6, p1.getPuntos());
+		
+		/*
+		 * El personaje p1 asigna estos puntos a sus habilidades
+		 */
+		
+		p1.getClase().getHabilidades().get(4).afectar(p1);
+		
+		/*
+		 * El personaje p1 queda con un punto disponible
+		 */
+		Assert.assertEquals(5, p1.getPuntos());
+		
+		/*
+		 * El personaje p1 tiene la habilidad Destreza con 2 puntos
+		 */
+		Assert.assertEquals(1, p1.getClase().getHabilidades().get(4).getPuntos());
+		
+		
+		/*
+		 * El personaje p1 mejoró sus atributos gracias a su nueva habilidad
+		 * */
+		Assert.assertEquals(10-2+1, p1.calcularPuntosDeAtaque());
+		Assert.assertEquals(10+4, p1.calcularPuntosDeDefensa());
+		Assert.assertEquals(0+2, p1.calcularPuntosDeMagia());
+		Assert.assertEquals(0, p1.getVelocidad());
+		Assert.assertEquals(0, p1.getDestreza());
+		Assert.assertEquals(0+1, p1.getPotencia());	
 		
 	}
 	
