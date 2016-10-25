@@ -18,7 +18,7 @@ import razas.*;
 /***
  * 
  * 9)	Como Personaje, quiero encontrarme con otros personajes en el mismo mundo.
- * Motivación: Para aliarme con ellos o combatir contra ellos.
+ * Motivaciï¿½n: Para aliarme con ellos o combatir contra ellos.
  * 
  ***/
 
@@ -27,23 +27,25 @@ public class Historia09Test {
 
 	/***
 	 * 
-	 * 1.	Dado un Personaje, cuando se encuentre cercano a otro e interactúen, entonces éste podrá unirse a la 
-	 * alianza de su nuevo compañero o formar una nueva. 
+	 * 1.	Dado un Personaje, cuando se encuentre cercano a otro e interactï¿½en, entonces ï¿½ste podrï¿½ unirse a la 
+	 * alianza de su nuevo compaï¿½ero o formar una nueva. 
 	 * 
 	 ***/
 	
 	@Test
 	public void historia09Criterio01_Test() throws FileNotFoundException{
 		/*
-		 * Creación de objetos
+		 * Creaciï¿½n de objetos
 		 * */
 		Personaje p1 = new Humano("Fernando De La Rua","123");
-		Personaje p2 = new Humano("Chacho Álvarez","123");
+		Personaje p2 = new Humano("Chacho Alvarez","123");
 		p1.setClase(new Chaman());
 		p2.setClase(new Guerrero());
+		p1.setUbicacion(new Ubicacion(0, 0));
+		p2.setUbicacion(new Ubicacion(3, 0));
 		
 		/*
-		 * Creación de alianza
+		 * Creaciï¿½n de alianza
 		 * */
 		Alianza a = new Alianza("Alianza99");
 		
@@ -52,8 +54,32 @@ public class Historia09Test {
 		 * */
 		
 		a.formarAlianza(p1);
-		a.formarAlianza(p2);
 		
+		for(Personaje p : a.getIntegrantes())
+		{
+			/*Verifico que estén cerca en un radio = 2*/
+			if(p2.seEncuentraCerca(p))
+			{
+				a.formarAlianza(p2);
+				break;
+			}
+		}
+		
+		
+		Personaje p3 = new Humano("Mauricio Macri","123");
+		p3.setClase(new Hechicero());
+		/*Seteo ubicacion alejado del resto.*/
+		p3.setUbicacion(new Ubicacion(15, 0));
+		
+		for(Personaje p : a.getIntegrantes())
+		{
+			/*Verifico que el personaje esté cerca en un radio = 2*/
+			if(p3.seEncuentraCerca(p))
+			{
+				a.formarAlianza(p3);
+				break;
+			}
+		}
 		/*
 		 * Controlo que mi alianza tenga 2 miembros
 		 * */
@@ -65,19 +91,80 @@ public class Historia09Test {
 	
 	/***
 	 * 
-	 * 2.	Dado un Personaje, cuando se encuentre cercano a otro e interactúen, entonces éste podrá combatir 
-	 * contra él hasta definir un ganador.
+	 * 2.	Dado un Personaje, cuando se encuentre cercano a otro e interactï¿½en, entonces ï¿½ste podrï¿½ combatir 
+	 * contra ï¿½l hasta definir un ganador.
 	 * 
 	 ***/
 	
 	@Test
 	public void historia09Criterio02_Test() throws FileNotFoundException{
-		/*
-		 * @mauroat - 24/10/16:
-		 * Creo todavía no puede probarse
-		 * */
+		Alianza pro = crearAlianzaPro();
+		Alianza claseMedia = crearAlianzaClaseMedia();
+		/*Combatir por turnos.*/
 		
 	}
 	
+	private Alianza crearAlianzaPro()
+	{
+		Personaje p1 = new Humano("Mauricio Macri","123");
+		Personaje p2 = new Humano("Eugenia Vidal","123");
+		p1.setClase(new Chaman());
+		p2.setClase(new Guerrero());
+		p1.setUbicacion(new Ubicacion(0, 0));
+		p2.setUbicacion(new Ubicacion(3, 0));
+		
+		/*
+		 * Creaciï¿½n de alianza
+		 * */
+		Alianza a = new Alianza("Pro");
+		
+		/*
+		 * Agrego personajes a la Alianza 
+		 * */
+		
+		a.formarAlianza(p1);
+		
+		for(Personaje p : a.getIntegrantes())
+		{
+			/*Verifico que estén cerca en un radio = 2*/
+			if(p2.seEncuentraCerca(p))
+			{
+				a.formarAlianza(p2);
+				break;
+			}
+		}
+		return a;
+	}
 	
+	private Alianza crearAlianzaClaseMedia()
+	{
+		Personaje p1 = new Humano("Carlos Perez","123");
+		Personaje p2 = new Humano("Juan Fernandez","123");
+		p1.setClase(new Chaman());
+		p2.setClase(new Guerrero());
+		p1.setUbicacion(new Ubicacion(0, 0));
+		p2.setUbicacion(new Ubicacion(3, 0));
+		
+		/*
+		 * Creaciï¿½n de alianza
+		 * */
+		Alianza a = new Alianza("ClaseMedia");
+		
+		/*
+		 * Agrego personajes a la Alianza 
+		 * */
+		
+		a.formarAlianza(p1);
+		
+		for(Personaje p : a.getIntegrantes())
+		{
+			/*Verifico que estén cerca en un radio = 2*/
+			if(p2.seEncuentraCerca(p))
+			{
+				a.formarAlianza(p2);
+				break;
+			}
+		}
+		return a;
+	}
 }

@@ -4,6 +4,7 @@ import razas.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,12 +24,13 @@ public abstract class Personaje implements Peleador {
 				  ataque, 
 				  defensa,
 				  magia,
-				  //daño, // @mauroat - Este atributo me parece al dope
+				  //daï¿½o, // @mauroat - Este atributo me parece al dope
 				  puntos,	// @mauroat - agregado 19/10/16 - modificado 24/10/16
 				  destreza,
 				  velocidad,
 				  potencia;
 	protected int puedeAgregarAtaque; // @mauroat - 24/10/16 : Esto se crea para satisfacer la historia de usuario 13-
+	protected Ubicacion ubicacion;
 	protected Usuario usuarioPersonaje;
 	protected String raza;
 	protected Casta clase;
@@ -57,7 +59,7 @@ public abstract class Personaje implements Peleador {
 	
 	/* 
 	 * @mauroat - 18/10/16
-	 * Se modifica este método para que se sume más experiencia en caso que mate al atacado. 
+	 * Se modifica este mï¿½todo para que se sume mï¿½s experiencia en caso que mate al atacado. 
 	 * Mi idea es que cuando esten implementadas las razas tambien afecten la experiencia.
 	 * 
 	 * */
@@ -67,7 +69,7 @@ public abstract class Personaje implements Peleador {
 		if(atacado.estaVivo()){
 			if (this.puedeAtacar()) {
 				atacado.serAtacado(calcularPuntosDeAtaque());
-				// El siguiente metodo podrá implementarse cuando definamos la ubicación de los personajes
+				// El siguiente metodo podrï¿½ implementarse cuando definamos la ubicaciï¿½n de los personajes
 				//atacado.despuesDeSerAtacado();
 				this.energia -= calcularPuntosDeAtaque();
 				
@@ -85,25 +87,25 @@ public abstract class Personaje implements Peleador {
 				
 			} else{
 				
-				//System.out.println(this.getUsername()+" no tiene energía suficiente para atacar!");
+				//System.out.println(this.getUsername()+" no tiene energï¿½a suficiente para atacar!");
 			}
 		}
 		else{
 			
-			//System.out.println("El atacado está muerto, no se lo puede atacar.");
+			//System.out.println("El atacado estï¿½ muerto, no se lo puede atacar.");
 		}
 	}
 
 	/* 
 	 * @mauroat - 18/10/16
-	 * Se sobrecarga el método atacar, para que se apliquen los daños causados por los ataques que posee cada personaje.
+	 * Se sobrecarga el mï¿½todo atacar, para que se apliquen los daï¿½os causados por los ataques que posee cada personaje.
 	 * 
 	 * */
 	public final void atacar(Personaje atacado, Ataque a) throws FileNotFoundException {
 		if(atacado.estaVivo()){
 			if (this.puedeAtacar()) {
 				atacado.serAtacado(calcularPuntosDeAtaque()+a.aplicarAtaque());
-				// El siguiente método podrá implementarse cuando definamos la ubicación de los personajes
+				// El siguiente mï¿½todo podrï¿½ implementarse cuando definamos la ubicaciï¿½n de los personajes
 				//atacado.despuesDeSerAtacado();
 				this.energia -= calcularPuntosDeAtaque()+a.aplicarAtaque();
 				if(atacado.estaVivo()){
@@ -116,11 +118,11 @@ public abstract class Personaje implements Peleador {
 	
 				this.despuesDeAtacar();	
 			} else{
-				//System.out.println(this.getUsername()+" no tiene energía suficiente para atacar!");
+				//System.out.println(this.getUsername()+" no tiene energï¿½a suficiente para atacar!");
 			}
 		}
 		else{
-			//System.out.println("El atacado está muerto, no se lo puede atacar.");
+			//System.out.println("El atacado estï¿½ muerto, no se lo puede atacar.");
 		}
 	}
 	
@@ -167,7 +169,7 @@ public abstract class Personaje implements Peleador {
 			
 			/*
 			 * @mauroat - 24/10/16
-			 * Si el personaje alcanza un nivel multiplo de 5, podrá agregar un ataque. 
+			 * Si el personaje alcanza un nivel multiplo de 5, podrï¿½ agregar un ataque. 
 			 * */
 			
 			if(this.nivel % 5 == 0){
@@ -177,7 +179,7 @@ public abstract class Personaje implements Peleador {
 	}
 	
 	/* @mauroat - 17/10/16
-	 * Esto será reemplazado por una consulta a una base de datos
+	 * Esto serï¿½ reemplazado por una consulta a una base de datos
 	 * */ 
 	private int experienciaRequerida(int nivel) throws FileNotFoundException{
 		try{
@@ -216,7 +218,7 @@ public abstract class Personaje implements Peleador {
 	}
 
 	private void reaparecer() {
-		// Este método tiene que reubicarme en una zona segura		
+		// Este mï¿½todo tiene que reubicarme en una zona segura		
 	}
 
 	public boolean estaVivo() {
@@ -224,11 +226,11 @@ public abstract class Personaje implements Peleador {
 	}
 	
 	/* @mauroat - 18/10/16
-	 * Modifico este método para que los puntos de defensa amortiguen el daño recibido en los ataques
+	 * Modifico este mï¿½todo para que los puntos de defensa amortiguen el daï¿½o recibido en los ataques
 	 * */
 	@Override
 	public void serAtacado(int daño) {
-		this.vida -= daño-this.calcularPuntosDeDefensa();
+		this.vida -= daño - this.calcularPuntosDeDefensa();
 	}
 
 	public void serCurado() {
@@ -440,6 +442,14 @@ public abstract class Personaje implements Peleador {
 		this.defensa = defensa;
 	}
 
+	public Ubicacion getUbicacion() {
+		return ubicacion;
+	}
+
+	public void setUbicacion(Ubicacion u) {
+		this.ubicacion = u;
+	}
+
 	public int getMagia() {
 		return magia;
 	}
@@ -448,7 +458,26 @@ public abstract class Personaje implements Peleador {
 		this.magia = magia;
 	}
 	
-	 	 
+	 public boolean seEncuentraCerca(Personaje obj)
+	 {
+		 return this.ubicacion.distanciaA(obj.ubicacion) <= (this.ubicacion.getRadio() + obj.ubicacion.getRadio());
+	 }
 	 
-	
+	 public void reubicar()
+	 {
+		this.setUbicacion(obtenerLugarSeguroRandom());
+	 }
+	 
+	 private Ubicacion obtenerLugarSeguroRandom()
+	 {
+		 Random r = new Random();
+		 Map<Integer, Ubicacion> ListaUbicacion = new HashMap<Integer, Ubicacion>(); 
+		 /*Validar que no haya obstaculos ni personajes en las ubicaciones*/
+		 ListaUbicacion.put(0, new Ubicacion(0,0));
+		 ListaUbicacion.put(1, new Ubicacion(15,0));
+		 ListaUbicacion.put(2, new Ubicacion(90,90));
+		 ListaUbicacion.put(3, new Ubicacion(90,150));
+		
+		 return ListaUbicacion.get(r.nextInt(4));
+	 }
 }

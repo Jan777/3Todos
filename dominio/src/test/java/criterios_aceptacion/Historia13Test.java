@@ -78,7 +78,7 @@ public class Historia13Test {
 		p2.serCurado();
 		
 		// Método a definir e implementar
-		//p2.reubicar();
+		p2.reubicar();
 		
 		Assert.assertEquals(100, p2.getVida());
 	}
