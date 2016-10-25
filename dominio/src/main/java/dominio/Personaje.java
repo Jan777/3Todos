@@ -55,6 +55,16 @@ public abstract class Personaje implements Peleador {
 		this.puedeAgregarAtaque = 0;
 	}
 	
+	public Personaje(Usuario u){
+		//super(p.getUsername(),p.getPassword());
+		this.usuarioPersonaje = u;
+		this.vida = 100;
+		this.energia = 100;
+		this.experiencia = 0;
+		this.nivel = 1;	
+		this.puntos = 0;
+		this.puedeAgregarAtaque = 0;
+	}
 	/* 
 	 * @mauroat - 18/10/16
 	 * Se modifica este método para que se sume más experiencia en caso que mate al atacado. 
@@ -389,6 +399,14 @@ public abstract class Personaje implements Peleador {
 	
 	
 	
+	public Usuario getUsuarioPersonaje() {
+		return usuarioPersonaje;
+	}
+
+	public void setUsuarioPersonaje(Usuario usuarioPersonaje) {
+		this.usuarioPersonaje = usuarioPersonaje;
+	}
+
 	public Personaje desequipar(PersonajeEquipado personaje) {
 		return null;
 	}

@@ -20,7 +20,14 @@ public class Orco extends Personaje{
 		this.magia = 3;
 	}
 	
-
+	public Orco(Usuario u) {
+		super(u);
+		this.setRaza("Orco");
+		this.ataque = 12;
+		this.defensa = 5;
+		this.magia = 3;
+	}
+	
 	@Override
 	public  boolean puedeAtacar() {
 		return this.energia > (10 + this.calcularPuntosDeAtaque());
