@@ -64,4 +64,6 @@ public class BujiaHescher extends PersonajeEquipado {
 	public int getTamañoLista() {
 		return personajeDecorado.getTamañoLista()+1;
 	}
+	
+	
 }

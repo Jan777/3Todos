@@ -1,15 +1,32 @@
 package dominio;
 
+/*
+ * @mauroat - 24/10/16
+ * Cada vez que se asigne un punto a una habilidad existente, se utilizará el método afectar(), lo que incrementará
+ * sus puntos base
+ * 
+ * */
+
 public abstract class Habilidad {
 
 	protected int idHabilidad;
 	protected String nombre;
-	protected int ataque, defensa, magia, destreza, potencia, velocidad;
 	protected int puntos;
+	//protected int ataque, defensa, magia, destreza, potencia, velocidad;
 	
-	public void afectar(){
-		
+	
+	public abstract void afectar(Personaje p);
+	
+
+	public int getPuntos() {
+		return puntos;
 	}
+
+
+	public void setPuntos(int puntos) {
+		this.puntos = puntos;
+	}
+
 
 	public int getIdHabilidad() {
 		return idHabilidad;
@@ -27,53 +44,7 @@ public abstract class Habilidad {
 		this.nombre = nombre;
 	}
 
-	public int getAtaque() {
-		return ataque;
-	}
-
-	public void setAtaque(int ataque) {
-		this.ataque = ataque;
-	}
-
-	public int getDefensa() {
-		return defensa;
-	}
-
-	public void setDefensa(int defensa) {
-		this.defensa = defensa;
-	}
-
-	public int getMagia() {
-		return magia;
-	}
-
-	public void setMagia(int magia) {
-		this.magia = magia;
-	}
-
-	public int getDestreza() {
-		return destreza;
-	}
-
-	public void setDestreza(int destreza) {
-		this.destreza = destreza;
-	}
-
-	public int getPotencia() {
-		return potencia;
-	}
-
-	public void setPotencia(int potencia) {
-		this.potencia = potencia;
-	}
-
-	public int getVelocidad() {
-		return velocidad;
-	}
-
-	public void setVelocidad(int velocidad) {
-		this.velocidad = velocidad;
-	}
+	
 	
 	
 	

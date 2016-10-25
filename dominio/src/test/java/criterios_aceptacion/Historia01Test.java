@@ -3,7 +3,7 @@ package criterios_aceptacion;
 
 /***
  * 
- * 1)	 Como Jugador, Quiero crear mi personaje, editando sus características principales (como raza y casta).
+ * 1)	 Como Jugador, quiero crear mi personaje, editando sus características principales (como raza y casta).
  *  Motivación: Quiero modificar mi avatar y verme reflejado en el mismo.  
  * 
  ***/

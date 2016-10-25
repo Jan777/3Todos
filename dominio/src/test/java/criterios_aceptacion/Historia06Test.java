@@ -11,8 +11,7 @@ import habilidades.*;
 import items.*;
 import razas.*;
 
-// El test falla porque no hay métodos en habilidades que mejoren los atributos en cuestion.
-// Cuando eso se resuelva el test debe dar OK asi como está.
+// OK
 
 
 /***
@@ -64,11 +63,18 @@ public class Historia06Test {
 		Assert.assertEquals(0, p1.getPotencia());
 		
 		/*
+		 * Agrego puntos para asignar habilidades
+		 * */
+		p1.setPuntos(2);
+		Assert.assertEquals(2, p1.getPuntos());
+		
+		/*
 		 * Agrego la habilidad Destreza al personaje p1
 		 * */
 		
 		p1.getClase().agregarHabilidad(new Destreza());
-			
+		p1.getClase().getHabilidades().get(1).afectar(p1);	
+		
 		Assert.assertEquals(1, p1.getClase().getHabilidades().size());
 		
 		/*
@@ -93,7 +99,7 @@ public class Historia06Test {
 		 * */
 		
 		p1.getClase().agregarHabilidad(new Inteligencia());
-			
+		p1.getClase().getHabilidades().get(4).afectar(p1);		
 		Assert.assertEquals(2, p1.getClase().getHabilidades().size());
 		
 		/*

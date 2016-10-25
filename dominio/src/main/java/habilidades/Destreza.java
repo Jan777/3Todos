@@ -10,10 +10,15 @@ public class Destreza extends Habilidad{
 		this.puntos = 0;
 	}
 	
-	public void aumentarDestreza(){
-		this.velocidad++;
-		this.potencia++;
+	public void afectar(Personaje p){
+		if(p.getPuntos() > 0){
+			p.setVelocidad(p.getVelocidad()+1);
+			p.setPotencia(p.getPotencia()+1);
+			p.setPuntos(p.getPuntos()-1);
+			this.puntos++;
+		}		
 	}
+	
 	
 	
 }
