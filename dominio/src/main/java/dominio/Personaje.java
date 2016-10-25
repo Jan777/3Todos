@@ -402,7 +402,7 @@ public abstract class Personaje implements Peleador {
 	     	return this.usuarioPersonaje.getUsername();
 	 }
 	  	
-	 public boolean inteactuarConOtroPersonaje(Personaje obj)  {
+	 public boolean interactuarConOtroPersonaje(Personaje obj)  {
 	 	return obj.respuesta(); 	 
 	 }
 	 
