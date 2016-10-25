@@ -19,7 +19,6 @@ import org.junit.Test;
  * 3)	 Atacar personajes. 
  * Motivación: Para aumentar mi experiencia.  
  * 
- * 
  ***/
 
 

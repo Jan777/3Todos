@@ -20,6 +20,14 @@ public class Humano extends Personaje {
 		this.magia = 0;
 	}
 	
+	public Humano(Usuario u){
+		super(u);
+		this.setRaza("Humano");
+		this.ataque = 10;
+		this.defensa = 10;
+		this.magia = 0;
+	}
+	
 	@Override
 	public boolean puedeAtacar() {
 		return energia > (10 + this.calcularPuntosDeAtaque());

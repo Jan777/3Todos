@@ -12,6 +12,7 @@ import items.*;
 import razas.*;
 
 // Falta el criterio 4
+// El criterio 4 es igual al criterio 4 de la historia 2
 
 /***
  * 

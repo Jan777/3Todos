@@ -157,12 +157,12 @@ public class PersonajeEquipado extends Personaje {
 		} else {
 			for (int i = 0 ; i<this.getTamañoLista();i++){
 				if(maximo.getPrioridad() > siguiente.getPrioridad()){
-					if(siguiente.getPersonajeDecorado().getNombreItem() != "Sin items")
+					if(siguiente.getPersonajeDecorado().getNombreItem() != null)
 						siguiente = siguiente.getPersonajeDecorado();					
 				}
 				else {
 					maximo = siguiente;
-					if(siguiente.getPersonajeDecorado().getNombreItem() != "Sin items")
+					if(siguiente.getPersonajeDecorado().getNombreItem() != null)
 						siguiente = (PersonajeEquipado) siguiente.getPersonajeDecorado();
 				}
 			}
@@ -194,10 +194,6 @@ public class PersonajeEquipado extends Personaje {
 		
 		//return anterior;
 	}
-
-	
-	
-	
 		
 }
 

@@ -11,9 +11,20 @@ public class Elfo extends Personaje{
 		this.magia = 10;
 	}
 	
-	public Elfo(Usuario u) {
-		super(u.getUsername(),u.getPassword());
+	public Elfo(Personaje p) {
+		super(p);
 		this.setRaza("Elfo");
+		this.ataque = 5;
+		this.defensa = 5;
+		this.magia = 10;
+	}
+	
+	public Elfo(Usuario u) {
+		super(u);
+		this.setRaza("Elfo");
+		this.ataque = 5;
+		this.defensa = 5;
+		this.magia = 10;
 	}
 
 	@Override
