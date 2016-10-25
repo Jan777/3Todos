@@ -55,4 +55,15 @@ public class Usuario {
 		}
 		this.password = generatedPassword;
 	}
+	 
+	  public boolean equals(Usuario obj) {
+	 
+	     if(this.idUsuario == obj.idUsuario && this.username == obj.username)
+	 
+	       return true;
+	 
+	     return false;  
+	 
+	   }
+	 
 }
