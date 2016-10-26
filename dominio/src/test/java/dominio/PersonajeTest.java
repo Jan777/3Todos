@@ -5,7 +5,10 @@ import java.io.FileNotFoundException;
 import org.junit.Assert;
 import org.junit.Test;
 
+import ataques.*;
+import castas.*;
 import dominio.*;
+import habilidades.*;
 import items.*;
 import razas.*;
 
@@ -95,5 +98,184 @@ public class PersonajeTest {
 
 	}
 	
+	/*
+	 * @mauroat - 26/10/16
+	 * Se prueba el metodo clonar
+	 * */
+	@Test
+	public void clonarPersonajeSimpleConAtaquesTest() throws CloneNotSupportedException{
+		/*
+		 * Armo un personaje con experiencia
+		 * */
+		Personaje p1 = new Humano("Lero","Lero");
+		p1.setClase(new Hechicero());
+		p1.setNivel(3);
+		p1.setExperiencia(440);
+		p1.setPuedeAgregarAtaque(1);
+		p1.agregarAtaque(new CuerpoACuerpo());
+		
+		/*
+		 * Clono y comparo
+		 * */
+		Personaje p2 = new Humano(p1);
+		/*
+		 * Usuario
+		 * */
+		Assert.assertEquals(p1.getUsuarioPersonaje(), p2.getUsuarioPersonaje());
+		/*
+		 * Atributos propios de personaje
+		 * */
+		Assert.assertEquals(p1.getVida(), p2.getVida());
+		Assert.assertEquals(p1.getExperiencia(), p2.getExperiencia());
+		/*
+		 * Atributos básicos
+		 * */
+		Assert.assertEquals(p1.calcularPuntosDeAtaque(), p2.calcularPuntosDeAtaque());
+		Assert.assertEquals(p1.calcularPuntosDeDefensa(), p2.calcularPuntosDeDefensa());
+		Assert.assertEquals(p1.calcularPuntosDeMagia(), p2.calcularPuntosDeMagia());
+		Assert.assertEquals(p1.getPotencia(), p2.getPotencia());
+		Assert.assertEquals(p1.getVelocidad(), p2.getVelocidad());
+		Assert.assertEquals(p1.getDestreza(), p2.getDestreza());
+		/*
+		 * Casta y Raza
+		 * */
+		Assert.assertEquals(p1.getRaza(), p2.getRaza());
+		Assert.assertEquals(p1.getClase(), p2.getClase());
+		/*
+		 * Mapa de ataques
+		 * */		
+		Assert.assertEquals(p1.getAtaques(), p2.getAtaques());
+		/*
+		 * Habilidades
+		 * */
+		Assert.assertEquals(p1.getClase().getHabilidades(), p2.getClase().getHabilidades());		
+		/*
+		 * Puntajes
+		 * */
+		Assert.assertEquals(p1.getPuedeAgregarAtaque(), p2.getPuedeAgregarAtaque());
+		Assert.assertEquals(p1.getPuntos(), p2.getPuntos());
+		
+	}
+	
+	@Test
+	public void clonarPersonajeConHabilidadesTest() throws CloneNotSupportedException{
+		/*
+		 * Armo un personaje con habilidades
+		 * */
+		Personaje p1 = new Humano("Lero","Lero");
+		p1.setClase(new Hechicero());
+		p1.setNivel(3);
+		p1.setExperiencia(440);
+		p1.setPuedeAgregarAtaque(1);
+		p1.agregarAtaque(new CuerpoACuerpo());
+		p1.setPuntos(2);
+		p1.getClase().agregarHabilidad(new Velocidad());
+		p1.getClase().agregarHabilidad(new Fuerza());
+		
+		/*
+		 * Clono y comparo
+		 * */
+		Personaje p2 = new Humano(p1);
+		/*
+		 * Usuario
+		 * */
+		Assert.assertEquals(p1.getUsuarioPersonaje(), p2.getUsuarioPersonaje());
+		/*
+		 * Atributos propios de personaje
+		 * */
+		Assert.assertEquals(p1.getVida(), p2.getVida());
+		Assert.assertEquals(p1.getExperiencia(), p2.getExperiencia());
+		/*
+		 * Atributos básicos
+		 * */
+		Assert.assertEquals(p1.calcularPuntosDeAtaque(), p2.calcularPuntosDeAtaque());
+		Assert.assertEquals(p1.calcularPuntosDeDefensa(), p2.calcularPuntosDeDefensa());
+		Assert.assertEquals(p1.calcularPuntosDeMagia(), p2.calcularPuntosDeMagia());
+		Assert.assertEquals(p1.getPotencia(), p2.getPotencia());
+		Assert.assertEquals(p1.getVelocidad(), p2.getVelocidad());
+		Assert.assertEquals(p1.getDestreza(), p2.getDestreza());
+		/*
+		 * Casta y Raza
+		 * */
+		Assert.assertEquals(p1.getRaza(), p2.getRaza());
+		Assert.assertEquals(p1.getClase(), p2.getClase());
+		/*
+		 * Mapa de ataques
+		 * */		
+		Assert.assertEquals(p1.getAtaques(), p2.getAtaques());
+		/*
+		 * Habilidades
+		 * */
+		Assert.assertEquals(p1.getClase().getHabilidades(), p2.getClase().getHabilidades());		
+		/*
+		 * Puntajes
+		 * */
+		Assert.assertEquals(p1.getPuedeAgregarAtaque(), p2.getPuedeAgregarAtaque());
+		Assert.assertEquals(p1.getPuntos(), p2.getPuntos());
+	}
+	
+	
+	@Test
+	public void clonarPersonajeEquipadoConHabilidadesTest() throws CloneNotSupportedException{
+		/*
+		 * Armo un personaje con habilidades, ataques e items
+		 * */
+		Personaje p1 = new Humano("Lero","Lero");
+		p1.setClase(new Hechicero());
+		p1.setNivel(3);
+		p1.setExperiencia(440);
+		p1.setPuedeAgregarAtaque(1);
+		p1.agregarAtaque(new CuerpoACuerpo());
+		p1.setPuntos(2);
+		p1.getClase().agregarHabilidad(new Velocidad());
+		p1.getClase().getHabilidades().get(6).afectar(p1);
+		p1.getClase().agregarHabilidad(new Fuerza());
+		p1.getClase().getHabilidades().get(3).afectar(p1);
+		p1 = new PocionBruta(p1);
+		
+		
+		/*
+		 * Clono y comparo
+		 * */
+		Personaje p2 = p1;
+		/*
+		 * Usuario
+		 * */
+		Assert.assertEquals(p1.getUsuarioPersonaje(), p2.getUsuarioPersonaje());
+		/*
+		 * Atributos propios de personaje
+		 * */
+		Assert.assertEquals(p1.getVida(), p2.getVida());
+		Assert.assertEquals(p1.getExperiencia(), p2.getExperiencia());
+		/*
+		 * Atributos básicos
+		 * */
+		Assert.assertEquals(p1.calcularPuntosDeAtaque(), p2.calcularPuntosDeAtaque());
+		Assert.assertEquals(p1.calcularPuntosDeDefensa(), p2.calcularPuntosDeDefensa());
+		Assert.assertEquals(p1.calcularPuntosDeMagia(), p2.calcularPuntosDeMagia());
+		Assert.assertEquals(p1.getPotencia(), p2.getPotencia());
+		Assert.assertEquals(p1.getVelocidad(), p2.getVelocidad());
+		Assert.assertEquals(p1.getDestreza(), p2.getDestreza());
+		/*
+		 * Casta y Raza
+		 * */
+		Assert.assertEquals(p1.getRaza(), p2.getRaza());
+		Assert.assertEquals(p1.getClase(), p2.getClase());
+		/*
+		 * Mapa de ataques
+		 * */		
+		Assert.assertEquals(p1.getAtaques(), p2.getAtaques());
+		/*
+		 * Habilidades
+		 * */
+		Assert.assertEquals(p1.getClase().getHabilidades(), p2.getClase().getHabilidades());		
+		/*
+		 * Puntajes
+		 * */
+		Assert.assertEquals(p1.getPuedeAgregarAtaque(), p2.getPuedeAgregarAtaque());
+		Assert.assertEquals(p1.getPuntos(), p2.getPuntos());
+		
+		p2.setNivel(5);
+	}
 	
 }
