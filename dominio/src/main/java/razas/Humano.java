@@ -15,9 +15,6 @@ public class Humano extends Personaje {
 	public Humano(Personaje p){
 		super(p);
 		this.setRaza("Humano");
-		this.ataque = 10;
-		this.defensa = 10;
-		this.magia = 0;
 	}
 	
 	public Humano(Usuario u){
@@ -55,9 +52,7 @@ public class Humano extends Personaje {
 		return "Humano";
 	}
 
-	public boolean respuesta()	{
-		return false;
-	}
+	
 	
 }
 

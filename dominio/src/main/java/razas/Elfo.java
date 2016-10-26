@@ -14,9 +14,6 @@ public class Elfo extends Personaje{
 	public Elfo(Personaje p) {
 		super(p);
 		this.setRaza("Elfo");
-		this.ataque = 5;
-		this.defensa = 5;
-		this.magia = 10;
 	}
 	
 	public Elfo(Usuario u) {
@@ -57,9 +54,8 @@ public class Elfo extends Personaje{
 		return "Elfo";
 	}
 
-	public boolean respuesta(){
-		return false;
-	}
+
+	
 	
 	
 }

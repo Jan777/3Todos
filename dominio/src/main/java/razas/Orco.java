@@ -15,9 +15,6 @@ public class Orco extends Personaje{
 	public Orco(Personaje p) {
 		super(p);
 		this.setRaza("Orco");
-		this.ataque = 12;
-		this.defensa = 5;
-		this.magia = 3;
 	}
 	
 	public Orco(Usuario u) {
@@ -49,10 +46,7 @@ public class Orco extends Personaje{
 		return this.magia;
 	}
 
-		
-	public boolean respuesta()	{
-		return false;
-	}
+
 	
 	@Override
 	public String getRaza() {
