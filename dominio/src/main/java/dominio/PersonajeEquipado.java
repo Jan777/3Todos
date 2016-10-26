@@ -64,6 +64,11 @@ public class PersonajeEquipado extends Personaje {
 		return personajeDecorado.getClase().getNombre();
 	}
 	
+	@Override
+	public Casta getClase() {
+		return personajeDecorado.getClase();
+	}
+	
 	public void setPersonajeDecorado(Personaje personajeDecorado) {
 		this.personajeDecorado = personajeDecorado;
 	}
@@ -141,6 +146,8 @@ public class PersonajeEquipado extends Personaje {
 	public int getPotencia() {
 		return this.personajeDecorado.getPotencia();
 	}
+	
+	
 	
 	
 	/*

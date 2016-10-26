@@ -11,7 +11,8 @@ import habilidades.*;
 import items.*;
 import razas.*;
 
-// Falta todo
+// Agregado criterio 3.
+// Falta 1 y 2
 
 /***
  * 
@@ -63,9 +64,75 @@ public class Historia07Test {
 	@Test
 	public void historia07Criterio03_Test() throws FileNotFoundException{
 		/*
-		 * @mauroat - 24/10/16:
-		 * Creo odavía no puede probarse
+		 * Creo un objeto personaje estandar
 		 * */
+		Personaje p1 = new Humano("Pepito","Pepote");
+		p1.setClase(new Guerrero());
+		
+		/*
+		 * Verifico el valor de los atributos:
+		 * Ataque : 10
+		 * Defensa: 10
+		 * Magia :  0
+		 * Velocidad: 0
+		 * Destreza: 0
+		 * Potencia: 0
+		 * */
+		
+		Assert.assertEquals(10, p1.calcularPuntosDeAtaque());
+		Assert.assertEquals(10, p1.calcularPuntosDeDefensa());
+		Assert.assertEquals(0, p1.calcularPuntosDeMagia());
+		Assert.assertEquals(0, p1.getVelocidad());
+		Assert.assertEquals(0, p1.getDestreza());
+		Assert.assertEquals(0, p1.getPotencia());
+		
+		/*
+		 * Equipo al p1 con un item
+		 * */
+		
+		p1 = new PocionSabiduria(p1);
+		
+		/*
+		 * Verifico el nuevo valor de sus atributos:
+		 * Ataque : 10
+		 * Defensa: 10+2
+		 * Magia :  0+3
+		 * Velocidad: 0
+		 * Destreza: 0
+		 * Potencia: 0
+		 * */
+		
+		Assert.assertEquals(10, p1.calcularPuntosDeAtaque());
+		Assert.assertEquals(10+2, p1.calcularPuntosDeDefensa());
+		Assert.assertEquals(0+3, p1.calcularPuntosDeMagia());
+		Assert.assertEquals(0, p1.getVelocidad());
+		Assert.assertEquals(0, p1.getDestreza());
+		Assert.assertEquals(0, p1.getPotencia());
+		
+		/*
+		 * Agrego una habilidad al personaje
+		 * */
+		p1.setPuntos(1);
+		p1.getClase().agregarHabilidad(new Valentia());		
+		p1.getClase().getHabilidades().get(5).afectar(p1);
+		
+		/*
+		 * Verifico el nuevo valor de sus atributos:
+		 * Ataque : 10+2
+		 * Defensa: 10+2
+		 * Magia :  0+3
+		 * Velocidad: 0
+		 * Destreza: 0
+		 * Potencia: 0
+		 * */
+		
+		Assert.assertEquals(10+2, p1.calcularPuntosDeAtaque());
+		Assert.assertEquals(10+2, p1.calcularPuntosDeDefensa());
+		Assert.assertEquals(0+3, p1.calcularPuntosDeMagia());
+		Assert.assertEquals(0, p1.getVelocidad());
+		Assert.assertEquals(0, p1.getDestreza());
+		Assert.assertEquals(0, p1.getPotencia());
+		
 		
 	}
 }
