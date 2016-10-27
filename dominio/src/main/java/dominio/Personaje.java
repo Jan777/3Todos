@@ -34,6 +34,7 @@ public abstract class Personaje implements Peleador {
 	protected String raza;
 	protected Casta clase;
 	protected Map<String, Ataque> ataques = new HashMap<String, Ataque>(); 
+	protected Alianza alianzaActual;
 	
 	public Personaje(String nombre, String password){
 		this.usuarioPersonaje = new Usuario(nombre,password);
@@ -527,7 +528,13 @@ public abstract class Personaje implements Peleador {
 		 return ListaUbicacion.get(r.nextInt(4));
 	 }
 
+		public void setAlianzaActual(Alianza alianzaActual) {
+			this.alianzaActual = alianzaActual;
+		}
 		
+		public Alianza getAlianzaActual() {
+			return alianzaActual;
+		}	
 	 
 	 
 	 
