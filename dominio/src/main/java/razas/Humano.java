@@ -45,13 +45,18 @@ public class Humano extends Personaje {
 		return this.magia*0;
 	}
 
-
-
 	@Override
 	public String getRaza() {
 		return "Humano";
 	}
 
+	@Override
+	protected Personaje clone() throws CloneNotSupportedException {
+		Personaje aux = new Humano(this);
+		return aux;
+	}
+
+	
 	
 	
 }

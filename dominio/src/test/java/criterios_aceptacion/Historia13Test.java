@@ -9,7 +9,7 @@ import dominio.*;
 import items.*;
 import razas.*;
 
-// Falta método donde se reubica al personaje
+// OK
 
 /***
  * 

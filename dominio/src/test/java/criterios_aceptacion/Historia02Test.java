@@ -8,9 +8,12 @@ import org.junit.Test;
 import castas.*;
 import dominio.*;
 import habilidades.*;
+import items.PocionSabiduria;
+import items.RunaDeMagia;
 import razas.*;
 
-// Agregado criterio 4, faltan 1, 2 y 3
+// Agregado criterio 3 y 4, faltan 1 y 2
+// criterio 3 parecido al criterio 1 de historia de usuario 7
 
 /***
  * 
@@ -45,9 +48,104 @@ public class Historia02Test {
 	 * 
 	 * 3.	Dado un Jugador, cuando su personaje gane una batalla contra otro personaje Jugador o un personaje genérico,
 	 * entonces obtendrá experiencia e ítems.
+	 * @throws FileNotFoundException 
+	 * @throws CloneNotSupportedException 
 	 * 
 	 ***/
-	public void historia02Criterio03_Test(){
+	public void historia02Criterio03_Test() throws FileNotFoundException, CloneNotSupportedException{
+		/**
+		 * 2.3.1.	Personaje contra Personaje
+		*/
+		
+		/*
+		 * Creo los personajes en base a los usuarios
+		 * */
+		Usuario u1 = new Usuario ("Skay","Paez");
+		Usuario u2 = new Usuario ("Semilla","Charpentier");
+		
+		Personaje p1 = new Humano(u1);
+		Personaje p2 = new Elfo(u2);
+		
+		p1.setClase(new Hechicero());
+		p2.setClase(new Chaman());
+		
+		
+		/*
+		 * Equipo al p2 con 2 items: el mas prioritario es Pocion Sabiduria
+		 * */
+		
+		p2 = new RunaDeMagia(p2);
+		p2 = new PocionSabiduria(p2);
+		
+		/*
+		 * Como recien está creado, su experiencia es 0
+		 * */
+		Assert.assertEquals(0, p1.getExperiencia());
+		
+		/*
+		 * Combate entre p1 y p2 
+		 */
+		
+		while(p2.estaVivo()){
+			p1.atacar(p2);
+			p1.atacar(p2);
+			p1.atacar(p2);
+			p1.serEnergizado();			
+		}
+		
+		if(!p2.estaVivo()){
+			PersonajeEquipado mejorItem = (PersonajeEquipado) p2.dejarMejorItem();
+			p2 = p2.desequipar((PersonajeEquipado)p2.dejarMejorItem());
+			p1 = p1.equipar(mejorItem);
+	
+		}
+		
+		/*
+		 * La lista de items del personaje p1 ahora es 1 ya que obtuvo el mejor item del eliminado
+		 * */
+		
+		Assert.assertEquals(1, p1.getTamañoLista());
+		Assert.assertEquals("Poción sabiduría", p1.getNombreItem());
+		
+		/*
+		 * Luego de atacar, su experiencia ya no es 0
+		 * */
+		Assert.assertNotEquals(0, p1.getExperiencia());
+		
+		/**
+		 * 2.3.2.	Personaje contra Generico
+		*/
+		
+		Usuario u3 = new Usuario ("Dawi","Paez");
+		Personaje p3 = new Humano(u3);
+		p3.setClase(new Hechicero());
+		
+		Generico g1 = new Generico();
+		
+		/*
+		 * Ataco al generico hasta matarlo
+		 * */
+		
+		while(g1.estaVivo()){
+			p3.atacar(g1);
+			p3.atacar(g1);
+			p3.atacar(g1);
+			p3.serEnergizado();			
+		}
+		
+		/*
+		 * Si está muerto, me equipo con su item
+		 * */
+		
+		if(!g1.estaVivo()){			
+			p3 = p3.equipar(g1.getItem());
+		}
+		
+		/*
+		 * Controlo que la lista de p3 tenga un item
+		 * */
+		
+		Assert.assertEquals(1, p3.getTamañoLista());
 		
 	}
 	
@@ -56,7 +154,6 @@ public class Historia02Test {
 	 * 
 	 * 4.	Dado un Jugador, cuando su personaje acumule la experiencia necesaria para aumentar de nivel, entonces podrá agregar 
 	 * nuevas habilidades.
-	 *
 	 * 
 	 ***/
 	@Test

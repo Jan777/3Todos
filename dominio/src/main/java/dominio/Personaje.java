@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import dominio.*;
+import items.*;
 
 public abstract class Personaje implements Peleador {
 
@@ -28,6 +29,7 @@ public abstract class Personaje implements Peleador {
 				  destreza,
 				  velocidad,
 				  potencia;
+	
 	protected int puedeAgregarAtaque; // @mauroat - 24/10/16 : Esto se crea para satisfacer la historia de usuario 13-
 	protected Ubicacion ubicacion;
 	protected Usuario usuarioPersonaje;
@@ -68,7 +70,6 @@ public abstract class Personaje implements Peleador {
 	}
 	
 	public Personaje(Usuario u){
-		//super(p.getUsername(),p.getPassword());
 		this.usuarioPersonaje = u;
 		this.vida = 100;
 		this.energia = 100;
@@ -431,13 +432,88 @@ public abstract class Personaje implements Peleador {
 	public void setUsuarioPersonaje(Usuario usuarioPersonaje) {
 		this.usuarioPersonaje = usuarioPersonaje;
 	}
-/*
-	public Personaje equipar(PersonajeEquipado personaje) throws CloneNotSupportedException {
+
+	/*
+	 * @mauroat - 27/10/16
+	 * Rudimentario, pero funciona
+	 * */
+	public PersonajeEquipado equipar(PersonajeEquipado pe) throws CloneNotSupportedException {
+		/*
+		 * Creo una copia de mi personaje desequipado
+		 * */
 		Personaje aux = (Personaje) this.clone();
-		aux.verEstado();
-		return aux;
+		
+		if(pe.getNombreItem() == "Armadura de Azor Ahai"){
+			aux = new ArmaduraDeAzorAhai(aux);
+		} else if (pe.getNombreItem() == "Bastón de Saruman"){
+			aux = new BastonDeSaruman(aux);
+		} else if (pe.getNombreItem() == "Bujía Hescher"){
+			aux = new BujiaHescher(aux);
+		} else if (pe.getNombreItem() == "Daga de Dragón"){
+			aux = new DagaDeDragon(aux);	
+		} else if (pe.getNombreItem() == "Escudo de León"){
+			aux = new EscudoDeLeon(aux);
+		} else if (pe.getNombreItem() == "Espada de Juan Nieve"){
+			aux = new EspadaDeJuanNieve(aux);
+		} else if (pe.getNombreItem() == "Guante de Poder"){
+			aux = new GuanteDePoder(aux);
+		} else if (pe.getNombreItem() == "Lanza en llamas"){
+			aux = new LanzaEnLlamas(aux);
+		} else if (pe.getNombreItem() == "Poción bruta"){
+			aux = new PocionBruta(aux);
+		} else if (pe.getNombreItem() == "Poción multijugos"){
+			aux = new PocionMultijugos(aux);
+		} else if (pe.getNombreItem() == "Poción sabiduría"){
+			aux = new PocionSabiduria(aux);
+		} else if (pe.getNombreItem() == "Runa de magia"){
+			aux = new RunaDeMagia(aux);
+		} else {
+			aux = new TotemProteccion(aux);
+		}
+		
+		return (PersonajeEquipado) aux;
 	}
-*/	
+	
+	/*
+	 * Se sobrecarga este metodo para que sea funcional a los Genericos
+	 * */
+	
+	public PersonajeEquipado equipar(String item) throws CloneNotSupportedException {
+		/*
+		 * Creo una copia de mi personaje desequipado
+		 * */
+		Personaje aux = (Personaje) this.clone();
+		
+		if(item == "Armadura de Azor Ahai"){
+			aux = new ArmaduraDeAzorAhai(aux);
+		} else if (item == "Bastón de Saruman"){
+			aux = new BastonDeSaruman(aux);
+		} else if (item == "Bujía Hescher"){
+			aux = new BujiaHescher(aux);
+		} else if (item == "Daga de Dragón"){
+			aux = new DagaDeDragon(aux);	
+		} else if (item == "Escudo de León"){
+			aux = new EscudoDeLeon(aux);
+		} else if (item == "Espada de Juan Nieve"){
+			aux = new EspadaDeJuanNieve(aux);
+		} else if (item == "Guante de Poder"){
+			aux = new GuanteDePoder(aux);
+		} else if (item == "Lanza en llamas"){
+			aux = new LanzaEnLlamas(aux);
+		} else if (item == "Poción bruta"){
+			aux = new PocionBruta(aux);
+		} else if (item == "Poción multijugos"){
+			aux = new PocionMultijugos(aux);
+		} else if (item == "Poción sabiduría"){
+			aux = new PocionSabiduria(aux);
+		} else if (item == "Runa de magia"){
+			aux = new RunaDeMagia(aux);
+		} else {
+			aux = new TotemProteccion(aux);
+		}
+		
+		return (PersonajeEquipado) aux;
+	}
 	
 	public Personaje desequipar(PersonajeEquipado personaje) {
 		return null;
@@ -534,8 +610,9 @@ public abstract class Personaje implements Peleador {
 		
 		public Alianza getAlianzaActual() {
 			return alianzaActual;
-		}	
-	 
+		}
+
+
 	 
 	 
 }

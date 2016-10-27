@@ -11,8 +11,8 @@ import habilidades.*;
 import items.*;
 import razas.*;
 
-// Agregado criterio 3.
-// Falta 1 y 2
+// Agregado criterio 1 y 3.
+// Falta 2
 
 /***
  * 
@@ -28,12 +28,81 @@ public class Historia07Test {
 	 * 
 	 * 1.	Dado un Personaje, cuando éste mata a otro Personaje Jugador o Personaje Genérico, entonces éste se equipará con 
 	 * el mejor item de su enemigo.
+	 * @throws CloneNotSupportedException 
 	 * 
 	 ***/
 	
 	@Test
-	public void historia07Criterio01_Test() throws FileNotFoundException{
+	public void historia07Criterio01_Test() throws FileNotFoundException, CloneNotSupportedException{
+	
+		/**
+		 * 7.1.1.	Personaje con otro personaje
+		 * */
+		Personaje p1 = new Humano("Fito","Paez");
+		Personaje p2 = new Elfo("Chano","Charpentier");
+		p1.setClase(new Hechicero());
+		p1.setClase(new Chaman());
 		
+		
+		/*
+		 * Equipo al p2 con 2 items: el mas prioritario es Pocion Sabiduria
+		 * */
+		
+		p2 = new RunaDeMagia(p2);
+		p2 = new PocionSabiduria(p2);
+		
+		/*
+		 * Combate entre p1 y p2 
+		 */
+		
+		while(p2.estaVivo()){
+			p1.atacar(p2);
+			p1.atacar(p2);
+			p1.atacar(p2);
+			p1.serEnergizado();			
+		}
+		
+		if(!p2.estaVivo()){
+			PersonajeEquipado mejorItem = (PersonajeEquipado) p2.dejarMejorItem();
+			p2 = p2.desequipar((PersonajeEquipado)p2.dejarMejorItem());
+			p1 = p1.equipar(mejorItem);
+	
+		}
+		
+		Assert.assertEquals(1, p1.getTamañoLista());
+		Assert.assertEquals("Poción sabiduría", p1.getNombreItem());
+		
+		/**
+		 * 7.1.2.	Personaje con genérico
+		 * */
+		Personaje p3 = new Humano("Fito","Paez");
+		p3.setClase(new Hechicero());
+		p3.setClase(new Chaman());
+		p3 = new EspadaDeJuanNieve(p3);
+		Generico g1 = new Generico();
+		
+	
+		/*
+		 * Los genericos se generan con un item aleatorio por defecto
+		 * */
+		Assert.assertNotEquals(null, g1.getItem());
+				
+		/*
+		 * Combate entre p1 y p2 
+		 */
+		
+		while(g1.estaVivo()){
+			p3.atacar(g1);
+			p3.atacar(g1);
+			p3.atacar(g1);
+			p3.serEnergizado();			
+		}
+		
+		if(!g1.estaVivo()){			
+			p1 = p1.equipar(g1.getItem());
+		}
+		
+		Assert.assertEquals(2, p1.getTamañoLista());
 		
 	}
 	
@@ -63,6 +132,8 @@ public class Historia07Test {
 	
 	@Test
 	public void historia07Criterio03_Test() throws FileNotFoundException{
+		
+		
 		/*
 		 * Creo un objeto personaje estandar
 		 * */

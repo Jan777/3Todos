@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import castas.*;
 import dominio.*;
 import razas.*;
 import items.*;
@@ -196,4 +198,45 @@ public class PeleadorTest {
 		Assert.assertEquals("Orco equipado con: 1- Bastón de Saruman  2- Armadura de Azor Ahai ", orco.getLista());
 	}
 
+	
+	@Test
+	public void peleadorSeDesequipaConMejorItemYOtroSeEquipa() throws FileNotFoundException{
+		
+		
+		Personaje humano = new Humano("Indio Solari","123");
+		humano.setClase(new Guerrero());
+		
+		/*
+		 * El item de mayor prioridad es BujiaHescher
+		 * */
+		
+		humano = new BastonDeSaruman(humano);
+		humano = new ArmaduraDeAzorAhai(humano);
+		humano = new BujiaHescher(humano);	
+		
+		humano = (humano.desequipar((PersonajeEquipado)humano.dejarMejorItem()));
+		System.out.println(humano.getLista());
+		
+	//	Assert.assertEquals(2, humano.getTamañoLista());
+
+		
+		
+		// El mas importante al principio de la lista
+		Personaje orco = new Orco("Skay Beilinson","123");
+		orco.setClase(new Hechicero());
+		
+		orco = new BujiaHescher(orco);	
+		orco = new BastonDeSaruman(orco);
+		orco = new ArmaduraDeAzorAhai(orco);
+		
+		
+		
+		orco = (orco.desequipar((PersonajeEquipado) orco.dejarMejorItem()));
+		
+		Assert.assertEquals(2, orco.getTamañoLista());
+		System.out.println(orco.getLista());
+		//Assert.assertEquals("Humano equipado con: 1- Bastón de Saruman  2- Armadura de Azor Ahai ", humano.getLista());
+		
+		
+	}
 }

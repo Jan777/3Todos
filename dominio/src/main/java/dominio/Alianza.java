@@ -1,6 +1,8 @@
 package dominio;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 public class Alianza {
+	 
 	private String nombre;
 	private ArrayList <Personaje> integrantes; 
 	
@@ -49,4 +51,12 @@ public class Alianza {
 	public ArrayList<Personaje> getIntegrantes() {
 		return integrantes;
 	}
+	/*
+	 * @mauroat - 27/10/16
+	 * La idea de este método es que finalizados los combates reparta experiencia entre los miembros de la alianza
+	 * */
+	public void repartirExperiencia(){
+		
+	}
+	
 }

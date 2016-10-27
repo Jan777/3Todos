@@ -2,6 +2,9 @@ package dominio;
 
 import java.util.ArrayList;
 
+import items.*;
+
+
 public class PersonajeEquipado extends Personaje {
 
 	protected Personaje personajeDecorado;
@@ -186,13 +189,20 @@ public class PersonajeEquipado extends Personaje {
 		Personaje siguiente=this, anterior = this, ultimo = this; 
 		
 		for (int i = 0 ; i < this.getTamañoLista();i++){
+			if(i == 0 && siguiente.getNombreItem() == personajeDecorado.getNombreItem()){
+				ultimo = siguiente.getPersonajeDecorado();
+				//ultimo.setPersonajeDecorado(siguiente);
+				return ultimo;
+			}
+			
+			
 			if(siguiente.getNombreItem() != personajeDecorado.getNombreItem()){
 				anterior = siguiente;
 				siguiente = siguiente.getPersonajeDecorado();
 			} else {				
 				anterior.setPersonajeDecorado(siguiente.getPersonajeDecorado());				
 				return ultimo;
-			}
+			} 
 			
 		}
 		// Devuelvo lo mismo si el item no existe
@@ -201,7 +211,46 @@ public class PersonajeEquipado extends Personaje {
 		
 		//return anterior;
 	}
+	@Override
+	public PersonajeEquipado equipar(String item) throws CloneNotSupportedException {
+		/*
+		 * Creo una copia de mi personaje desequipado
+		 * */
+		PersonajeEquipado aux = this;
 		
+		if(item == "Armadura de Azor Ahai"){
+			aux = new ArmaduraDeAzorAhai(aux);
+		} else if (item == "Bastón de Saruman"){
+			aux = new BastonDeSaruman(aux);
+		} else if (item == "Bujía Hescher"){
+			aux = new BujiaHescher(aux);
+		} else if (item == "Daga de Dragón"){
+			aux = new DagaDeDragon(aux);	
+		} else if (item == "Escudo de León"){
+			aux = new EscudoDeLeon(aux);
+		} else if (item == "Espada de Juan Nieve"){
+			aux = new EspadaDeJuanNieve(aux);
+		} else if (item == "Guante de Poder"){
+			aux = new GuanteDePoder(aux);
+		} else if (item == "Lanza en llamas"){
+			aux = new LanzaEnLlamas(aux);
+		} else if (item == "Poción bruta"){
+			aux = new PocionBruta(aux);
+		} else if (item == "Poción multijugos"){
+			aux = new PocionMultijugos(aux);
+		} else if (item == "Poción sabiduría"){
+			aux = new PocionSabiduria(aux);
+		} else if (item == "Runa de magia"){
+			aux = new RunaDeMagia(aux);
+		} else {
+			aux = new TotemProteccion(aux);
+		}
+		
+		return (PersonajeEquipado) aux;
+	}
+
+	
+	
 }
 
 	

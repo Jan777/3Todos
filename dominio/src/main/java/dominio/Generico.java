@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
 import castas.*;
+import items.*;
+
 
 public class Generico implements Peleador {
 
@@ -12,7 +14,7 @@ public class Generico implements Peleador {
 				  nivel,
 				  energia;
 	protected String raza;
-	//protected Casta clase;
+	protected String item;
 	protected ArrayList<PersonajeEquipado> lista = new ArrayList<>();
 
 	/* @mauroat - 18/10/16:
@@ -31,6 +33,7 @@ public class Generico implements Peleador {
 		this.energia = 100;
 		this.nivel = r.nextInt(5);
 		this.raza = setRandomRaza();
+		this.setRandomItem();
 	}
 	
 	public Generico(String nombre){
@@ -40,6 +43,7 @@ public class Generico implements Peleador {
 		this.energia = 100;
 		this.nivel = r.nextInt(6)+1; // Con el +1 evito que sea 0
 		this.raza = setRandomRaza();
+		this.setRandomItem();
 	}
 	
 	private String setRandomRaza() {
@@ -206,12 +210,57 @@ public class Generico implements Peleador {
 	public void setRaza(String raza) {
 		this.raza = raza;
 	}
+	
+	public String getNombreItem(){
+		return this.item;
+	}
+	
+	public void setRandomItem(){
+		Random r = new Random();
+		int aux = r.nextInt(9);
+		if(aux == 1){
+			this.item = "Armadura de Azor Ahai";
+		} else if (aux == 2){
+			this.item = "Bastón de Saruman";
+		} else if (aux == 3){
+			this.item = "Bujía Hescher";
+		} else if (aux == 4){
+			this.item = "Daga de Dragón";
+		} else if (aux == 5){
+			this.item = "Escudo de León";
+		} else if (aux == 6){
+			this.item = "Espada de Juan Nieve";
+		} else if (aux == 7){
+			this.item = "Guante de Poder";
+		} else if (aux == 8){
+			this.item = "Lanza en llamas";
+		} else if (aux == 9){
+			this.item = "Poción bruta";
+		} else if (aux == 10){
+			this.item = "Poción multijugos";
+		} else if (aux == 11){
+			this.item = "Poción sabiduría";
+		} else if (aux == 12){
+			this.item = "Runa de Magia";
+		} else {
+			this.item = "Tótem de protección";
+		} 		
+	}
+
+	public String getItem() {
+		return item;
+	}
+
+	public void setItem(String item) {
+		this.item = item;
+	}
 
 	@Override
 	public Personaje dejarMejorItem() {
+		// ESTE METODO NO SE USA !!
 		return null;
 	}
-
+	
 	
 
 	

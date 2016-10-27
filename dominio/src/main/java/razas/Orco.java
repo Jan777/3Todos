@@ -46,7 +46,11 @@ public class Orco extends Personaje{
 		return this.magia;
 	}
 
-
+	@Override
+	protected Personaje clone() throws CloneNotSupportedException {
+		Personaje aux = new Orco(this);
+		return aux;
+	}
 	
 	@Override
 	public String getRaza() {

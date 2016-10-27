@@ -54,7 +54,13 @@ public class Elfo extends Personaje{
 		return "Elfo";
 	}
 
+	@Override
+	protected Personaje clone() throws CloneNotSupportedException {
+		Personaje aux = new Elfo(this);
+		return aux;	
+	}
 
+	
 	
 	
 	

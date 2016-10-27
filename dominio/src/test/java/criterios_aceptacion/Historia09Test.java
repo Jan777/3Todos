@@ -11,14 +11,13 @@ import habilidades.*;
 import items.*;
 import razas.*;
 
-// Criterio 1 - OK
-// Criterio 2 - Falta
+// OK
 
 
 /***
  * 
  * 9)	Como Personaje, quiero encontrarme con otros personajes en el mismo mundo.
- * Motivaciï¿½n: Para aliarme con ellos o combatir contra ellos.
+ * Motivacion: Para aliarme con ellos o combatir contra ellos.
  * 
  ***/
 
@@ -27,7 +26,7 @@ public class Historia09Test {
 
 	/***
 	 * 
-	 * 1.	Dado un Personaje, cuando se encuentre cercano a otro e interactï¿½en, entonces ï¿½ste podrï¿½ unirse a la 
+	 * 1.	Dado un Personaje, cuando se encuentre cercano a otro e interactuen, entonces este podra unirse a la 
 	 * alianza de su nuevo compaï¿½ero o formar una nueva. 
 	 * 
 	 ***/
@@ -35,7 +34,7 @@ public class Historia09Test {
 	@Test
 	public void historia09Criterio01_Test() throws FileNotFoundException{
 		/*
-		 * Creaciï¿½n de objetos
+		 * Creacion de objetos
 		 * */
 		Personaje p1 = new Humano("Fernando De La Rua","123");
 		Personaje p2 = new Humano("Chacho Alvarez","123");
@@ -45,7 +44,7 @@ public class Historia09Test {
 		p2.setUbicacion(new Ubicacion(3, 0));
 		
 		/*
-		 * Creaciï¿½n de alianza
+		 * Creacion de alianza
 		 * */
 		Alianza a = new Alianza("Alianza99");
 		
@@ -57,7 +56,7 @@ public class Historia09Test {
 		
 		for(Personaje p : a.getIntegrantes())
 		{
-			/*Verifico que estén cerca en un radio = 2*/
+			/*Verifico que estê® cerca en un radio = 2*/
 			if(p2.seEncuentraCerca(p))
 			{
 				a.formarAlianza(p2);
@@ -73,7 +72,7 @@ public class Historia09Test {
 		
 		for(Personaje p : a.getIntegrantes())
 		{
-			/*Verifico que el personaje esté cerca en un radio = 2*/
+			/*Verifico que el personaje este cerca en un radio = 2*/
 			if(p3.seEncuentraCerca(p))
 			{
 				a.formarAlianza(p3);
@@ -91,8 +90,8 @@ public class Historia09Test {
 	
 	/***
 	 * 
-	 * 2.	Dado un Personaje, cuando se encuentre cercano a otro e interactï¿½en, entonces ï¿½ste podrï¿½ combatir 
-	 * contra ï¿½l hasta definir un ganador.
+	 * 2.	Dado un Personaje, cuando se encuentre cercano a otro e interactuen, entonces este podra combatir 
+	 * contra el hasta definir un ganador.
 	 * 
 	 ***/
 	
@@ -114,7 +113,7 @@ public class Historia09Test {
 		p2.setUbicacion(new Ubicacion(3, 0));
 		
 		/*
-		 * Creaciï¿½n de alianza
+		 * Creacion de alianza
 		 * */
 		Alianza a = new Alianza("Pro");
 		
@@ -126,7 +125,7 @@ public class Historia09Test {
 		
 		for(Personaje p : a.getIntegrantes())
 		{
-			/*Verifico que estén cerca en un radio = 2*/
+			/*Verifico que estê® cerca en un radio = 2*/
 			if(p2.seEncuentraCerca(p))
 			{
 				a.formarAlianza(p2);
@@ -146,7 +145,7 @@ public class Historia09Test {
 		p2.setUbicacion(new Ubicacion(3, 0));
 		
 		/*
-		 * Creaciï¿½n de alianza
+		 * Creacion de alianza
 		 * */
 		Alianza a = new Alianza("ClaseMedia");
 		
@@ -158,7 +157,7 @@ public class Historia09Test {
 		
 		for(Personaje p : a.getIntegrantes())
 		{
-			/*Verifico que estén cerca en un radio = 2*/
+			/*Verifico que estê® cerca en un radio = 2*/
 			if(p2.seEncuentraCerca(p))
 			{
 				a.formarAlianza(p2);
