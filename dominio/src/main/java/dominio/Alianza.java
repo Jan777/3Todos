@@ -45,7 +45,7 @@ public class Alianza {
 	public void dejarAlianza(Personaje objPersonaje){
 
 		Calendar actual = Calendar.getInstance();
-		if(cantidadTotalMinutos(objPersonaje.limiteMinimoPermanenciaAlianza, actual)>=4){
+		if(cantidadTotalMinutos(objPersonaje.limiteMinimoPermanenciaAlianza, actual)>=5){
 			Iterator<Personaje> iter = integrantes.iterator();
 			while (iter.hasNext()) 	{
 				Personaje user = iter.next();
