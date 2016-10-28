@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,17 +21,17 @@ import items.*;
 public abstract class Personaje implements Peleador {
 
 	protected int vida,
-				  experiencia,
-				  nivel,
-				  energia, 
-				  ataque, 
-				  defensa,
-				  magia,
-				  puntos,	// @mauroat - agregado 19/10/16 - modificado 24/10/16
-				  destreza,
-				  velocidad,
-				  potencia;
-	
+	experiencia,
+	nivel,
+	energia, 
+	ataque, 
+	defensa,
+	magia,
+	puntos,	// @mauroat - agregado 19/10/16 - modificado 24/10/16
+	destreza,
+	velocidad,
+	potencia;
+
 	protected int puedeAgregarAtaque; // @mauroat - 24/10/16 : Esto se crea para satisfacer la historia de usuario 13-
 	protected Ubicacion ubicacion;
 	protected Usuario usuarioPersonaje;
@@ -38,7 +39,8 @@ public abstract class Personaje implements Peleador {
 	protected Casta clase;
 	protected Map<String, Ataque> ataques = new HashMap<String, Ataque>(); 
 	protected Alianza alianzaActual;
-	
+	protected Calendar limiteMinimoPermanenciaAlianza;
+
 	public Personaje(String nombre, String password){
 		this.usuarioPersonaje = new Usuario(nombre,password);
 		this.vida = 100;
@@ -48,7 +50,7 @@ public abstract class Personaje implements Peleador {
 		this.puntos = 0;
 		this.puedeAgregarAtaque = 0;
 	}
-	
+
 	/*
 	 * Copiar personaje
 	 * */
@@ -69,7 +71,7 @@ public abstract class Personaje implements Peleador {
 		this.clase = p.clase;
 		this.ataques = p.ataques;		
 	}
-	
+
 	public Personaje(Usuario u){
 		this.usuarioPersonaje = u;
 		this.vida = 100;
@@ -85,7 +87,7 @@ public abstract class Personaje implements Peleador {
 	 * Mi idea es que cuando esten implementadas las razas tambien afecten la experiencia.
 	 * 
 	 * */
-	
+
 	// Esto recibia un Peleador
 	public final void atacar (Peleador atacado)  {
 		if(atacado.estaVivo()){
@@ -94,17 +96,17 @@ public abstract class Personaje implements Peleador {
 				// El siguiente metodo podria implementarse cuando definamos la ubicacion de los personajes
 				//atacado.despuesDeSerAtacado();
 				this.energia -= calcularPuntosDeAtaque();
-				
+
 				if(atacado.estaVivo()){
 					// Por cada ataque que haga, mi experiencia sube en 8
 					this.experiencia += 8;
-					
+
 				} else {
 					// Si en cambio, mato al atacado, mi experiencia sube en 10*el nivel del atacado
 					this.experiencia+=(atacado.getNivel()*10);
-					
+
 				}
-	
+
 				this.despuesDeAtacar();	
 			} 
 		}
@@ -129,12 +131,12 @@ public abstract class Personaje implements Peleador {
 					// Si en cambio, mato al atacado, mi experiencia sube en 10*el nivel del atacado
 					this.experiencia+=(atacado.getNivel()*10);
 				}
-	
+
 				this.despuesDeAtacar();	
 			}
 		}
 	}
-	
+
 	public void despuesDeSerAtacado(){
 		if(this.vida <=0)
 			this.morir();
@@ -142,35 +144,35 @@ public abstract class Personaje implements Peleador {
 
 	public void despuesDeAtacar()  { 
 		this.verificarNivel();
-		
+
 	}	
-	
+
 	/* @mauroat - 19/10/16
 	 * Al subir de nivel se suman dos puntos para sumar a las habilidades
 	 * */
-	
+
 	private void verificarNivel()  {
 		if(this.experiencia >= experienciaRequerida(this.nivel)){
 			this.nivel++;
 			this.puntos += 2;
-			
+
 			/*
 			 * @mauroat - 24/10/16
 			 * Si el personaje alcanza un nivel multiplo de 5, podra agregar un ataque. 
 			 * */
-			
+
 			if(this.nivel % 5 == 0){
 				this.puedeAgregarAtaque += 1;
 			}
 		}		
 	}
-	
+
 	/* @mauroat - 17/10/16
 	 * Esto sera reemplazado por una consulta a una base de datos
 	 * */ 
 	private int experienciaRequerida(int nivel) {
 		try{
-			
+
 			Scanner sc = new Scanner (new File ("config/niveles.cfg"));	
 			while(sc.hasNextLine()){
 				if(nivel == sc.nextInt()){
@@ -190,7 +192,7 @@ public abstract class Personaje implements Peleador {
 	public abstract int calcularPuntosDeDefensa();
 	public abstract int calcularPuntosDeMagia();
 	public abstract String getRaza();
-	
+
 	public void morir(){
 		this.vida=0;
 		//Tengo que dejar el mejor item
@@ -198,7 +200,7 @@ public abstract class Personaje implements Peleador {
 		this.reaparecer();
 		this.revivir();
 	}
-	
+
 	private void revivir() {
 		this.serCurado();
 		this.serEnergizado();		
@@ -211,7 +213,7 @@ public abstract class Personaje implements Peleador {
 	public boolean estaVivo() {
 		return this.vida > 0;
 	}
-	
+
 	/* @mauroat - 18/10/16
 	 * Modifico este metodo para que los puntos de defensa amortiguen el daño recibido en los ataques
 	 * */
@@ -227,11 +229,11 @@ public abstract class Personaje implements Peleador {
 	public void serEnergizado() {
 		this.energia = 100;
 	}
-	
+
 	public int getVida() {
 		return vida;
 	}
-	
+
 	public int getExperiencia() {
 		return experiencia;
 	}
@@ -277,7 +279,7 @@ public abstract class Personaje implements Peleador {
 	public Casta getClase() {
 		return clase;
 	}
-	
+
 	public String getNombreClase() {
 		return clase.getNombre();
 	}
@@ -318,38 +320,38 @@ public abstract class Personaje implements Peleador {
 	}
 
 	/* LISTA DE ITEMS */
-	
+
 	public String getLista() {
 		return this.raza +" equipado con:";
 	}
-	
+
 	public int getTamañoLista() {
 		return 0;
 	}
 
 	/* HASMAP DE ATAQUES  */
-	
+
 	public void agregarAtaque(Ataque a){
 		this.ataques.put(a.getNombre(), a);
 		this.puedeAgregarAtaque--;
 	}
-	
+
 	public void quitarAtaque(Ataque a){
 		this.ataques.remove(a.getNombre());		
 		// Si lo quiere sacar no puede elegir otro, que se joda.
 		//this.puedeAgregarAtaque++;
 	}
-	
+
 	public LinkedList<String> getListaAtaques(){
 		int i = 1;
 		LinkedList<String> ataques = new LinkedList<String>();
 		for (Map.Entry<String, Ataque> entry : this.ataques.entrySet()) {
-		    ataques.add("Ataque "+i+": "+entry.getKey());
-		    i++;
+			ataques.add("Ataque "+i+": "+entry.getKey());
+			i++;
 		}
 		return ataques;
 	}
-	
+
 	public Map<String, Ataque> getAtaques() {
 		return ataques;
 	}
@@ -361,19 +363,19 @@ public abstract class Personaje implements Peleador {
 	public int getCantidadAtaques(){
 		return this.ataques.size();
 	}
-	
+
 	public Ataque getAtaque(String ataque){
 		return this.ataques.get(ataque);		
 	}
-	
+
 	public Personaje dejarMejorItem(){
 		return null;
 	}
-	
+
 	public int getPrioridad() {
 		return 0;
 	}
-	
+
 	public boolean compararPrioridad(int p1, int p2){
 		return p1 == p2;
 	}
@@ -385,9 +387,9 @@ public abstract class Personaje implements Peleador {
 	public void setPersonajeDecorado(Personaje p) {
 		// No hace nada
 	}
-	
-	
-	
+
+
+
 	public Usuario getUsuarioPersonaje() {
 		return usuarioPersonaje;
 	}
@@ -405,7 +407,7 @@ public abstract class Personaje implements Peleador {
 		 * Creo una copia de mi personaje desequipado
 		 * */
 		Personaje aux = (Personaje) this.clone();
-		
+
 		if(pe.getNombreItem() == "Armadura de Azor Ahai"){
 			aux = new ArmaduraDeAzorAhai(aux);
 		} else if (pe.getNombreItem() == "Bastón de Saruman"){
@@ -433,20 +435,20 @@ public abstract class Personaje implements Peleador {
 		} else {
 			aux = new TotemProteccion(aux);
 		}
-		
+
 		return (PersonajeEquipado) aux;
 	}
-	
+
 	/*
 	 * Se sobrecarga este metodo para que sea funcional a los Genericos
 	 * */
-	
+
 	public PersonajeEquipado equipar(String item) throws CloneNotSupportedException {
 		/*
 		 * Creo una copia de mi personaje desequipado
 		 * */
 		Personaje aux = (Personaje) this.clone();
-		
+
 		if(item == "Armadura de Azor Ahai"){
 			aux = new ArmaduraDeAzorAhai(aux);
 		} else if (item == "Bastón de Saruman"){
@@ -474,38 +476,38 @@ public abstract class Personaje implements Peleador {
 		} else {
 			aux = new TotemProteccion(aux);
 		}
-		
+
 		return (PersonajeEquipado) aux;
 	}
-	
+
 	public Personaje desequipar(PersonajeEquipado personaje) {
 		return null;
 	}
-	
+
 	public String getNombreItem() {
 		//return "Sin items";
 		return null;
 	}
-	
+
 	public String toString()   {
-	     	return this.usuarioPersonaje.getUsername();
-	 }
-	  	
-	 public boolean interactuarConOtroPersonaje(Personaje p)  {
-		 if(ubicacion.contiene(p.getUbicacion()))
-				return p.respuesta();
-			return false; 	 
-	 }
-	 
-	 public boolean respuesta() {
-		 return true;
-	 }
-	 	    
-	 public boolean equals(Personaje obj) {
-	 	if(this.usuarioPersonaje.equals(obj.usuarioPersonaje))
-	 		return true;
-	 	return false;	
-	 }
+		return this.usuarioPersonaje.getUsername();
+	}
+
+	public boolean interactuarConOtroPersonaje(Personaje p)  {
+		if(ubicacion.contiene(p.getUbicacion()))
+			return p.respuesta();
+		return false; 	 
+	}
+
+	public boolean respuesta() {
+		return true;
+	}
+
+	public boolean equals(Personaje obj) {
+		if(this.usuarioPersonaje.equals(obj.usuarioPersonaje))
+			return true;
+		return false;	
+	}
 
 	public int getPuedeAgregarAtaque() {
 		return puedeAgregarAtaque;
@@ -546,36 +548,47 @@ public abstract class Personaje implements Peleador {
 	public void setMagia(int magia) {
 		this.magia = magia;
 	}
-	
-	 public boolean seEncuentraCerca(Personaje obj)	 {
-		 return this.ubicacion.distanciaA(obj.ubicacion) <= (this.ubicacion.getRadio() + obj.ubicacion.getRadio());
-	 }
-	 
-	 public void reubicar()	 {
+
+	public boolean seEncuentraCerca(Personaje obj)	 {
+		return this.ubicacion.distanciaA(obj.ubicacion) <= (this.ubicacion.getRadio() + obj.ubicacion.getRadio());
+	}
+
+	public void reubicar()	 {
 		this.setUbicacion(obtenerLugarSeguroRandom());
-	 }
-	 
-	 private Ubicacion obtenerLugarSeguroRandom()	 {
-		 Random r = new Random();
-		 Map<Integer, Ubicacion> ListaUbicacion = new HashMap<Integer, Ubicacion>(); 
-		 /*Validar que no haya obstaculos ni personajes en las ubicaciones*/
-		 ListaUbicacion.put(0, new Ubicacion(0,0));
-		 ListaUbicacion.put(1, new Ubicacion(15,0));
-		 ListaUbicacion.put(2, new Ubicacion(90,90));
-		 ListaUbicacion.put(3, new Ubicacion(90,150));
-		
-		 return ListaUbicacion.get(r.nextInt(4));
-	 }
+	}
 
-		public void setAlianzaActual(Alianza alianzaActual) {
-			this.alianzaActual = alianzaActual;
-		}
-		
-		public Alianza getAlianzaActual() {
-			return alianzaActual;
-		}
+	private Ubicacion obtenerLugarSeguroRandom()	 {
+		Random r = new Random();
+		Map<Integer, Ubicacion> ListaUbicacion = new HashMap<Integer, Ubicacion>(); 
+		/*Validar que no haya obstaculos ni personajes en las ubicaciones*/
+		ListaUbicacion.put(0, new Ubicacion(0,0));
+		ListaUbicacion.put(1, new Ubicacion(15,0));
+		ListaUbicacion.put(2, new Ubicacion(90,90));
+		ListaUbicacion.put(3, new Ubicacion(90,150));
+
+		return ListaUbicacion.get(r.nextInt(4));
+	}
+
+	public void setAlianzaActual(Alianza alianzaActual) {
+		this.alianzaActual = alianzaActual;
+	}
+
+	public Alianza getAlianzaActual() {
+		return alianzaActual;
+	}
+
+	public Calendar getLimiteMinimoPermanenciaAlianza() {
+		return limiteMinimoPermanenciaAlianza;
+	}
+
+	public void setLimiteMinimoPermanenciaAlianza(Calendar limiteMinimoPermanenciaAlianza) {
+		this.limiteMinimoPermanenciaAlianza = limiteMinimoPermanenciaAlianza;
+	}
 
 
-	 
-	 
+
+
+
+
+
 }

@@ -1,6 +1,7 @@
 package criterios_aceptacion;
 
 import java.io.FileNotFoundException;
+import java.util.Calendar;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,6 +17,8 @@ import razas.*;
  * 12) Como Personaje, quiero cambiar las alianzas establecidas cada cierta
  * cantidad de tiempo. Motivación: Para poder traicionar a mis aliados.
  * 
+ * 
+ * 
  ***/
 
 public class Historia12Test {
@@ -29,13 +32,39 @@ public class Historia12Test {
 	 ***/
 
 	@Test
-	public void historia12Criterio01_Test(){
+	public void historia12Criterio01_Test() throws FileNotFoundException{
+
+		Personaje objHumano = new Humano("jose","dssjjad");
+		Personaje objElfo = new Elfo("dani","1242");
+		Personaje soyUnElfo = new Elfo("Harry","1234");
+		Alianza objAlianza = new Alianza("Somos re cracks");
+		objAlianza.formarAlianza(objElfo);
+		objAlianza.formarAlianza(objHumano);
+		objAlianza.formarAlianza(soyUnElfo);
+		Assert.assertEquals(3, objAlianza.cantidadMiembrosAlianza());
+
+		Calendar actual = Calendar.getInstance();
+		actual.add(Calendar.MINUTE, -2);
+		objElfo.setLimiteMinimoPermanenciaAlianza(actual);
+		objAlianza.dejarAlianza(objElfo);
+
+		Assert.assertEquals(3, objAlianza.cantidadMiembrosAlianza());
+
+		actual.add(Calendar.MINUTE, -10);
+		soyUnElfo.setLimiteMinimoPermanenciaAlianza(actual);
+		objAlianza.dejarAlianza(soyUnElfo);
+
+		Assert.assertEquals(2, objAlianza.cantidadMiembrosAlianza());
+	}
+
+	@Test
+	public void historia12Criterio011_Test(){
 
 		Long inicio = System.currentTimeMillis();
 		Alianza pro = crearAlianzaPro();
 		// Assert.assertEquals(2, pro.cantidadMiembrosAlianza());
 		Personaje p = new Humano("Mauricio Macri", "123");
-		
+
 		pro.dejarAlianza(p);
 		Assert.assertEquals(1, pro.cantidadMiembrosAlianza());
 
@@ -108,9 +137,9 @@ public class Historia12Test {
 
 		Combate c = new Combate("La Gran Batalla");
 		c.combatir(e1, e2);
-		
+
 		c.declararGanador(e1, e2);
-		
-		
+
+
 	}
 }

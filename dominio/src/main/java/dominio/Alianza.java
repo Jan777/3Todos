@@ -6,50 +6,58 @@ public class Alianza {
 	private int idAlianza;
 	private String nombre;
 	private ArrayList <Personaje> integrantes; 
-	
+
 	public Alianza(String nombreParametro){
 		nombre=nombreParametro;
 		integrantes = new ArrayList<Personaje>();
 	}
-	
+
 	public Alianza(){
 		//nombre=nombreParametro;
 		idAlianza = this.getProximaAlianza();
 		integrantes = new ArrayList<Personaje>();
+
 	}
-	
+
 	private int getProximaAlianza(){
 		return contadorAlianzas++;
 	}
-	
-	public void formarAlianza(Personaje objPersonaje)	{
+
+	public void formarAlianza(Personaje objPersonaje){
+		Calendar actual = Calendar.getInstance();
+		actual.add(Calendar.MINUTE, 5);
 		integrantes.add(objPersonaje);
 		objPersonaje.setAlianzaActual(this);
-		
+		objPersonaje.setLimiteMinimoPermanenciaAlianza(actual);
+
 	}
-	
+
 	public void eliminarAlianza(){
 		Iterator<Personaje> iter = integrantes.iterator();
 		while (iter.hasNext()) 	{
 			Personaje user = iter.next();
 			user.setAlianzaActual(null);
 		}
-		
+
 		this.integrantes.clear();
-		
+
 	}
-	
+
 	public void dejarAlianza(Personaje objPersonaje){
-		Iterator<Personaje> iter = integrantes.iterator();
-		while (iter.hasNext()) 	{
-		    Personaje user = iter.next();
-		    if(user.equals(objPersonaje)) { //con personaje veo el usuario
-		    	user.setAlianzaActual(null);
-		    	iter.remove();
-		    }
-		}		
+
+		Calendar actual = Calendar.getInstance();
+		if(cantidadTotalMinutos(objPersonaje.limiteMinimoPermanenciaAlianza, actual)>=4){
+			Iterator<Personaje> iter = integrantes.iterator();
+			while (iter.hasNext()) 	{
+				Personaje user = iter.next();
+				if(user.equals(objPersonaje)) { //con personaje veo el usuario
+					user.setAlianzaActual(null);
+					iter.remove();
+				}
+			}
+		}
 	}
-	
+
 
 	public int cantidadMiembrosAlianza(){
 		return this.integrantes.size();
@@ -73,5 +81,12 @@ public class Alianza {
 
 	public void setIntegrantes(ArrayList<Personaje> integrantes) {
 		this.integrantes = integrantes;
+	}
+
+	public long cantidadTotalMinutos(Calendar fechaInicial ,Calendar fechaFinal){
+
+		long totalMinutos=0;
+		totalMinutos=((fechaFinal.getTimeInMillis()-fechaInicial.getTimeInMillis())/1000/60);
+		return totalMinutos;
 	}
 }
