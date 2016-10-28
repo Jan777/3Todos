@@ -25,7 +25,6 @@ public class Alianza {
 
 	public void formarAlianza(Personaje objPersonaje){
 		Calendar actual = Calendar.getInstance();
-		actual.add(Calendar.MINUTE, 5);
 		integrantes.add(objPersonaje);
 		objPersonaje.setAlianzaActual(this);
 		objPersonaje.setLimiteMinimoPermanenciaAlianza(actual);
@@ -68,7 +67,7 @@ public class Alianza {
 	}
 	/*
 	 * @mauroat - 27/10/16
-	 * La idea de este método es que finalizados los combates reparta experiencia entre los miembros de la alianza
+	 * La idea de este mÃ©todo es que finalizados los combates reparta experiencia entre los miembros de la alianza
 	 * */
 
 	public int getIdAlianza() {
