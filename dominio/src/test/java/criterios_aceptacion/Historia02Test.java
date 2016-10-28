@@ -3,20 +3,12 @@ package criterios_aceptacion;
 import org.junit.Assert;
 import org.junit.Test;
 
-import castas.Chaman;
-import castas.Guerrero;
-import castas.Hechicero;
-import dominio.Generico;
-import dominio.Personaje;
-import dominio.PersonajeEquipado;
-import dominio.Usuario;
-import habilidades.Inteligencia;
-import habilidades.Valentia;
-import items.PocionSabiduria;
-import items.RunaDeMagia;
-import razas.Elfo;
-import razas.Humano;
-import razas.Orco;
+import castas.*;
+import dominio.*;
+import habilidades.*;
+import items.*;
+import razas.*;
+
 
 // Agregado criterio 3 y 4, faltan 1 y 2
 // criterio 3 parecido al criterio 1 de historia de usuario 7

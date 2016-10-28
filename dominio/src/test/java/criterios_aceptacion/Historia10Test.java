@@ -1,22 +1,16 @@
 package criterios_aceptacion;
 
+import java.io.FileNotFoundException;
+
 import org.junit.Assert;
 import org.junit.Test;
 
-import castas.Chaman;
-import castas.Guerrero;
-import castas.Hechicero;
-import dominio.Alianza;
-import dominio.Combate;
-import dominio.Equipo;
-import dominio.Generico;
-import dominio.Personaje;
-import razas.Elfo;
-import razas.Humano;
-import razas.Orco;
+import castas.*;
+import dominio.*;
+import razas.*;
+
 
 // Falta ultimo assert en criterio 1
-// Faltan los demas criterios 
 
 /***
  * 
@@ -32,11 +26,12 @@ public class Historia10Test {
 	 * 
 	 * 1.	Dado un Personaje que pertenece a una Alianza, cuando resulten ganadores de un combate contra otra 
 	 * Alianza de Personajes Usuarios, entonces el sistema incrementará la experiencia de todos ellos.
+	 * @throws FileNotFoundException 
 	 * 
 	 ***/
 	
 	@Test
-	public void historia10Criterio01_Test() {
+	public void historia10Criterio01_Test() throws FileNotFoundException {
 		/*
 		 * Creo los objetos personaje
 		 * */
@@ -55,28 +50,31 @@ public class Historia10Test {
 		 *  
 		 * */
 		Alianza a1 = new Alianza();
+		
 		p1.setAlianzaActual(a1);
 		p2.setAlianzaActual(a1);
 		
 		
 		p1.getAlianzaActual().formarAlianza(p2);
 		p2.getAlianzaActual().formarAlianza(p1);
-		
+		///////////////////////
 		Alianza a2 = new Alianza();
-		p1.setAlianzaActual(a2);
-		p2.setAlianzaActual(a2);
 		
+		p3.setAlianzaActual(a2);
+		p4.setAlianzaActual(a2);
 		
-		p1.getAlianzaActual().formarAlianza(p2);
-		p2.getAlianzaActual().formarAlianza(p1);
+		p3.getAlianzaActual().formarAlianza(p4);
+		p4.getAlianzaActual().formarAlianza(p3);
+		
+	
+	
 		
 		/*
 		 * Se preparan los equipos a pelear
 		 * */
 		Equipo e1 = new Equipo(p1);
-		e1.agregar(p2);
 		Equipo e2 = new Equipo(p3);
-		e2.agregar(p4);
+	
 		
 		/*
 		 * Compruebo que esten todos vivos
@@ -92,32 +90,41 @@ public class Historia10Test {
 		 * 
 		 * */
 		
-		Combate c = new Combate("La Batalla");
-		while(e1.quedaAlgunoVivo() && e2.quedaAlgunoVivo() ){
-			c.combatir(e1,e2);
-		}
+		Combate c = new Combate();
 		
-		if(!e1.quedaAlgunoVivo()){
-			e2.repartirExperiencia(e1.calcularExperiencia());
-		} else if (!e2.quedaAlgunoVivo()){
-			e1.repartirExperiencia(e2.calcularExperiencia());
-		}
+		c.combatir(e1,e2);
+		
+		/*
+		 * Todo el equipo 4 esta muerto
+		 * */
+		Assert.assertEquals(false, p3.estaVivo());
+		Assert.assertEquals(false, p4.estaVivo());
+		
+		/*
+		 * p1 obtuvo 88 de experiencia por los ataques realizados 
+		 * p2 obtuvo 172 de experiencia por los ataques realizados 
+		 * El ultimo peleador vivo del equipo 2 era de nivel 1, por ende la experiencia 
+		 * a repartir sera (1)*10 /2 = 5
+		 * 
+		 * */
+		Assert.assertEquals(148+5, p1.getExperiencia());
+		Assert.assertEquals(128+5, p2.getExperiencia());
+		
+
 	}
 	
-	/*
-	 * Faltan los Asserts para comprobar 
-	 * */
-	
+
 	
 	/***
 	 * 
 	 * 2.	Dado un Personaje que pertenece a una Alianza, cuando resulten ganadores de un combate contra un 
 	 * Personaje Usuario, entonces el sistema incrementará la experiencia de todos ellos. 
+	 * @throws FileNotFoundException 
 	 * 
 	 ***/
 	
 	@Test
-	public void historia10Criterio02_Test() {
+	public void historia10Criterio02_Test() throws FileNotFoundException {
 		Personaje p1 = new Humano("Humano1","1231");
 		Personaje p2 = new Orco("Humano2","1231");
 		Personaje p3 = new Elfo("Humano3","1231");
@@ -159,15 +166,25 @@ public class Historia10Test {
 		 * */
 		
 		Combate c = new Combate("La Batalla de la Muerte");
-		while(e1.quedaAlgunoVivo() && e2.quedaAlgunoVivo() ){
-			c.combatir(e1,e2);
-		}
 		
-		if(!e1.quedaAlgunoVivo()){
-			e2.repartirExperiencia(e1.calcularExperiencia());
-		} else if (!e2.quedaAlgunoVivo()){
-			e1.repartirExperiencia(e2.calcularExperiencia());
-		}
+		c.combatir(e1,e2);
+		
+		/*
+		 * Todo el equipo 2 esta muerto
+		 * */
+		Assert.assertEquals(false, p3.estaVivo());
+	
+		
+		/*
+		 * p1 obtuvo 74 de experiencia por los ataques realizados 
+		 * p2 obtuvo 64 de experiencia por los ataques realizados 
+		 * p3 era de nivel 1, por ende la experiencia 
+		 * a repartir sera (1)*10 /2 = 5
+		 * 
+		 * */
+		Assert.assertEquals(74+5, p1.getExperiencia());
+		Assert.assertEquals(64+5, p2.getExperiencia());
+		
 		
 	}
 	
@@ -175,11 +192,12 @@ public class Historia10Test {
 	 * 
 	 * 3. 	Dado un Personaje que pertenece a una Alianza, cuando resulten ganadores de un combate contra un 
 	 * Personaje Genérico, entonces el sistema incrementará la experiencia de todos ellos.
+	 * @throws FileNotFoundException 
 	 * 
 	 ***/
 	
 	@Test
-	public void historia10Criterio03_Test() {
+	public void historia10Criterio03_Test() throws FileNotFoundException {
 		Personaje p1 = new Humano("Humano1","1231");
 		Personaje p2 = new Orco("Humano2","1231");
 		Generico g = new Generico("Terminator");
@@ -217,14 +235,22 @@ public class Historia10Test {
 		 * 
 		 * */
 		
-		Combate c = new Combate("Nueva Batalla");
-		while(e1.quedaAlgunoVivo() && g.estaVivo()){
-			c.combatir(e1,g);
-		}
+		Combate c = new Combate();
 		
-		if(e1.quedaAlgunoVivo()){
-			e1.repartirExperiencia(g.getNivel() * 10);
-		}
+		c.combatir(e1,g);
+		
+		/*
+		 * Personaje generico esta muerto
+		 * */
+		Assert.assertEquals(false, g.estaVivo());
+	
+		
+		/*
+		 * La experiencia no se puede comprobar ya que los genericos se crean con nivel random
+		 * */
+	
+	
+		
 		
 	}
 	

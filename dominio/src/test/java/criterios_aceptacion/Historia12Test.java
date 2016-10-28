@@ -1,20 +1,15 @@
 package criterios_aceptacion;
 
+import java.io.FileNotFoundException;
+
 import org.junit.Assert;
 import org.junit.Test;
 
-import castas.Chaman;
-import castas.Guerrero;
-import castas.Hechicero;
-import dominio.Alianza;
-import dominio.Combate;
-import dominio.Equipo;
-import dominio.Personaje;
-import dominio.Ubicacion;
-import razas.Humano;
-import razas.Orco;
+import castas.*;
+import dominio.*;
+import razas.*;
 
-// Falta todo
+
 
 /***
  * 
@@ -55,7 +50,7 @@ public class Historia12Test {
 		p2.setUbicacion(new Ubicacion(3, 0));
 
 		/*
-		 * Creaciï¿½n de alianza
+		 * Creacion de alianza
 		 */
 		Alianza a = new Alianza("Pro");
 
@@ -79,11 +74,12 @@ public class Historia12Test {
 	 * 
 	 * 2. Dado un Personaje, cuando se encuentre cercano a otro e interactúen,
 	 * entonces éste podrá combatir contra él hasta definir un ganador.
+	 * @throws FileNotFoundException 
 	 * 
 	 ***/
 
 	@Test
-	public void historia12Criterio02_Test() {
+	public void historia12Criterio02_Test() throws FileNotFoundException {
 		Personaje p1 = new Humano("Humano1", "1231");
 		Personaje p2 = new Orco("Humano2", "1231");
 		p1.setCasta(new Guerrero());
@@ -111,9 +107,10 @@ public class Historia12Test {
 		 */
 
 		Combate c = new Combate("La Gran Batalla");
-		while (e1.quedaAlgunoVivo() && e2.quedaAlgunoVivo()) {
-			c.combatir(e1, e2);
-		}
+		c.combatir(e1, e2);
+		
 		c.declararGanador(e1, e2);
+		
+		
 	}
 }

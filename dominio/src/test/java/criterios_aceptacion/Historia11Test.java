@@ -1,21 +1,16 @@
 package criterios_aceptacion;
 
+import java.io.FileNotFoundException;
+
 import org.junit.Assert;
 import org.junit.Test;
 
-import castas.Chaman;
-import castas.Guerrero;
-import castas.Hechicero;
-import dominio.Alianza;
-import dominio.Combate;
-import dominio.Equipo;
-import dominio.Generico;
-import dominio.Personaje;
-import razas.Elfo;
-import razas.Humano;
-import razas.Orco;
+import castas.*;
+import dominio.*;
+import razas.*;
 
-// Falta todo
+
+// Faltan asserts
 
 
 /***
@@ -32,11 +27,12 @@ public class Historia11Test {
 	 * 
 	 * 1.	Dado un Personaje que pertenece a una Alianza, cuando éstos resultan ganadores de un combate, entonces 
 	 * se reparten los ítems de los perdedores entre los integrantes. 
+	 * @throws FileNotFoundException 
 	 * 
 	 ***/
 	
 	@Test
-	public void historia11Criterio01_Test() {
+	public void historia11Criterio01_Test() throws FileNotFoundException {
 		Personaje p1 = new Humano("Humano1","1231");
 		Personaje p2 = new Orco("Humano2","1231");
 		Personaje p3 = new Elfo("Humano3","1231");
@@ -80,13 +76,13 @@ public class Historia11Test {
 		 * 
 		 * */
 		Combate c = new Combate("Super Batalla");
-		while(e1.quedaAlgunoVivo() && e2.quedaAlgunoVivo() ){
-			c.combatir(e1, e2);
-		}
-		if(e1.quedaAlgunoVivo())
-			e1.repartirItem(e2);
-		else if(e2.quedaAlgunoVivo())
-			e2.repartirItem(e1);
+		
+		c.combatir(e1, e2);
+		/*
+		 * Falta metodo repartirItems combinado con dejarMejorItem y desequipar
+		 * 
+		 * */
+		Assert.assertEquals(1, 2);
 	}
 	
 	
@@ -94,11 +90,12 @@ public class Historia11Test {
 	 * 
 	 * 2.	Dado un Personaje, cuando finaliza el combate contra otro Personaje 
 	 * Usuario y resulta ganador, entonces se le entrega el mejor ítem de aquel Personaje Usuario derrotado. 
+	 * @throws FileNotFoundException 
 	 * 
 	 ***/
 	
 	@Test
-	public void historia11Criterio02_Test() {
+	public void historia11Criterio02_Test() throws FileNotFoundException {
 		Personaje p1 = new Humano("Humano1","1231");
 		Personaje p2 = new Orco("Humano2","1231");
 		p1.setCasta(new Guerrero());
@@ -125,25 +122,27 @@ public class Historia11Test {
 		 * */
 		
 		Combate c = new Combate("La Gran Batalla");
-		while(e1.quedaAlgunoVivo() && e2.quedaAlgunoVivo() ){
-			c.combatir(e1, e2);
-		}
 		
-		if(e1.quedaAlgunoVivo())
-			e1.repartirItem(e2);
-		else if(e2.quedaAlgunoVivo())
-			e2.repartirItem(e1);
+		c.combatir(e1, e2);
+		/*
+		 * Falta metodo repartirItems combinado con dejarMejorItem y desequipar
+		 * 
+		 * */
+		Assert.assertEquals(1, 2);
+		
+
 	}
 	
 	/***
 	 * 
 	 * 3.	Dado un Personaje, cuando finaliza el combate contra un Personaje Genérico y resulta ganador, 
 	 * entonces se le entrega el mejor ítem del Personaje Genérico.
+	 * @throws FileNotFoundException 
 	 * 
 	 ***/
 	
 	@Test
-	public void historia11Criterio03_Test() {
+	public void historia11Criterio03_Test() throws FileNotFoundException {
 		Personaje p1 = new Humano("Humano1","1231");
 		Personaje p2 = new Orco("Humano2","1231");
 		Generico g = new Generico("Terminator");
@@ -182,11 +181,12 @@ public class Historia11Test {
 		 * */
 		
 		Combate c = new Combate("La Pelea Final");
-		while(e1.quedaAlgunoVivo() && g.estaVivo()){
-			c.combatir(e1, g);
-		}
+		c.combatir(e1, g);
 		
-		if(e1.quedaAlgunoVivo())
-			e1.repartirItem(g);
+		/*
+		 * Falta metodo repartirItems combinado con dejarMejorItem y desequipar
+		 * 
+		 * */
+		
 	}
 }

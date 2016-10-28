@@ -8,6 +8,7 @@ import java.util.List;
 public class Equipo {
 
 	protected List<Personaje> listaPeleadores = new LinkedList<Personaje>();
+	protected static int proximo=1;
 	
 	public Equipo (Personaje p){		
 		agregar(p);
@@ -30,14 +31,30 @@ public class Equipo {
 	
 
 	
-	
-	public void atacar(Equipo otro)  {
+	public void atacar(Equipo otro) throws FileNotFoundException {
 		Peleador victima = otro.obtenerProximaVictima();
 		for (Personaje atacante : listaPeleadores) {
-			atacante.atacar(victima);
+			if(atacante.puedeAtacar()){
+				atacante.atacar(victima);
+			} else {
+				atacante.setEnergia(100);
+			}
+			
 		}
 	}
 
+	public void atacar(Generico g) throws FileNotFoundException {
+		Peleador victima = g;
+		for (Personaje atacante : listaPeleadores) {
+			if(atacante.puedeAtacar()){
+				atacante.atacar(victima);
+			} else {
+				atacante.setEnergia(100);
+			}
+			
+		}
+	}
+	
 	public boolean agregar(Personaje personaje) {
 		return listaPeleadores.add(personaje);
 	}
@@ -45,8 +62,7 @@ public class Equipo {
 	
 	public Peleador obtenerProximaVictima() {
 		depurarEquipo();
-		if(listaPeleadores.isEmpty()) {
-			
+		if(listaPeleadores.isEmpty()) {		
 			//throw new RuntimeException("El batallón está vacío");
 		}
 		return listaPeleadores.get(0);
@@ -61,27 +77,32 @@ public class Equipo {
 		
 	}
 	
+
 	public int calcularExperiencia(){
-		int suma = 0;
-		for (int i = 0; i<listaPeleadores.size();i++){
-			suma += listaPeleadores.get(i).getNivel();
+		
+		int suma = listaPeleadores.get(0).getNivel();
+		
+		for (int i = 1; i < listaPeleadores.size();i++){
+			
+			suma += listaPeleadores.get(0).getAlianzaActual().getIntegrantes().get(i).getNivel();
 		}
 		return suma*10;
 	}
 	
-	/*
-	 * 
-	 * Hay que probarlo.
-	 * */
+
 	public void repartirExperiencia(int experiencia){
 		int puntosPorPersonaje = experiencia / listaPeleadores.size();
 		
 		for (int i = 0; i<listaPeleadores.size();i++){
-			listaPeleadores.get(i).setExperiencia(listaPeleadores.get(i).getExperiencia()+puntosPorPersonaje);
+			if(listaPeleadores.get(i).estaVivo())
+				listaPeleadores.get(i).setExperiencia(listaPeleadores.get(i).getExperiencia()+puntosPorPersonaje);
 		}
 	}
-
-	public void repartirItem(Equipo e2) {
+	
+	/*
+	 * Equipa con el mejor item del personaje muerto al personaje que lo mató 
+	 * */
+	public void repartirItem(Equipo e) {
 		
 	}
 
@@ -89,11 +110,17 @@ public class Equipo {
 		
 	}
 
-	public List<String> mostrarGanador() {
-		LinkedList ganadores = new LinkedList<String>();
+	public void desequiparEquipo(){
 		for (int i = 0; i<listaPeleadores.size();i++){
-			ganadores.add(listaPeleadores.get(i).usuarioPersonaje.getUsername());
+			listaPeleadores.get(i).desequipar((PersonajeEquipado)listaPeleadores.get(i).dejarMejorItem());
 		}
-		return ganadores;
 	}
+	
+	public List<String> mostrarGanador() {
+        LinkedList ganadores = new LinkedList<String>();
+        for (int i = 0; i<listaPeleadores.size();i++){
+            ganadores.add(listaPeleadores.get(i).usuarioPersonaje.getUsername());
+        }
+        return ganadores;
+    }
 }

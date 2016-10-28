@@ -1,36 +1,69 @@
 package dominio;
 
+import java.io.FileNotFoundException;
+import java.util.Random;
+
 public class Combate {
 	
-	private static int contadorCombates = 1; 
+	private static int contadorCombates = 0; 
 	private int idCombate;
+	private int ultimoAtacanteE1,ultimoAtacanteE2; 
 	private String nombre;
+
 	
 	public Combate(String nombre)
 	{
 		this.nombre = nombre;
-		this.contadorCombates = 1;
-		this.idCombate = 1;
+		this.idCombate = getProximoCombate();
 	}
 	
-	public void combatir(Equipo e1, Equipo e2){
-		idCombate = getProximoCombate();
+	public Combate()
+	{
+		//this.nombre = nombre;
+		this.idCombate = getProximoCombate();
+	}
+	
+	
+	public void combatir(Equipo e1, Equipo e2) throws FileNotFoundException{
+		Random r = new Random();
+		int aux = r.nextInt(2);
+		
 		/*
-		p1.atacar(p3);
-		p3.atacar(p2);
-		p2.atacar(p4);
-		p4.atacar(p1);
-		p1.serEnergizado();
-		*/	
+		 * Defino quien ataca primero
+		 * */
+		while(e1.quedaAlgunoVivo() && e2.quedaAlgunoVivo() ){
+			if(aux == 1){
+				e1.atacar(e2);
+				e2.atacar(e1);
+			} else {
+				e2.atacar(e1);
+				e1.atacar(e2);
+			}		
+		}
+
+		if(e1.quedaAlgunoVivo()){
+			e1.repartirExperiencia(e2.calcularExperiencia());
+			e1.repartirItem(e2);
+		}	else if(e2.quedaAlgunoVivo()){
+			e2.repartirExperiencia(e1.calcularExperiencia());
+			e2.repartirItem(e1);
+		}
 	}
 
-	public void combatir(Equipo e1, Generico g) {
-		/*
-		p1.atacar(g);
-		g.atacar(p1);
-		p2.atacar(g);
-		g.atacar(p2);
-		*/
+	public void combatir(Equipo e, Generico g) throws FileNotFoundException {
+		while(e.quedaAlgunoVivo() && g.estaVivo() ){
+			//Ataca primero siempre el generico
+				e.atacar(g);
+				g.atacar(e.obtenerProximaVictima());		
+		}
+
+		if(e.quedaAlgunoVivo()){
+			e.repartirExperiencia(g.getNivel()*10);
+			e.repartirItem(g);
+		}	else if(g.estaVivo()){
+			/* Cada miembro del equipo deja su mejor item*/
+			e.desequiparEquipo();
+		}
 	}
 	
 	private int getProximoCombate(){
