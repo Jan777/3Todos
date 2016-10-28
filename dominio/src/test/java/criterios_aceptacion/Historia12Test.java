@@ -15,7 +15,7 @@ import razas.*;
 /***
  * 
  * 12) Como Personaje, quiero cambiar las alianzas establecidas cada cierta
- * cantidad de tiempo. Motivación: Para poder traicionar a mis aliados.
+ * cantidad de tiempo. MotivaciÃ³n: Para poder traicionar a mis aliados.
  * 
  * 
  * 
@@ -26,8 +26,8 @@ public class Historia12Test {
 	/***
 	 * 
 	 * 1. Dado un Personaje miembro de una Alianza, cuando se exceda el tiempo
-	 * mínimo de pertenencia en la misma y decida abandonarla, entonces el
-	 * Personaje deja de formar parte de ésta.
+	 * mÃ­nimo de pertenencia en la misma y decida abandonarla, entonces el
+	 * Personaje deja de formar parte de Ã©sta.
 	 * 
 	 ***/
 
@@ -44,7 +44,7 @@ public class Historia12Test {
 		Assert.assertEquals(3, objAlianza.cantidadMiembrosAlianza());
 
 		Calendar actual = Calendar.getInstance();
-		actual.add(Calendar.MINUTE, -2);
+		actual.add(Calendar.MINUTE, -3);
 		objElfo.setLimiteMinimoPermanenciaAlianza(actual);
 		objAlianza.dejarAlianza(objElfo);
 
@@ -57,52 +57,10 @@ public class Historia12Test {
 		Assert.assertEquals(2, objAlianza.cantidadMiembrosAlianza());
 	}
 
-	@Test
-	public void historia12Criterio011_Test(){
-
-		Long inicio = System.currentTimeMillis();
-		Alianza pro = crearAlianzaPro();
-		// Assert.assertEquals(2, pro.cantidadMiembrosAlianza());
-		Personaje p = new Humano("Mauricio Macri", "123");
-
-		pro.dejarAlianza(p);
-		Assert.assertEquals(1, pro.cantidadMiembrosAlianza());
-
-	}
-
-	private Alianza crearAlianzaPro() {
-		Personaje p1 = new Humano("Mauricio Macri", "123");
-		Personaje p2 = new Humano("Eugenia Vidal", "123");
-		p1.setCasta(new Chaman());
-		p2.setCasta(new Guerrero());
-		p1.setUbicacion(new Ubicacion(0, 0));
-		p2.setUbicacion(new Ubicacion(3, 0));
-
-		/*
-		 * Creacion de alianza
-		 */
-		Alianza a = new Alianza("Pro");
-
-		/*
-		 * Agrego personajes a la Alianza
-		 */
-
-		a.formarAlianza(p1);
-
-		for (Personaje p : a.getIntegrantes()) {
-			/* Verifico que estén cerca en un radio = 2 */
-			if (p2.seEncuentraCerca(p)) {
-				a.formarAlianza(p2);
-				break;
-			}
-		}
-		return a;
-	}
-
 	/***
 	 * 
-	 * 2. Dado un Personaje, cuando se encuentre cercano a otro e interactúen,
-	 * entonces éste podrá combatir contra él hasta definir un ganador.
+	 * 2. Dado un Personaje, cuando se encuentre cercano a otro e interactÃºen,
+	 * entonces Ã©ste podrÃ¡ combatir contra Ã©l hasta definir un ganador.
 	 * @throws FileNotFoundException 
 	 * 
 	 ***/
