@@ -11,7 +11,7 @@ public class TestIntegral {
 	 */
 	
 	@Test
-	public void testCompleto() throws FileNotFoundException{
+	public void testCompleto() {
 		// Usuario Test
 		UsuarioTest ut = new UsuarioTest();
 		ut.crearUsuariotest();

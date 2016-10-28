@@ -16,10 +16,4 @@ public class MensajePersonajeSerializar {
 		cadenaPersonajeSerializado = objSerializacion.toJson(objPersonaje);
 	}
 	
-	/*public static void main(String []args){
-		Orco objOrco = new Orco("jejje","1234");
-		MensajePersonajeSerializar objMsj = new MensajePersonajeSerializar(objOrco);
-		System.out.println(objMsj.getObjSerializacion());
-	}*/
-	
 }

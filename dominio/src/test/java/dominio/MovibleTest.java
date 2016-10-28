@@ -12,7 +12,7 @@ public class MovibleTest {
 	@Test
 	public void posicionamientoInicialPersonajeTest(){
 		Personaje p1 = new Humano("Gate","Gota");
-		p1.setClase(new Hechicero());	
+		p1.setCasta(new Hechicero());	
 		p1.setUbicacion(new Ubicacion(1.0,2.0));
 		
 		Assert.assertEquals(new Ubicacion(1.0,2.0), p1.getUbicacion());
@@ -25,15 +25,15 @@ public class MovibleTest {
 		 * */
 		
 		Personaje p1 = new Humano("Gate","Gota");
-		p1.setClase(new Hechicero());
+		p1.setCasta(new Hechicero());
 		p1.setUbicacion(new Ubicacion(3.0,4.0));
 		
 		Personaje p2 = new Orco("Teto","Tete");
-		p2.setClase(new Guerrero());
+		p2.setCasta(new Guerrero());
 		p2.setUbicacion(new Ubicacion(2.0,3.0));
 		
 		Personaje p3 = new Elfo("Teto","Tete");
-		p3.setClase(new Chaman());
+		p3.setCasta(new Chaman());
 		p3.setUbicacion(new Ubicacion(13.0,24.0));
 		
 		/*

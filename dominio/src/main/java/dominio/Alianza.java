@@ -54,10 +54,6 @@ public class Alianza {
 	public int cantidadMiembrosAlianza(){
 		return this.integrantes.size();
 	}
-	
-	public void verintegrantes()	{
-	  System.out.println(integrantes);
-	}
 
 	public ArrayList<Personaje> getIntegrantes() {
 		return integrantes;
@@ -78,7 +74,4 @@ public class Alianza {
 	public void setIntegrantes(ArrayList<Personaje> integrantes) {
 		this.integrantes = integrantes;
 	}
-	
-	
-	
 }

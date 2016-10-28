@@ -15,7 +15,7 @@ public class GanchoDeGoroTest {
 	 * En esta caso es 12.
 	 * */
 	@Test
-	public void atacarGanchoDeGoro() throws FileNotFoundException{
+	public void atacarGanchoDeGoro() {
 		Personaje h1 = new Humano("Pablo Lescano","dama$grati$");
 		Personaje h2 = new Humano("Phil Collins","fere");
 		// Lescano agrega el ataque cuerpo a cuerpo y verifico que el daño que causa sea 9

@@ -1,15 +1,19 @@
 package criterios_aceptacion;
 
-import java.io.FileNotFoundException;
-
 import org.junit.Assert;
 import org.junit.Test;
 
-import castas.*;
-import dominio.*;
-import habilidades.*;
-import items.*;
-import razas.*;
+import castas.Chaman;
+import castas.Guerrero;
+import castas.Hechicero;
+import dominio.Alianza;
+import dominio.Combate;
+import dominio.Equipo;
+import dominio.Generico;
+import dominio.Personaje;
+import razas.Elfo;
+import razas.Humano;
+import razas.Orco;
 
 // Falta ultimo assert en criterio 1
 // Faltan los demas criterios 
@@ -32,7 +36,7 @@ public class Historia10Test {
 	 ***/
 	
 	@Test
-	public void historia10Criterio01_Test() throws FileNotFoundException{
+	public void historia10Criterio01_Test() {
 		/*
 		 * Creo los objetos personaje
 		 * */
@@ -41,10 +45,10 @@ public class Historia10Test {
 		Personaje p2 = new Orco("Humano2","1231");
 		Personaje p3 = new Elfo("Humano3","1231");
 		Personaje p4 = new Elfo("Humano4","1231");
-		p1.setClase(new Guerrero());
-		p2.setClase(new Hechicero());
-		p3.setClase(new Chaman());
-		p4.setClase(new Hechicero());
+		p1.setCasta(new Guerrero());
+		p2.setCasta(new Hechicero());
+		p3.setCasta(new Chaman());
+		p4.setCasta(new Hechicero());
 		
 		/*
 		 * Armo las alianzas: 
@@ -113,13 +117,13 @@ public class Historia10Test {
 	 ***/
 	
 	@Test
-	public void historia10Criterio02_Test() throws FileNotFoundException{
+	public void historia10Criterio02_Test() {
 		Personaje p1 = new Humano("Humano1","1231");
 		Personaje p2 = new Orco("Humano2","1231");
 		Personaje p3 = new Elfo("Humano3","1231");
-		p1.setClase(new Guerrero());
-		p2.setClase(new Hechicero());
-		p3.setClase(new Chaman());
+		p1.setCasta(new Guerrero());
+		p2.setCasta(new Hechicero());
+		p3.setCasta(new Chaman());
 		
 		/*
 		 * Armo las alianzas: 
@@ -175,12 +179,12 @@ public class Historia10Test {
 	 ***/
 	
 	@Test
-	public void historia10Criterio03_Test() throws FileNotFoundException{
+	public void historia10Criterio03_Test() {
 		Personaje p1 = new Humano("Humano1","1231");
 		Personaje p2 = new Orco("Humano2","1231");
 		Generico g = new Generico("Terminator");
-		p1.setClase(new Guerrero());
-		p2.setClase(new Hechicero());
+		p1.setCasta(new Guerrero());
+		p2.setCasta(new Hechicero());
 		
 		/*
 		 * Armo la alianza: 

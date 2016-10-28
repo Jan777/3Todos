@@ -32,7 +32,7 @@ public class Historia03Test {
 	 ***/
 
 	@Test
-	public void historia03Criterio01_Test() throws FileNotFoundException{
+	public void historia03Criterio01_Test() {
 		
 		/****************************************************
 		 * 3.1.1 - Orco contra otro personaje
@@ -41,8 +41,8 @@ public class Historia03Test {
 		// Creación de personajes
 		Personaje o1 = new Orco ("Orquito1","123");
 		Personaje o2 = new Orco ("Orquito2","123");
-		o1.setClase(new Guerrero());
-		o2.setClase(new Guerrero());
+		o1.setCasta(new Guerrero());
+		o2.setCasta(new Guerrero());
 		o1 = new EspadaDeJuanNieve(o1);
 		o1 = new DagaDeDragon(o1);
 		
@@ -81,7 +81,7 @@ public class Historia03Test {
 		// Creación de personajes
 		Personaje o3 = new Orco ("Orquito3","123");
 		Generico g1 = new Generico ("Generico 1");
-		o3.setClase(new Hechicero());
+		o3.setCasta(new Hechicero());
 		
 		o3 = new EspadaDeJuanNieve(o3);
 		o3 = new DagaDeDragon(o3);
@@ -129,7 +129,7 @@ public class Historia03Test {
 	 ***/
 
 	@Test
-	public void historia03Criterio02_Test() throws FileNotFoundException{
+	public void historia03Criterio02_Test() {
 		/****************************************************
 		 * 3.2.1 - Humano contra otro personaje
 		 * ****************************************************/
@@ -140,8 +140,8 @@ public class Historia03Test {
 		
 		Personaje p1 = new Humano ("Humanito1","123");
 		Personaje p2 = new Humano ("Humanito2","123");
-		p1.setClase(new Guerrero());
-		p2.setClase(new Guerrero());
+		p1.setCasta(new Guerrero());
+		p2.setCasta(new Guerrero());
 		p1 = new EspadaDeJuanNieve(p1);
 		p1 = new DagaDeDragon(p1);
 		
@@ -193,7 +193,7 @@ public class Historia03Test {
 		 * */
 		Personaje p3 = new Humano ("Orquito3","123");
 		Generico g1 = new Generico ("Generico 1");
-		p3.setClase(new Hechicero());
+		p3.setCasta(new Hechicero());
 		
 		p3 = new EspadaDeJuanNieve(p3);
 		p3 = new DagaDeDragon(p3);
@@ -244,7 +244,7 @@ public class Historia03Test {
 	 ***/
 	
 	@Test
-	public void historia03Criterio03_Test() throws FileNotFoundException{
+	public void historia03Criterio03_Test() {
 		/****************************************************
 		 * 3.2.1 - Humano contra otro personaje
 		 * ****************************************************/
@@ -255,8 +255,8 @@ public class Historia03Test {
 		
 		Personaje e1 = new Elfo ("Humanito1","123");
 		Personaje e2 = new Elfo ("Humanito2","123");
-		e1.setClase(new Guerrero());
-		e2.setClase(new Guerrero());
+		e1.setCasta(new Guerrero());
+		e2.setCasta(new Guerrero());
 		e1 = new EspadaDeJuanNieve(e1);
 		e1 = new DagaDeDragon(e1);
 		
@@ -308,7 +308,7 @@ public class Historia03Test {
 		 * */
 		Personaje p3 = new Humano ("Orquito3","123");
 		Generico g1 = new Generico ("Generico 1");
-		p3.setClase(new Hechicero());
+		p3.setCasta(new Hechicero());
 		
 		p3 = new EspadaDeJuanNieve(p3);
 		p3 = new DagaDeDragon(p3);

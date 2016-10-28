@@ -31,7 +31,7 @@ public class Equipo {
 
 	
 	
-	public void atacar(Equipo otro) throws FileNotFoundException {
+	public void atacar(Equipo otro)  {
 		Peleador victima = otro.obtenerProximaVictima();
 		for (Personaje atacante : listaPeleadores) {
 			atacante.atacar(victima);
@@ -89,9 +89,11 @@ public class Equipo {
 		
 	}
 
-	public void mostrarGanador() {
+	public List<String> mostrarGanador() {
+		LinkedList ganadores = new LinkedList<String>();
 		for (int i = 0; i<listaPeleadores.size();i++){
-			System.out.println(listaPeleadores.get(i).usuarioPersonaje.getUsername());
+			ganadores.add(listaPeleadores.get(i).usuarioPersonaje.getUsername());
 		}
+		return ganadores;
 	}
 }

@@ -1,15 +1,14 @@
 package criterios_aceptacion;
 
-import java.io.FileNotFoundException;
-
 import org.junit.Assert;
 import org.junit.Test;
 
-import castas.*;
-import dominio.*;
-import habilidades.*;
-import items.*;
-import razas.*;
+import castas.Guerrero;
+import dominio.Personaje;
+import habilidades.Destreza;
+import habilidades.Inteligencia;
+import items.BujiaHescher;
+import razas.Orco;
 
 // OK
 
@@ -31,13 +30,13 @@ public class Historia06Test {
 	 ***/
 	
 	@Test
-	public void historia06Criterio01_Test() throws FileNotFoundException{
+	public void historia06Criterio01_Test() {
 		/*
 		 * Creo el personaje con casta Guerrero
 		 * */
 		
 		Personaje p1 = new Orco("Fantino","Fantasy");
-		p1.setClase(new Guerrero());
+		p1.setCasta(new Guerrero());
 		
 		/*
 		 * Lo equipo con una bujía Hescher

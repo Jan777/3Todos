@@ -1,12 +1,10 @@
 package criterios_aceptacion;
 
-import java.io.FileNotFoundException;
-
 import org.junit.Assert;
 import org.junit.Test;
 
-import dominio.*;
-import razas.*;
+import dominio.Personaje;
+import razas.Humano;
 
 // OK
 
@@ -27,7 +25,7 @@ public class Historia04Test {
 	 ***/
 
 	@Test
-	public void historia04Criterio01_Test() throws FileNotFoundException{
+	public void historia04Criterio01_Test() {
 		Personaje p1 = new Humano("CarlosTevez","VeryDificul");
 		Personaje p2 = new Humano("Dalessandra","Cabezon");
 		Personaje p3 = new Humano("Romagnola","Cabezon");

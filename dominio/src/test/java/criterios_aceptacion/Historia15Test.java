@@ -1,13 +1,14 @@
 package criterios_aceptacion;
 
-import java.io.FileNotFoundException;
-
 import org.junit.Assert;
 import org.junit.Test;
-import castas.*;
-import dominio.*;
-import items.*;
-import razas.*;
+
+import castas.Chaman;
+import castas.Guerrero;
+import dominio.Personaje;
+import items.DagaDeDragon;
+import items.EspadaDeJuanNieve;
+import razas.Elfo;
 
 // Esta todo OK salvo por el hecho que no se como indicar que el personaje se dirige a una zona segura.
 
@@ -30,7 +31,7 @@ public class Historia15Test {
 	 ***/
 	
 	@Test
-	public void historia15Criterio01_Test() throws FileNotFoundException{
+	public void historia15Criterio01_Test() {
 		
 		/*
 		 * Creo los personajes
@@ -38,8 +39,8 @@ public class Historia15Test {
 		
 		Personaje p1 = new Elfo("gato","loco");
 		Personaje p2 = new Elfo("perro","loco");
-		p1.setClase(new Guerrero());
-		p2.setClase(new Chaman());
+		p1.setCasta(new Guerrero());
+		p2.setCasta(new Chaman());
 		p1 = new DagaDeDragon(p1);
 		p1 = new EspadaDeJuanNieve(p1);
 		/*

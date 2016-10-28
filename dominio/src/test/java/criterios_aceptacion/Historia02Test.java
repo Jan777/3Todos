@@ -1,16 +1,22 @@
 package criterios_aceptacion;
 
-import java.io.FileNotFoundException;
-
 import org.junit.Assert;
 import org.junit.Test;
 
-import castas.*;
-import dominio.*;
-import habilidades.*;
+import castas.Chaman;
+import castas.Guerrero;
+import castas.Hechicero;
+import dominio.Generico;
+import dominio.Personaje;
+import dominio.PersonajeEquipado;
+import dominio.Usuario;
+import habilidades.Inteligencia;
+import habilidades.Valentia;
 import items.PocionSabiduria;
 import items.RunaDeMagia;
-import razas.*;
+import razas.Elfo;
+import razas.Humano;
+import razas.Orco;
 
 // Agregado criterio 3 y 4, faltan 1 y 2
 // criterio 3 parecido al criterio 1 de historia de usuario 7
@@ -48,11 +54,11 @@ public class Historia02Test {
 	 * 
 	 * 3.	Dado un Jugador, cuando su personaje gane una batalla contra otro personaje Jugador o un personaje genérico,
 	 * entonces obtendrá experiencia e ítems.
-	 * @throws FileNotFoundException 
+	 * @ 
 	 * @throws CloneNotSupportedException 
 	 * 
 	 ***/
-	public void historia02Criterio03_Test() throws FileNotFoundException, CloneNotSupportedException{
+	public void historia02Criterio03_Test() throws CloneNotSupportedException{
 		/**
 		 * 2.3.1.	Personaje contra Personaje
 		*/
@@ -66,8 +72,8 @@ public class Historia02Test {
 		Personaje p1 = new Humano(u1);
 		Personaje p2 = new Elfo(u2);
 		
-		p1.setClase(new Hechicero());
-		p2.setClase(new Chaman());
+		p1.setCasta(new Hechicero());
+		p2.setCasta(new Chaman());
 		
 		
 		/*
@@ -118,7 +124,7 @@ public class Historia02Test {
 		
 		Usuario u3 = new Usuario ("Dawi","Paez");
 		Personaje p3 = new Humano(u3);
-		p3.setClase(new Hechicero());
+		p3.setCasta(new Hechicero());
 		
 		Generico g1 = new Generico();
 		
@@ -157,7 +163,7 @@ public class Historia02Test {
 	 * 
 	 ***/
 	@Test
-	public void historia02Criterio04_Test() throws FileNotFoundException{
+	public void historia02Criterio04_Test() {
 		/*
 		 * Se crean 2 usuarios y dos personajes en base a estos usuarios 
 		 * */
@@ -168,8 +174,8 @@ public class Historia02Test {
 		Personaje p1 = new Orco(u1);
 		Personaje p2 = new Elfo(u1);
 	
-		p1.setClase(new Guerrero());
-		p2.setClase(new Guerrero());
+		p1.setCasta(new Guerrero());
+		p2.setCasta(new Guerrero());
 
 		/*
 		 * Compruebo mis atributos iniciales
@@ -237,5 +243,4 @@ public class Historia02Test {
 		Assert.assertEquals(0, p1.getDestreza());
 		Assert.assertEquals(0+1, p1.getPotencia());
 	}
-
 }

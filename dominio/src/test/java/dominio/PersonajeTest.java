@@ -32,7 +32,7 @@ public class PersonajeTest {
 		Assert.assertEquals(10,h.calcularPuntosDeAtaque());
 		Assert.assertEquals(10,h.calcularPuntosDeDefensa());
 		Assert.assertEquals(0,h.calcularPuntosDeMagia());
-		//h.verEstado();
+
 		
 		// Elfo - Valores estandar de Ataque (5) , Defensa (5) y Magia (10)		
 		Assert.assertEquals("Elfo", e.getRaza());
@@ -40,14 +40,13 @@ public class PersonajeTest {
 		Assert.assertEquals(5,e.calcularPuntosDeAtaque());
 		Assert.assertEquals(5,e.calcularPuntosDeDefensa());
 		Assert.assertEquals(10,e.calcularPuntosDeMagia());
-		//e.verEstado();
 		
 		// Orco - Valores estandar de Ataque (12) , Defensa (5) y Magia (3)
 		Assert.assertEquals("Orco", o.getRaza());
 		Assert.assertEquals(5,o.calcularPuntosDeDefensa());
 		Assert.assertEquals(3,o.calcularPuntosDeMagia());
 		Assert.assertEquals(12, o.calcularPuntosDeAtaque());
-		//o.verEstado();		
+		
 		
 	}
 	
@@ -61,7 +60,7 @@ public class PersonajeTest {
 	 */
 	
 	@Test
-	public void personajeHumanoEquipadoYDesequipadoTest() throws FileNotFoundException{
+	public void personajeHumanoEquipadoYDesequipadoTest() {
 		Personaje h = new Humano("Humanito 1","123");
 		Personaje e = new Elfo("ElfoE","123");
 		
@@ -92,9 +91,6 @@ public class PersonajeTest {
 		Assert.assertEquals(1,h.calcularPuntosDeMagia());	
 		Assert.assertEquals(1, h.getTamañoLista());
 		
-		//System.out.println(h.getLista());
-		//h.verEstado();
-		
 
 	}
 	
@@ -108,7 +104,7 @@ public class PersonajeTest {
 		 * Armo un personaje con experiencia
 		 * */
 		Personaje p1 = new Humano("Lero","Lero");
-		p1.setClase(new Hechicero());
+		p1.setCasta(new Hechicero());
 		p1.setNivel(3);
 		p1.setExperiencia(440);
 		p1.setPuedeAgregarAtaque(1);
@@ -163,7 +159,7 @@ public class PersonajeTest {
 		 * Armo un personaje con habilidades
 		 * */
 		Personaje p1 = new Humano("Lero","Lero");
-		p1.setClase(new Hechicero());
+		p1.setCasta(new Hechicero());
 		p1.setNivel(3);
 		p1.setExperiencia(440);
 		p1.setPuedeAgregarAtaque(1);
@@ -221,7 +217,7 @@ public class PersonajeTest {
 		 * Armo un personaje con habilidades, ataques e items
 		 * */
 		Personaje p1 = new Humano("Lero","Lero");
-		p1.setClase(new Hechicero());
+		p1.setCasta(new Hechicero());
 		p1.setNivel(3);
 		p1.setExperiencia(440);
 		p1.setPuedeAgregarAtaque(1);

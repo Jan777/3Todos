@@ -1,15 +1,15 @@
 package criterios_aceptacion;
 
-import java.io.FileNotFoundException;
-
 import org.junit.Assert;
 import org.junit.Test;
 
-import castas.*;
-import dominio.*;
-import habilidades.*;
-import items.*;
-import razas.*;
+import castas.Chaman;
+import castas.Guerrero;
+import castas.Hechicero;
+import dominio.Alianza;
+import dominio.Personaje;
+import dominio.Ubicacion;
+import razas.Humano;
 
 // OK
 
@@ -32,14 +32,14 @@ public class Historia09Test {
 	 ***/
 	
 	@Test
-	public void historia09Criterio01_Test() throws FileNotFoundException{
+	public void historia09Criterio01_Test() {
 		/*
 		 * Creacion de objetos
 		 * */
 		Personaje p1 = new Humano("Fernando De La Rua","123");
 		Personaje p2 = new Humano("Chacho Alvarez","123");
-		p1.setClase(new Chaman());
-		p2.setClase(new Guerrero());
+		p1.setCasta(new Chaman());
+		p2.setCasta(new Guerrero());
 		p1.setUbicacion(new Ubicacion(0, 0));
 		p2.setUbicacion(new Ubicacion(3, 0));
 		
@@ -66,7 +66,7 @@ public class Historia09Test {
 		
 		
 		Personaje p3 = new Humano("Mauricio Macri","123");
-		p3.setClase(new Hechicero());
+		p3.setCasta(new Hechicero());
 		/*Seteo ubicacion alejado del resto.*/
 		p3.setUbicacion(new Ubicacion(15, 0));
 		
@@ -96,7 +96,7 @@ public class Historia09Test {
 	 ***/
 	
 	@Test
-	public void historia09Criterio02_Test() throws FileNotFoundException{
+	public void historia09Criterio02_Test() {
 		Alianza pro = crearAlianzaPro();
 		Alianza claseMedia = crearAlianzaClaseMedia();
 		/*Combatir por turnos.*/
@@ -107,8 +107,8 @@ public class Historia09Test {
 	{
 		Personaje p1 = new Humano("Mauricio Macri","123");
 		Personaje p2 = new Humano("Eugenia Vidal","123");
-		p1.setClase(new Chaman());
-		p2.setClase(new Guerrero());
+		p1.setCasta(new Chaman());
+		p2.setCasta(new Guerrero());
 		p1.setUbicacion(new Ubicacion(0, 0));
 		p2.setUbicacion(new Ubicacion(3, 0));
 		
@@ -139,8 +139,8 @@ public class Historia09Test {
 	{
 		Personaje p1 = new Humano("Carlos Perez","123");
 		Personaje p2 = new Humano("Juan Fernandez","123");
-		p1.setClase(new Chaman());
-		p2.setClase(new Guerrero());
+		p1.setCasta(new Chaman());
+		p2.setCasta(new Guerrero());
 		p1.setUbicacion(new Ubicacion(0, 0));
 		p2.setUbicacion(new Ubicacion(3, 0));
 		

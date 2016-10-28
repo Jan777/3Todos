@@ -1,15 +1,17 @@
 package criterios_aceptacion;
 
-import java.io.FileNotFoundException;
-
 import org.junit.Assert;
 import org.junit.Test;
 
-import castas.*;
-import dominio.*;
-import habilidades.*;
-import items.*;
-import razas.*;
+import castas.Guerrero;
+import dominio.Personaje;
+import habilidades.Destreza;
+import habilidades.Evasion;
+import habilidades.Fuerza;
+import habilidades.Inteligencia;
+import habilidades.Valentia;
+import habilidades.Velocidad;
+import razas.Humano;
 
 // OK
 
@@ -37,7 +39,7 @@ public class Historia08Test {
 		 * */
 		
 		Personaje p1 = new Humano("Humanito","123");
-		p1.setClase(new Guerrero());
+		p1.setCasta(new Guerrero());
 		
 		/*
 		 * Compruebo los valores iniciales de los atributos
@@ -90,13 +92,13 @@ public class Historia08Test {
 	 ***/
 	
 	@Test
-	public void historia08Criterio02_Test() throws FileNotFoundException{
+	public void historia08Criterio02_Test() {
 		/*
 		 * Declaración de objeto Personaje
 		 * */
 		
 		Personaje p1 = new Humano("Humanito","123");
-		p1.setClase(new Guerrero());
+		p1.setCasta(new Guerrero());
 		
 		/*
 		 * Compruebo los valores iniciales de los atributos
@@ -149,13 +151,13 @@ public class Historia08Test {
 	 ***/
 	
 	@Test
-	public void historia08Criterio03_Test() throws FileNotFoundException{
+	public void historia08Criterio03_Test() {
 		/*
 		 * Declaración de objeto Personaje
 		 * */
 		
 		Personaje p1 = new Humano("Humanito","123");
-		p1.setClase(new Guerrero());
+		p1.setCasta(new Guerrero());
 		
 		/*
 		 * Compruebo los valores iniciales de los atributos
@@ -208,13 +210,13 @@ public class Historia08Test {
 	 ***/
 	
 	@Test
-	public void historia08Criterio04_Test() throws FileNotFoundException{
+	public void historia08Criterio04_Test() {
 		/*
 		 * Declaración de objeto Personaje
 		 * */
 		
 		Personaje p1 = new Humano("Humanito","123");
-		p1.setClase(new Guerrero());
+		p1.setCasta(new Guerrero());
 		
 		/*
 		 * Compruebo los valores iniciales de los atributos
@@ -267,13 +269,13 @@ public class Historia08Test {
 	 ***/
 	
 	@Test
-	public void historia08Criterio05_Test() throws FileNotFoundException{
+	public void historia08Criterio05_Test() {
 		/*
 		 * Declaración de objeto Personaje
 		 * */
 		
 		Personaje p1 = new Humano("Humanito","123");
-		p1.setClase(new Guerrero());
+		p1.setCasta(new Guerrero());
 		
 		/*
 		 * Compruebo los valores iniciales de los atributos
@@ -326,13 +328,13 @@ public class Historia08Test {
 	 ***/
 	
 	@Test
-	public void historia08Criterio06_Test() throws FileNotFoundException{
+	public void historia08Criterio06_Test() {
 		/*
 		 * Declaración de objeto Personaje
 		 * */
 		
 		Personaje p1 = new Humano("Humanito","123");
-		p1.setClase(new Guerrero());
+		p1.setCasta(new Guerrero());
 		
 		/*
 		 * Compruebo los valores iniciales de los atributos

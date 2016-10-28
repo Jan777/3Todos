@@ -15,7 +15,7 @@ public class CuerpoACuerpoTest {
 	 * En esta caso es 5.
 	 * */
 	@Test
-	public void atacarConCuerpoACuerpo() throws FileNotFoundException{
+	public void atacarConCuerpoACuerpo() {
 		Personaje h1 = new Humano("Pablo Lescano","dama$grati$");
 		Personaje h2 = new Humano("Phil Collins","fere");
 		

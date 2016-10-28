@@ -12,9 +12,8 @@ public abstract class Casta {
 	protected String nombre;
 	
 	public void agregarHabilidad(Habilidad h) {
-		if(this.habilidades.size()>=3){
-			//System.out.println("No puede tener más de 3 habilidades");
-		} else {
+		if(this.habilidades.size()<=3){
+			//No puede tener más de 3 habilidades;
 			this.habilidades.put(h.getIdHabilidad(), h);
 		}			
 	}
@@ -22,14 +21,6 @@ public abstract class Casta {
 
 	public Map<Integer, Habilidad> getHabilidades(){
 		return this.habilidades;
-	}
-
-	public void verHabilidades(){
-		int i = 1;
-		for (Map.Entry<Integer, Habilidad> entry : this.habilidades.entrySet()) {
-		    System.out.println("Habilidades "+i+": "+entry.getValue().nombre);
-		    i++;
-		}
 	}
 	
 	public String getNombre() {
@@ -39,7 +30,4 @@ public abstract class Casta {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
-	 
-
 }

@@ -14,7 +14,7 @@ public class PuñoDragonTest {
 	 * En esta caso es 8.
 	 * */
 	@Test
-	public void atacarPuñoDragon() throws FileNotFoundException{
+	public void atacarPuñoDragon() {
 		Personaje h1 = new Humano("Goku","dbz");
 		Personaje h2 = new Humano("Majin Boo","dada");
 		// Lescano agrega el ataque cuerpo a cuerpo y verifico que el daño que causa sea 9

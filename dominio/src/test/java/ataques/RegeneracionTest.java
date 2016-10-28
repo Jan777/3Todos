@@ -14,7 +14,7 @@ public class RegeneracionTest {
 	 * En esta caso es -7.
 	 * */
 	@Test
-	public void atacarRegeneracion() throws FileNotFoundException{
+	public void atacarRegeneracion() {
 		Personaje e1 = new Elfo("Ditto","hds");
 		Personaje e2 = new Elfo("Pikachu","fere");
 		// Lescano agrega el ataque cuerpo a cuerpo y verifico que el daño que causa sea 9

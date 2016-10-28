@@ -39,7 +39,7 @@ public class AtaquesTest {
 	 *  Este test verifica que los ataques se agreguen y quiten correctamente
 	 * */
 	@Test
-	public void atacarConAtaques() throws FileNotFoundException{
+	public void atacarConAtaques() {
 		// Atacante
 		Personaje a = new Elfo("Anibal","444");
 		// Atacado

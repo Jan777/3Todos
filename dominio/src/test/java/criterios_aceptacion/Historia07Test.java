@@ -1,15 +1,20 @@
 package criterios_aceptacion;
 
-import java.io.FileNotFoundException;
-
 import org.junit.Assert;
 import org.junit.Test;
 
-import castas.*;
-import dominio.*;
-import habilidades.*;
-import items.*;
-import razas.*;
+import castas.Chaman;
+import castas.Guerrero;
+import castas.Hechicero;
+import dominio.Generico;
+import dominio.Personaje;
+import dominio.PersonajeEquipado;
+import habilidades.Valentia;
+import items.EspadaDeJuanNieve;
+import items.PocionSabiduria;
+import items.RunaDeMagia;
+import razas.Elfo;
+import razas.Humano;
 
 // Agregado criterio 1 y 3.
 // Falta 2
@@ -33,15 +38,15 @@ public class Historia07Test {
 	 ***/
 	
 	@Test
-	public void historia07Criterio01_Test() throws FileNotFoundException, CloneNotSupportedException{
+	public void historia07Criterio01_Test() throws CloneNotSupportedException{
 	
 		/**
 		 * 7.1.1.	Personaje con otro personaje
 		 * */
 		Personaje p1 = new Humano("Fito","Paez");
 		Personaje p2 = new Elfo("Chano","Charpentier");
-		p1.setClase(new Hechicero());
-		p1.setClase(new Chaman());
+		p1.setCasta(new Hechicero());
+		p1.setCasta(new Chaman());
 		
 		
 		/*
@@ -76,8 +81,8 @@ public class Historia07Test {
 		 * 7.1.2.	Personaje con genérico
 		 * */
 		Personaje p3 = new Humano("Fito","Paez");
-		p3.setClase(new Hechicero());
-		p3.setClase(new Chaman());
+		p3.setCasta(new Hechicero());
+		p3.setCasta(new Chaman());
 		p3 = new EspadaDeJuanNieve(p3);
 		Generico g1 = new Generico();
 		
@@ -115,7 +120,7 @@ public class Historia07Test {
 	 ***/
 	
 	@Test
-	public void historia07Criterio02_Test() throws FileNotFoundException{
+	public void historia07Criterio02_Test() {
 		/*
 		 * @mauroat - 24/10/16:
 		 * Creo odavía no puede probarse
@@ -131,14 +136,14 @@ public class Historia07Test {
 	 ***/
 	
 	@Test
-	public void historia07Criterio03_Test() throws FileNotFoundException{
+	public void historia07Criterio03_Test() {
 		
 		
 		/*
 		 * Creo un objeto personaje estandar
 		 * */
 		Personaje p1 = new Humano("Pepito","Pepote");
-		p1.setClase(new Guerrero());
+		p1.setCasta(new Guerrero());
 		
 		/*
 		 * Verifico el valor de los atributos:

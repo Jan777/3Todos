@@ -15,7 +15,7 @@ public class FuriaSangrientaTest {
 	 * En esta caso es 9.
 	 * */
 	@Test
-	public void atacarConFuriaSangrienta() throws FileNotFoundException{
+	public void atacarConFuriaSangrienta() {
 		Personaje h1 = new Humano("Pablo Lescano","dama$grati$");
 		Personaje h2 = new Humano("Phil Collins","fere");
 		// Lescano agrega el ataque cuerpo a cuerpo y verifico que el daño que causa sea 9

@@ -72,7 +72,7 @@ public class Generico implements Peleador {
 	}
 
 
-	private void setClase(Casta casta) {
+	private void setCasta(Casta casta) {
 		this.clase = casta;	
 	}
 	 */
@@ -85,8 +85,6 @@ public class Generico implements Peleador {
 				//victima.despuesDeSerAtacado();
 				this.energia -= this.calcularPuntosDeAtaque();
 				this.despuesDeAtacar();					
-			} else{				
-				System.out.println(this.nombre+" no tiene energía suficiente para atacar!");
 			}	
 		}
 	}
@@ -152,20 +150,6 @@ public class Generico implements Peleador {
 		return nombre;
 	}
 
-	public void verEstado(){
-		System.out.println("Personaje: "+this.getNombre());
-		System.out.println("Salud: "+this.vida);
-		System.out.println("Energia: "+this.energia);
-		System.out.println("----------");
-		System.out.println("Raza: "+this.getRaza());
-		//System.out.println("Casta: "+this.getClase().getNombre());
-		System.out.println("Nivel: "+this.nivel);
-		System.out.println("----------");
-		System.out.println("Ataque: "+this.calcularPuntosDeAtaque());
-		System.out.println("Defensa: "+this.calcularPuntosDeDefensa());
-		System.out.println("Magia: "+this.calcularPuntosDeMagia());			
-		System.out.println("===============");
-	}
 	
 	public void setNombre(String nombre) {
 		this.nombre = nombre;

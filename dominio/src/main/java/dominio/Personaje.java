@@ -3,6 +3,7 @@ package dominio;
 import razas.*;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
@@ -86,7 +87,7 @@ public abstract class Personaje implements Peleador {
 	 * */
 	
 	// Esto recibia un Peleador
-	public final void atacar (Peleador atacado) throws FileNotFoundException {
+	public final void atacar (Peleador atacado)  {
 		if(atacado.estaVivo()){
 			if (this.puedeAtacar()) {
 				atacado.serAtacado(calcularPuntosDeAtaque());
@@ -105,15 +106,7 @@ public abstract class Personaje implements Peleador {
 				}
 	
 				this.despuesDeAtacar();	
-				
-			} else{
-				
-				//System.out.println(this.getUsername()+" no tiene energia suficiente para atacar!");
-			}
-		}
-		else{
-			
-			//System.out.println("El atacado esta muerto, no se lo puede atacar.");
+			} 
 		}
 	}
 
@@ -122,7 +115,7 @@ public abstract class Personaje implements Peleador {
 	 * Se sobrecarga el metodo atacar, para que se apliquen los daños causados por los ataques que posee cada personaje.
 	 * 
 	 * */
-	public final void atacar(Personaje atacado, Ataque a) throws FileNotFoundException {
+	public final void atacar(Personaje atacado, Ataque a)  {
 		if(atacado.estaVivo()){
 			if (this.puedeAtacar()) {
 				atacado.serAtacado(calcularPuntosDeAtaque()+a.aplicarAtaque());
@@ -138,46 +131,16 @@ public abstract class Personaje implements Peleador {
 				}
 	
 				this.despuesDeAtacar();	
-			} else{
-				//System.out.println(this.getUsername()+" no tiene energia suficiente para atacar!");
 			}
-		}
-		else{
-			//System.out.println("El atacado esta muerto, no se lo puede atacar.");
 		}
 	}
 	
 	public void despuesDeSerAtacado(){
 		if(this.vida <=0)
 			this.morir();
-	}
-	
-	public void verEstado(){
-		System.out.println("Personaje: "+this.usuarioPersonaje.getUsername());
-		System.out.println("Salud: "+this.vida);
-		System.out.println("Energia: "+this.energia);
-		System.out.println("----------");
-		System.out.println("Raza: "+this.getRaza());
-		System.out.println("Casta: "+this.getClase().getNombre());
-		System.out.println("Nivel: "+this.nivel);
-		System.out.println("Experiencia: "+this.experiencia);
-		System.out.println("----------");
-		System.out.println("Ataque: "+this.calcularPuntosDeAtaque());
-		System.out.println("Defensa: "+this.calcularPuntosDeDefensa());
-		System.out.println("Magia: "+this.calcularPuntosDeMagia());
-		System.out.println("----------");
-		System.out.println("Destreza: "+this.destreza);
-		System.out.println("Velocidad: "+this.velocidad);
-		System.out.println("Potencia: "+this.potencia);
-		System.out.println("----------");
-		System.out.println("Ataques que puede agregar: "+this.puedeAgregarAtaque);
-		System.out.println("Puntos para habilidades: "+this.puntos);
-		System.out.println("===============");
-	}
-	
-	
+	}	
 
-	public void despuesDeAtacar() throws FileNotFoundException { 
+	public void despuesDeAtacar()  { 
 		this.verificarNivel();
 		
 	}	
@@ -186,7 +149,7 @@ public abstract class Personaje implements Peleador {
 	 * Al subir de nivel se suman dos puntos para sumar a las habilidades
 	 * */
 	
-	private void verificarNivel() throws FileNotFoundException {
+	private void verificarNivel()  {
 		if(this.experiencia >= experienciaRequerida(this.nivel)){
 			this.nivel++;
 			this.puntos += 2;
@@ -205,7 +168,7 @@ public abstract class Personaje implements Peleador {
 	/* @mauroat - 17/10/16
 	 * Esto sera reemplazado por una consulta a una base de datos
 	 * */ 
-	private int experienciaRequerida(int nivel) throws FileNotFoundException{
+	private int experienciaRequerida(int nivel) {
 		try{
 			
 			Scanner sc = new Scanner (new File ("config/niveles.cfg"));	
@@ -319,7 +282,7 @@ public abstract class Personaje implements Peleador {
 		return clase.getNombre();
 	}
 
-	public void setClase(Casta clase) {
+	public void setCasta(Casta clase) {
 		this.clase = clase;
 	}
 
@@ -377,15 +340,15 @@ public abstract class Personaje implements Peleador {
 		//this.puedeAgregarAtaque++;
 	}
 	
-	public void verListaAtaques(){
+	public LinkedList<String> getListaAtaques(){
 		int i = 1;
+		LinkedList<String> ataques = new LinkedList<String>();
 		for (Map.Entry<String, Ataque> entry : this.ataques.entrySet()) {
-		    System.out.println("Ataque "+i+": "+entry.getKey());
+		    ataques.add("Ataque "+i+": "+entry.getKey());
 		    i++;
 		}
+		return ataques;
 	}
-	
-	
 	
 	public Map<String, Ataque> getAtaques() {
 		return ataques;

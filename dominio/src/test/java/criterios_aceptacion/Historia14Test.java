@@ -1,14 +1,14 @@
 package criterios_aceptacion;
-import java.io.FileNotFoundException;
-
 import org.junit.Assert;
 import org.junit.Test;
 
-import ataques.*;
-import castas.*;
-import dominio.*;
-import items.*;
-import razas.*;
+import ataques.CuerpoACuerpo;
+import castas.Chaman;
+import castas.Guerrero;
+import dominio.Personaje;
+import items.DagaDeDragon;
+import items.EspadaDeJuanNieve;
+import razas.Elfo;
 
 // OK
 
@@ -29,7 +29,7 @@ public class Historia14Test {
 	 ***/
 	
 	@Test
-	public void historia14Criterio01_Test() throws FileNotFoundException{
+	public void historia14Criterio01_Test() {
 		
 		/*
 		 * Creo los personajes
@@ -37,8 +37,8 @@ public class Historia14Test {
 		
 		Personaje p1 = new Elfo("gato","loco");
 		Personaje p2 = new Elfo("perro","loco");
-		p1.setClase(new Guerrero());
-		p2.setClase(new Chaman());
+		p1.setCasta(new Guerrero());
+		p2.setCasta(new Chaman());
 		p1 = new DagaDeDragon(p1);
 		p1 = new EspadaDeJuanNieve(p1);
 		/*

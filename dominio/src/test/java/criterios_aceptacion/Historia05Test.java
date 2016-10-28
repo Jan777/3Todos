@@ -1,15 +1,18 @@
 package criterios_aceptacion;
 
-import java.io.FileNotFoundException;
-
 import org.junit.Assert;
 import org.junit.Test;
 
-import castas.*;
-import dominio.*;
-import habilidades.*;
-import items.*;
-import razas.*;
+import castas.Guerrero;
+import dominio.Personaje;
+import dominio.Usuario;
+import habilidades.Destreza;
+import habilidades.Inteligencia;
+import habilidades.Valentia;
+import items.PocionBruta;
+import razas.Elfo;
+import razas.Humano;
+import razas.Orco;
 
 // OK
 // El criterio 4 es igual al criterio 4 de la historia 2
@@ -32,14 +35,14 @@ public class Historia05Test {
 	 ***/
 	
 	@Test
-	public void historia05Criterio01_Test() throws FileNotFoundException{
+	public void historia05Criterio01_Test() {
 		Personaje p1 = new Humano("CarlosTevez","VeryDificul");
 		Personaje p2 = new Humano("Dalessandra","Cabezon");
 		Personaje p3 = new Humano("Romagnola","Cabezon");
 		
-		p1.setClase(new Guerrero());
-		p2.setClase(new Guerrero());
-		p3.setClase(new Guerrero());
+		p1.setCasta(new Guerrero());
+		p2.setCasta(new Guerrero());
+		p3.setCasta(new Guerrero());
 		
 		for (int i = 0; i<9;i++)			
 			p1.atacar(p2);
@@ -77,12 +80,12 @@ public class Historia05Test {
 	 ***/
 	
 	@Test
-	public void historia05Criterio02_Test() throws FileNotFoundException{
+	public void historia05Criterio02_Test() {
 		Personaje p1 = new Humano("CarlosTevez","VeryDificul");
 		Personaje p2 = new Humano("Dalessandra","Cabezon");
 		Personaje p3 = new Humano("Romagnola","Cabezon");
 		
-		p1.setClase(new Guerrero());
+		p1.setCasta(new Guerrero());
 		p1.getClase().agregarHabilidad(new Destreza());
 		
 		
@@ -160,11 +163,11 @@ public class Historia05Test {
 
 	
 	@Test
-	public void historia05Criterio03_Test() throws FileNotFoundException{
+	public void historia05Criterio03_Test() {
 		Personaje p1 = new Humano("JRR10","VeryDificul");
 		Personaje p2 = new Humano("Yepes","Cabezon");
 		
-		p1.setClase(new Guerrero());
+		p1.setCasta(new Guerrero());
 		p1 = new PocionBruta(p1);
 		
 		p1.getClase().agregarHabilidad(new Inteligencia());
@@ -240,7 +243,7 @@ public class Historia05Test {
 	 ***/
 	
 	@Test
-	public void historia05Criterio04_Test() throws FileNotFoundException{
+	public void historia05Criterio04_Test() {
 		/*
 		 * Se crean 2 usuarios y dos personajes en base a estos usuarios 
 		 * */
@@ -251,8 +254,8 @@ public class Historia05Test {
 		Personaje p1 = new Orco(u1);
 		Personaje p2 = new Elfo(u1);
 	
-		p1.setClase(new Guerrero());
-		p2.setClase(new Guerrero());
+		p1.setCasta(new Guerrero());
+		p2.setCasta(new Guerrero());
 
 		/*
 		 * Compruebo mis atributos iniciales

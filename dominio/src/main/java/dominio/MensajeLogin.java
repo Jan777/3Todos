@@ -12,7 +12,5 @@ public class MensajeLogin {
 		cadenaUser = objSerializacion.toJson(user);
 	}
 	public void enviarMensajeLogin(){};
-	
-	
 
 }

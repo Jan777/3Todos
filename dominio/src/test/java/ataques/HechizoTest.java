@@ -15,7 +15,7 @@ public class HechizoTest {
 	 * En esta caso es 6.
 	 * */
 	@Test
-	public void atacarHechizo() throws FileNotFoundException{
+	public void atacarHechizo() {
 		Personaje e1 = new Elfo("Enrique Bunbury","hds");
 		Personaje e2 = new Elfo("Mago goma","fere");
 		// Lescano agrega el ataque cuerpo a cuerpo y verifico que el daño que causa sea 9
