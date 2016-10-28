@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Equipo {
 
-	protected List<Personaje> equipo = new LinkedList<Personaje>();
+	protected List<Personaje> listaPeleadores = new LinkedList<Personaje>();
 	
 	public Equipo (Personaje p){		
 		agregar(p);
@@ -19,9 +19,9 @@ public class Equipo {
 			}
 		}
 	}
-
+		
 	public final void depurarEquipo() {
-		Iterator<Personaje> iter = equipo.iterator();
+		Iterator<Personaje> iter = listaPeleadores.iterator();
 		while(iter.hasNext()){
 		    if(!iter.next().estaVivo()) 
 		    	iter.remove();
@@ -33,29 +33,29 @@ public class Equipo {
 	
 	public void atacar(Equipo otro) throws FileNotFoundException {
 		Peleador victima = otro.obtenerProximaVictima();
-		for (Personaje atacante : equipo) {
+		for (Personaje atacante : listaPeleadores) {
 			atacante.atacar(victima);
 		}
 	}
 
 	public boolean agregar(Personaje personaje) {
-		return equipo.add(personaje);
+		return listaPeleadores.add(personaje);
 	}
 
 	
 	public Peleador obtenerProximaVictima() {
 		depurarEquipo();
-		if(equipo.isEmpty()) {
+		if(listaPeleadores.isEmpty()) {
 			
 			//throw new RuntimeException("El batallón está vacío");
 		}
-		return equipo.get(0);
+		return listaPeleadores.get(0);
 	}
 	
 	public boolean quedaAlgunoVivo(){
 		boolean marca = false;
-		for(int i = 0; i< this.equipo.size();i++)
-			if(equipo.get(i).estaVivo())
+		for(int i = 0; i< this.listaPeleadores.size();i++)
+			if(listaPeleadores.get(i).estaVivo())
 				marca = true;	
 		return marca;
 		
@@ -63,8 +63,8 @@ public class Equipo {
 	
 	public int calcularExperiencia(){
 		int suma = 0;
-		for (int i = 0; i<equipo.size();i++){
-			suma += equipo.get(i).getNivel();
+		for (int i = 0; i<listaPeleadores.size();i++){
+			suma += listaPeleadores.get(i).getNivel();
 		}
 		return suma*10;
 	}
@@ -74,10 +74,24 @@ public class Equipo {
 	 * Hay que probarlo.
 	 * */
 	public void repartirExperiencia(int experiencia){
-		int puntosPorPersonaje = experiencia / equipo.size();
+		int puntosPorPersonaje = experiencia / listaPeleadores.size();
 		
-		for (int i = 0; i<equipo.size();i++){
-			equipo.get(i).setExperiencia(equipo.get(i).getExperiencia()+puntosPorPersonaje);
+		for (int i = 0; i<listaPeleadores.size();i++){
+			listaPeleadores.get(i).setExperiencia(listaPeleadores.get(i).getExperiencia()+puntosPorPersonaje);
+		}
+	}
+
+	public void repartirItem(Equipo e2) {
+		
+	}
+
+	public void repartirItem(Generico g) {
+		
+	}
+
+	public void mostrarGanador() {
+		for (int i = 0; i<listaPeleadores.size();i++){
+			System.out.println(listaPeleadores.get(i).usuarioPersonaje.getUsername());
 		}
 	}
 }
