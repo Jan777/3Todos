@@ -1,7 +1,6 @@
 package entities;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import connection.DataBaseOperations;
 
 public class Usuario {
 
@@ -34,8 +33,9 @@ public class Usuario {
 		return 1;
 	}
 
-	public int validarIngreso(String username, String password) {
-		return 0;
+	public boolean validarIngreso() {
+		DataBaseOperations d = new DataBaseOperations();
+		return d.verificarCredencia(this.getUsername(), this.getPassword());
 	}
 
 	public boolean equals(Usuario obj) {

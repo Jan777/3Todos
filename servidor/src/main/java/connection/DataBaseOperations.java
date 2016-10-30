@@ -70,4 +70,25 @@ public class DataBaseOperations {
 		}
 		return u;
 	}
+
+	public boolean verificarCredencia(String nombre,String pas) {
+		Usuario u = null;
+		PreparedStatement pstmt = null;
+		String contrasena = "";
+		String query = "SELECT CONTRASENA FROM USUARIO WHERE NOMBRE=?";
+		try {
+			conn = SQLConnection.getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1,nombre.toUpperCase());
+
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				contrasena = rs.getString("CONTRASENA");
+			}
+			return pas.equals(contrasena);
+		} catch (Exception e) {
+			// Log error al agregar usuario
+		}
+		return false;
+	}
 }
