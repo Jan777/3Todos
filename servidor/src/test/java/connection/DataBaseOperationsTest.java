@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import org.junit.Test;
 
-import backend.DataBaseOperations;
+import connection.DataBaseOperations;
 import entities.Usuario;
 import junit.framework.Assert;
 
