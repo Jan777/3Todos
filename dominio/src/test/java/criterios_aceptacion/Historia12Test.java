@@ -15,7 +15,7 @@ import razas.*;
 /***
  * 
  * 12) Como Personaje, quiero cambiar las alianzas establecidas cada cierta
- * cantidad de tiempo. Motivación: Para poder traicionar a mis aliados.
+ * cantidad de tiempo. Motivaci�n: Para poder traicionar a mis aliados.
  * 
  * 
  * 
@@ -26,41 +26,43 @@ public class Historia12Test {
 	/***
 	 * 
 	 * 1. Dado un Personaje miembro de una Alianza, cuando se exceda el tiempo
-	 * mínimo de pertenencia en la misma y decida abandonarla, entonces el
-	 * Personaje deja de formar parte de ésta.
+	 * minimo de pertenencia en la misma y decida abandonarla, entonces el
+	 * Personaje deja de formar parte de esta.
 	 * 
 	 ***/
 
 	@Test
 	public void historia12Criterio01_Test() throws FileNotFoundException{
 
-		Personaje objHumano = new Humano("jose","dssjjad");
-		Personaje objElfo = new Elfo("dani","1242");
-		Personaje soyUnElfo = new Elfo("Harry","1234");
-		Alianza objAlianza = new Alianza("Somos re cracks");
-		objAlianza.formarAlianza(objElfo);
-		objAlianza.formarAlianza(objHumano);
-		objAlianza.formarAlianza(soyUnElfo);
-		Assert.assertEquals(3, objAlianza.cantidadMiembrosAlianza());
+		Personaje p1 = new Humano("jose","dssjjad");
+		Personaje p2 = new Elfo("dani","1242");
+		Personaje p3 = new Elfo("Harry","1234");
+		Alianza alianza = new Alianza("Somos re cracks");
+			
+		alianza.agregarAAlianza(p2);
+		alianza.agregarAAlianza(p1);
+		alianza.agregarAAlianza(p3);
+		
+		Assert.assertEquals(3, alianza.cantidadMiembrosAlianza());
 
 		Calendar actual = Calendar.getInstance();
 		actual.add(Calendar.MINUTE, -3);
-		objElfo.setLimiteMinimoPermanenciaAlianza(actual);
-		objAlianza.dejarAlianza(objElfo);
+		p2.setLimiteMinimoPermanenciaAlianza(actual);
+		alianza.dejarAlianza(p2);
 
-		Assert.assertEquals(3, objAlianza.cantidadMiembrosAlianza());
+		Assert.assertEquals(3, alianza.cantidadMiembrosAlianza());
 
 		actual.add(Calendar.MINUTE, -10);
-		soyUnElfo.setLimiteMinimoPermanenciaAlianza(actual);
-		objAlianza.dejarAlianza(soyUnElfo);
+		p3.setLimiteMinimoPermanenciaAlianza(actual);
+		alianza.dejarAlianza(p3);
 
-		Assert.assertEquals(2, objAlianza.cantidadMiembrosAlianza());
+		Assert.assertEquals(2, alianza.cantidadMiembrosAlianza());
 	}
 
 	/***
 	 * 
-	 * 2. Dado un Personaje, cuando se encuentre cercano a otro e interactúen,
-	 * entonces éste podrá combatir contra él hasta definir un ganador.
+	 * 2. Dado un Personaje, cuando se encuentre cercano a otro e interactuen,
+	 * entonces este podra combatir contra el hasta definir un ganador.
 	 * @throws FileNotFoundException 
 	 * 
 	 ***/

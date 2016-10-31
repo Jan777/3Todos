@@ -41,26 +41,27 @@ public class Historia11Test {
 		p2.setCasta(new Hechicero());
 		p3.setCasta(new Chaman());
 		p4.setCasta(new Hechicero());
+		p1.setUbicacion(new Ubicacion(0,1));
+		p2.setUbicacion(new Ubicacion(0,4));
+		p3.setUbicacion(new Ubicacion(1,4));
+		p4.setUbicacion(new Ubicacion(1,6));
 		
 		/*
 		 * Armo las alianzas: 
 		 *  
 		 * */
-		Alianza a1 = new Alianza();
-		p1.setAlianzaActual(a1);
-		p2.setAlianzaActual(a1);
+	
+		p1.formarAlianzaCon(p2);
+		p3.formarAlianzaCon(p4);
 		
-		
-		p1.getAlianzaActual().formarAlianza(p2);
-		p2.getAlianzaActual().formarAlianza(p1);
+
 		
 		/*
 		 * Se preparan los equipos a pelear
 		 * */
 		Equipo e1 = new Equipo(p1);
-		e1.agregar(p2);
 		Equipo e2 = new Equipo(p3);
-		e2.agregar(p4);
+		
 		
 		/*
 		 * Compruebo que esten todos vivos
@@ -148,18 +149,14 @@ public class Historia11Test {
 		Generico g = new Generico("Terminator");
 		p1.setCasta(new Guerrero());
 		p2.setCasta(new Hechicero());
+		p1.setUbicacion(new Ubicacion(0,1));
+		p2.setUbicacion(new Ubicacion(0,4));
 		
 		/*
 		 * Armo la alianza: 
 		 *  
 		 * */
-		Alianza a1 = new Alianza();
-		p1.setAlianzaActual(a1);
-		p2.setAlianzaActual(a1);
-		
-		
-		p1.getAlianzaActual().formarAlianza(p2);
-		p2.getAlianzaActual().formarAlianza(p1);
+		p1.formarAlianzaCon(p2);
 		
 		/*
 		 * Se prepara un equipo para pelear

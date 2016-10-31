@@ -40,34 +40,26 @@ public class Historia10Test {
 		Personaje p2 = new Orco("Humano2","1231");
 		Personaje p3 = new Elfo("Humano3","1231");
 		Personaje p4 = new Elfo("Humano4","1231");
+		
+		
 		p1.setCasta(new Guerrero());
 		p2.setCasta(new Hechicero());
 		p3.setCasta(new Chaman());
 		p4.setCasta(new Hechicero());
 		
+		p1.setUbicacion(new Ubicacion(0,1));
+		p2.setUbicacion(new Ubicacion(0,4));
+		p3.setUbicacion(new Ubicacion(1,4));
+		p4.setUbicacion(new Ubicacion(1,6));
+		
+		
 		/*
 		 * Armo las alianzas: 
 		 *  
 		 * */
-		Alianza a1 = new Alianza();
 		
-		p1.setAlianzaActual(a1);
-		p2.setAlianzaActual(a1);
-		
-		
-		p1.getAlianzaActual().formarAlianza(p2);
-		p2.getAlianzaActual().formarAlianza(p1);
-		///////////////////////
-		Alianza a2 = new Alianza();
-		
-		p3.setAlianzaActual(a2);
-		p4.setAlianzaActual(a2);
-		
-		p3.getAlianzaActual().formarAlianza(p4);
-		p4.getAlianzaActual().formarAlianza(p3);
-		
-	
-	
+		p1.formarAlianzaCon(p2);
+		p3.formarAlianzaCon(p4);
 		
 		/*
 		 * Se preparan los equipos a pelear
@@ -131,25 +123,22 @@ public class Historia10Test {
 		p1.setCasta(new Guerrero());
 		p2.setCasta(new Hechicero());
 		p3.setCasta(new Chaman());
+		p1.setUbicacion(new Ubicacion(0,1));
+		p2.setUbicacion(new Ubicacion(0,4));
+		p3.setUbicacion(new Ubicacion(1,4));
+		
 		
 		/*
 		 * Armo las alianzas: 
 		 *  
 		 * */
-		Alianza a1 = new Alianza();
-		p1.setAlianzaActual(a1);
-		p2.setAlianzaActual(a1);
-		
-		
-		p1.getAlianzaActual().formarAlianza(p2);
-		p2.getAlianzaActual().formarAlianza(p1);
-		
+		p1.formarAlianzaCon(p2);
+				
 		/*
 		 * Se preparan los equipos a pelear
 		 * */
-		Equipo e1 = new Equipo(p1);
-		Equipo e2 = new Equipo(p2);
-		e2 = new Equipo(p3);
+		Equipo e1 = new Equipo(p1);	
+		Equipo e2 = new Equipo(p3);
 		
 		/*
 		 * Compruebo que esten todos vivos
@@ -203,18 +192,15 @@ public class Historia10Test {
 		Generico g = new Generico("Terminator");
 		p1.setCasta(new Guerrero());
 		p2.setCasta(new Hechicero());
-		
+		p1.setUbicacion(new Ubicacion(0,1));
+		p2.setUbicacion(new Ubicacion(0,4));
+	
 		/*
 		 * Armo la alianza: 
 		 *  
 		 * */
-		Alianza a1 = new Alianza();
-		p1.setAlianzaActual(a1);
-		p2.setAlianzaActual(a1);
-		
-		
-		p1.getAlianzaActual().formarAlianza(p2);
-		p2.getAlianzaActual().formarAlianza(p1);
+		p1.formarAlianzaCon(p2);		
+
 		
 		/*
 		 * Se prepara un equipo para pelear

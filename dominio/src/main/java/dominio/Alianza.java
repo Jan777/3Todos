@@ -22,7 +22,16 @@ public class Alianza {
 	private int getProximaAlianza(){
 		return contadorAlianzas++;
 	}
+	
+	public void agregarAAlianza(Personaje p){
+		Calendar actual = Calendar.getInstance();
+		integrantes.add(p);
+		p.setAlianzaActual(this);
+		p.setLimiteMinimoPermanenciaAlianza(actual);
 
+	}
+	
+/*
 	public void formarAlianza(Personaje objPersonaje){
 		Calendar actual = Calendar.getInstance();
 		integrantes.add(objPersonaje);
@@ -30,7 +39,7 @@ public class Alianza {
 		objPersonaje.setLimiteMinimoPermanenciaAlianza(actual);
 
 	}
-
+*/
 	public void eliminarAlianza(){
 		Iterator<Personaje> iter = integrantes.iterator();
 		while (iter.hasNext()) 	{
@@ -67,7 +76,7 @@ public class Alianza {
 	}
 	/*
 	 * @mauroat - 27/10/16
-	 * La idea de este mÃ©todo es que finalizados los combates reparta experiencia entre los miembros de la alianza
+	 * La idea de este método es que finalizados los combates reparta experiencia entre los miembros de la alianza
 	 * */
 
 	public int getIdAlianza() {

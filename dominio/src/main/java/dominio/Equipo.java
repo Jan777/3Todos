@@ -12,13 +12,11 @@ public class Equipo {
 	
 	public Equipo (Personaje p){		
 		agregar(p);
-		if(p.getAlianzaActual() != null){
-			int i = 1;
-			while(i < p.getAlianzaActual().getIntegrantes().size()){
-				agregar(p.getAlianzaActual().getIntegrantes().get(0));
-				i++;
-			}
-		}
+		if(p.getAlianzaActual() != null)
+			for (Personaje aliado : p.getAlianzaActual().getIntegrantes()) 
+				if(aliado.seEncuentraCerca(p) && aliado != p)		
+					agregar(aliado);
+
 	}
 		
 	public final void depurarEquipo() {
@@ -123,4 +121,14 @@ public class Equipo {
         }
         return ganadores;
     }
+
+	public List<Personaje> getListaPeleadores() {
+		return listaPeleadores;
+	}
+
+	public void setListaPeleadores(List<Personaje> listaPeleadores) {
+		this.listaPeleadores = listaPeleadores;
+	}
+	
+	
 }

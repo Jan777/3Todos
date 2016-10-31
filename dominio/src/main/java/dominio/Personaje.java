@@ -569,6 +569,38 @@ public abstract class Personaje implements Peleador {
 		return ListaUbicacion.get(r.nextInt(4));
 	}
 
+	public boolean formarAlianzaCon(Personaje p) {
+		/*
+		 * Si this no tiene alianza, la creo y me agrego
+		 */
+		if (this.alianzaActual == null) {
+			Alianza a = new Alianza();
+			this.alianzaActual = a;
+			a.agregarAAlianza(this);
+		}
+		
+		/*
+		 * Si p no tiene alianza, lo agrego a mi alianza
+		 * */
+		
+		if (p.alianzaActual == null) {
+			
+			p.alianzaActual = this.alianzaActual;
+			alianzaActual.agregarAAlianza(p);
+			
+			return true;
+		} else
+			// EL PERSONAJE YA ESTA EN UNA ALIANZA, NO SE PUEDE VOLVER A ALIAR
+		return false;
+	}
+	
+	public void dejarAlianzaActual(){
+		this.alianzaActual.getIntegrantes().remove(this);
+		this.alianzaActual = null;
+	}
+	
+	
+	
 	public void setAlianzaActual(Alianza alianzaActual) {
 		this.alianzaActual = alianzaActual;
 	}
