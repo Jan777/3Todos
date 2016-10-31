@@ -173,7 +173,7 @@ public abstract class Personaje implements Peleador {
 	private int experienciaRequerida(int nivel) {
 		try{
 
-			Scanner sc = new Scanner (new File ("config/niveles.cfg"));	
+			Scanner sc = new Scanner (new File ("config/niveles.properties"));	
 			while(sc.hasNextLine()){
 				if(nivel == sc.nextInt()){
 					return sc.nextInt();
