@@ -3,12 +3,10 @@ package criterios_aceptacion;
 import org.junit.Assert;
 import org.junit.Test;
 
-import castas.Chaman;
-import castas.Guerrero;
-import dominio.Personaje;
-import items.DagaDeDragon;
-import items.EspadaDeJuanNieve;
-import razas.Elfo;
+import castas.*;
+import dominio.*;
+import items.*;
+import razas.*;
 
 // Esta todo OK salvo por el hecho que no se como indicar que el personaje se dirige a una zona segura.
 

@@ -3,13 +3,11 @@ package criterios_aceptacion;
 import org.junit.Assert;
 import org.junit.Test;
 
-import castas.Chaman;
-import castas.Guerrero;
-import dominio.Personaje;
-import items.DagaDeDragon;
-import items.EspadaDeJuanNieve;
-import razas.Humano;
-import razas.Orco;
+import castas.*;
+import dominio.*;
+import items.*;
+import razas.*;
+
 
 // OK
 

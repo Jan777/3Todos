@@ -76,12 +76,9 @@ public class Equipo {
 	}
 	
 
-	public int calcularExperiencia(){
-		
-		int suma = listaPeleadores.get(0).getNivel();
-		
-		for (int i = 1; i < listaPeleadores.size();i++){
-			
+	public int calcularExperiencia(){		
+		int suma = listaPeleadores.get(0).getNivel();		
+		for (int i = 1; i < listaPeleadores.size();i++){		
 			suma += listaPeleadores.get(0).getAlianzaActual().getIntegrantes().get(i).getNivel();
 		}
 		return suma*10;

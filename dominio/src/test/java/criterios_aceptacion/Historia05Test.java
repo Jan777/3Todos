@@ -3,19 +3,14 @@ package criterios_aceptacion;
 import org.junit.Assert;
 import org.junit.Test;
 
-import castas.Guerrero;
-import dominio.Personaje;
-import dominio.Usuario;
-import habilidades.Destreza;
-import habilidades.Inteligencia;
-import habilidades.Valentia;
-import items.PocionBruta;
-import razas.Elfo;
-import razas.Humano;
-import razas.Orco;
+import castas.*;
+import dominio.*;
+import habilidades.*;
+import items.*;
+import razas.*;
 
-// OK
-// El criterio 4 es igual al criterio 4 de la historia 2
+// @mauroat - 01/11/16
+// Quedo mal despues del ultimo cambio. Esta noche lo corrijo.
 
 /***
  * 
