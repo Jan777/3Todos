@@ -23,18 +23,19 @@ import items.*;
 public abstract class Personaje implements Peleador {
 
 	protected int vida,
-	experiencia,
-	nivel,
-	energia, 
-	ataque, 
-	defensa,
-	magia,
-	puntos,	// @mauroat - agregado 19/10/16 - modificado 24/10/16
-	destreza,
-	velocidad,
-	potencia;
+				experiencia,
+				nivel,
+				energia, 
+				ataque, 
+				defensa,
+				magia,
+				puntos,	// @mauroat - agregado 19/10/16 - modificado 24/10/16
+				destreza,
+				velocidad,
+				potencia,
+				puedeAgregarAtaque; // @mauroat - 24/10/16 : Esto se crea para satisfacer la historia de usuario 13-
 
-	protected int puedeAgregarAtaque; // @mauroat - 24/10/16 : Esto se crea para satisfacer la historia de usuario 13-
+	
 	protected Ubicacion ubicacion;
 	protected Usuario usuarioPersonaje;
 	protected String raza;
@@ -51,6 +52,9 @@ public abstract class Personaje implements Peleador {
 		this.nivel = 1;	
 		this.puntos = 0;
 		this.puedeAgregarAtaque = 0;
+		this.destreza = 0;
+		this.potencia = 0;
+		this.velocidad = 0;
 	}
 
 	/*
@@ -71,7 +75,8 @@ public abstract class Personaje implements Peleador {
 		this.velocidad = p.velocidad;
 		this.potencia = p.potencia;
 		this.clase = p.clase;
-		this.ataques = p.ataques;		
+		this.ataques = p.ataques;	
+		this.alianzaActual = p.alianzaActual;
 	}
 
 	public Personaje(Usuario u){
@@ -82,6 +87,9 @@ public abstract class Personaje implements Peleador {
 		this.nivel = 1;	
 		this.puntos = 0;
 		this.puedeAgregarAtaque = 0;
+		this.destreza = 0;
+		this.potencia = 0;
+		this.velocidad = 0;
 	}
 	/* 
 	 * @mauroat - 18/10/16
@@ -122,10 +130,26 @@ public abstract class Personaje implements Peleador {
 	public final void atacar(Personaje atacado, Ataque a)  {
 		if(atacado.estaVivo()){
 			if (this.puedeAtacar()) {
-				atacado.serAtacado(calcularPuntosDeAtaque()+a.aplicarAtaque());
-				// El siguiente metodo podra implementarse cuando definamos la ubicacion de los personajes
-				//atacado.despuesDeSerAtacado();
-				this.energia -= calcularPuntosDeAtaque()+a.aplicarAtaque();
+
+				// Si es curacion, entonces afecta positivamente directamente al atacado
+				// Su energia disminuye acorde unicamente a sus puntos de ataque, ya que la curacion tiene valores negativos
+				if(a.getIdAtaque() == 7){
+					atacado.serAtacado(a.aplicarAtaque());
+					this.energia -= calcularPuntosDeAtaque();	
+				} 
+				// Si es regeneracion, aumentara la energia del atacante +30
+				else if (a.getIdAtaque() == 6){
+					this.energia += a.aplicarAtaque();
+				}
+				// Si el ataque no es curacion, entonces impactara sumando el 
+				//daño del ataque + los puntos de ataque
+				else {
+					atacado.serAtacado(calcularPuntosDeAtaque()+a.aplicarAtaque());
+					// El siguiente metodo podra implementarse cuando definamos la ubicacion de los personajes
+					//atacado.despuesDeSerAtacado();
+					this.energia -= calcularPuntosDeAtaque()+a.aplicarAtaque();
+				}
+				
 				if(atacado.estaVivo()){
 					// Por cada ataque que haga, mi experiencia sube en 8
 					this.experiencia += 8;					
@@ -216,7 +240,10 @@ public abstract class Personaje implements Peleador {
 	 * */
 	@Override
 	public void serAtacado(int daño){
-		this.vida -= daño-this.calcularPuntosDeDefensa();
+		if(daño>0)
+			this.vida -= daño-this.calcularPuntosDeDefensa();
+		else
+			this.vida -= daño;
 	}
 
 	public void serCurado() {

@@ -17,13 +17,13 @@ public class RegeneracionTest {
 	public void atacarRegeneracion() {
 		Personaje e1 = new Elfo("Ditto","hds");
 		Personaje e2 = new Elfo("Pikachu","fere");
-		// Lescano agrega el ataque cuerpo a cuerpo y verifico que el daño que causa sea 9
+		// Ditto agrega el ataque Regeneracion y verifico que el daño que causa sea 30
 		e1.agregarAtaque(new Regeneracion());
-		Assert.assertEquals(-7, e1.getAtaque("Regeneración").aplicarAtaque());
+		Assert.assertEquals(30, e1.getAtaque("Regeneración").aplicarAtaque());
 		
-		// Lescano ataca a Collins con gancho de goro, debe disminuir su energia y disminuir la vida del atacado
+		// Ditto usa el ataque regeneracion. Pikachu no se ve afectado.
 		e1.atacar(e2,e1.getAtaque("Regeneración"));
-		Assert.assertEquals(100-5-(-7), e1.getEnergia());
-		Assert.assertEquals(100-5-(-7)+5, e2.getVida());
+		Assert.assertEquals(100+30, e1.getEnergia());
+		Assert.assertEquals(100, e2.getVida());
 	}
 }

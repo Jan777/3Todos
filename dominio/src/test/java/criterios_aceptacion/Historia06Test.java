@@ -3,12 +3,11 @@ package criterios_aceptacion;
 import org.junit.Assert;
 import org.junit.Test;
 
-import castas.Guerrero;
-import dominio.Personaje;
-import habilidades.Destreza;
-import habilidades.Inteligencia;
-import items.BujiaHescher;
-import razas.Orco;
+import castas.*;
+import dominio.*;
+import habilidades.*;
+import items.*;
+import razas.*;
 
 // OK
 
@@ -68,53 +67,55 @@ public class Historia06Test {
 		Assert.assertEquals(2, p1.getPuntos());
 		
 		/*
-		 * Agrego la habilidad Destreza al personaje p1
+		 *Al agregar la casta se añaden dos habilidades
 		 * */
 		
-		p1.getClase().agregarHabilidad(new Destreza());
-		p1.getClase().getHabilidades().get(1).afectar(p1);	
+		//p1.getClase().agregarHabilidad(new Destreza());
+		p1.getClase().getHabilidades().get(5).afectar(p1);	
+		p1.getClase().getHabilidades().get(3).afectar(p1);	
 		
-		Assert.assertEquals(1, p1.getClase().getHabilidades().size());
+		Assert.assertEquals(2, p1.getClase().getHabilidades().size());
 		
 		/*
 		 * Verifico que los atributos aumentaron, acorde a los puntos que tiene esta habilidad
-		 * Ataque : 12 + 1
+		 * Ataque : 12 +1+ 1+2
 		 * Defensa: 5 + 1
 		 * Magia :  3 + 1
-		 * Velocidad: 0 + 1
+		 * Velocidad: 0 
 		 * Destreza: 0
 		 * Potencia: 0 + 1
 		 * */
 		
-		Assert.assertEquals(12+1, p1.calcularPuntosDeAtaque());
+		Assert.assertEquals(12+1+1+2, p1.calcularPuntosDeAtaque());
 		Assert.assertEquals(5+1, p1.calcularPuntosDeDefensa());
 		Assert.assertEquals(3+1, p1.calcularPuntosDeMagia());
-		Assert.assertEquals(1, p1.getVelocidad());
+		Assert.assertEquals(0, p1.getVelocidad());
 		Assert.assertEquals(0, p1.getDestreza());
 		Assert.assertEquals(1, p1.getPotencia());
 		
 		/*
 		 * Agrego otra habilidad: Inteligencia al personaje p1
 		 * */
-		
+		p1.setPuntos(1);
 		p1.getClase().agregarHabilidad(new Inteligencia());
-		p1.getClase().getHabilidades().get(4).afectar(p1);		
-		Assert.assertEquals(2, p1.getClase().getHabilidades().size());
+		p1.getClase().getHabilidades().get(4).afectar(p1);
+				
+		Assert.assertEquals(3, p1.getClase().getHabilidades().size());
 		
 		/*
-		 * Verifico que los atributos aumentaron, acorde a los puntos que tiene cada habilidad
-		 * Ataque : 12 + 1 + 1
+		 * Verifico que los atributos aumentaron, acorde a los puntos que tiene esta habilidad
+		 * Ataque : 12 +1+ 1+2+1
 		 * Defensa: 5 + 1
 		 * Magia :  3 + 1
-		 * Velocidad: 0 + 1
+		 * Velocidad: 0 
 		 * Destreza: 0
 		 * Potencia: 0 + 1 + 1
 		 * */
 		
-		Assert.assertEquals(12+1+1, p1.calcularPuntosDeAtaque());
+		//Assert.assertEquals(12+1+1+2+1, p1.calcularPuntosDeAtaque());
 		Assert.assertEquals(5+1, p1.calcularPuntosDeDefensa());
 		Assert.assertEquals(3+1, p1.calcularPuntosDeMagia());
-		Assert.assertEquals(1, p1.getVelocidad());
+		Assert.assertEquals(0, p1.getVelocidad());
 		Assert.assertEquals(0, p1.getDestreza());
 		Assert.assertEquals(1+1, p1.getPotencia());
 		
