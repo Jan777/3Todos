@@ -5,9 +5,11 @@ import razas.*;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Random;
 import java.util.Scanner;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -173,14 +175,9 @@ public abstract class Personaje implements Peleador {
 	private int experienciaRequerida(int nivel) {
 		try{
 
-			Scanner sc = new Scanner (new File ("config/niveles.properties"));	
-			while(sc.hasNextLine()){
-				if(nivel == sc.nextInt()){
-					return sc.nextInt();
-				}
-				sc.nextInt();
-			}
-			sc.close();
+			Properties niveles = new Properties();
+			niveles.load(new FileInputStream("config/niveles.properties"));
+			return Integer.parseInt(niveles.getProperty(String.valueOf(nivel)));
 		} catch(Exception e){
 			e.printStackTrace();
 		} 
