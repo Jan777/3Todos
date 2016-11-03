@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import com.google.gson.Gson;
 
 import entities.Usuario;
+import utilities.Loggin;
 
 public class HiloMundo extends Thread {
 
@@ -22,6 +23,7 @@ public class HiloMundo extends Thread {
 	private int id;
 
 	public HiloMundo(Socket clientSocket, ArrayList<Socket> mundo1, ArrayList<Socket> mundo2, int id) {
+
 		this.sk = clientSocket;
 		this.gson = new Gson();
 		this.mundo1 = mundo1;
@@ -32,9 +34,8 @@ public class HiloMundo extends Thread {
 			this.in = new DataInputStream(sk.getInputStream());
 			this.out = new DataOutputStream(sk.getOutputStream());
 
-			procesarPeticion();
 		} catch (IOException e) {
-			// Log Error Eleccion mundo
+			Loggin.getInstance().error(e.getMessage());
 		}
 	}
 
@@ -44,15 +45,15 @@ public class HiloMundo extends Thread {
 			msj = gson.fromJson(in.readUTF(), Mensaje.class);
 			resp = msj.getId();
 		} catch (Exception e) {
-			// Error leer mensaje
+			Loggin.getInstance().error(e.getMessage());
 		}
 		switch (resp) {
 		case "login": {
-			Usuario u = gson.fromJson(msj.getMensaje(),Usuario.class);
+			Usuario u = gson.fromJson(msj.getMensaje(), Usuario.class);
 			boolean ingreso = u.validarIngreso();
-			if(ingreso){
+			if (ingreso) {
 				msj.setMensaje("Ok");
-			}else{
+			} else {
 				msj.setMensaje("Usuario no valido");
 			}
 			out.writeUTF(gson.toJson(msj));
@@ -73,6 +74,16 @@ public class HiloMundo extends Thread {
 		default: {
 			break;
 		}
+		}
+	}
+
+	public void run() {
+		try {
+			while (true) {
+				procesarPeticion();
+			}
+		} catch (IOException e) {
+			Loggin.getInstance().error("Procesar peticion " + e.getMessage());
 		}
 	}
 }

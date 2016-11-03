@@ -7,6 +7,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import utilities.Loggin;
+
 public class Servidor {
 
 	private ServerSocket socket;
@@ -18,18 +20,19 @@ public class Servidor {
 	public Servidor() throws FileNotFoundException {
 		mundo1 = new ArrayList<Socket>();
 		mundo2 = new ArrayList<Socket>();
-
 		leerConfig();
+		
 		try {
 			socket = new ServerSocket(this.puerto);
 			while (true) {
 				Socket clientSocket = socket.accept();
+				Loggin.getInstance().info("Se conecto un cliente");	
 				HiloMundo sala = new HiloMundo(clientSocket, mundo1, mundo2, id);
 				sala.start();
 				id++;
 			}
 		} catch (Exception e) {
-			// Log Error conectar
+			Loggin.getInstance().error("Error conectar");
 		}
 	}
 
