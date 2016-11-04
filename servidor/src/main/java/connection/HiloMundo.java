@@ -35,7 +35,7 @@ public class HiloMundo extends Thread {
 			this.out = new DataOutputStream(sk.getOutputStream());
 
 		} catch (IOException e) {
-			Loggin.getInstance().error(e.getMessage());
+			//Loggin.getInstance().error(e.getMessage());
 		}
 	}
 
@@ -45,7 +45,7 @@ public class HiloMundo extends Thread {
 			msj = gson.fromJson(in.readUTF(), Mensaje.class);
 			resp = msj.getId();
 		} catch (Exception e) {
-			Loggin.getInstance().error(e.getMessage());
+			//Loggin.getInstance().error(e.getMessage());
 		}
 		switch (resp) {
 		case "login": {
@@ -83,7 +83,7 @@ public class HiloMundo extends Thread {
 				procesarPeticion();
 			}
 		} catch (IOException e) {
-			Loggin.getInstance().error("Procesar peticion " + e.getMessage());
+			//Loggin.getInstance().error("Procesar peticion " + e.getMessage());
 		}
 	}
 }
