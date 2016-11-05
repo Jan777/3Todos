@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -40,6 +41,7 @@ public class Login extends JFrame {
 	private JButton btnIngresar;
 	private JButton btnRegistro;
 	private Login login;
+	
 	private Socket cliente;
 	private DataOutputStream out;
 	private DataInputStream in;
@@ -60,8 +62,20 @@ public class Login extends JFrame {
 			}
 		});
 	}
+	public Socket getCliente() {
+		return cliente;
+	}
 
-	public Login() {
+	private void cerrarConexion() throws IOException
+	{
+		if(this.cliente != null)
+		{
+			
+			msj.setId("cerrar");
+			enviarMensaje(msj);
+		}
+	}
+	public Login() throws IOException {
 		setTitle("Login");
 		setLogin(this);
 		this.msj = new Mensaje();
@@ -81,7 +95,22 @@ public class Login extends JFrame {
 		} catch (Exception e) {
 
 		}
-
+		
+		  addWindowListener(
+		            new WindowAdapter() {
+		                public void windowClosing(WindowEvent e) {
+		                	try {
+								
+		                		cerrarConexion();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+		    				cancelar();
+		                }
+		            }
+		        );
+		
 		JLabel lblBloodyWars = new JLabel("BloodyWars");
 		lblBloodyWars.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBloodyWars.setBounds(61, 11, 236, 48);
@@ -147,18 +176,29 @@ public class Login extends JFrame {
 
 		btnRegistro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new Registro(login, cliente);
+				try {
+					new Registro(login, cliente);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		btnRegistro.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent key) {
 				if (key.getKeyChar() == key.VK_ENTER)
-					new Registro(login, cliente);
+					try {
+						new Registro(login, cliente);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 			}
 		});
 		contentPane.add(btnRegistro);
 		visible(true);
+		
 	}
 
 	protected void validar() {

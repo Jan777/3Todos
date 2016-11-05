@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.*;
 import java.net.Socket;
 
 import javax.swing.JButton;
@@ -17,8 +18,10 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import connection.Mensaje;
+import entities.Usuario;
 
 public class Registro extends JFrame {
 
@@ -35,6 +38,8 @@ public class Registro extends JFrame {
 	private JButton btnCancelar;
 	private Mensaje msj;
 	private Gson gson;
+	private DataOutputStream out;
+	private DataInputStream in;
 
 	/**
 	 * Launch the application.
@@ -57,7 +62,7 @@ public class Registro extends JFrame {
 
 	}
 
-	public Registro(Login login, Socket cliente) {
+	public Registro(Login login, Socket cliente) throws IOException {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -69,6 +74,8 @@ public class Registro extends JFrame {
 		msj = new Mensaje();
 		gson = new Gson();
 		this.login = login;
+		this.in = new DataInputStream(login.getCliente().getInputStream());
+		this.out = new DataOutputStream(login.getCliente().getOutputStream());
 
 		login.visible(false);
 		frmRegitro = new JFrame();
@@ -162,7 +169,12 @@ public class Registro extends JFrame {
 
 	protected void registrar() {
 		if(camposCompletos() && coincidenContrasenas() ){
-
+			Usuario u = new Usuario(txtUsuario.getText(), password1.getText());
+			String resp="";
+			msj.setId("registrarse");
+			//Envio un usuario como mensaje
+			msj.setMensaje(gson.toJson(u));
+			enviarMensaje(msj);
 		}
 	}
 
@@ -191,6 +203,25 @@ public class Registro extends JFrame {
 		txtUsuario.setText("");
 		password1.setText("");
 		password2.setText("");
+	}
+	
+	public void enviarMensaje(Mensaje msj) {
+		try {
+			out.writeUTF(gson.toJson(msj));
+			out.flush();
+		} catch (Exception e) {
+			// Error enviar mensaje
+		}
+	}
+
+	/*lo tengo para ver duplicados*/
+	private String leerRespuesta() {
+		try {
+			msj = gson.fromJson(in.readUTF(),Mensaje.class);
+		} catch (JsonSyntaxException | IOException e) {
+			//Error al leer Respuesta del servidor
+		}
+		return msj.getMensaje();
 	}
 
 }

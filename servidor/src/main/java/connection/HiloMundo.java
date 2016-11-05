@@ -23,7 +23,7 @@ public class HiloMundo extends Thread {
 	private int id;
 
 	public HiloMundo(Socket clientSocket, ArrayList<Socket> mundo1, ArrayList<Socket> mundo2, int id) {
-
+		Loggin.getInstance().info("Se conecto un cliente");	
 		this.sk = clientSocket;
 		this.gson = new Gson();
 		this.mundo1 = mundo1;
@@ -45,7 +45,7 @@ public class HiloMundo extends Thread {
 			msj = gson.fromJson(in.readUTF(), Mensaje.class);
 			resp = msj.getId();
 		} catch (Exception e) {
-			//Loggin.getInstance().error(e.getMessage());
+		//	Loggin.getInstance().error(e.getMessage());
 		}
 		switch (resp) {
 		case "login": {
@@ -71,8 +71,26 @@ public class HiloMundo extends Thread {
 			hilo.start();
 			break;
 		}
-		default: {
+		case "cerrar":
+		{
+			Loggin.getInstance().info("chau me fui");
+			in.close();
+			out.close();
+			sk.close();
 			break;
+			
+		}
+		case "registrarse":
+		{
+			
+			Usuario u = gson.fromJson(msj.getMensaje(), Usuario.class);
+			DataBaseOperations agregar = new DataBaseOperations();
+			agregar.agregarUsuario(u.getUsername(),u.getPassword());	
+			break;
+		}
+		default: {
+			
+			//break;
 		}
 		}
 	}
@@ -83,6 +101,7 @@ public class HiloMundo extends Thread {
 				procesarPeticion();
 			}
 		} catch (IOException e) {
+			
 			//Loggin.getInstance().error("Procesar peticion " + e.getMessage());
 		}
 	}

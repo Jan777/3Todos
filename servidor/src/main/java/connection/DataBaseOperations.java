@@ -18,12 +18,12 @@ public class DataBaseOperations {
 		}
 	}
 
-	public void agregarUsuario(int idUsuario, String nombre, String contrasena) {
+	public void agregarUsuario(String nombre, String contrasena) {
 		PreparedStatement pstmt = null;
 		try {
 			conn = SQLConnection.getConnection();
 			pstmt = conn.prepareStatement("INSERT INTO USUARIO(ID_USUARIO,NOMBRE,CONTRASENA) VALUES(?,?,?)");
-			pstmt.setInt(1, idUsuario);
+			pstmt.setInt(1, nroUsuario());
 			pstmt.setString(2, nombre);
 			pstmt.setString(3, contrasena);
 			pstmt.executeUpdate();
@@ -70,7 +70,24 @@ public class DataBaseOperations {
 		}
 		return u;
 	}
-
+	public int nroUsuario()
+	{
+		int cant = 0;
+		PreparedStatement pstmt = null;
+		String query = "SELECT COUNT(*) as cantidad FROM USUARIO";
+		try {
+			conn = SQLConnection.getConnection();
+			pstmt = conn.prepareStatement(query);
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+			cant = rs.getInt("cantidad") ;
+			rs.close();
+		}
+		catch(Exception e){
+			
+		}
+		return cant+1;
+	}
 	public boolean verificarCredencia(String nombre,String pas) {
 		Usuario u = null;
 		PreparedStatement pstmt = null;
@@ -91,4 +108,5 @@ public class DataBaseOperations {
 		}
 		return false;
 	}
+	
 }
