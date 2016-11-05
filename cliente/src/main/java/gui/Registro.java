@@ -3,9 +3,13 @@ package gui;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.Socket;
 
 import javax.swing.JButton;
@@ -57,7 +61,6 @@ public class Registro extends JFrame {
 		});
 	}
 
-
 	public Registro() {
 
 	}
@@ -89,11 +92,11 @@ public class Registro extends JFrame {
 		lblUsuario.setBounds(21, 32, 122, 29);
 		frmRegitro.getContentPane().add(lblUsuario);
 
-		lblContrasena = new JLabel("Contraseña:");
+		lblContrasena = new JLabel("Contraseï¿½a:");
 		lblContrasena.setBounds(22, 72, 122, 29);
 		frmRegitro.getContentPane().add(lblContrasena);
 
-		lblRepetirContrasena = new JLabel("Repetir Contraseña:");
+		lblRepetirContrasena = new JLabel("Repetir Contraseï¿½a:");
 		lblRepetirContrasena.setBounds(22, 108, 165, 29);
 		frmRegitro.getContentPane().add(lblRepetirContrasena);
 
@@ -167,14 +170,37 @@ public class Registro extends JFrame {
 		frmRegitro.setVisible(true);
 	}
 
+	private boolean nombreUsuarioValido(String nombre) {
+		msj.setId("nombreUsuarioValido");
+		msj.setMensaje(nombre);
+		enviarMensaje(msj);
+		String resp = leerRespuesta();
+		if (resp.equals("Ok")) {
+			return true;
+		}
+		return false;
+	}
+
 	protected void registrar() {
-		if(camposCompletos() && coincidenContrasenas() ){
-			Usuario u = new Usuario(txtUsuario.getText(), password1.getText());
-			String resp="";
-			msj.setId("registrarse");
-			//Envio un usuario como mensaje
-			msj.setMensaje(gson.toJson(u));
-			enviarMensaje(msj);
+		if (!nombreUsuarioValido(txtUsuario.getText())) {
+			JOptionPane.showMessageDialog(null, "Nombre de usuario ya existe", "Error", JOptionPane.ERROR_MESSAGE);
+		} else {
+			if (camposCompletos() && coincidenContrasenas()) {
+				Usuario u = new Usuario(txtUsuario.getText(), password1.getText());
+				String resp = "";
+				msj.setId("registrarse");
+				// Envio un usuario como mensaje
+				msj.setMensaje(gson.toJson(u));
+				enviarMensaje(msj);
+				resp = leerRespuesta();
+				if (resp.equals("Ok")) {
+					JOptionPane.showMessageDialog(null, "Usuario creado correctamente", "Usuario",
+							JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null, resp, "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				cancelar();
+			}
 		}
 	}
 
@@ -190,7 +216,7 @@ public class Registro extends JFrame {
 	private boolean coincidenContrasenas() {
 		if (password1.getText().equals(password2.getText()))
 			return true;
-		JOptionPane.showMessageDialog(null, "No coinciden las contraseñas", "Error", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null, "No coinciden las contraseï¿½as", "Error", JOptionPane.ERROR_MESSAGE);
 		return false;
 	}
 
@@ -204,7 +230,7 @@ public class Registro extends JFrame {
 		password1.setText("");
 		password2.setText("");
 	}
-	
+
 	public void enviarMensaje(Mensaje msj) {
 		try {
 			out.writeUTF(gson.toJson(msj));
@@ -214,14 +240,12 @@ public class Registro extends JFrame {
 		}
 	}
 
-	/*lo tengo para ver duplicados*/
 	private String leerRespuesta() {
 		try {
-			msj = gson.fromJson(in.readUTF(),Mensaje.class);
+			msj = gson.fromJson(in.readUTF(), Mensaje.class);
 		} catch (JsonSyntaxException | IOException e) {
-			//Error al leer Respuesta del servidor
+			// Error al leer Respuesta del servidor
 		}
 		return msj.getMensaje();
 	}
-
 }

@@ -10,7 +10,11 @@ public class Usuario {
 
 	public Usuario(String username, String password) {
 		this.username = username;
-		this.password=password;
+		this.password = password;
+	}
+
+	public Usuario() {
+
 	}
 
 	public String getUsername() {
@@ -26,7 +30,7 @@ public class Usuario {
 	}
 
 	public void setPassword(String password) {
-		this.password=password;
+		this.password = password;
 	}
 
 	public int guardarUsuario() {
@@ -34,8 +38,7 @@ public class Usuario {
 	}
 
 	public boolean validarIngreso() {
-		DataBaseOperations d = new DataBaseOperations();
-		return d.verificarCredencia(this.getUsername(), this.getPassword());
+		return new DataBaseOperations().verificarCredencia(this.getUsername(), this.getPassword());
 	}
 
 	public boolean equals(Usuario obj) {
@@ -43,5 +46,13 @@ public class Usuario {
 			return true;
 
 		return false;
+	}
+
+	public int agregarUsuario(String username, String password) {
+		return new DataBaseOperations().agregarUsuario(username, password);
+	}
+
+	public boolean validarNombre(String nombre) {
+		return new DataBaseOperations().existeUsuario(nombre);
 	}
 }

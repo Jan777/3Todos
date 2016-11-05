@@ -1,4 +1,17 @@
-Se conecto un cliente
- 05 nov 2016 14:33:17,992 Se conecto un cliente
- 05 nov 2016 14:33:18,000 chau me fui
- 05 nov 2016 14:33:42,632 
+INFO	2016-11-05 19:13:28,976	0	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+INFO	2016-11-05 19:17:49,543	0	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+INFO	2016-11-05 19:17:51,453	1910	connection.Servidor	[Thread-0]	Cerro la conexion un cliente: /127.0.0.1
+INFO	2016-11-05 19:18:19,904	0	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+INFO	2016-11-05 19:18:55,496	35592	connection.Servidor	[Thread-0]	Cerro la conexion un cliente: /127.0.0.1
+ERROR	2016-11-05 19:20:15,354	0	connection.Servidor	[main]	Error conectar: Address already in use (Bind failed)
+INFO	2016-11-05 19:20:18,570	118666	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+INFO	2016-11-05 19:20:38,876	138972	connection.Servidor	[Thread-1]	Cerro la conexion un cliente: /127.0.0.1
+ERROR	2016-11-05 19:29:43,495	0	connection.Servidor	[main]	Error conectar: Address already in use (Bind failed)
+INFO	2016-11-05 19:29:52,888	692984	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+INFO	2016-11-05 19:31:17,047	777143	connection.Servidor	[Thread-2]	Cerro la conexion un cliente: /127.0.0.1
+INFO	2016-11-05 19:33:27,431	0	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+INFO	2016-11-05 19:33:53,863	26432	connection.Servidor	[Thread-0]	Cerro la conexion un cliente: /127.0.0.1
+INFO	2016-11-05 19:33:57,679	30248	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+INFO	2016-11-05 19:34:01,508	34077	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+INFO	2016-11-05 19:34:42,623	75192	connection.Servidor	[Thread-2]	Cerro la conexion un cliente: /127.0.0.1
+INFO	2016-11-05 19:34:48,504	81073	connection.Servidor	[Thread-1]	Cerro la conexion un cliente: /127.0.0.1

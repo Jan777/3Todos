@@ -41,7 +41,7 @@ public class Login extends JFrame {
 	private JButton btnIngresar;
 	private JButton btnRegistro;
 	private Login login;
-	
+
 	private Socket cliente;
 	private DataOutputStream out;
 	private DataInputStream in;
@@ -62,19 +62,18 @@ public class Login extends JFrame {
 			}
 		});
 	}
+
 	public Socket getCliente() {
 		return cliente;
 	}
 
-	private void cerrarConexion() throws IOException
-	{
-		if(this.cliente != null)
-		{
-			
+	private void cerrarConexion() throws IOException {
+		if (this.cliente != null) {
 			msj.setId("cerrar");
 			enviarMensaje(msj);
 		}
 	}
+
 	public Login() throws IOException {
 		setTitle("Login");
 		setLogin(this);
@@ -95,22 +94,17 @@ public class Login extends JFrame {
 		} catch (Exception e) {
 
 		}
-		
-		  addWindowListener(
-		            new WindowAdapter() {
-		                public void windowClosing(WindowEvent e) {
-		                	try {
-								
-		                		cerrarConexion();
-							} catch (IOException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-		    				cancelar();
-		                }
-		            }
-		        );
-		
+
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				try {
+					cerrarConexion();
+				} catch (IOException e1) {
+					// TODO Log error
+				}
+			}
+		});
+
 		JLabel lblBloodyWars = new JLabel("BloodyWars");
 		lblBloodyWars.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBloodyWars.setBounds(61, 11, 236, 48);
@@ -119,7 +113,7 @@ public class Login extends JFrame {
 		lblUsuario = new JLabel("Usuario: ");
 		lblUsuario.setBounds(7, 84, 96, 20);
 		contentPane.add(lblUsuario);
-		lblContrasena = new JLabel("Contraseña: ");
+		lblContrasena = new JLabel("Contraseï¿½a: ");
 		lblContrasena.setBounds(7, 108, 96, 20);
 		contentPane.add(lblContrasena);
 
@@ -179,8 +173,7 @@ public class Login extends JFrame {
 				try {
 					new Registro(login, cliente);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					// TODO 
 				}
 			}
 		});
@@ -192,31 +185,30 @@ public class Login extends JFrame {
 						new Registro(login, cliente);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
 					}
 			}
 		});
 		contentPane.add(btnRegistro);
 		visible(true);
-		
+
 	}
 
 	protected void validar() {
 		if (camposCompletos()) {
 
 			Usuario u = new Usuario(txtUsuario.getText(), tpContrasena.getText());
-			String resp="";
+			String resp = "";
 			msj.setId("login");
-			//Envio un usuario como mensaje
+			// Envio un usuario como mensaje
 			msj.setMensaje(gson.toJson(u));
 			enviarMensaje(msj);
 
-			//Leer Respuesta del servidor
+			// Leer Respuesta del servidor
 			resp = leerRespuesta();
 			if(resp.equals("Ok")){
 				//Pasar a la siguiente ventana
 			}else{
-				JOptionPane.showMessageDialog(null, "Usuario o contraseña inválido", "Error", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Usuario o contraseÃ±a invÃ¡lido", "Error", JOptionPane.WARNING_MESSAGE);
 				cancelar();
 			}
 		}
@@ -242,7 +234,7 @@ public class Login extends JFrame {
 	private void leerConfig() throws FileNotFoundException {
 		String linea;
 		String[] splitLine;
-		Scanner sc = new Scanner(new File("src\\main\\resources\\App.config"));
+		Scanner sc = new Scanner(new File("src/main/resources/App.config"));
 		linea = sc.nextLine();
 		splitLine = linea.split(":");
 		this.ip = splitLine[1];

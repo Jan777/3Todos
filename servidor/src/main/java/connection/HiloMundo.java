@@ -21,21 +21,22 @@ public class HiloMundo extends Thread {
 	private ArrayList<Socket> mundo1;
 	private ArrayList<Socket> mundo2;
 	private int id;
+	private Usuario usu;
 
 	public HiloMundo(Socket clientSocket, ArrayList<Socket> mundo1, ArrayList<Socket> mundo2, int id) {
-		Loggin.getInstance().info("Se conecto un cliente");	
 		this.sk = clientSocket;
 		this.gson = new Gson();
 		this.mundo1 = mundo1;
 		this.mundo2 = mundo2;
 		this.id = id;
+		this.usu = new Usuario();
 		this.msj = new Mensaje();
 		try {
 			this.in = new DataInputStream(sk.getInputStream());
 			this.out = new DataOutputStream(sk.getOutputStream());
 
 		} catch (IOException e) {
-			//Loggin.getInstance().error(e.getMessage());
+			Loggin.getInstance().error(e.getMessage());
 		}
 	}
 
@@ -45,18 +46,29 @@ public class HiloMundo extends Thread {
 			msj = gson.fromJson(in.readUTF(), Mensaje.class);
 			resp = msj.getId();
 		} catch (Exception e) {
-		//	Loggin.getInstance().error(e.getMessage());
+			Loggin.getInstance().error(e.getMessage());
 		}
 		switch (resp) {
 		case "login": {
-			Usuario u = gson.fromJson(msj.getMensaje(), Usuario.class);
-			boolean ingreso = u.validarIngreso();
+			usu = gson.fromJson(msj.getMensaje(), Usuario.class);
+			boolean ingreso = usu.validarIngreso();
 			if (ingreso) {
 				msj.setMensaje("Ok");
 			} else {
 				msj.setMensaje("Usuario no valido");
 			}
 			out.writeUTF(gson.toJson(msj));
+			break;
+		}
+		case "nombreUsuarioValido": {
+			boolean existeUsuario = usu.validarNombre(msj.getMensaje());
+			if (!existeUsuario) {
+				msj.setMensaje("Ok");
+			} else {
+				msj.setMensaje("Usuario ya existe en la base de datos");
+			}
+			out.writeUTF(gson.toJson(msj));
+
 			break;
 		}
 		case "conectarMundo1": {
@@ -71,27 +83,42 @@ public class HiloMundo extends Thread {
 			hilo.start();
 			break;
 		}
-		case "cerrar":
-		{
-			Loggin.getInstance().info("chau me fui");
-			in.close();
-			out.close();
-			sk.close();
+		case "cerrar": {
+			cerrarConexion();
 			break;
-			
 		}
-		case "registrarse":
-		{
-			
+		case "registrarse": {
 			Usuario u = gson.fromJson(msj.getMensaje(), Usuario.class);
-			DataBaseOperations agregar = new DataBaseOperations();
-			agregar.agregarUsuario(u.getUsername(),u.getPassword());	
+			if (u.agregarUsuario(u.getUsername(), u.getPassword()) == 1) {
+				msj.setId("Ok");
+				msj.setMensaje("Ok");
+			} else {
+				msj.setMensaje("Error al registrar usuario");
+			}
+			out.writeUTF(gson.toJson(msj));
 			break;
 		}
 		default: {
-			
-			//break;
+
+			break;
 		}
+		}
+	}
+
+	private void cerrarConexion() {
+		Loggin.getInstance().info("Cerro la conexion un cliente: " + sk.getInetAddress());
+		try {
+
+			in.close();
+			out.close();
+			sk.close();
+		} catch (IOException e) {
+			Loggin.getInstance().error(e.getMessage());
+		}
+		try {
+			this.join(0);
+		} catch (InterruptedException e) {
+			Loggin.getInstance().error(e.getMessage());
 		}
 	}
 
@@ -101,8 +128,7 @@ public class HiloMundo extends Thread {
 				procesarPeticion();
 			}
 		} catch (IOException e) {
-			
-			//Loggin.getInstance().error("Procesar peticion " + e.getMessage());
+			Loggin.getInstance().error("Procesar peticion " + e.getMessage());
 		}
 	}
 }

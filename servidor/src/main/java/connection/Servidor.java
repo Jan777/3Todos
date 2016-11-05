@@ -26,13 +26,13 @@ public class Servidor {
 			socket = new ServerSocket(this.puerto);
 			while (true) {
 				Socket clientSocket = socket.accept();
-				Loggin.getInstance().info("Se conecto un cliente");	
+				Loggin.getInstance().info("Se conecto un cliente "+ clientSocket.getInetAddress());	
 				HiloMundo sala = new HiloMundo(clientSocket, mundo1, mundo2, id);
 				sala.start();
 				id++;
 			}
 		} catch (Exception e) {
-			Loggin.getInstance().error("Error conectar");
+			Loggin.getInstance().error("Error conectar: "+e.getMessage());
 		}
 	}
 
