@@ -3,8 +3,6 @@ package gui;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.DataInputStream;
@@ -26,6 +24,7 @@ import com.google.gson.JsonSyntaxException;
 
 import connection.Mensaje;
 import entities.Usuario;
+import utilities.Loggin;
 
 public class Registro extends JFrame {
 
@@ -65,9 +64,8 @@ public class Registro extends JFrame {
 
 	}
 
-	public Registro(Login login, Socket cliente) throws IOException {
+	public Registro(Login login, Socket cliente) {
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -77,8 +75,12 @@ public class Registro extends JFrame {
 		msj = new Mensaje();
 		gson = new Gson();
 		this.login = login;
-		this.in = new DataInputStream(login.getCliente().getInputStream());
-		this.out = new DataOutputStream(login.getCliente().getOutputStream());
+		try {
+			this.in = new DataInputStream(login.getCliente().getInputStream());
+			this.out = new DataOutputStream(login.getCliente().getOutputStream());
+		} catch (Exception e1) {
+			Loggin.getInstance().error("Error al validar contrasena " + e1.getMessage());
+		}
 
 		login.visible(false);
 		frmRegitro = new JFrame();
@@ -92,11 +94,11 @@ public class Registro extends JFrame {
 		lblUsuario.setBounds(21, 32, 122, 29);
 		frmRegitro.getContentPane().add(lblUsuario);
 
-		lblContrasena = new JLabel("Contrase�a:");
+		lblContrasena = new JLabel("Contrasena:");
 		lblContrasena.setBounds(22, 72, 122, 29);
 		frmRegitro.getContentPane().add(lblContrasena);
 
-		lblRepetirContrasena = new JLabel("Repetir Contrase�a:");
+		lblRepetirContrasena = new JLabel("Repetir Contrasena:");
 		lblRepetirContrasena.setBounds(22, 108, 165, 29);
 		frmRegitro.getContentPane().add(lblRepetirContrasena);
 
@@ -216,7 +218,7 @@ public class Registro extends JFrame {
 	private boolean coincidenContrasenas() {
 		if (password1.getText().equals(password2.getText()))
 			return true;
-		JOptionPane.showMessageDialog(null, "No coinciden las contrase�as", "Error", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null, "No coinciden las contrasenas", "Error", JOptionPane.ERROR_MESSAGE);
 		return false;
 	}
 
@@ -236,7 +238,7 @@ public class Registro extends JFrame {
 			out.writeUTF(gson.toJson(msj));
 			out.flush();
 		} catch (Exception e) {
-			// Error enviar mensaje
+			Loggin.getInstance().error("Error enviarMensaje" + e.getMessage());
 		}
 	}
 
@@ -244,7 +246,7 @@ public class Registro extends JFrame {
 		try {
 			msj = gson.fromJson(in.readUTF(), Mensaje.class);
 		} catch (JsonSyntaxException | IOException e) {
-			// Error al leer Respuesta del servidor
+			Loggin.getInstance().error("Error al leer Respuesta del servidor" + e.getMessage());
 		}
 		return msj.getMensaje();
 	}
