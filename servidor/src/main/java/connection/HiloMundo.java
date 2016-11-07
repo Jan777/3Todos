@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import com.google.gson.Gson;
 
+import entities.MensajePersonaje;
 import entities.Usuario;
 import utilities.Loggin;
 
@@ -98,6 +99,13 @@ public class HiloMundo extends Thread {
 			out.writeUTF(gson.toJson(msj));
 			break;
 		}
+		case "obtenerPersonaje" :{
+			MensajePersonaje personaje = new MensajePersonaje();
+			personaje.setUsername(msj.getMensaje());
+			msj.setMensaje(gson.toJson(personaje.getPersonaje()));
+			out.writeUTF(gson.toJson(msj));
+			break;
+		}
 		default: {
 
 			break;
@@ -112,7 +120,7 @@ public class HiloMundo extends Thread {
 			in.close();
 			out.close();
 			sk.close();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			Loggin.getInstance().error(e.getMessage());
 		}
 		try {
@@ -127,7 +135,7 @@ public class HiloMundo extends Thread {
 			while (true) {
 				procesarPeticion();
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			Loggin.getInstance().error("Procesar peticion " + e.getMessage());
 		}
 	}

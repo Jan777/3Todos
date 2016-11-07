@@ -5,9 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.net.Socket;
 
 import javax.swing.JButton;
@@ -20,11 +17,9 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 
 import connection.Mensaje;
 import entities.Usuario;
-import utilities.Loggin;
 
 public class Registro extends JFrame {
 
@@ -41,8 +36,6 @@ public class Registro extends JFrame {
 	private JButton btnCancelar;
 	private Mensaje msj;
 	private Gson gson;
-	private DataOutputStream out;
-	private DataInputStream in;
 
 	/**
 	 * Launch the application.
@@ -75,12 +68,6 @@ public class Registro extends JFrame {
 		msj = new Mensaje();
 		gson = new Gson();
 		this.login = login;
-		try {
-			this.in = new DataInputStream(login.getCliente().getInputStream());
-			this.out = new DataOutputStream(login.getCliente().getOutputStream());
-		} catch (Exception e1) {
-			Loggin.getInstance().error("Error al validar contrasena " + e1.getMessage());
-		}
 
 		login.visible(false);
 		frmRegitro = new JFrame();
@@ -175,8 +162,8 @@ public class Registro extends JFrame {
 	private boolean nombreUsuarioValido(String nombre) {
 		msj.setId("nombreUsuarioValido");
 		msj.setMensaje(nombre);
-		enviarMensaje(msj);
-		String resp = leerRespuesta();
+		this.login.enviarMensaje(msj);
+		String resp = this.login.leerRespuesta();
 		if (resp.equals("Ok")) {
 			return true;
 		}
@@ -193,8 +180,8 @@ public class Registro extends JFrame {
 				msj.setId("registrarse");
 				// Envio un usuario como mensaje
 				msj.setMensaje(gson.toJson(u));
-				enviarMensaje(msj);
-				resp = leerRespuesta();
+				this.login.enviarMensaje(msj);
+				resp = this.login.leerRespuesta();
 				if (resp.equals("Ok")) {
 					JOptionPane.showMessageDialog(null, "Usuario creado correctamente", "Usuario",
 							JOptionPane.INFORMATION_MESSAGE);
@@ -231,23 +218,5 @@ public class Registro extends JFrame {
 		txtUsuario.setText("");
 		password1.setText("");
 		password2.setText("");
-	}
-
-	public void enviarMensaje(Mensaje msj) {
-		try {
-			out.writeUTF(gson.toJson(msj));
-			out.flush();
-		} catch (Exception e) {
-			Loggin.getInstance().error("Error enviarMensaje" + e.getMessage());
-		}
-	}
-
-	private String leerRespuesta() {
-		try {
-			msj = gson.fromJson(in.readUTF(), Mensaje.class);
-		} catch (JsonSyntaxException | IOException e) {
-			Loggin.getInstance().error("Error al leer Respuesta del servidor" + e.getMessage());
-		}
-		return msj.getMensaje();
 	}
 }

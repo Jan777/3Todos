@@ -5,7 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -42,7 +43,6 @@ public class Login extends JFrame {
 	private JButton btnIngresar;
 	private JButton btnRegistro;
 	private Login login;
-
 	private Socket cliente;
 	private DataOutputStream out;
 	private DataInputStream in;
@@ -50,6 +50,7 @@ public class Login extends JFrame {
 	private String ip;
 	private Gson gson;
 	private Mensaje msj;
+	private String username;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -219,7 +220,9 @@ public class Login extends JFrame {
 			resp = leerRespuesta();
 			if(resp.equals("Ok")){
 				try {
+					login.setUsername(txtUsuario.getText());
 					new EditarPersonaje(login, cliente);
+					cancelar();
 				} catch (Exception e) {
 					Loggin.getInstance().error("Error al acceder a Editar Personaje "+e.getMessage());
 				}
@@ -230,7 +233,7 @@ public class Login extends JFrame {
 		}
 	}
 
-	private String leerRespuesta() {
+	public String leerRespuesta() {
 		try {
 			msj = gson.fromJson(in.readUTF(),Mensaje.class);
 		} catch (JsonSyntaxException | IOException e) {
@@ -287,4 +290,12 @@ public class Login extends JFrame {
 	public void visible(boolean value) {
 		this.setVisible(value);
 	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}	
 }

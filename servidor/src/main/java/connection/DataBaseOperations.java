@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import entities.MensajePersonaje;
 import entities.Usuario;
 import utilities.Loggin;
 
@@ -95,7 +96,7 @@ public class DataBaseOperations {
 
 	public boolean existeUsuario(String userName) {
 		PreparedStatement pstmt = null;
-		String nombre="";
+		String nombre = "";
 		String query = "SELECT NOMBRE FROM USUARIO WHERE NOMBRE=?";
 		try {
 			conn = SQLConnection.getConnection();
@@ -112,5 +113,29 @@ public class DataBaseOperations {
 			Loggin.getInstance().error("Error existeUsuario " + e.getMessage());
 		}
 		return false;
+	}
+
+	public MensajePersonaje getPersonaje(String username) {
+		PreparedStatement pstmt = null;
+		String query = "SELECT NOMBRE,R.RAZA  AS RAZA,C.CASTA AS CASTA,ID_USUARIO AS ID FROM (SELECT U.NOMBRE,U.ID_USUARIO,P.ID_RAZA,P.ID_CASTA "
+				+ "FROM USUARIO U INNER JOIN PERSONAJE P ON "
+				+ "U.ID_USUARIO=P.ID_USUARIO WHERE NOMBRE=?) AS PERSON INNER JOIN RAZA R ON PERSON.ID_RAZA=R.ID_RAZA INNER JOIN CASTA C ON C.ID_CASTA=PERSON.ID_CASTA";
+		MensajePersonaje personaje = new MensajePersonaje();
+		try {
+			conn = SQLConnection.getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, username.toUpperCase());
+
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				personaje.setUsername(rs.getString("NOMBRE"));
+				personaje.setRaza(rs.getString("RAZA"));
+				personaje.setCasta(rs.getString("CASTA"));
+				personaje.setIdUsuario(rs.getInt("ID"));
+			}
+		} catch (Exception e) {
+			Loggin.getInstance().error("Error getPersonaje" + e.getMessage());
+		}
+		return personaje;
 	}
 }

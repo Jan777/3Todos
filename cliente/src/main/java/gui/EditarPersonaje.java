@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import com.google.gson.Gson;
 
 import connection.Mensaje;
+import entities.MensajePersonaje;
 
 public class EditarPersonaje extends JFrame {
 
@@ -41,21 +42,17 @@ public class EditarPersonaje extends JFrame {
 		});
 	}
 
-	public EditarPersonaje(Login login, Socket cliente) {
+	public EditarPersonaje() {
 
 	}
 
-	public EditarPersonaje() {
+	public EditarPersonaje(Login login, Socket cliente) {
 
 		msj = new Mensaje();
 
-		// gson = new Gson();
+		gson = new Gson();
 		this.login = login;
-		// this.in = new DataInputStream(login.getCliente().getInputStream());
-		// this.out = new
-		// DataOutputStream(login.getCliente().getOutputStream());
-		//
-		// login.visible(false);
+		login.visible(false);
 		frmPersonaje = new JFrame();
 		frmPersonaje.setResizable(false);
 		frmPersonaje.setTitle("Seleción de Personaje");
@@ -90,7 +87,7 @@ public class EditarPersonaje extends JFrame {
 
 		comboRaza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				setTextRaza(evt);
+				
 			}
 		});
 
@@ -100,7 +97,7 @@ public class EditarPersonaje extends JFrame {
 
 		comboCasta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				setTextCasta(evt);
+				
 			}
 		});
 
@@ -112,20 +109,18 @@ public class EditarPersonaje extends JFrame {
 		lblCastaElegida.setBounds(286, 172, 110, 14);
 		frmPersonaje.getContentPane().add(lblCastaElegida);
 		cargarCombo();
-
+		cargarPersonaje();
 		frmPersonaje.setVisible(true);
 	}
-
-	protected void setTextRaza(ActionEvent evt) {
-		if (comboRaza.getSelectedItem() != null) {
-			lblRazaElegida.setText(comboRaza.getSelectedItem().toString());
-		}
-	}
-
-	protected void setTextCasta(ActionEvent evt) {
-		if (comboCasta.getSelectedItem() != null) {
-			lblCastaElegida.setText(comboCasta.getSelectedItem().toString());
-		}
+	
+	private void cargarPersonaje(){
+		msj.setId("obtenerPersonaje");
+		msj.setMensaje(this.login.getUsername());
+		this.login.enviarMensaje(msj);
+		String resp =this.login.leerRespuesta();
+		MensajePersonaje personaje = gson.fromJson(resp, MensajePersonaje.class);
+		lblRazaElegida.setText(personaje.getRaza());
+		lblCastaElegida.setText(personaje.getCasta());
 	}
 
 	private void cargarCombo() {
