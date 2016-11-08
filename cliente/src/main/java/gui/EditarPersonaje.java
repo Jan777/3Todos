@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import com.google.gson.Gson;
 
@@ -29,6 +30,7 @@ public class EditarPersonaje extends JFrame {
 	private JComboBox comboCasta;
 	private JLabel lblRazaElegida;
 	private JLabel lblCastaElegida;
+	private MensajePersonaje personaje;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -42,12 +44,12 @@ public class EditarPersonaje extends JFrame {
 		});
 	}
 
-	public EditarPersonaje() {
+	public EditarPersonaje(Login login, Socket cliente) {
 
 	}
 
-	public EditarPersonaje(Login login, Socket cliente) {
-
+	public EditarPersonaje() {
+		personaje = new MensajePersonaje();
 		msj = new Mensaje();
 
 		gson = new Gson();
@@ -66,7 +68,7 @@ public class EditarPersonaje extends JFrame {
 				salir();
 			}
 		});
-		btnAtras.setBounds(325, 259, 133, 25);
+		btnAtras.setBounds(351, 259, 107, 25);
 		frmPersonaje.getContentPane().add(btnAtras);
 
 		JLabel selecionarPersonaje = new JLabel("Seleccione su personaje:");
@@ -87,7 +89,7 @@ public class EditarPersonaje extends JFrame {
 
 		comboRaza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				
+
 			}
 		});
 
@@ -97,7 +99,7 @@ public class EditarPersonaje extends JFrame {
 
 		comboCasta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				
+
 			}
 		});
 
@@ -108,26 +110,60 @@ public class EditarPersonaje extends JFrame {
 		lblCastaElegida = new JLabel("");
 		lblCastaElegida.setBounds(286, 172, 110, 14);
 		frmPersonaje.getContentPane().add(lblCastaElegida);
+
+		JButton button = new JButton("Gurdar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				guardarPersonaje();
+			}
+		});
+		button.setBounds(234, 259, 107, 25);
+		frmPersonaje.getContentPane().add(button);
 		cargarCombo();
 		cargarPersonaje();
 		frmPersonaje.setVisible(true);
 	}
-	
-	private void cargarPersonaje(){
+
+	private void cargarPersonaje() {
 		msj.setId("obtenerPersonaje");
 		msj.setMensaje(this.login.getUsername());
 		this.login.enviarMensaje(msj);
-		String resp =this.login.leerRespuesta();
-		MensajePersonaje personaje = gson.fromJson(resp, MensajePersonaje.class);
+		String resp = this.login.leerRespuesta();
+		personaje = gson.fromJson(resp, MensajePersonaje.class);
 		lblRazaElegida.setText(personaje.getRaza());
 		lblCastaElegida.setText(personaje.getCasta());
 	}
 
+	private void guardarPersonaje() {
+		int razaItem = comboRaza.getSelectedIndex();
+		int castaItem = comboCasta.getSelectedIndex();
+		personaje = new MensajePersonaje(personaje.getIdUsuario(), login.getUsername(), comboRaza.getSelectedItem().toString(), comboCasta.getSelectedItem().toString());
+		if (comboCompleto(razaItem, castaItem)) {
+			msj.setId("guardarPersonaje");
+			msj.setMensaje(gson.toJson(personaje));
+			this.login.enviarMensaje(msj);
+		}
+	}
+
+	private boolean comboCompleto(int razaItem, int castaItem) {
+		if (razaItem == 0) {
+			JOptionPane.showMessageDialog(null, "Seleccione una Raza", "Error", JOptionPane.WARNING_MESSAGE);
+			return false;
+		} else {
+			if (castaItem == 0) {
+				JOptionPane.showMessageDialog(null, "Seleccione una Casta", "Error", JOptionPane.WARNING_MESSAGE);
+				return false;
+			}
+			return true;
+		}
+	}
+
 	private void cargarCombo() {
+		comboRaza.addItem("");
 		comboRaza.addItem("ORCO");
 		comboRaza.addItem("HUMANO");
 		comboRaza.addItem("ELFO");
-
+		comboCasta.addItem("");
 		comboCasta.addItem("GUERRERO");
 		comboCasta.addItem("HECHICERO");
 		comboCasta.addItem("CHAMAN");

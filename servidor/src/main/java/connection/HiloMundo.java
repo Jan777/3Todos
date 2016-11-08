@@ -48,6 +48,13 @@ public class HiloMundo extends Thread {
 			resp = msj.getId();
 		} catch (Exception e) {
 			Loggin.getInstance().error(e.getMessage());
+			if (e.getMessage().equals("Connection reset")){
+				try {
+					this.join(0);
+				} catch (InterruptedException e1) {
+					Loggin.getInstance().error(e1.getMessage());
+				}
+			}
 		}
 		switch (resp) {
 		case "login": {
@@ -99,7 +106,7 @@ public class HiloMundo extends Thread {
 			out.writeUTF(gson.toJson(msj));
 			break;
 		}
-		case "obtenerPersonaje" :{
+		case "obtenerPersonaje": {
 			MensajePersonaje personaje = new MensajePersonaje();
 			personaje.setUsername(msj.getMensaje());
 			msj.setMensaje(gson.toJson(personaje.getPersonaje()));

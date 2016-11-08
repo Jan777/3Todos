@@ -1,17 +1,21 @@
 package entities;
 
 public class MensajePersonaje {
-	
+
 	private int idUsuario;
 	private String username;
 	private String raza;
 	private String casta;
-	
+
 	public MensajePersonaje(int id,String name,String raza,String casta){
 		this.idUsuario=id;
 		this.username=name;
 		this.raza=raza;
 		this.casta=casta;
+	}
+
+	public MensajePersonaje() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public int getIdUsuario() {
