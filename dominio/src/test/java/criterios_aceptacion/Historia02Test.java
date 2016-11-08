@@ -165,7 +165,11 @@ public class Historia02Test {
 		
 		Personaje p1 = new Orco(u1);
 		Personaje p2 = new Elfo(u1);
-	
+		
+		/*
+		 * La casta Guerrero agrega la habilidad Fuerza 
+		 * */
+		
 		p1.setCasta(new Guerrero());
 		p2.setCasta(new Guerrero());
 
@@ -219,7 +223,15 @@ public class Historia02Test {
 		/*
 		 * Compruebo que mi lista tiene dos habilidades y que las mismas tienen 1 punto cada una.
 		 * */
-		Assert.assertEquals(2, p1.getClase().getHabilidades().size());
+		Assert.assertEquals(3, p1.getClase().getHabilidades().size());
+	
+		/*
+		 * Fuerza: 0 puntos
+		 * Inteligencia: 1 punto
+		 * Valentia: 1 punto
+		 * */
+		
+		Assert.assertEquals(0, p1.getClase().getHabilidades().get(3).getPuntos());
 		Assert.assertEquals(1, p1.getClase().getHabilidades().get(4).getPuntos());
 		Assert.assertEquals(1, p1.getClase().getHabilidades().get(5).getPuntos());
 		

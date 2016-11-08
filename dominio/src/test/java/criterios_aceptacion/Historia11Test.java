@@ -7,10 +7,16 @@ import org.junit.Test;
 
 import castas.*;
 import dominio.*;
+import items.*;
 import razas.*;
 
 
-// Faltan asserts
+/*
+ * @mauroat - 07/11/16
+ * El error que tengo en el metodo equipo.repartirItems es que los punteros iniciales de p1, p2, etc
+ * No se actualizan al decorator. Solo el equipo actualiza su referencia.
+ * 
+ * */
 
 
 /***
@@ -28,11 +34,12 @@ public class Historia11Test {
 	 * 1.	Dado un Personaje que pertenece a una Alianza, cuando éstos resultan ganadores de un combate, entonces 
 	 * se reparten los ítems de los perdedores entre los integrantes. 
 	 * @throws FileNotFoundException 
+	 * @throws CloneNotSupportedException 
 	 * 
 	 ***/
 	
 	@Test
-	public void historia11Criterio01_Test() throws FileNotFoundException {
+	public void historia11Criterio01_Test() throws FileNotFoundException, CloneNotSupportedException {
 		Personaje p1 = new Humano("Humano1","1231");
 		Personaje p2 = new Orco("Humano2","1231");
 		Personaje p3 = new Elfo("Humano3","1231");
@@ -45,6 +52,15 @@ public class Historia11Test {
 		p2.setUbicacion(new Ubicacion(0,4));
 		p3.setUbicacion(new Ubicacion(1,4));
 		p4.setUbicacion(new Ubicacion(1,6));
+		
+		/*
+		 * Equipo con items
+		 * */
+		
+		p1 = new ArmaduraDeAzorAhai(p1);
+		p2 = new BujiaHescher(p2);
+		p3 = new PocionBruta(p3);
+		p4 = new PocionSabiduria(p4);
 		
 		/*
 		 * Armo las alianzas: 
@@ -79,11 +95,12 @@ public class Historia11Test {
 		Combate c = new Combate("Super Batalla");
 		
 		c.combatir(e1, e2);
-		/*
-		 * Falta metodo repartirItems combinado con dejarMejorItem y desequipar
-		 * 
-		 * */
-		Assert.assertEquals(1, 2);
+		
+		
+		
+		Assert.assertEquals(0, p3.getTamañoLista());
+		Assert.assertEquals(0, p4.getTamañoLista());
+		
 	}
 	
 	
@@ -92,11 +109,12 @@ public class Historia11Test {
 	 * 2.	Dado un Personaje, cuando finaliza el combate contra otro Personaje 
 	 * Usuario y resulta ganador, entonces se le entrega el mejor ítem de aquel Personaje Usuario derrotado. 
 	 * @throws FileNotFoundException 
+	 * @throws CloneNotSupportedException 
 	 * 
 	 ***/
 	
 	@Test
-	public void historia11Criterio02_Test() throws FileNotFoundException {
+	public void historia11Criterio02_Test() throws FileNotFoundException, CloneNotSupportedException {
 		Personaje p1 = new Humano("Humano1","1231");
 		Personaje p2 = new Orco("Humano2","1231");
 		p1.setCasta(new Guerrero());
@@ -139,11 +157,12 @@ public class Historia11Test {
 	 * 3.	Dado un Personaje, cuando finaliza el combate contra un Personaje Genérico y resulta ganador, 
 	 * entonces se le entrega el mejor ítem del Personaje Genérico.
 	 * @throws FileNotFoundException 
+	 * @throws CloneNotSupportedException 
 	 * 
 	 ***/
 	
 	@Test
-	public void historia11Criterio03_Test() throws FileNotFoundException {
+	public void historia11Criterio03_Test() throws FileNotFoundException, CloneNotSupportedException {
 		Personaje p1 = new Humano("Humano1","1231");
 		Personaje p2 = new Orco("Humano2","1231");
 		Generico g = new Generico("Terminator");
@@ -180,10 +199,10 @@ public class Historia11Test {
 		Combate c = new Combate("La Pelea Final");
 		c.combatir(e1, g);
 		
-		/*
-		 * Falta metodo repartirItems combinado con dejarMejorItem y desequipar
-		 * 
-		 * */
+	
+		
+		Assert.assertEquals(1, p1.getTamañoLista());
+
 		
 	}
 }

@@ -16,6 +16,7 @@ public class PersonajeEquipado extends Personaje {
 		super(personajeDecorado);		
 		this.personajeDecorado = personajeDecorado;	
 		this.clase = personajeDecorado.getClase();
+		this.ubicacion = personajeDecorado.ubicacion;
 	}
 
 	@Override

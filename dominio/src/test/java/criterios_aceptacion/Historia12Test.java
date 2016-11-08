@@ -64,11 +64,12 @@ public class Historia12Test {
 	 * 2. Dado un Personaje, cuando se encuentre cercano a otro e interactuen,
 	 * entonces este podra combatir contra el hasta definir un ganador.
 	 * @throws FileNotFoundException 
+	 * @throws CloneNotSupportedException 
 	 * 
 	 ***/
 
 	@Test
-	public void historia12Criterio02_Test() throws FileNotFoundException {
+	public void historia12Criterio02_Test() throws FileNotFoundException, CloneNotSupportedException {
 		Personaje p1 = new Humano("Humano1", "1231");
 		Personaje p2 = new Orco("Humano2", "1231");
 		p1.setCasta(new Guerrero());

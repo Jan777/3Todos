@@ -9,6 +9,8 @@ public class Combate {
 	private int idCombate;
 	private int ultimoAtacanteE1,ultimoAtacanteE2; 
 	private String nombre;
+	private int ganador;
+	
 
 	
 	public Combate(String nombre)
@@ -24,7 +26,7 @@ public class Combate {
 	}
 	
 	
-	public void combatir(Equipo e1, Equipo e2) throws FileNotFoundException{
+	public void combatir(Equipo e1, Equipo e2) throws FileNotFoundException, CloneNotSupportedException{
 		Random r = new Random();
 		int aux = r.nextInt(2);
 		
@@ -42,15 +44,19 @@ public class Combate {
 		}
 
 		if(e1.quedaAlgunoVivo()){
+			this.ganador = 1;
 			e1.repartirExperiencia(e2.calcularExperiencia());
 			e1.repartirItem(e2);
+			//e2.desequiparEquipo();
 		}	else if(e2.quedaAlgunoVivo()){
+			this.ganador = 2;
 			e2.repartirExperiencia(e1.calcularExperiencia());
 			e2.repartirItem(e1);
+			//e1.desequiparEquipo();
 		}
 	}
 
-	public void combatir(Equipo e, Generico g) throws FileNotFoundException {
+	public void combatir(Equipo e, Generico g) throws FileNotFoundException, CloneNotSupportedException {
 		while(e.quedaAlgunoVivo() && g.estaVivo() ){
 			//Ataca primero siempre el generico
 				e.atacar(g);
@@ -65,6 +71,9 @@ public class Combate {
 			e.desequiparEquipo();
 		}
 	}
+	
+	
+	
 	
 	private int getProximoCombate(){
 		return contadorCombates++;

@@ -26,7 +26,7 @@ public class Historia09Test {
 	/***
 	 * 
 	 * 1.	Dado un Personaje, cuando se encuentre cercano a otro e interactuen, entonces este podra unirse a la 
-	 * alianza de su nuevo compañero o formar una nueva. 
+	 * alianza de su nuevo companero o formar una nueva. 
 	 * 
 	 ***/
 	
@@ -78,11 +78,12 @@ public class Historia09Test {
 	 * 2.	Dado un Personaje, cuando se encuentre cercano a otro e interactuen, entonces este podra combatir 
 	 * contra el hasta definir un ganador.
 	 * @throws FileNotFoundException 
+	 * @throws CloneNotSupportedException 
 	 * 
 	 ***/
 	
 	@Test
-	public void historia09Criterio02_Test() throws FileNotFoundException {
+	public void historia09Criterio02_Test() throws FileNotFoundException, CloneNotSupportedException {
 		/*
 		 * Creacion de personajes y alianzas
 		 * */
@@ -119,7 +120,7 @@ public class Historia09Test {
 		c.combatir(e1, e2);
 		
 		Assert.assertEquals(2, e1.getListaPeleadores().size());
-		Assert.assertEquals(1, e2.getListaPeleadores().size());
+		Assert.assertEquals(0, e2.getListaPeleadores().size());
 		
 		//Assert.assertEquals(1, c.declararGanador(e1, e2));
 		
