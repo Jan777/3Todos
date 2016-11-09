@@ -10,9 +10,14 @@ public class Equipo {
 
 	protected List<Personaje> listaPeleadores = new LinkedList<Personaje>();
 	protected List<Personaje> listaPeleadoresMuertos = new LinkedList<Personaje>();
-	protected static int proximo=1;
+	protected int proximaVictima;
+	
+	/*
+	 * Esto tendra que resolverlo el server
+	 * */
 	
 	public Equipo (Personaje p){		
+		this.proximaVictima = -1;
 		agregar(p);
 		if(p.getAlianzaActual() != null)
 			for (Personaje aliado : p.getAlianzaActual().getIntegrantes()) 
@@ -30,12 +35,6 @@ public class Equipo {
 				
 		}
 		
-		/*Iterator<Personaje> iter = listaPeleadores.iterator();
-		while(iter.hasNext()){
-		    if(!iter.next().estaVivo()) 
-		    	iter.remove();
-		}
-		*/
 	}
 	
 
@@ -44,6 +43,8 @@ public class Equipo {
 		Peleador victima = otro.obtenerProximaVictima();
 		for (Personaje atacante : listaPeleadores) {
 			if(atacante.puedeAtacar()){
+				// ESTO DEBERA CAMBIARSE PARA QUE EL ATACANTE ELIJA SI ATACAR NORMAL
+				// O CON UN ATAQUE
 				atacante.atacar(victima);
 			} else {
 				atacante.setEnergia(atacante.getEnergia()+20);
@@ -56,6 +57,8 @@ public class Equipo {
 		Peleador victima = g;
 		for (Personaje atacante : listaPeleadores) {
 			if(atacante.puedeAtacar()){
+				// ESTO DEBERA CAMBIARSE PARA QUE EL ATACANTE ELIJA SI ATACAR NORMAL
+				// O CON UN ATAQUE
 				atacante.atacar(victima);
 			} else {
 				atacante.setEnergia(atacante.getEnergia()+20);
@@ -71,10 +74,19 @@ public class Equipo {
 	
 	public Peleador obtenerProximaVictima() {
 		depurarEquipo();
+		this.proximaVictima++;
+		
+		/*
+		 * Si el contador se me va a la mierda lo reseteo
+		 * */
+		
+		if(this.proximaVictima >= this.listaPeleadores.size())
+			this.proximaVictima = 0;
+		
 		if(listaPeleadores.isEmpty()) {		
 			//throw new RuntimeException("El batallón está vacío");
 		}
-		return listaPeleadores.get(0);
+		return listaPeleadores.get(this.proximaVictima);
 	}
 	
 	public boolean quedaAlgunoVivo(){
@@ -119,12 +131,14 @@ public class Equipo {
 		equipoPerdedor.listaPeleadoresMuertos.add(equipoPerdedor.listaPeleadores.get(0));
 		equipoPerdedor.listaPeleadores.remove(0);
 		
-
+		/*
+		 * Aleatoriamente entre los que queden vivos del equipo ganador, ire asignando items de los personajes abatidos.
+		 * A su vez, dichos items se iran desequipando de estos ultimos.
+		 * */
 
 		for(Personaje abatido : equipoPerdedor.listaPeleadoresMuertos){
 			int posicionDePersonajeGanador = r.nextInt(this.listaPeleadores.size());			
-			listaPeleadores.set(posicionDePersonajeGanador,listaPeleadores.get(posicionDePersonajeGanador).equipar(abatido.getNombreItem()));			
-			//equipoPerdedor.listaPeleadoresMuertos.remove(abatido);
+			this.listaPeleadores.get(posicionDePersonajeGanador).agregarItem(abatido.dejarItem());
 		}
 		
 	}
@@ -138,33 +152,25 @@ public class Equipo {
 	public void repartirItem(Generico g) throws CloneNotSupportedException {
 		Random r = new Random();
 		
-		int posicion = r.nextInt(listaPeleadores.size());
-		
-		if(listaPeleadores.get(posicion).estaVivo()){
-			listaPeleadores.set(posicion,listaPeleadores.get(posicion).equipar(g.item));
-		}
-		
-	}
-
-	public void desequiparEquipo(){
-		for(Personaje personajeDesequipado : listaPeleadoresMuertos){
-			Personaje aux = personajeDesequipado.desequipar((PersonajeEquipado)personajeDesequipado.dejarMejorItem());
-			personajeDesequipado = aux;
-		}
-		
 		/*
-		for (int i = 0; i<listaPeleadoresMuertos.size();i++){
-			//p2 = p2.desequipar((PersonajeEquipado)p2.dejarMejorItem());
-			listaPeleadoresMuertos.set(i, listaPeleadoresMuertos.get(i);
+		 * Como los personajes muertos se van depurando a otra lista, no hace falta q pregunte si esta vivo
+		 * */
+		
+		int posicion = r.nextInt(listaPeleadores.size());
+		this.listaPeleadores.get(posicion).agregarItem(g.dejarItem());
 			
-		}
-		*/
 	}
+	
+	public void desequiparEquipo(){
+		for(Personaje abatido : this.listaPeleadoresMuertos)
+			abatido.dejarItem();
+	}
+	
 	
 	public List<String> mostrarGanador() {
         LinkedList ganadores = new LinkedList<String>();
-        for (int i = 0; i<listaPeleadores.size();i++){
-            ganadores.add(listaPeleadores.get(i).usuarioPersonaje.getUsername());
+        for (int i = 0; i < listaPeleadores.size();i++){
+            ganadores.add(listaPeleadores.get(i).getNombre());
         }
         return ganadores;
     }

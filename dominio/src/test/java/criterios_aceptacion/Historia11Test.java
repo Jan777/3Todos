@@ -58,7 +58,7 @@ public class Historia11Test {
 		 * */
 		
 		p1 = new ArmaduraDeAzorAhai(p1);
-		p2 = new BujiaHescher(p2);
+		p2 = new BujiasHescher(p2);
 		p3 = new PocionBruta(p3);
 		p4 = new PocionSabiduria(p4);
 		

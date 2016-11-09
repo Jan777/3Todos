@@ -4,8 +4,8 @@ import dominio.*;
 
 public class Orco extends Personaje{
 
-	public Orco(String username, String password) {
-		super(username, password);
+	public Orco(String username) {
+		super(username);
 		this.setRaza("Orco");
 		this.ataque = 12;
 		this.defensa = 5;
@@ -17,35 +17,12 @@ public class Orco extends Personaje{
 		this.setRaza("Orco");
 	}
 	
-	public Orco(Usuario u) {
-		super(u);
-		this.setRaza("Orco");
-		this.ataque = 12;
-		this.defensa = 5;
-		this.magia = 3;
-	}
-	
 	@Override
 	public  boolean puedeAtacar() {
 		return this.energia > (10 + this.calcularPuntosDeAtaque());
 	}
 	
-	
-	@Override
-	public int calcularPuntosDeAtaque() {
-		return this.ataque;
-	}
-
-	@Override
-	public int calcularPuntosDeDefensa() {
-		return this.defensa;
-	}
-
-	@Override
-	public int calcularPuntosDeMagia() {
-		return this.magia;
-	}
-
+		
 	@Override
 	protected Personaje clone() throws CloneNotSupportedException {
 		Personaje aux = new Orco(this);
@@ -54,7 +31,7 @@ public class Orco extends Personaje{
 	
 	@Override
 	public String getRaza() {
-		return "Orco";
+		return raza;
 	}
 
 }

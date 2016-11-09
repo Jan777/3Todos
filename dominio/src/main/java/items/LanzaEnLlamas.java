@@ -2,45 +2,13 @@ package items;
 
 import dominio.*;
 
-public class LanzaEnLlamas extends PersonajeEquipado{
-	private Personaje p;
-	
-	public LanzaEnLlamas(Personaje p) {
-		super(p);
-		this.p = p;
-		this.prioridad=1;
-		this.nombreItem = "Lanza en llamas";
-	}
+public class LanzaEnLlamas extends Item{
 
-	@Override
-	public int calcularPuntosDeAtaque() {
-		return p.calcularPuntosDeAtaque()+6;
+	public LanzaEnLlamas(){
+		super();
+		this.prioridad = 2;
+		this.nombre = "Lanza en llamas";
+		this.ataque = 6;
+		this.defensa = -2;
 	}
-
-	@Override
-	public int calcularPuntosDeDefensa() {
-		return p.calcularPuntosDeDefensa()-2;
-	}
-
-	@Override
-	public int calcularPuntosDeMagia() {
-		return p.calcularPuntosDeMagia();
-	}
-
-	@Override
-	public void setPersonajeDecorado(Personaje personajeDecorado) {
-		this.personajeDecorado = personajeDecorado;
-	}
-	
-	@Override
-	public String getLista() {
-		return personajeDecorado.getLista() + " "+getTamañoLista()+"- " +this.nombreItem+ " ";
-	}
-	
-	@Override
-	public int getTamañoLista() {
-		return personajeDecorado.getTamañoLista()+1;
-	}
-
-
 }

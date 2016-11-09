@@ -14,8 +14,8 @@ public class Generico implements Peleador {
 				  nivel,
 				  energia;
 	protected String raza;
-	protected String item;
-	protected ArrayList<PersonajeEquipado> lista = new ArrayList<>();
+	protected Item item;
+	
 
 	/* @mauroat - 18/10/16:
 	 * El nivel del generico será un valor random <= 6.
@@ -58,24 +58,7 @@ public class Generico implements Peleador {
 		}
 	}
 
-	/*
-	private Casta setRandomCasta() {
-		Random r = new Random();
-		int aux = r.nextInt(4);
-		if(aux == 1){
-			return (new Hechicero());
-		} else if (aux == 2){
-			return (new Chaman());
-		} else {
-			return (new Guerrero());
-		}
-	}
 
-
-	private void setCasta(Casta casta) {
-		this.clase = casta;	
-	}
-	 */
 	@Override
 	public void atacar(Peleador victima){
 		if(victima.estaVivo()){
@@ -108,7 +91,7 @@ public class Generico implements Peleador {
 	
 	@Override
 	public boolean puedeAtacar(){
-		return this.energia >=10;		
+		return this.energia >= 10;		
 	}
 	
 	/*@mauroat - 18/10/16
@@ -195,54 +178,58 @@ public class Generico implements Peleador {
 		this.raza = raza;
 	}
 	
-	public String getNombreItem(){
-		return this.item;
-	}
-	
+
 	public void setRandomItem(){
 		Random r = new Random();
-		int aux = r.nextInt(9);
+		int aux = r.nextInt(14);
 		if(aux == 1){
-			this.item = "Armadura de Azor Ahai";
+			this.item = new ArmaduraDeAzorAhai();
 		} else if (aux == 2){
-			this.item = "Bastón de Saruman";
+			this.item = new BastonDeSaruman();
 		} else if (aux == 3){
-			this.item = "Bujía Hescher";
+			this.item = new BujiasHescher();
 		} else if (aux == 4){
-			this.item = "Daga de Dragón";
+			this.item = new DagaDeDragon();
 		} else if (aux == 5){
-			this.item = "Escudo de León";
+			this.item = new EscudoDeLeon();
 		} else if (aux == 6){
-			this.item = "Espada de Juan Nieve";
+			this.item = new EspadaDeJuanNieve();
 		} else if (aux == 7){
-			this.item = "Guante de Poder";
+			this.item = new GuanteDePoder();
 		} else if (aux == 8){
-			this.item = "Lanza en llamas";
+			this.item = new LanzaEnLlamas();
 		} else if (aux == 9){
-			this.item = "Poción bruta";
+			this.item = new PocionBruta();
 		} else if (aux == 10){
-			this.item = "Poción multijugos";
+			this.item = new PocionMultijugos();
 		} else if (aux == 11){
-			this.item = "Poción sabiduría";
+			this.item = new PocionSabiduria();
 		} else if (aux == 12){
-			this.item = "Runa de Magia";
-		} else {
-			this.item = "Tótem de protección";
+			this.item = new RunaDeMagia();		
+		}  else if (aux == 12){
+			this.item = new EspadaDeAragorn();			
+		}else {
+			this.item = new TotemProteccion();
 		} 		
 	}
 
-	public String getItem() {
+	public Item getItem() {
 		return item;
 	}
 
-	public void setItem(String item) {
+	public void setItem(Item item) {
 		this.item = item;
 	}
 
+
 	@Override
-	public Personaje dejarMejorItem() {
-		// ESTE METODO NO SE USA !!
-		return null;
+	public void agregarItem(Item i) {
+		// Este metodo no hace nada		
+	}
+
+	@Override
+	public Item dejarItem() {
+		return getItem();
 	}
 	
 	

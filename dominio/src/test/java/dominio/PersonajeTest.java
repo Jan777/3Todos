@@ -65,7 +65,7 @@ public class PersonajeTest {
 		Personaje e = new Elfo("ElfoE","123");
 		
 		// Equipo a un humano con una bujía Hescher
-		h = new BujiaHescher(h);		
+		h = new BujiasHescher(h);		
 		Assert.assertEquals("Humano", h.getRaza());
 		Assert.assertEquals(100, h.getVida());
 		Assert.assertEquals(10+1,h.calcularPuntosDeAtaque());

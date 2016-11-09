@@ -2,45 +2,14 @@ package items;
 
 import dominio.*;
 
-public class GuanteDePoder extends PersonajeEquipado{
-	private Personaje p;
-	
-	public GuanteDePoder(Personaje p) {
-		super(p);
-		this.p = p;		
-		this.prioridad=2;
-		this.nombreItem = "Guante de Poder";
-	}
+public class GuanteDePoder extends Item{
 
-	@Override
-	public int calcularPuntosDeAtaque() {
-		return super.calcularPuntosDeAtaque()+2;
+	public GuanteDePoder(){
+		super();
+		this.prioridad = 2;
+		this.nombre = "Guante de poder";
+		this.ataque = 2;
+		this.defensa = 1;
+		this.magia = 3;
 	}
-
-	@Override
-	public int calcularPuntosDeDefensa() {
-		return super.calcularPuntosDeDefensa()+1;
-	}
-
-	@Override
-	public int calcularPuntosDeMagia() {
-		return super.calcularPuntosDeMagia()+3;
-	}
-	
-	@Override
-	public void setPersonajeDecorado(Personaje personajeDecorado) {
-		this.personajeDecorado = personajeDecorado;
-	}
-	
-	@Override
-	public String getLista() {
-		return personajeDecorado.getLista() + " "+getTamañoLista()+"- " +this.nombreItem+ " ";
-	}
-	
-	@Override
-	public int getTamañoLista() {
-		return personajeDecorado.getTamañoLista()+1;
-	}
-
-
 }

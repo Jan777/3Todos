@@ -41,7 +41,7 @@ public class Historia06Test {
 		 * Lo equipo con una bujía Hescher
 		 * */
 		
-		p1 = new BujiaHescher(p1);
+		p1 = new BujiasHescher(p1);
 		
 		/*
 		 * Verifico el valor de los atributos:
