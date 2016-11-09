@@ -22,8 +22,8 @@ public class PeleadorTest {
 	
 	@Test
 	public void peleadorTest() {
-		Personaje orco = new Orco("Orcazo","123");
-		Personaje elfo = new Elfo("Elfazo","123");
+		Personaje orco = new Orco("Orcazo");
+		Personaje elfo = new Elfo("Elfazo");
 		
 		
 		/* Con el Orco ataca 15 veces al humano. Debería dejar de atacar cuando el Orco se quede sin energia */		
@@ -31,7 +31,7 @@ public class PeleadorTest {
 			orco.atacar(elfo);
 		
 		
-		Assert.assertEquals(51, elfo.getVida());		
+		Assert.assertEquals(44, elfo.getVida());		
 
 		
 		/* Ahora energizo al Orco y termino de rematar al humano. Deberia aumentar la experiencia del Orco*/
@@ -42,8 +42,8 @@ public class PeleadorTest {
 			
 		orco.serEnergizado();
 		
-		Assert.assertEquals(104, orco.getExperiencia());
-		Assert.assertEquals(9, elfo.getVida());
+		Assert.assertEquals(106, orco.getExperiencia());
+		Assert.assertEquals(-4, elfo.getVida());
 
 	}
 	
@@ -54,10 +54,10 @@ public class PeleadorTest {
 	
 	@Test
 	public void peleadorTestSubirNivel() {
-		Personaje orco = new Orco("Orcazo","123");
-		Personaje humano1 = new Humano("Humanazo","123");
-		Personaje elfo1 = new Elfo("Elfazo","123");
-		Personaje elfo2 = new Elfo("Elfazito","123");
+		Personaje orco = new Orco("Orcazo");
+		Personaje humano1 = new Humano("Humanazo");
+		Personaje elfo1 = new Elfo("Elfazo");
+		Personaje elfo2 = new Elfo("Elfazito");
 			
 		for (int i = 0; i<9;i++)			
 			orco.atacar(humano1);
@@ -75,9 +75,9 @@ public class PeleadorTest {
 			orco.atacar(elfo2);
 		
 		
-		Assert.assertEquals(226, orco.getExperiencia());
-		Assert.assertEquals(3, orco.getNivel());
-		Assert.assertEquals(4, orco.getPuntos());
+		Assert.assertEquals(210, orco.getExperiencia());
+		Assert.assertEquals(2, orco.getNivel());
+		Assert.assertEquals(2, orco.getPuntos());
 	}
 	
 	/*	@mauroat - 18-10-16:
@@ -94,23 +94,21 @@ public class PeleadorTest {
 		 * */
 				
 		// Sin items
-		Personaje humano = new Humano("Indio Solari","123");
+		Personaje humano = new Humano("Indio Solari");
 		Personaje item;
 
-		Assert.assertEquals(0, humano.getTamañoLista());
+		Assert.assertEquals(0, humano.getMochila().size());
 		
-		// 1 item
-		humano = new BastonDeSaruman(humano);
-		Assert.assertEquals(1, humano.getTamañoLista());		
-		// 2 items
-		humano = new BujiasHescher(humano);		
-		Assert.assertEquals(2, humano.getTamañoLista());		
-		// 3 items
-		humano = new ArmaduraDeAzorAhai(humano);
-		Assert.assertEquals(3, humano.getTamañoLista());	
+		// Agrego 3 items
+		humano.agregarItem(new BastonDeSaruman());
+		humano.agregarItem(new BujiasHescher());
+		humano.agregarItem(new ArmaduraDeAzorAhai());
+		
+		
+		Assert.assertEquals(3, humano.getMochila().size());	
 		
 		// Obtengo mejor item del peleador: Bujia Hescher
-		Assert.assertEquals("Bujía Hescher", humano.dejarMejorItem().getNombreItem());
+		Assert.assertEquals("Bujias Hescher", humano.dejarItem().getNombre());
 				
 	}
 
@@ -118,32 +116,36 @@ public class PeleadorTest {
 	public void peleadorDejarMejorItemDistintasPosiciones() {
 				
 		// El mejor al comienzo
-		Personaje humano = new Humano("Indio Solari","123");
-
-		humano = new BujiasHescher(humano);	
-		humano = new BastonDeSaruman(humano);
-		humano = new BujiasHescher(humano);		
-		humano = new ArmaduraDeAzorAhai(humano);
-
-		Assert.assertEquals("Bujía Hescher", humano.dejarMejorItem().getNombreItem());
+		Personaje humano = new Humano("Indio Solari");
+		humano.setClase(new Guerrero());
+		
+		humano.agregarItem(new BujiasHescher());
+		humano.agregarItem(new BastonDeSaruman());
+		humano.agregarItem(new BujiasHescher());
+		humano.agregarItem(new ArmaduraDeAzorAhai());
+		
+		
+		Assert.assertEquals("Bujias Hescher", humano.dejarItem().getNombre());
 		
 		// El mejor al comienzo
-		Personaje orco = new Orco("Indio Solari","123");
+		Personaje orco = new Orco("Indio Solari");
 		
-		orco = new BastonDeSaruman(orco);
-		orco = new BujiasHescher(orco);		
-		orco = new ArmaduraDeAzorAhai(orco);
+		orco.agregarItem(new BastonDeSaruman());
+		orco.agregarItem(new BujiasHescher());
+		orco.agregarItem(new ArmaduraDeAzorAhai());
 
-		Assert.assertEquals("Bujía Hescher", orco.dejarMejorItem().getNombreItem());
+		Assert.assertEquals("Bujias Hescher", orco.dejarItem().getNombre());
+		Assert.assertEquals(3, humano.getMochila().size());
 		
 		// El mejor al final
-		Personaje elfo = new Elfo("Indio Solari","123");
+		Personaje elfo = new Elfo("Indio Solari");
 				
-		elfo = new BastonDeSaruman(elfo);
-		elfo = new BujiasHescher(elfo);		
-		elfo = new ArmaduraDeAzorAhai(elfo);
+		elfo.agregarItem(new BastonDeSaruman());
+		elfo.agregarItem(new BujiasHescher());
+		elfo.agregarItem(new ArmaduraDeAzorAhai());
 
-		Assert.assertEquals("Bujía Hescher", elfo.dejarMejorItem().getNombreItem());
+		Assert.assertEquals("Bujias Hescher", elfo.dejarItem().getNombre());
+		Assert.assertEquals(2, elfo.getMochila().size());
 	}
 	
 	
@@ -151,89 +153,81 @@ public class PeleadorTest {
 	public void peleadorDejarMejorItemSiEstaRepetido() {
 			
 		// Sin items
-		Personaje humano = new Humano("Indio Solari","123");
-		Personaje item;
+		Personaje humano = new Humano("Indio Solari");
+		humano.setClase(new Guerrero());
 		
-		Assert.assertEquals(0, humano.getTamañoLista());
 		
-		// 1 item
-		humano = new BastonDeSaruman(humano);
-		Assert.assertEquals(1, humano.getTamañoLista());		
-		// 2 items
-		humano = new BujiasHescher(humano);		
-		Assert.assertEquals(2, humano.getTamañoLista());		
-		// 3 items
-		humano = new BujiasHescher(humano);
-		Assert.assertEquals(3, humano.getTamañoLista());
+		Assert.assertEquals(0, humano.getMochila().size());
+			
+		// 4 items - 2 repetidos
+		humano.agregarItem(new BujiasHescher());
+		humano.agregarItem(new BastonDeSaruman());
+		humano.agregarItem(new BujiasHescher());
+		humano.agregarItem(new ArmaduraDeAzorAhai());
+		
+		Assert.assertEquals(4, humano.getMochila().size());
+		
 		
 		// Obtengo mejor item del peleador: Bujia Hescher
-		Assert.assertEquals("Bujía Hescher", humano.dejarMejorItem().getNombreItem());
+		Assert.assertEquals("Bujias Hescher", humano.dejarItem().getNombre());
 			
 	}
 	
 	
-	@Test
-	public void peleadorSeDesequipaConMejorItem() {
-		
-		// El mas importante al final de la lista
-		Personaje humano = new Humano("Indio Solari","123");
-		
-		humano = new BastonDeSaruman(humano);
-		humano = new ArmaduraDeAzorAhai(humano);
-		humano = new BujiasHescher(humano);	
-		humano = humano.desequipar((PersonajeEquipado)humano.dejarMejorItem());
-		//Assert.assertEquals("Humano equipado con: 1- Bastón de Saruman  2- Armadura de Azor Ahai ", humano.getLista());
-		
-		// El mas importante al principio de la lista
-		Personaje orco = new Orco("Skay Beilinson","123");
-		orco = new BujiasHescher(orco);	
-		orco = new BastonDeSaruman(orco);
-		orco = new ArmaduraDeAzorAhai(orco);
-
-		orco = (orco.desequipar((PersonajeEquipado) orco.dejarMejorItem()));
-		
-		Assert.assertEquals(2, orco.getTamañoLista());
-		Assert.assertEquals("Orco equipado con: 1- Bastón de Saruman  2- Armadura de Azor Ahai ", orco.getLista());
-	}
-
 	
 	@Test
 	public void peleadorSeDesequipaConMejorItemYOtroSeEquipa() {
 		
 		
-		Personaje humano = new Humano("Indio Solari","123");
-		humano.setCasta(new Guerrero());
+		Personaje humano = new Humano("Indio Solari");
+		humano.setClase(new Guerrero());
+		
+		Personaje orco = new Orco ("Pipita");
+		orco.setClase(new Chaman());
+		
 		
 		/*
 		 * El item de mayor prioridad es BujiaHescher
 		 * */
 		
-		humano = new BastonDeSaruman(humano);
-		humano = new ArmaduraDeAzorAhai(humano);
-		humano = new BujiasHescher(humano);	
+		humano.agregarItem(new BujiasHescher());
+		humano.agregarItem(new BastonDeSaruman());
+		humano.agregarItem(new ArmaduraDeAzorAhai());
 		
-		humano = (humano.desequipar((PersonajeEquipado)humano.dejarMejorItem()));
+		orco.agregarItem(humano.dejarItem());
 		
-		Assert.assertEquals(2, humano.getTamañoLista());
+		Assert.assertEquals(2, humano.getMochila().size());
+		
+		Assert.assertEquals(1, orco.getMochila().size());
 
-		
-		
-		// El mas importante al principio de la lista
-		Personaje orco = new Orco("Skay Beilinson","123");
-		orco.setCasta(new Hechicero());
-		
-		orco = new BujiasHescher(orco);	
-		orco = new BastonDeSaruman(orco);
-		orco = new ArmaduraDeAzorAhai(orco);
-		
-		
-		
-		orco = (orco.desequipar((PersonajeEquipado) orco.dejarMejorItem()));
-		
-		Assert.assertEquals(2, orco.getTamañoLista());
-		
-		//Assert.assertEquals("Humano equipado con: 1- Bastón de Saruman  2- Armadura de Azor Ahai ", humano.getLista());
-		
-		
 	}
+	/*
+	 * La idea aqui es que cuando un personaje tenga mas defensa que ataque su oponente, su vida no 
+	 * aumente mas alla de 100	 * 
+	 * */
+	@Test
+	public void evitarInanicionEnVida(){
+		Personaje p1 = new Humano("Pipito");
+		p1.setClase(new Chaman());
+		
+		
+		Personaje p2 = new Elfo("Pipito");
+		p2.setClase(new Chaman());
+		p2.agregarItem(new PocionBruta());
+		p2.agregarItem(new PocionBruta());
+		p2.agregarItem(new PocionBruta());
+		p2.agregarItem(new PocionBruta());
+		
+		
+		/*
+		 * Humano tiene +5 de defensa
+		 * Elfo tiene +6 de ataque
+		 * Le agrego 4 pociones brutas que disminuyen en 2 el ataque, entonces su ataque sera -8+6 = -2
+		 * */
+		
+		p2.atacar(p1);
+		Assert.assertEquals(100, p1.getVida());
+	}
+	
+
 }

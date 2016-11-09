@@ -15,8 +15,8 @@ public class RegeneracionTest {
 	 * */
 	@Test
 	public void atacarRegeneracion() {
-		Personaje e1 = new Elfo("Ditto","hds");
-		Personaje e2 = new Elfo("Pikachu","fere");
+		Personaje e1 = new Elfo("Ditto");
+		Personaje e2 = new Elfo("Pikachu");
 		// Ditto agrega el ataque Regeneracion y verifico que el daño que causa sea 30
 		e1.agregarAtaque(new Regeneracion());
 		Assert.assertEquals(30, e1.getAtaque("Regeneración").aplicarAtaque());

@@ -35,12 +35,15 @@ public class Historia13Test {
 		 * Creo los personajes
 		 * */
 		
-		Personaje p1 = new Orco("gato","loco");
-		Personaje p2 = new Humano("perro","loco");
-		p1.setCasta(new Guerrero());
-		p2.setCasta(new Chaman());
-		p1 = new DagaDeDragon(p1);
-		p1 = new EspadaDeJuanNieve(p1);
+		Personaje p1 = new Orco("gato");
+		p1.setClase(new Guerrero());
+		p1.agregarItem(new DagaDeDragon());
+		p1.agregarItem(new EspadaDeJuanNieve());
+		
+		Personaje p2 = new Humano("perro");
+		p2.setClase(new Chaman());
+		
+	
 		
 		/*
 		 * Verifico experiencia y nivel

@@ -37,19 +37,17 @@ public class Historia07Test {
 		/**
 		 * 7.1.1.	Personaje con otro personaje
 		 * */
-		Personaje p1 = new Humano("Fito","Paez");
-		Personaje p2 = new Elfo("Chano","Charpentier");
-		p1.setCasta(new Hechicero());
-		p1.setCasta(new Chaman());
+		Personaje p1 = new Humano("Fito");
+		p1.setClase(new Hechicero());
 		
 		
-		/*
-		 * Equipo al p2 con 2 items: el mas prioritario es Pocion Sabiduria
-		 * */
+		Personaje p2 = new Elfo("Chano");
+		p2.setClase(new Chaman());
+		p2.agregarItem(new RunaDeMagia());
+		p2.agregarItem(new PocionSabiduria());
 		
-		p2 = new RunaDeMagia(p2);
-		p2 = new PocionSabiduria(p2);
 		
+		// IMPLEMENTAR ATAQUE ENTRE EQUIPOS
 		/*
 		 * Combate entre p1 y p2 
 		 */
@@ -61,23 +59,27 @@ public class Historia07Test {
 			p1.serEnergizado();			
 		}
 		
-		if(!p2.estaVivo()){
-			PersonajeEquipado mejorItem = (PersonajeEquipado) p2.dejarMejorItem();
-			p2 = p2.desequipar((PersonajeEquipado)p2.dejarMejorItem());
-			p1 = p1.equipar(mejorItem);
-	
-		}
+		if(!p2.estaVivo())
+			p1.agregarItem(p2.dejarItem());
+
+		/*
+		 * Personaje p1 agrega 1 item y p2 deja 1 item 
+		 * */
 		
-		Assert.assertEquals(1, p1.getTamañoLista());
-		Assert.assertEquals("Poción sabiduría", p1.getNombreItem());
+		Assert.assertEquals(1, p1.getMochila().size());
+		Assert.assertEquals("Pocion sabiduria", p1.getMochila().get(0).getNombre());
+		
+		Assert.assertEquals(1, p2.getMochila().size());
+		
+		
 		
 		/**
 		 * 7.1.2.	Personaje con genérico
 		 * */
-		Personaje p3 = new Humano("Fito","Paez");
-		p3.setCasta(new Hechicero());
-		p3.setCasta(new Chaman());
-		p3 = new EspadaDeJuanNieve(p3);
+		Personaje p3 = new Humano("Fito");
+		p3.setClase(new Hechicero());
+		p3.agregarItem(new EspadaDeJuanNieve());
+		
 		Generico g1 = new Generico();
 		
 	
@@ -97,11 +99,12 @@ public class Historia07Test {
 			p3.serEnergizado();			
 		}
 		
-		if(!g1.estaVivo()){			
-			p1 = p1.equipar(g1.getItem());
-		}
+		if(!g1.estaVivo())	
+			p1.agregarItem(g1.dejarItem());
+			
 		
-		Assert.assertEquals(2, p1.getTamañoLista());
+		
+		Assert.assertEquals(2, p1.getMochila().size());
 		
 	}
 	
@@ -136,8 +139,8 @@ public class Historia07Test {
 		/*
 		 * Creo un objeto personaje estandar
 		 * */
-		Personaje p1 = new Humano("Pepito","Pepote");
-		p1.setCasta(new Guerrero());
+		Personaje p1 = new Humano("Pepito");
+		p1.setClase(new Guerrero());
 		
 		/*
 		 * Verifico el valor de los atributos:
@@ -149,8 +152,8 @@ public class Historia07Test {
 		 * Potencia: 0
 		 * */
 		
-		Assert.assertEquals(10, p1.calcularPuntosDeAtaque());
-		Assert.assertEquals(10, p1.calcularPuntosDeDefensa());
+		Assert.assertEquals(15, p1.calcularPuntosDeAtaque());
+		Assert.assertEquals(5, p1.calcularPuntosDeDefensa());
 		Assert.assertEquals(0, p1.calcularPuntosDeMagia());
 		Assert.assertEquals(0, p1.getVelocidad());
 		Assert.assertEquals(0, p1.getDestreza());
@@ -159,8 +162,8 @@ public class Historia07Test {
 		/*
 		 * Equipo al p1 con un item
 		 * */
-		
-		p1 = new PocionSabiduria(p1);
+		p1.agregarItem(new PocionSabiduria());
+	
 		
 		/*
 		 * Verifico el nuevo valor de sus atributos:
@@ -172,8 +175,8 @@ public class Historia07Test {
 		 * Potencia: 0
 		 * */
 		
-		Assert.assertEquals(10, p1.calcularPuntosDeAtaque());
-		Assert.assertEquals(10+2, p1.calcularPuntosDeDefensa());
+		Assert.assertEquals(15, p1.calcularPuntosDeAtaque());
+		Assert.assertEquals(5+2, p1.calcularPuntosDeDefensa());
 		Assert.assertEquals(0+3, p1.calcularPuntosDeMagia());
 		Assert.assertEquals(0, p1.getVelocidad());
 		Assert.assertEquals(0, p1.getDestreza());
@@ -196,8 +199,8 @@ public class Historia07Test {
 		 * Potencia: 0
 		 * */
 		
-		Assert.assertEquals(10+2, p1.calcularPuntosDeAtaque());
-		Assert.assertEquals(10+2, p1.calcularPuntosDeDefensa());
+		Assert.assertEquals(15+2, p1.calcularPuntosDeAtaque());
+		Assert.assertEquals(5+2, p1.calcularPuntosDeDefensa());
 		Assert.assertEquals(0+3, p1.calcularPuntosDeMagia());
 		Assert.assertEquals(0, p1.getVelocidad());
 		Assert.assertEquals(0, p1.getDestreza());

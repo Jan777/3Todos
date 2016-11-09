@@ -3,6 +3,7 @@ package razas;
 import org.junit.Assert;
 import org.junit.Test;
 
+import castas.*;
 import dominio.Personaje;
 
 public class HumanoTest {
@@ -11,9 +12,9 @@ public class HumanoTest {
 	 * */
 	@Test
 	public void constructorHumano(){
-		Personaje h = new Humano("Chespirito","Acapulco");
-		
-		Assert.assertEquals("Chespirito", h.toString());
+		Personaje h = new Humano("Chespirito");
+		h.setClase(new Guerrero());
+		Assert.assertEquals("Chespirito", h.getNombre());
 		Assert.assertEquals(100, h.getEnergia());
 		Assert.assertEquals(100, h.getVida());
 		Assert.assertEquals(1, h.getNivel());
@@ -22,6 +23,6 @@ public class HumanoTest {
 		Assert.assertEquals(10, h.calcularPuntosDeDefensa());
 		Assert.assertEquals(0, h.calcularPuntosDeMagia());
 		Assert.assertEquals("Humano", h.getRaza());
-			
+		Assert.assertEquals("Guerrero", h.getClase().getNombre());		
 	}
 }

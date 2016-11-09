@@ -33,12 +33,14 @@ public class Historia14Test {
 		 * Creo los personajes
 		 * */
 		
-		Personaje p1 = new Elfo("gato","loco");
-		Personaje p2 = new Elfo("perro","loco");
-		p1.setCasta(new Guerrero());
-		p2.setCasta(new Chaman());
-		p1 = new DagaDeDragon(p1);
-		p1 = new EspadaDeJuanNieve(p1);
+		Personaje p1 = new Elfo("gato");
+		p1.setClase(new Guerrero());
+		p1.agregarItem(new DagaDeDragon());
+		p1.agregarItem(new EspadaDeJuanNieve());
+		
+		Personaje p2 = new Elfo("perro");	
+		p2.setClase(new Chaman());
+
 		/*
 		 * Verifico experiencia, nivel y cantidad de ataques que puede agregar
 		 * */
@@ -54,14 +56,13 @@ public class Historia14Test {
 			p1.atacar(p2);
 			p1.atacar(p2);
 			p1.atacar(p2);
-			if(p1.getEnergia()<10+p1.calcularPuntosDeAtaque()){
-				p1.serEnergizado();
-			}
+			p1.serEnergizado();
 			
 			if(!p2.estaVivo()){			
 				p2.serCurado();
 			}
 		}
+		
 		p1.atacar(p2);
 		p1.atacar(p2);
 		

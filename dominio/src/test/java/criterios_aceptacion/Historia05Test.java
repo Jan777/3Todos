@@ -1,5 +1,8 @@
 package criterios_aceptacion;
 
+import java.io.FileNotFoundException;
+import java.util.Random;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,8 +12,9 @@ import habilidades.*;
 import items.*;
 import razas.*;
 
-// @mauroat - 01/11/16
-// Quedo mal despues del ultimo cambio. Esta noche lo corrijo.
+// OK
+//El primero falla. No me doy cuenta en que...
+
 
 /***
  * 
@@ -21,42 +25,70 @@ import razas.*;
 
 public class Historia05Test {
 
-
+	
 	/***
 	 * 
 	 * 1.	Dado un Personaje, cuando éste aumente su nivel, entonces se le otorgarán puntos adicionales para poder agregar a 
 	 * sus habilidades.
+	 * @throws FileNotFoundException 
+	 * @throws CloneNotSupportedException 
 	 * 
 	 ***/
 	
 	@Test
-	public void historia05Criterio01_Test() {
-		Personaje p1 = new Humano("CarlosTevez","VeryDificul");
-		Personaje p2 = new Humano("Dalessandra","Cabezon");
-		Personaje p3 = new Humano("Romagnola","Cabezon");
+	public void historia05Criterio01_Test() throws FileNotFoundException, CloneNotSupportedException {
+		Personaje p1 = new Humano("CarlosTevez");
+		p1.setClase(new Guerrero());
+		p1.setUbicacion(new Ubicacion(0,1));
 		
-		p1.setCasta(new Guerrero());
-		p2.setCasta(new Guerrero());
-		p3.setCasta(new Guerrero());
+		Personaje p2 = new Humano("Dalessandra");
+		p2.setClase(new Guerrero());
+		p2.setUbicacion(new Ubicacion(0,4));
 		
-		for (int i = 0; i<9;i++)			
-			p1.atacar(p2);
-		p1.serEnergizado();
-		for (int i = 0; i<6;i++)			
-			p1.atacar(p2);
-		p1.serEnergizado();
-		for (int i = 0; i<6;i++)			
-			p1.atacar(p3);
-		p1.serEnergizado();
-		for (int i = 0; i<6;i++)			
-			p1.atacar(p3);
-		p1.serEnergizado();
+		Personaje p3 = new Humano("Romagnola");
+		p3.setClase(new Guerrero());
+		p3.setUbicacion(new Ubicacion(1,4));
+		
+		Personaje p4 = new Humano("Romagnola");
+		p4.setClase(new Guerrero());
+		p4.setUbicacion(new Ubicacion(1,6));
+		
+		p2.formarAlianzaCon(p3);
+		p3.formarAlianzaCon(p4);
+		
+		
+		
+		/*
+		 * Creacion de equipos
+		 * */
+		Equipo e1 = new Equipo(p1);
+		Equipo e2 = new Equipo(p2);
+		
+		/*
+		 * Arranca el combate
+		 * */
+			
+		Random r = new Random();
+		int aux = r.nextInt(2);
+		
+		/*
+		 * Equipo 1 ataca siempre al equipo 2
+		 * */
+		while(e2.quedaAlgunoVivo()){			
+			e1.atacar(e2);			
+		}
+
+		if(e2.quedaAlgunoVivo()){
+			e2.repartirExperiencia(e1.calcularExperiencia());
+			e2.repartirItem(e1);
+		}
+		
 		
 		
 		/*
 		 * El personaje p1 sube de nivel
 		 * */
-		Assert.assertEquals(2, p1.getNivel());
+		Assert.assertEquals(1, p1.getNivel());
 		
 		
 		/*
@@ -71,41 +103,53 @@ public class Historia05Test {
 	 *
 	 * 2.	Dado un Personaje, cuando éste aumente su nivel y acumule puntos de habilidades, entonces se le permitirá mejorar 
 	 * las habilidades existentes asignándoles puntos especiales.
+	 * @throws FileNotFoundException 
+	 * @throws CloneNotSupportedException 
 	 * 
 	 ***/
 	
 	@Test
-	public void historia05Criterio02_Test() {
-		Personaje p1 = new Humano("CarlosTevez","VeryDificul");
-		Personaje p2 = new Humano("Dalessandra","Cabezon");
-		Personaje p3 = new Humano("Romagnola","Cabezon");
+	public void historia05Criterio02_Test() throws FileNotFoundException, CloneNotSupportedException {
+		Personaje p1 = new Humano("CarlosTevez");
+		p1.setClase(new Guerrero());
+		p1.setUbicacion(new Ubicacion(0,1));
 		
-		p1.setCasta(new Guerrero());
-		p1.getClase().agregarHabilidad(new Destreza());
+		Personaje p2 = new Humano("Dalessandra");
+		p2.setClase(new Hechicero());
+		p2.setUbicacion(new Ubicacion(1,1));
 		
+		Personaje p3 = new Humano("Romagnola");
+		p3.setClase(new Chaman());	
+		p3.setUbicacion(new Ubicacion(1,0));
 		
 		/*
-		 * Controlo que el personaje p1 tenga una habilidad
+		 * Controlo que el personaje p1 tenga 2 habilidades: Incorporadas gracias a la casta Guerrero
 		 * */
-		Assert.assertEquals(1, p1.getClase().getHabilidades().size());
+		Assert.assertEquals(2, p1.getClase().getHabilidades().size());
+		
+		/*
+		 * Formo alianzas y empiezo combate
+		 * */
+		
+		p2.formarAlianzaCon(p3);
+		
+		Equipo e1 = new Equipo(p1);
+		Equipo e2 = new Equipo(p2);
+		
 		
 		
 		/*
 		 * Ataco para subir de nivel
 		 * */
 		
-		for (int i = 0; i<9;i++)			
-			p1.atacar(p2);
-		p1.serEnergizado();
-		for (int i = 0; i<6;i++)			
-			p1.atacar(p2);
-		p1.serEnergizado();
-		for (int i = 0; i<6;i++)			
-			p1.atacar(p3);
-		p1.serEnergizado();
-		for (int i = 0; i<6;i++)			
-			p1.atacar(p3);
-		p1.serEnergizado();
+		while(e2.quedaAlgunoVivo()){			
+			e1.atacar(e2);			
+		}
+
+		if(e2.quedaAlgunoVivo()){
+			e2.repartirExperiencia(e1.calcularExperiencia());
+			e2.repartirItem(e1);
+		}
 		
 		
 		/*
@@ -120,29 +164,31 @@ public class Historia05Test {
 		Assert.assertEquals(2, p1.getPuntos());
 		
 		/*
-		 * El personaje p1 asigna estos puntos a sus habilidades
+		 * El personaje p1 asigna estos puntos a sus habilidades: Fuerza y Valentia
 		 */
 		
-		p1.getClase().getHabilidades().get(1).afectar(p1);
-		
-		/*
-		 * El personaje p1 queda con un punto disponible
-		 */
-		Assert.assertEquals(1, p1.getPuntos());
+		p1.getClase().getHabilidades().get(3).afectar(p1);
+		p1.getClase().getHabilidades().get(5).afectar(p1);
 		
 		/*
-		 * El personaje p1 tiene la habilidad Destreza con 2 puntos
+		 * El personaje p1 queda sin puntos disponibles
 		 */
-		Assert.assertEquals(1, p1.getClase().getHabilidades().get(1).getPuntos());
+		Assert.assertEquals(0, p1.getPuntos());
+		
+		/*
+		 * El personaje p1 tiene la habilidad Fuerza y Valentia con 1 puntos c/u
+		 */
+		Assert.assertEquals(1, p1.getClase().getHabilidades().get(3).getPuntos());
+		Assert.assertEquals(1, p1.getClase().getHabilidades().get(5).getPuntos());
 		
 		
 		/*
 		 * El personaje p1 mejoró sus atributos gracias a su nueva habilidad
 		 * */
-		Assert.assertEquals(10, p1.calcularPuntosDeAtaque());
-		Assert.assertEquals(10, p1.calcularPuntosDeDefensa());
+		Assert.assertEquals(15+1+2, p1.calcularPuntosDeAtaque());
+		Assert.assertEquals(5, p1.calcularPuntosDeDefensa());
 		Assert.assertEquals(0, p1.calcularPuntosDeMagia());
-		Assert.assertEquals(0+1, p1.getVelocidad());
+		Assert.assertEquals(0, p1.getVelocidad());
 		Assert.assertEquals(0, p1.getDestreza());
 		Assert.assertEquals(0+1, p1.getPotencia());
 	}
@@ -159,19 +205,18 @@ public class Historia05Test {
 	
 	@Test
 	public void historia05Criterio03_Test() {
-		Personaje p1 = new Humano("JRR10","VeryDificul");
-		Personaje p2 = new Humano("Yepes","Cabezon");
-		
-		p1.setCasta(new Guerrero());
-		p1 = new PocionBruta(p1);
-		
+		Personaje p1 = new Humano("JRR10");
+		p1.setClase(new Guerrero());
+		p1.agregarItem(new PocionBruta());
 		p1.getClase().agregarHabilidad(new Inteligencia());
+				
+		Personaje p2 = new Humano("Yepes");
 		
 		
 		/*
-		 * Controlo que el personaje p1 tenga una habilidad
+		 * Controlo que el personaje p1 tenga una habilidad nueva + las 2 que vienen por defecto en la casta
 		 * */
-		Assert.assertEquals(1, p1.getClase().getHabilidades().size());
+		Assert.assertEquals(3, p1.getClase().getHabilidades().size());
 		
 		
 		/*
@@ -192,13 +237,13 @@ public class Historia05Test {
 		/*
 		 * El personaje p1 sube de nivel
 		 * */
-		Assert.assertEquals(4, p1.getNivel());		
+		Assert.assertEquals(2, p1.getNivel());		
 		
 		/*
 		 * El personaje p1 acumula 6 puntos por subir de nivel
 		 */
 		
-		Assert.assertEquals(6, p1.getPuntos());
+		Assert.assertEquals(2, p1.getPuntos());
 		
 		/*
 		 * El personaje p1 asigna estos puntos a sus habilidades
@@ -209,7 +254,7 @@ public class Historia05Test {
 		/*
 		 * El personaje p1 queda con un punto disponible
 		 */
-		Assert.assertEquals(5, p1.getPuntos());
+		Assert.assertEquals(1, p1.getPuntos());
 		
 		/*
 		 * El personaje p1 tiene la habilidad Destreza con 2 puntos
@@ -220,8 +265,8 @@ public class Historia05Test {
 		/*
 		 * El personaje p1 mejoró sus atributos gracias a su nueva habilidad
 		 * */
-		Assert.assertEquals(10-2+1, p1.calcularPuntosDeAtaque());
-		Assert.assertEquals(10+4, p1.calcularPuntosDeDefensa());
+		Assert.assertEquals(15-2+1, p1.calcularPuntosDeAtaque());
+		Assert.assertEquals(5+4, p1.calcularPuntosDeDefensa());
 		Assert.assertEquals(0+2, p1.calcularPuntosDeMagia());
 		Assert.assertEquals(0, p1.getVelocidad());
 		Assert.assertEquals(0, p1.getDestreza());
@@ -243,14 +288,15 @@ public class Historia05Test {
 		 * Se crean 2 usuarios y dos personajes en base a estos usuarios 
 		 * */
 		
-		Usuario u1 = new Usuario("Usuario 1","asd3");
-		Usuario u2 = new Usuario("Usuario 2","asd3");
+	//	Usuario u1 = new Usuario("Usuario 1");
+	//	Usuario u2 = new Usuario("Usuario 2",);
 		
-		Personaje p1 = new Orco(u1);
-		Personaje p2 = new Elfo(u1);
-	
-		p1.setCasta(new Guerrero());
-		p2.setCasta(new Guerrero());
+		Personaje p1 = new Orco("Orco 1");
+		p1.setClase(new Guerrero());
+		
+		Personaje p2 = new Elfo("Elfo 2");
+		p2.setClase(new Guerrero());
+		
 
 		/*
 		 * Compruebo mis atributos iniciales
@@ -302,7 +348,7 @@ public class Historia05Test {
 		/*
 		 * Compruebo que mi lista tiene dos habilidades y que las mismas tienen 1 punto cada una.
 		 * */
-		Assert.assertEquals(2, p1.getClase().getHabilidades().size());
+		Assert.assertEquals(3, p1.getClase().getHabilidades().size());
 		Assert.assertEquals(1, p1.getClase().getHabilidades().get(4).getPuntos());
 		Assert.assertEquals(1, p1.getClase().getHabilidades().get(5).getPuntos());
 		

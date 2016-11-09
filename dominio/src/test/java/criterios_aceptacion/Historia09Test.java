@@ -1,6 +1,7 @@
 package criterios_aceptacion;
 
 import java.io.FileNotFoundException;
+import java.util.Random;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -35,11 +36,12 @@ public class Historia09Test {
 		/*
 		 * Creacion de objetos
 		 * */
-		Personaje p1 = new Humano("Fernando De La Rua","123");
-		Personaje p2 = new Humano("Chacho Alvarez","123");
-		p1.setCasta(new Chaman());
-		p2.setCasta(new Guerrero());
+		Personaje p1 = new Humano("Fernando De La Rua");
+		p1.setClase(new Chaman());
 		p1.setUbicacion(new Ubicacion(0, 0));
+		
+		Personaje p2 = new Humano("Chacho Alvarez");
+		p2.setClase(new Guerrero());
 		p2.setUbicacion(new Ubicacion(3, 0));
 		
 
@@ -54,8 +56,8 @@ public class Historia09Test {
 
 		///////////		
 		
-		Personaje p3 = new Humano("Mauricio Macri","123");
-		p3.setCasta(new Hechicero());
+		Personaje p3 = new Humano("Mauricio Macri");
+		p3.setClase(new Hechicero());
 		
 		
 		/*Seteo ubicacion alejado del resto.*/
@@ -87,23 +89,28 @@ public class Historia09Test {
 		/*
 		 * Creacion de personajes y alianzas
 		 * */
-		Personaje p1 = new Humano("Mauricio Macri","123");
-		Personaje p2 = new Humano("Eugenia Vidal","123");
-		p1.setCasta(new Chaman());
-		p2.setCasta(new Guerrero());
+		Personaje p1 = new Humano("Mauricio Macri");
+		p1.setClase(new Chaman());
 		p1.setUbicacion(new Ubicacion(0, 0));
+		
+		Personaje p2 = new Humano("Eugenia Vidal");
+		p2.setClase(new Guerrero());
 		p2.setUbicacion(new Ubicacion(3, 0));
 		
 		
-		Personaje p3 = new Elfo("Carlos Perez","123");
-		Personaje p4 = new Elfo("Juan Fernandez","123");
-		p3.setCasta(new Chaman());
-		p4.setCasta(new Chaman());
+		Personaje p3 = new Elfo("Carlos Perez");
+		p3.setClase(new Chaman());
 		p3.setUbicacion(new Ubicacion(1, 4));
+		
+		Personaje p4 = new Elfo("Juan Fernandez");
+		p4.setClase(new Chaman());
 		p4.setUbicacion(new Ubicacion(100, 500));
+		
+		
 		
 		p1.formarAlianzaCon(p2);
 		p3.formarAlianzaCon(p4);
+		
 		
 		/*
 		 * Creacion de equipos
@@ -114,14 +121,41 @@ public class Historia09Test {
 		/*
 		 * Arranca el combate
 		 * */
+			
+		Random r = new Random();
+		int aux = r.nextInt(2);
 		
-		Combate c = new Combate();
+		/*
+		 * Defino quien ataca primero
+		 * */
+		while(e1.quedaAlgunoVivo() && e2.quedaAlgunoVivo() ){
+			if(aux == 1){
+				e1.atacar(e2);
+				e2.atacar(e1);
+			} else {
+				e2.atacar(e1);
+				e1.atacar(e2);
+			}		
+		}
+
+		if(e1.quedaAlgunoVivo()){
+			e1.repartirExperiencia(e2.calcularExperiencia());
+			e1.repartirItem(e2);		
+		}	else if(e2.quedaAlgunoVivo()){
+			e2.repartirExperiencia(e1.calcularExperiencia());
+			e2.repartirItem(e1);
+		}
 		
-		c.combatir(e1, e2);
+		
 		
 		Assert.assertEquals(2, e1.getListaPeleadores().size());
 		Assert.assertEquals(0, e2.getListaPeleadores().size());
 		
+		
+		/*
+		 * Si se quiere mantener esto, hay que repensarlo
+		 * 
+		 * */
 		//Assert.assertEquals(1, c.declararGanador(e1, e2));
 		
 		

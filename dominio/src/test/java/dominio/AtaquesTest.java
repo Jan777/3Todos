@@ -18,7 +18,7 @@ public class AtaquesTest {
 	 * */
 	@Test
 	public void añadirYQuitarAtaques(){
-		Personaje p = new Elfo("Gago","444");
+		Personaje p = new Elfo("Gago");
 		// Agrego dos ataques
 		p.agregarAtaque(new CuerpoACuerpo());
 		p.agregarAtaque(new Hechizo());
@@ -41,9 +41,9 @@ public class AtaquesTest {
 	@Test
 	public void atacarConAtaques() {
 		// Atacante
-		Personaje a = new Elfo("Anibal","444");
+		Personaje a = new Elfo("Anibal");
 		// Atacado
-		Personaje f = new Elfo("Falopa","444");
+		Personaje f = new Elfo("Falopa");
 		
 		// Agrego dos ataques
 		a.agregarAtaque(new CuerpoACuerpo());
@@ -54,12 +54,12 @@ public class AtaquesTest {
 		// Todo esto combinado deberia restarle un daño de 11. Sin embargo tiene +5 de defensa, 
 		// por ende su vida pasaría a ser 100-11+5 = 94
 		a.atacar(f, a.getAtaque("Hechizo"));
-		Assert.assertEquals(5,a.calcularPuntosDeAtaque());
-		Assert.assertEquals(94, f.getVida());
+		Assert.assertEquals(6,a.calcularPuntosDeAtaque());
+		Assert.assertEquals(92, f.getVida());
 		
 		// El elfo tiene por defecto 5 de ataque. Atacar con "Hechizo" causa un daño de +5.
 		// Todo esto combinado deberia restarle un daño de 11, por ende su vida pasaría a ser 89-10+5 = 89
 		a.atacar(f, a.getAtaque("Cuerpo a cuerpo"));
-		Assert.assertEquals(89, f.getVida());
+		Assert.assertEquals(85, f.getVida());
 	}
 }

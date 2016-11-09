@@ -27,7 +27,9 @@ public class Historia02Test {
 	 * 
 	 ***/
 	public void historia02Criterio01_Test(){
-		
+		/*
+		 * Criterio no testeable
+		 * */
 	}
 	
 
@@ -38,7 +40,9 @@ public class Historia02Test {
 	 * 
 	 ***/
 	public void historia02Criterio02_Test(){
-		
+		/*
+		 * Criterio no testeable
+		 * */
 	}
 	
 
@@ -56,25 +60,24 @@ public class Historia02Test {
 		*/
 		
 		/*
-		 * Creo los personajes en base a los usuarios
+		 * Creo los personajes 
 		 * */
-		Usuario u1 = new Usuario ("Skay","Paez");
-		Usuario u2 = new Usuario ("Semilla","Charpentier");
-		
-		Personaje p1 = new Humano(u1);
-		Personaje p2 = new Elfo(u2);
-		
-		p1.setCasta(new Hechicero());
-		p2.setCasta(new Chaman());
+
+
+		Personaje p1 = new Humano("Skay");
+		p1.setClase(new Hechicero());
 		
 		
 		/*
-		 * Equipo al p2 con 2 items: el mas prioritario es Pocion Sabiduria
+		 * Equipo al p2 con 2 items: el mas prioritario es Pocion Sabiduria 
 		 * */
 		
-		p2 = new RunaDeMagia(p2);
-		p2 = new PocionSabiduria(p2);
+		Personaje p2 = new Elfo("Semilla");
+		p2.setClase(new Chaman());
+		p2.agregarItem(new RunaDeMagia());
+		p2.agregarItem(new PocionSabiduria());
 		
+				
 		/*
 		 * Como recien está creado, su experiencia es 0
 		 * */
@@ -91,19 +94,19 @@ public class Historia02Test {
 			p1.serEnergizado();			
 		}
 		
+		/*
+		 * Cuando muera p2, le desequipo su mejor item y se lo agrego a p1
+		 * */
 		if(!p2.estaVivo()){
-			PersonajeEquipado mejorItem = (PersonajeEquipado) p2.dejarMejorItem();
-			p2 = p2.desequipar((PersonajeEquipado)p2.dejarMejorItem());
-			p1 = p1.equipar(mejorItem);
-	
+			p1.agregarItem(p2.dejarItem());	
 		}
 		
 		/*
 		 * La lista de items del personaje p1 ahora es 1 ya que obtuvo el mejor item del eliminado
 		 * */
 		
-		Assert.assertEquals(1, p1.getTamañoLista());
-		Assert.assertEquals("Poción sabiduría", p1.getNombreItem());
+		Assert.assertEquals(1, p1.getMochila().size());
+		Assert.assertEquals("Pocion sabiduria", p1.getMochila().get(0).getNombre());
 		
 		/*
 		 * Luego de atacar, su experiencia ya no es 0
@@ -114,9 +117,8 @@ public class Historia02Test {
 		 * 2.3.2.	Personaje contra Generico
 		*/
 		
-		Usuario u3 = new Usuario ("Dawi","Paez");
-		Personaje p3 = new Humano(u3);
-		p3.setCasta(new Hechicero());
+		Personaje p3 = new Humano("Pipi");
+		p3.setClase(new Hechicero());
 		
 		Generico g1 = new Generico();
 		
@@ -136,14 +138,14 @@ public class Historia02Test {
 		 * */
 		
 		if(!g1.estaVivo()){			
-			p3 = p3.equipar(g1.getItem());
+			p3.agregarItem(g1.dejarItem());			
 		}
 		
 		/*
 		 * Controlo que la lista de p3 tenga un item
 		 * */
 		
-		Assert.assertEquals(1, p3.getTamañoLista());
+		Assert.assertEquals(1, p3.getMochila().size());
 		
 	}
 	
@@ -157,21 +159,17 @@ public class Historia02Test {
 	@Test
 	public void historia02Criterio04_Test() {
 		/*
-		 * Se crean 2 usuarios y dos personajes en base a estos usuarios 
+		 * Se crean 2 personajes 
+		 * La casta Guerrero le agrega fuerza a estos personajes
 		 * */
 		
-		Usuario u1 = new Usuario("Usuario 1","asd3");
-		Usuario u2 = new Usuario("Usuario 2","asd3");
 		
-		Personaje p1 = new Orco(u1);
-		Personaje p2 = new Elfo(u1);
+		Personaje p1 = new Orco("Usuario 1");
+		p1.setClase(new Guerrero());
 		
-		/*
-		 * La casta Guerrero agrega la habilidad Fuerza 
-		 * */
+		Personaje p2 = new Elfo("Usuario 2");
+		p2.setClase(new Guerrero());
 		
-		p1.setCasta(new Guerrero());
-		p2.setCasta(new Guerrero());
 
 		/*
 		 * Compruebo mis atributos iniciales
@@ -193,10 +191,7 @@ public class Historia02Test {
 			p1.atacar(p2);
 			p1.atacar(p2);
 			p1.atacar(p2);
-			if(p1.getEnergia()<10+p1.calcularPuntosDeAtaque()){
-				p1.serEnergizado();
-			}
-			
+			p1.serEnergizado();	
 		}
 		
 		/*

@@ -39,16 +39,19 @@ public class Historia03Test {
 		 * ****************************************************/
 		
 		// Creación de personajes
-		Personaje o1 = new Orco ("Orquito1","123");
-		Personaje o2 = new Orco ("Orquito2","123");
-		o1.setCasta(new Guerrero());
-		o2.setCasta(new Guerrero());
-		o1 = new EspadaDeJuanNieve(o1);
-		o1 = new DagaDeDragon(o1);
+		Personaje o1 = new Orco ("Orquito1");
+		o1.setClase(new Guerrero());
+		o1.agregarItem(new EspadaDeJuanNieve());
+				
+		
+		Personaje o2 = new Orco ("Orquito2");		
+		o2.setClase(new Guerrero());		
+		o2.agregarItem(new DagaDeDragon());
 		
 		// Verifico mi experiencia inicial
 		Assert.assertEquals(0, o1.getExperiencia());
-		Assert.assertEquals(12+4+5, o1.calcularPuntosDeAtaque());
+		Assert.assertEquals(12+5, o1.calcularPuntosDeAtaque());
+		
 		// Verifico el nivel del Orco 2
 		Assert.assertEquals(1, o2.getNivel());
 		
@@ -71,7 +74,7 @@ public class Historia03Test {
 		 * El atacante debe ganar 8 puntos de experiencia por cada ataque realizado y 10*Nivel del oponente en caso de matar 
 		 * al oponente.
 		 * */ 
-		Assert.assertEquals(6*8 + 10, o1.getExperiencia());
+		Assert.assertEquals(8*8 + 10, o1.getExperiencia());
 		
 		
 		/****************************************************
@@ -79,12 +82,13 @@ public class Historia03Test {
 		 * ****************************************************/
 		
 		// Creación de personajes
-		Personaje o3 = new Orco ("Orquito3","123");
+		Personaje o3 = new Orco ("Orquito3");
+		o3.setClase(new Hechicero());
+		o3.agregarItem(new EspadaDeJuanNieve());
+		o3.agregarItem(new DagaDeDragon());
+	
 		Generico g1 = new Generico ("Generico 1");
-		o3.setCasta(new Hechicero());
 		
-		o3 = new EspadaDeJuanNieve(o3);
-		o3 = new DagaDeDragon(o3);
 		
 		// Verifico mi experiencia inicial
 		Assert.assertEquals(0, o3.getExperiencia());
@@ -104,6 +108,9 @@ public class Historia03Test {
 			o3.serEnergizado();		
 		}
 		
+		if(!g1.estaVivo()){
+			o3.agregarItem(g1.dejarItem());
+		}
 		
 		/*
 		 * Chequeo que el Orco 2 esté muerto 
@@ -113,10 +120,11 @@ public class Historia03Test {
 		
 		/*
 		 * El atacante debe ganar 8 puntos de experiencia por cada ataque realizado y 10*Nivel del oponente en caso de matar 
-		 * al oponente.
+		 * al oponente y ademas sumar un item
 		 * El genérico tiene un nivel random entre 1 y 6, por lo tanto no es posible incluirlo en un Assert
 		 * */ 
 		
+		Assert.assertEquals(3, o3.getMochila().size());
 		//Assert.assertEquals(, o1.getExperiencia());
 		
 	}
@@ -138,19 +146,21 @@ public class Historia03Test {
 		 * Creación de personajes
 		 * */
 		
-		Personaje p1 = new Humano ("Humanito1","123");
-		Personaje p2 = new Humano ("Humanito2","123");
-		p1.setCasta(new Guerrero());
-		p2.setCasta(new Guerrero());
-		p1 = new EspadaDeJuanNieve(p1);
-		p1 = new DagaDeDragon(p1);
+		Personaje p1 = new Humano ("Humanito1");
+		p1.setClase(new Guerrero());
+		p1.agregarItem(new EspadaDeJuanNieve());
+		p1.agregarItem(new DagaDeDragon());
+		
+		Personaje p2 = new Humano ("Humanito2");
+		p2.setClase(new Guerrero());
+
 		
 		/*
-		 * Verifico mi experiencia inicial
+		 * Verifico mis valores iniciales
 		 * */
 		
 		Assert.assertEquals(0, p1.getExperiencia());
-		Assert.assertEquals(10+4+5, p1.calcularPuntosDeAtaque());
+		Assert.assertEquals(15+4+5, p1.calcularPuntosDeAtaque());
 		
 		/*
 		 * Verifico el nivel del humano 2
@@ -181,7 +191,7 @@ public class Historia03Test {
 		 * El atacante debe ganar 8 puntos de experiencia por cada ataque realizado y 10*Nivel del oponente en caso de matar 
 		 * al oponente.
 		 * */ 
-		Assert.assertEquals(11*8 + 10, p1.getExperiencia());
+		Assert.assertEquals(40 + 10, p1.getExperiencia());
 		
 		
 		/****************************************************
@@ -191,13 +201,14 @@ public class Historia03Test {
 		/*
 		 * Creación de personajes
 		 * */
-		Personaje p3 = new Humano ("Orquito3","123");
+		Personaje p3 = new Humano ("Orquito3");
+		p3.setClase(new Hechicero());
+		p3.agregarItem(new EspadaDeJuanNieve());
+		p3.agregarItem(new DagaDeDragon());
+	
 		Generico g1 = new Generico ("Generico 1");
-		p3.setCasta(new Hechicero());
 		
-		p3 = new EspadaDeJuanNieve(p3);
-		p3 = new DagaDeDragon(p3);
-		
+
 		/*
 		 * Verifico mi experiencia inicial
 		 * */
@@ -208,7 +219,7 @@ public class Historia03Test {
 		 * Verifico los puntos de ataque del humano: 10 + 5 + 4
 		 * */
 		
-		Assert.assertEquals(10+4+5, p3.calcularPuntosDeAtaque());
+		Assert.assertEquals(15+4+5, p3.calcularPuntosDeAtaque());
 		
 		// Humano 3 ataca a Genérico 1 hasta matarlo
 		while(g1.estaVivo()){
@@ -253,28 +264,30 @@ public class Historia03Test {
 		 * Creación de personajes
 		 * */
 		
-		Personaje e1 = new Elfo ("Humanito1","123");
-		Personaje e2 = new Elfo ("Humanito2","123");
-		e1.setCasta(new Guerrero());
-		e2.setCasta(new Guerrero());
-		e1 = new EspadaDeJuanNieve(e1);
-		e1 = new DagaDeDragon(e1);
+		Personaje e1 = new Elfo ("Elfito1");
+		e1.setClase(new Guerrero());
+		e1.agregarItem(new EspadaDeJuanNieve());
+		e1.agregarItem(new DagaDeDragon());
+		
+		Personaje e2 = new Elfo ("Elfito2");
+		e2.setClase(new Guerrero());
+		
 		
 		/*
 		 * Verifico mi experiencia inicial
 		 * */
 		
 		Assert.assertEquals(0, e1.getExperiencia());
-		Assert.assertEquals(5+4+5, e1.calcularPuntosDeAtaque());
+		Assert.assertEquals(6+4+5, e1.calcularPuntosDeAtaque());
 		
 		/*
-		 * Verifico el nivel del humano 2
+		 * Verifico el nivel del Elfo 2
 		 * */
 		
 		Assert.assertEquals(1, e2.getNivel());
 		
 		/*
-		 * Humano 1 ataca a Humano 2 hasta matarlo
+		 * Elfo  1 ataca a Elfo 2 hasta matarlo
 		 * */
 		
 		while(e2.estaVivo()){
@@ -287,17 +300,24 @@ public class Historia03Test {
 		
 		
 		/*
-		 * El Humano 2 muere
+		 * El Elfo 2 muere
 		 * */
 
 		Assert.assertEquals(false, e2.estaVivo());
+		
+		
+		/*
+		 * El Elfo 1 obtiene el mejor item del elfo 2. En esta caso ninguno
+		 * */
+		
+		e1.agregarItem(e2.dejarItem());
 		
 		/*
 		 * El atacante debe ganar 8 puntos de experiencia por cada ataque realizado y 10*Nivel del oponente en caso de matar 
 		 * al oponente.
 		 * */ 
-		Assert.assertEquals(11*8 + 10, e1.getExperiencia());
-		
+		Assert.assertEquals(8*9 + 10, e1.getExperiencia());
+		Assert.assertEquals(2, e1.getMochila().size());
 		
 		/****************************************************
 		 * 3.1.2 - Orco contra Genérico
@@ -306,13 +326,14 @@ public class Historia03Test {
 		/*
 		 * Creación de personajes
 		 * */
-		Personaje p3 = new Humano ("Orquito3","123");
+		Personaje p3 = new Orco ("Orquito3");
+		p3.setClase(new Hechicero());		
+		p3.agregarItem(new EspadaDeJuanNieve());
+		p3.agregarItem(new DagaDeDragon());
+		
 		Generico g1 = new Generico ("Generico 1");
-		p3.setCasta(new Hechicero());
 		
-		p3 = new EspadaDeJuanNieve(p3);
-		p3 = new DagaDeDragon(p3);
-		
+			
 		/*
 		 * Verifico mi experiencia inicial
 		 * */
@@ -320,10 +341,10 @@ public class Historia03Test {
 		Assert.assertEquals(0, p3.getExperiencia());
 		
 		/*
-		 * Verifico los puntos de ataque del humano: 10 + 5 + 4
+		 * Verifico los puntos de ataque del Orco: 12 + 5 + 4
 		 * */
 		
-		Assert.assertEquals(10+4+5, p3.calcularPuntosDeAtaque());
+		Assert.assertEquals(12+4+5, p3.calcularPuntosDeAtaque());
 		
 		// Humano 3 ataca a Genérico 1 hasta matarlo
 		while(g1.estaVivo()){

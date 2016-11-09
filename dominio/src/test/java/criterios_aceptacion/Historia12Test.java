@@ -2,6 +2,7 @@ package criterios_aceptacion;
 
 import java.io.FileNotFoundException;
 import java.util.Calendar;
+import java.util.Random;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -34,9 +35,9 @@ public class Historia12Test {
 	@Test
 	public void historia12Criterio01_Test() throws FileNotFoundException{
 
-		Personaje p1 = new Humano("jose","dssjjad");
-		Personaje p2 = new Elfo("dani","1242");
-		Personaje p3 = new Elfo("Harry","1234");
+		Personaje p1 = new Humano("jose");
+		Personaje p2 = new Elfo("dani");
+		Personaje p3 = new Elfo("Harry");
 		Alianza alianza = new Alianza("Somos re cracks");
 			
 		alianza.agregarAAlianza(p2);
@@ -70,10 +71,11 @@ public class Historia12Test {
 
 	@Test
 	public void historia12Criterio02_Test() throws FileNotFoundException, CloneNotSupportedException {
-		Personaje p1 = new Humano("Humano1", "1231");
-		Personaje p2 = new Orco("Humano2", "1231");
-		p1.setCasta(new Guerrero());
-		p2.setCasta(new Hechicero());
+		Personaje p1 = new Humano("Humano1");
+		p1.setClase(new Guerrero());
+		
+		Personaje p2 = new Orco("Humano2");		
+		p2.setClase(new Hechicero());
 
 		/*
 		 * Se preparan los equipos a pelear
@@ -96,10 +98,37 @@ public class Historia12Test {
 		 * 
 		 */
 
-		Combate c = new Combate("La Gran Batalla");
-		c.combatir(e1, e2);
+		/*
+		 * Arranca el combate
+		 * */
+			
+		Random r = new Random();
+		int aux = r.nextInt(2);
+		
+		/*
+		 * Defino quien ataca primero
+		 * */
+		while(e1.quedaAlgunoVivo() && e2.quedaAlgunoVivo() ){
+			if(aux == 1){
+				e1.atacar(e2);
+				e2.atacar(e1);
+			} else {
+				e2.atacar(e1);
+				e1.atacar(e2);
+			}		
+		}
 
-		c.declararGanador(e1, e2);
+		if(e1.quedaAlgunoVivo()){
+			e1.repartirExperiencia(e2.calcularExperiencia());
+			e1.repartirItem(e2);		
+		}	else if(e2.quedaAlgunoVivo()){
+			e2.repartirExperiencia(e1.calcularExperiencia());
+			e2.repartirItem(e1);
+		}
+		
+
+		Assert.assertEquals(true, p1.estaVivo());
+		Assert.assertEquals(false, p2.estaVivo());
 
 
 	}

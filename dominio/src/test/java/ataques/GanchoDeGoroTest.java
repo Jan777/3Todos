@@ -16,8 +16,8 @@ public class GanchoDeGoroTest {
 	 * */
 	@Test
 	public void atacarGanchoDeGoro() {
-		Personaje h1 = new Humano("Pablo Lescano","dama$grati$");
-		Personaje h2 = new Humano("Phil Collins","fere");
+		Personaje h1 = new Humano("Pablo Lescano");
+		Personaje h2 = new Humano("Phil Collins");
 		// Lescano agrega el ataque cuerpo a cuerpo y verifico que el daño que causa sea 9
 		h1.agregarAtaque(new GanchoDeGoro());
 		Assert.assertEquals(12, h1.getAtaque("Gancho de Goro").aplicarAtaque());

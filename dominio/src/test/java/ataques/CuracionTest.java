@@ -10,8 +10,8 @@ public class CuracionTest {
 	
 	@Test
 	public void atacarConCuracion() {
-		Personaje h1 = new Humano("Pablo Lescano","dama$grati$");
-		Personaje h2 = new Humano("Phil Collins","fere");
+		Personaje h1 = new Humano("Pablo Lescano");
+		Personaje h2 = new Humano("Phil Collins");
 		
 		h1.agregarAtaque(new Curacion());
 		Assert.assertEquals(-20, h1.getAtaque("Curacion").aplicarAtaque());

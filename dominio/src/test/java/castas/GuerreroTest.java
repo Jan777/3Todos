@@ -11,15 +11,15 @@ public class GuerreroTest {
 
 	@Test
 	public void guerreroConstructorTest(){
-		Personaje p = new Orco("Willy","Wonka");
-		p.setCasta(new Guerrero());
+		Personaje p = new Orco("Willy");
+		p.setClase(new Guerrero());
 		Assert.assertEquals("Guerrero", p.getNombreClase());
 	}
 	
 	@Test
 	public void guerreroAgregarAtaques(){
-		Personaje p = new Orco("Willy","Wonka");
-		p.setCasta(new Guerrero());
+		Personaje p = new Orco("Willy");
+		p.setClase(new Guerrero());
 		p.getClase().agregarHabilidad(new Destreza());
 		p.getClase().getHabilidades();
 	}

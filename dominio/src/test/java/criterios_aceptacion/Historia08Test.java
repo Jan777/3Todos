@@ -33,8 +33,9 @@ public class Historia08Test {
 		 * Declaración de objeto Personaje. Casta: Hechicero ya que contiene la habilidad Destreza
 		 * */
 		
-		Personaje p1 = new Humano("Humanito","123");
-		p1.setCasta(new Hechicero());
+		Personaje p1 = new Humano("Humanito");
+		p1.setClase(new Hechicero());
+		
 		/*
 		 * Afecto a Personaje con Destreza
 		 * */
@@ -45,12 +46,12 @@ public class Historia08Test {
 		 * Compruebo los valores de los atributos
 		 * */
 		
-		Assert.assertEquals(10, p1.calcularPuntosDeAtaque());
-		Assert.assertEquals(10, p1.calcularPuntosDeDefensa());
+		Assert.assertEquals(15, p1.calcularPuntosDeAtaque());
+		Assert.assertEquals(5, p1.calcularPuntosDeDefensa());
 		Assert.assertEquals(0, p1.calcularPuntosDeMagia());
 		Assert.assertEquals(0+1, p1.getVelocidad());
-		Assert.assertEquals(0, p1.getDestreza());
-		Assert.assertEquals(0+1, p1.getPotencia());
+		Assert.assertEquals(0+1, p1.getDestreza());
+		Assert.assertEquals(0, p1.getPotencia());
 		
 	
 	}
@@ -68,8 +69,8 @@ public class Historia08Test {
 		 * Declaración de objeto Personaje. Casta: Hechicero ya que contiene la habilidad Fuerza
 		 * */
 		
-		Personaje p1 = new Humano("Humanito","123");
-		p1.setCasta(new Guerrero());
+		Personaje p1 = new Humano("Humanito");
+		p1.setClase(new Guerrero());
 		/*
 		 * Afecto a Personaje con Fuerza
 		 * */
@@ -80,8 +81,8 @@ public class Historia08Test {
 		 * Compruebo los valores de los atributos
 		 * */
 		
-		Assert.assertEquals(10+1, p1.calcularPuntosDeAtaque());
-		Assert.assertEquals(10, p1.calcularPuntosDeDefensa());
+		Assert.assertEquals(15+1, p1.calcularPuntosDeAtaque());
+		Assert.assertEquals(5, p1.calcularPuntosDeDefensa());
 		Assert.assertEquals(0, p1.calcularPuntosDeMagia());
 		Assert.assertEquals(0, p1.getVelocidad());
 		Assert.assertEquals(0, p1.getDestreza());
@@ -102,8 +103,8 @@ public class Historia08Test {
 		 * Declaración de objeto Personaje. Casta: Hechicero ya que contiene la habilidad Inteligencia
 		 * */
 		
-		Personaje p1 = new Humano("Humanito","123");
-		p1.setCasta(new Hechicero());
+		Personaje p1 = new Humano("Humanito");
+		p1.setClase(new Hechicero());
 		/*
 		 * Afecto a Personaje con Inteligencia
 		 * */
@@ -114,8 +115,8 @@ public class Historia08Test {
 		 * Compruebo los valores de los atributos
 		 * */
 		
-		Assert.assertEquals(10+1, p1.calcularPuntosDeAtaque());
-		Assert.assertEquals(10, p1.calcularPuntosDeDefensa());
+		Assert.assertEquals(15+1, p1.calcularPuntosDeAtaque());
+		Assert.assertEquals(5, p1.calcularPuntosDeDefensa());
 		Assert.assertEquals(0, p1.calcularPuntosDeMagia());
 		Assert.assertEquals(0, p1.getVelocidad());
 		Assert.assertEquals(0, p1.getDestreza());
@@ -136,8 +137,8 @@ public class Historia08Test {
 		 * Declaración de objeto Personaje. Casta: Hechicero ya que contiene la habilidad Velocidad
 		 * */
 		
-		Personaje p1 = new Humano("Humanito","123");
-		p1.setCasta(new Chaman());
+		Personaje p1 = new Humano("Humanito");
+		p1.setClase(new Chaman());
 		/*
 		 * Afecto a Personaje con Inteligencia
 		 * */
@@ -148,8 +149,8 @@ public class Historia08Test {
 		 * Compruebo los valores de los atributos
 		 * */
 		
-		Assert.assertEquals(10+1, p1.calcularPuntosDeAtaque());
-		Assert.assertEquals(10, p1.calcularPuntosDeDefensa());
+		Assert.assertEquals(15+1, p1.calcularPuntosDeAtaque());
+		Assert.assertEquals(5, p1.calcularPuntosDeDefensa());
 		Assert.assertEquals(0, p1.calcularPuntosDeMagia());
 		Assert.assertEquals(0+1, p1.getVelocidad());
 		Assert.assertEquals(0, p1.getDestreza());
@@ -169,8 +170,8 @@ public class Historia08Test {
 		 * Declaración de objeto Personaje. Casta: Hechicero ya que contiene la habilidad Evasion
 		 * */
 		
-		Personaje p1 = new Humano("Humanito","123");
-		p1.setCasta(new Chaman());
+		Personaje p1 = new Humano("Humanito");
+		p1.setClase(new Chaman());
 		/*
 		 * Afecto a Personaje con Evasion
 		 * */
@@ -181,8 +182,8 @@ public class Historia08Test {
 		 * Compruebo los valores de los atributos
 		 * */
 		
-		Assert.assertEquals(10, p1.calcularPuntosDeAtaque());
-		Assert.assertEquals(10+2, p1.calcularPuntosDeDefensa());
+		Assert.assertEquals(15, p1.calcularPuntosDeAtaque());
+		Assert.assertEquals(5+2, p1.calcularPuntosDeDefensa());
 		Assert.assertEquals(0, p1.calcularPuntosDeMagia());
 		Assert.assertEquals(0, p1.getVelocidad());
 		Assert.assertEquals(0, p1.getDestreza());
@@ -202,8 +203,8 @@ public class Historia08Test {
 		 * Declaración de objeto Personaje. Casta: Hechicero ya que contiene la habilidad Evasion
 		 * */
 		
-		Personaje p1 = new Humano("Humanito","123");
-		p1.setCasta(new Guerrero());
+		Personaje p1 = new Humano("Humanito");
+		p1.setClase(new Guerrero());
 		/*
 		 * Afecto a Personaje con Evasion
 		 * */
@@ -214,8 +215,8 @@ public class Historia08Test {
 		 * Compruebo los valores de los atributos
 		 * */
 		
-		Assert.assertEquals(10+2, p1.calcularPuntosDeAtaque());
-		Assert.assertEquals(10, p1.calcularPuntosDeDefensa());
+		Assert.assertEquals(15+2, p1.calcularPuntosDeAtaque());
+		Assert.assertEquals(5, p1.calcularPuntosDeDefensa());
 		Assert.assertEquals(0, p1.calcularPuntosDeMagia());
 		Assert.assertEquals(0, p1.getVelocidad());
 		Assert.assertEquals(0, p1.getDestreza());

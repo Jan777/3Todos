@@ -16,8 +16,8 @@ public class HechizoTest {
 	 * */
 	@Test
 	public void atacarHechizo() {
-		Personaje e1 = new Elfo("Enrique Bunbury","hds");
-		Personaje e2 = new Elfo("Mago goma","fere");
+		Personaje e1 = new Elfo("Enrique Bunbury");
+		Personaje e2 = new Elfo("Mago goma");
 		// Lescano agrega el ataque cuerpo a cuerpo y verifico que el daño que causa sea 9
 		e1.agregarAtaque(new Hechizo());
 		Assert.assertEquals(6, e1.getAtaque("Hechizo").aplicarAtaque());

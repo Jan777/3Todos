@@ -1,6 +1,7 @@
 package criterios_aceptacion;
 
 import java.io.FileNotFoundException;
+import java.util.Random;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -40,27 +41,27 @@ public class Historia11Test {
 	
 	@Test
 	public void historia11Criterio01_Test() throws FileNotFoundException, CloneNotSupportedException {
-		Personaje p1 = new Humano("Humano1","1231");
-		Personaje p2 = new Orco("Humano2","1231");
-		Personaje p3 = new Elfo("Humano3","1231");
-		Personaje p4 = new Elfo("Humano4","1231");
-		p1.setCasta(new Guerrero());
-		p2.setCasta(new Hechicero());
-		p3.setCasta(new Chaman());
-		p4.setCasta(new Hechicero());
+		
+		Personaje p1 = new Humano("Humano1");
+		p1.setClase(new Guerrero());
 		p1.setUbicacion(new Ubicacion(0,1));
+		p1.agregarItem(new ArmaduraDeAzorAhai());
+		
+		Personaje p2 = new Orco("Humano2");
+		p2.setClase(new Hechicero());
 		p2.setUbicacion(new Ubicacion(0,4));
+		p2.agregarItem(new BujiasHescher());
+		
+		Personaje p3 = new Elfo("Humano3");
+		p3.setClase(new Chaman());
 		p3.setUbicacion(new Ubicacion(1,4));
+		p3.agregarItem(new PocionBruta());
+		
+		Personaje p4 = new Elfo("Humano4");
+		p4.setClase(new Hechicero());
 		p4.setUbicacion(new Ubicacion(1,6));
-		
-		/*
-		 * Equipo con items
-		 * */
-		
-		p1 = new ArmaduraDeAzorAhai(p1);
-		p2 = new BujiasHescher(p2);
-		p3 = new PocionBruta(p3);
-		p4 = new PocionSabiduria(p4);
+		p4.agregarItem(new PocionSabiduria());
+
 		
 		/*
 		 * Armo las alianzas: 
@@ -92,22 +93,46 @@ public class Historia11Test {
 		 * sumara a cada uno a su experiencia. 
 		 * 
 		 * */
-		Combate c = new Combate("Super Batalla");
+		/*
+		 * Arranca el combate
+		 * */
+			
+		Random r = new Random();
+		int aux = r.nextInt(2);
 		
-		c.combatir(e1, e2);
+		/*
+		 * Defino quien ataca primero
+		 * */
+		while(e1.quedaAlgunoVivo() && e2.quedaAlgunoVivo() ){
+			if(aux == 1){
+				e1.atacar(e2);
+				e2.atacar(e1);
+			} else {
+				e2.atacar(e1);
+				e1.atacar(e2);
+			}		
+		}
+
+		if(e1.quedaAlgunoVivo()){
+			e1.repartirExperiencia(e2.calcularExperiencia());
+			e1.repartirItem(e2);		
+		}	else if(e2.quedaAlgunoVivo()){
+			e2.repartirExperiencia(e1.calcularExperiencia());
+			e2.repartirItem(e1);
+		}
 		
 		
 		
-		Assert.assertEquals(0, p3.getTamañoLista());
-		Assert.assertEquals(0, p4.getTamañoLista());
+		Assert.assertEquals(0, p3.getMochila().size());
+		Assert.assertEquals(0, p4.getMochila().size());
 		
 	}
 	
 	
 	/***
 	 * 
-	 * 2.	Dado un Personaje, cuando finaliza el combate contra otro Personaje 
-	 * Usuario y resulta ganador, entonces se le entrega el mejor ítem de aquel Personaje Usuario derrotado. 
+	 * 2.	Dado un Personaje, cuando finaliza el combate contra otro Personaje y resulta ganador, entonces se le 
+	 * entrega el mejor ítem de aquel Personaje Usuario derrotado. 
 	 * @throws FileNotFoundException 
 	 * @throws CloneNotSupportedException 
 	 * 
@@ -115,10 +140,16 @@ public class Historia11Test {
 	
 	@Test
 	public void historia11Criterio02_Test() throws FileNotFoundException, CloneNotSupportedException {
-		Personaje p1 = new Humano("Humano1","1231");
-		Personaje p2 = new Orco("Humano2","1231");
-		p1.setCasta(new Guerrero());
-		p2.setCasta(new Hechicero());
+		Personaje p1 = new Humano("Humano1");
+		p1.setClase(new Guerrero());
+		p1.agregarItem(new EspadaDeAragorn());
+		p1.agregarItem(new ArmaduraDeAzorAhai());
+		
+		
+		Personaje p2 = new Orco("Humano2");		
+		p2.setClase(new Hechicero());
+		p2.agregarItem(new PocionSabiduria());
+		p2.agregarItem(new BujiasHescher());
 		
 		/*
 		 * Se preparan los equipos a pelear
@@ -140,14 +171,40 @@ public class Historia11Test {
 		 * 
 		 * */
 		
-		Combate c = new Combate("La Gran Batalla");
-		
-		c.combatir(e1, e2);
 		/*
-		 * Falta metodo repartirItems combinado con dejarMejorItem y desequipar
+		 * Arranca el combate
+		 * */
+			
+		Random r = new Random();
+		int aux = r.nextInt(2);
+		
+		/*
+		 * Defino quien ataca primero
+		 * */
+		while(e1.quedaAlgunoVivo() && e2.quedaAlgunoVivo() ){
+			if(aux == 1){
+				e1.atacar(e2);
+				e2.atacar(e1);
+			} else {
+				e2.atacar(e1);
+				e1.atacar(e2);
+			}		
+		}
+
+		if(e1.quedaAlgunoVivo()){
+			e1.repartirExperiencia(e2.calcularExperiencia());
+			e1.repartirItem(e2);		
+		}	else if(e2.quedaAlgunoVivo()){
+			e2.repartirExperiencia(e1.calcularExperiencia());
+			e2.repartirItem(e1);
+		}
+		
+		/*
+		 * Comrpuebo que el personaje del equipo ganador obtuvo un item y el perdedor perdio uno
 		 * 
 		 * */
-		Assert.assertEquals(1, 2);
+		Assert.assertEquals(3, p1.getMochila().size());
+		Assert.assertEquals(1, p2.getMochila().size());
 		
 
 	}
@@ -163,13 +220,16 @@ public class Historia11Test {
 	
 	@Test
 	public void historia11Criterio03_Test() throws FileNotFoundException, CloneNotSupportedException {
-		Personaje p1 = new Humano("Humano1","1231");
-		Personaje p2 = new Orco("Humano2","1231");
-		Generico g = new Generico("Terminator");
-		p1.setCasta(new Guerrero());
-		p2.setCasta(new Hechicero());
+		Personaje p1 = new Humano("Humano1");
+		p1.setClase(new Guerrero());
 		p1.setUbicacion(new Ubicacion(0,1));
+		
+		Personaje p2 = new Orco("Humano2");
+		p2.setClase(new Hechicero());		
 		p2.setUbicacion(new Ubicacion(0,4));
+		
+		Generico g = new Generico("Terminator");
+		
 		
 		/*
 		 * Armo la alianza: 
@@ -196,12 +256,39 @@ public class Historia11Test {
 		 * 
 		 * */
 		
-		Combate c = new Combate("La Pelea Final");
-		c.combatir(e1, g);
+		Random r = new Random();
+		int aux = r.nextInt(2);
+		
+		/*
+		 * Defino quien ataca primero
+		 * */
+		while(e1.quedaAlgunoVivo() && g.estaVivo() ){
+			if(aux == 1){
+				e1.atacar(g);
+				g.atacar(e1.obtenerProximaVictima());	
+			} else {
+				g.atacar(e1.obtenerProximaVictima());	
+				e1.atacar(g);
+			}		
+		}
+
+		if(e1.quedaAlgunoVivo()){
+			
+			e1.repartirExperiencia(g.getNivel()*10);
+			e1.repartirItem(g);
+			
+		}	else if(g.estaVivo()){
+			
+				e1.desequiparEquipo();
+			}
 		
 	
+		/*
+		 * Este assert puede fallar ya que los items se dan en forma aleatoria
+		 * 
+		 * */
+		Assert.assertEquals(1, p1.getMochila().size());
 		
-		Assert.assertEquals(1, p1.getTamañoLista());
 
 		
 	}

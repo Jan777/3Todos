@@ -26,9 +26,9 @@ public class Historia04Test {
 
 	@Test
 	public void historia04Criterio01_Test() {
-		Personaje p1 = new Humano("CarlosTevez","VeryDificul");
-		Personaje p2 = new Humano("Dalessandra","Cabezon");
-		Personaje p3 = new Humano("Romagnola","Cabezon");
+		Personaje p1 = new Humano("CarlosTevez");
+		Personaje p2 = new Humano("Dalessandra");
+		Personaje p3 = new Humano("Romagnola");
 		
 		/*
 		 * El personaje p1 ataca a p2 y p3. En consecuencia, aumenta su experiencia. 

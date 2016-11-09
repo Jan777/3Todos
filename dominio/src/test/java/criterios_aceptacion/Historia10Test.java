@@ -1,6 +1,7 @@
 package criterios_aceptacion;
 
 import java.io.FileNotFoundException;
+import java.util.Random;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,7 +11,7 @@ import dominio.*;
 import razas.*;
 
 
-// OK
+// Falta ultimo assert en criterio 1
 
 /***
  * 
@@ -37,22 +38,23 @@ public class Historia10Test {
 		 * Creo los objetos personaje
 		 * */
 		
-		Personaje p1 = new Humano("Humano1","1231");
-		Personaje p2 = new Orco("Humano2","1231");
-		Personaje p3 = new Elfo("Humano3","1231");
-		Personaje p4 = new Elfo("Humano4","1231");
-		
-		
-		p1.setCasta(new Guerrero());
-		p2.setCasta(new Hechicero());
-		p3.setCasta(new Chaman());
-		p4.setCasta(new Hechicero());
-		
+		Personaje p1 = new Humano("Humano1");
+		p1.setClase(new Guerrero());
 		p1.setUbicacion(new Ubicacion(0,1));
+		
+		Personaje p2 = new Orco("Humano2");
+		p2.setClase(new Hechicero());
 		p2.setUbicacion(new Ubicacion(0,4));
+		
+		Personaje p3 = new Elfo("Humano3");
+		p3.setClase(new Chaman());
 		p3.setUbicacion(new Ubicacion(1,4));
+		
+		Personaje p4 = new Elfo("Humano4");
+		p4.setClase(new Hechicero());
 		p4.setUbicacion(new Ubicacion(1,6));
 		
+
 		
 		/*
 		 * Armo las alianzas: 
@@ -83,9 +85,33 @@ public class Historia10Test {
 		 * 
 		 * */
 		
-		Combate c = new Combate();
+		/*
+		 * Arranca el combate
+		 * */
+			
+		Random r = new Random();
+		int aux = r.nextInt(2);
 		
-		c.combatir(e1,e2);
+		/*
+		 * Defino quien ataca primero
+		 * */
+		while(e1.quedaAlgunoVivo() && e2.quedaAlgunoVivo() ){
+			if(aux == 1){
+				e1.atacar(e2);
+				e2.atacar(e1);
+			} else {
+				e2.atacar(e1);
+				e1.atacar(e2);
+			}		
+		}
+
+		if(e1.quedaAlgunoVivo()){
+			e1.repartirExperiencia(e2.calcularExperiencia());
+			e1.repartirItem(e2);		
+		}	else if(e2.quedaAlgunoVivo()){
+			e2.repartirExperiencia(e1.calcularExperiencia());
+			e2.repartirItem(e1);
+		};
 		
 		/*
 		 * Todo el equipo 4 esta muerto
@@ -94,14 +120,14 @@ public class Historia10Test {
 		Assert.assertEquals(false, p4.estaVivo());
 		
 		/*
-		 * p1 obtuvo 88 de experiencia por los ataques realizados 
-		 * p2 obtuvo 172 de experiencia por los ataques realizados 
-		 * El ultimo peleador vivo del equipo 2 era de nivel 1, por ende la experiencia 
-		 * a repartir sera (1)*10 /2 = 5
+		 * p1 obtuvo 100 de experiencia por los ataques realizados 
+		 * p2 obtuvo 110 de experiencia por los ataques realizados 
+		 * El ultimo peleador vivo del equipo 2 era de nivel 2, por ende la experiencia 
+		 * a repartir sera (2)*10 /2 = 10
 		 * 
 		 * */
-		Assert.assertEquals(148+3, p1.getExperiencia());
-		Assert.assertEquals(128+7, p2.getExperiencia());
+		Assert.assertEquals(100+10, p1.getExperiencia());
+		Assert.assertEquals(100+10, p2.getExperiencia());
 		
 
 	}
@@ -119,16 +145,20 @@ public class Historia10Test {
 	
 	@Test
 	public void historia10Criterio02_Test() throws FileNotFoundException, CloneNotSupportedException {
-		Personaje p1 = new Humano("Humano1","1231");
-		Personaje p2 = new Orco("Humano2","1231");
-		Personaje p3 = new Elfo("Humano3","1231");
-		p1.setCasta(new Guerrero());
-		p2.setCasta(new Hechicero());
-		p3.setCasta(new Chaman());
+		Personaje p1 = new Humano("Humano1");
+		p1.setClase(new Guerrero());
 		p1.setUbicacion(new Ubicacion(0,1));
+		
+		Personaje p2 = new Orco("Humano2");
+		p2.setClase(new Hechicero());
 		p2.setUbicacion(new Ubicacion(0,4));
+		
+		Personaje p3 = new Elfo("Humano3");
+		p3.setClase(new Chaman());
 		p3.setUbicacion(new Ubicacion(1,4));
 		
+		
+
 		
 		/*
 		 * Armo las alianzas: 
@@ -156,9 +186,30 @@ public class Historia10Test {
 		 * 
 		 * */
 		
-		Combate c = new Combate("La Batalla de la Muerte");
+		Random r = new Random();
+		int aux = r.nextInt(2);
 		
-		c.combatir(e1,e2);
+		/*
+		 * Defino quien ataca primero
+		 * */
+		while(e1.quedaAlgunoVivo() && e2.quedaAlgunoVivo() ){
+			if(aux == 1){
+				e1.atacar(e2);
+				e2.atacar(e1);
+			} else {
+				e2.atacar(e1);
+				e1.atacar(e2);
+			}		
+		}
+
+		if(e1.quedaAlgunoVivo()){
+			e1.repartirExperiencia(e2.calcularExperiencia());
+			e1.repartirItem(e2);		
+		}	else if(e2.quedaAlgunoVivo()){
+			e2.repartirExperiencia(e1.calcularExperiencia());
+			e2.repartirItem(e1);
+		};
+		
 		
 		/*
 		 * Todo el equipo 2 esta muerto
@@ -173,8 +224,8 @@ public class Historia10Test {
 		 * a repartir sera (1)*10 /2 = 5
 		 * 
 		 * */
-		Assert.assertEquals(74+5, p1.getExperiencia());
-		Assert.assertEquals(64+5, p2.getExperiencia());
+		Assert.assertEquals(40+5, p1.getExperiencia());
+		Assert.assertEquals(50+5, p2.getExperiencia());
 		
 		
 	}
@@ -190,13 +241,17 @@ public class Historia10Test {
 	
 	@Test
 	public void historia10Criterio03_Test() throws FileNotFoundException, CloneNotSupportedException {
-		Personaje p1 = new Humano("Humano1","1231");
-		Personaje p2 = new Orco("Humano2","1231");
-		Generico g = new Generico("Terminator");
-		p1.setCasta(new Guerrero());
-		p2.setCasta(new Hechicero());
+		Personaje p1 = new Humano("Humano1");
+		p1.setClase(new Guerrero());
 		p1.setUbicacion(new Ubicacion(0,1));
+		
+		Personaje p2 = new Orco("Humano2");
+		p2.setClase(new Hechicero());
 		p2.setUbicacion(new Ubicacion(0,4));
+		
+		Generico g = new Generico("Terminator");
+		
+		
 	
 		/*
 		 * Armo la alianza: 
@@ -224,9 +279,31 @@ public class Historia10Test {
 		 * 
 		 * */
 		
-		Combate c = new Combate();
+		Random r = new Random();
+		int aux = r.nextInt(2);
 		
-		c.combatir(e1,g);
+		/*
+		 * Defino quien ataca primero
+		 * */
+		while(e1.quedaAlgunoVivo() && g.estaVivo() ){
+			if(aux == 1){
+				e1.atacar(g);
+				g.atacar(e1.obtenerProximaVictima());	
+			} else {
+				g.atacar(e1.obtenerProximaVictima());	
+				e1.atacar(g);
+			}		
+		}
+
+		if(e1.quedaAlgunoVivo()){
+			
+			e1.repartirExperiencia(g.getNivel()*10);
+			e1.repartirItem(g);
+			
+		}	else if(g.estaVivo()){
+			
+				e1.desequiparEquipo();
+			}
 		
 		/*
 		 * Personaje generico esta muerto

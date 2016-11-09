@@ -8,8 +8,8 @@ public class AlianzaTest {
 
 	@Test
 	public void testPersonajeSinAlianzas() {
-		Humano objHumano = new Humano("jose","dssjjad");
-		Orco objOrco = new Orco("kali","1234");
+		Humano objHumano = new Humano("jose");
+		Orco objOrco = new Orco("kali");
 		
 		//Assert.assertEquals(false,objHumano.interactuarConOtroPersonaje(objOrco));
 		
@@ -17,9 +17,9 @@ public class AlianzaTest {
 	@Test
 	public void testFormarAlianza()
 	{
-		Personaje p1 = new Humano("jose","dssjjad");
-		Personaje p2 = new Elfo("dani","1242");
-		Personaje p3 = new Humano("lucas","1244");
+		Personaje p1 = new Humano("jose");
+		Personaje p2 = new Elfo("dani");
+		Personaje p3 = new Humano("lucas");
 		
 		p1.formarAlianzaCon(p2);
 		p2.formarAlianzaCon(p3);
@@ -32,9 +32,9 @@ public class AlianzaTest {
 	@Test
 	public void dejarAlianza()
 	{
-		Personaje p1 = new Humano("jose","dssjjad");
-		Personaje p2 = new Elfo("dani","1242");
-		Personaje p3 = new Humano("lucas","1244");
+		Personaje p1 = new Humano("jose");
+		Personaje p2 = new Elfo("dani");
+		Personaje p3 = new Humano("lucas");
 		
 		p1.formarAlianzaCon(p2);
 		p2.formarAlianzaCon(p3);
@@ -57,8 +57,8 @@ public class AlianzaTest {
 	{
 		
 		
-		Personaje p1 = new Humano("jose","dssjjad");
-		Personaje p2 = new Elfo("dani","1242");
+		Personaje p1 = new Humano("jose");
+		Personaje p2 = new Elfo("dani");
 		
 		p1.formarAlianzaCon(p2);
 		

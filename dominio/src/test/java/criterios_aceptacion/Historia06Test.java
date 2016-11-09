@@ -34,14 +34,10 @@ public class Historia06Test {
 		 * Creo el personaje con casta Guerrero
 		 * */
 		
-		Personaje p1 = new Orco("Fantino","Fantasy");
-		p1.setCasta(new Guerrero());
+		Personaje p1 = new Orco("Fantino");
+		p1.setClase(new Guerrero());
+		p1.agregarItem(new BujiasHescher());
 		
-		/*
-		 * Lo equipo con una bujía Hescher
-		 * */
-		
-		p1 = new BujiasHescher(p1);
 		
 		/*
 		 * Verifico el valor de los atributos:

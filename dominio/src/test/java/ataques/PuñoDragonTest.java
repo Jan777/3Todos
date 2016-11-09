@@ -15,8 +15,8 @@ public class PuñoDragonTest {
 	 * */
 	@Test
 	public void atacarPuñoDragon() {
-		Personaje h1 = new Humano("Goku","dbz");
-		Personaje h2 = new Humano("Majin Boo","dada");
+		Personaje h1 = new Humano("Goku");
+		Personaje h2 = new Humano("Majin Boo");
 		// Lescano agrega el ataque cuerpo a cuerpo y verifico que el daño que causa sea 9
 		h1.agregarAtaque(new PuñoDragon());
 		Assert.assertEquals(8, h1.getAtaque("Puño Dragón").aplicarAtaque());

@@ -16,8 +16,8 @@ public class FuriaSangrientaTest {
 	 * */
 	@Test
 	public void atacarConFuriaSangrienta() {
-		Personaje h1 = new Humano("Pablo Lescano","dama$grati$");
-		Personaje h2 = new Humano("Phil Collins","fere");
+		Personaje h1 = new Humano("Pablo Lescano");
+		Personaje h2 = new Humano("Phil Collins");
 		// Lescano agrega el ataque cuerpo a cuerpo y verifico que el daño que causa sea 9
 		h1.agregarAtaque(new FuriaSangrienta());
 		Assert.assertEquals(9, h1.getAtaque("Furia sangrienta").aplicarAtaque());

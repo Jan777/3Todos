@@ -7,7 +7,7 @@ package criterios_aceptacion;
  *  Motivación: Quiero modificar mi avatar y verme reflejado en el mismo.  
  * 
  ***/
-public class Historia01Test {
+	public class Historia01Test {
 
 
 	/*** 

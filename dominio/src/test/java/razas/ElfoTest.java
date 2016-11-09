@@ -3,6 +3,7 @@ package razas;
 import org.junit.Assert;
 import org.junit.Test;
 
+import castas.*;
 import dominio.*;
 
 
@@ -12,9 +13,10 @@ public class ElfoTest {
 	 * */
 	@Test
 	public void constructorElfo(){
-		Personaje e = new Elfo("Agente Smith","matrix");
+		Personaje e = new Elfo("Agente Smith");
+		e.setClase(new Guerrero());
 	
-		Assert.assertEquals("Agente Smith", e.toString());
+		Assert.assertEquals("Agente Smith", e.getNombre());
 		Assert.assertEquals(100, e.getEnergia());
 		Assert.assertEquals(100, e.getVida());
 		Assert.assertEquals(1, e.getNivel());
@@ -23,7 +25,7 @@ public class ElfoTest {
 		Assert.assertEquals(5, e.calcularPuntosDeDefensa());
 		Assert.assertEquals(10, e.calcularPuntosDeMagia());
 		Assert.assertEquals("Elfo", e.getRaza());
-			
+		Assert.assertEquals("Guerrero", e.getClase().getNombre());	
 	}
 	
 	
