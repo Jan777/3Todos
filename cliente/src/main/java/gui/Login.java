@@ -34,6 +34,7 @@ import utilities.Loggin;
 
 public class Login extends JFrame {
 
+	private static final long serialVersionUID = -6471222468956323219L;
 	private JPanel contentPane;
 	private JTextField txtUsuario;
 	private JPasswordField tpContrasena;
@@ -297,5 +298,5 @@ public class Login extends JFrame {
 
 	public void setUsername(String username) {
 		this.username = username;
-	}	
+	}
 }

@@ -23,6 +23,7 @@ public class HiloMundo extends Thread {
 	private ArrayList<Socket> mundo2;
 	private int id;
 	private Usuario usu;
+	private MensajePersonaje personaje;
 
 	public HiloMundo(Socket clientSocket, ArrayList<Socket> mundo1, ArrayList<Socket> mundo2, int id) {
 		this.sk = clientSocket;
@@ -32,6 +33,7 @@ public class HiloMundo extends Thread {
 		this.id = id;
 		this.usu = new Usuario();
 		this.msj = new Mensaje();
+		this.personaje= new MensajePersonaje();
 		try {
 			this.in = new DataInputStream(sk.getInputStream());
 			this.out = new DataOutputStream(sk.getOutputStream());
@@ -107,9 +109,18 @@ public class HiloMundo extends Thread {
 			break;
 		}
 		case "obtenerPersonaje": {
-			MensajePersonaje personaje = new MensajePersonaje();
 			personaje.setUsername(msj.getMensaje());
 			msj.setMensaje(gson.toJson(personaje.getPersonaje()));
+			out.writeUTF(gson.toJson(msj));
+			break;
+		}
+		case "guardarPersonaje": {
+			personaje=gson.fromJson(msj.getMensaje(),MensajePersonaje.class);
+			if(personaje.guardarPersonaje()){
+				msj.setMensaje("OK");
+			}else{
+				msj.setMensaje("Error al al persistir datos");;
+			}
 			out.writeUTF(gson.toJson(msj));
 			break;
 		}

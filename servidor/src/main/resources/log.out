@@ -1,8 +1,11 @@
-INFO	2016-11-07 22:23:36,221	0	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
-INFO	2016-11-07 22:24:33,362	57141	connection.Servidor	[Thread-0]	Cerro la conexion un cliente: /127.0.0.1
-INFO	2016-11-07 22:24:54,069	77848	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
-ERROR	2016-11-07 22:25:08,401	92180	connection.Servidor	[Thread-1]	Connection reset
-INFO	2016-11-07 22:26:09,536	0	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
-ERROR	2016-11-07 22:26:13,718	4182	connection.Servidor	[Thread-0]	Connection reset
-INFO	2016-11-07 22:26:20,519	10983	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
-INFO	2016-11-07 22:26:51,457	41921	connection.Servidor	[Thread-1]	Cerro la conexion un cliente: /127.0.0.1
+INFO	2016-11-09 00:04:05,965	0	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+INFO	2016-11-09 00:04:50,336	44371	connection.Servidor	[Thread-0]	Cerro la conexion un cliente: /127.0.0.1
+INFO	2016-11-09 00:50:51,830	0	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+ERROR	2016-11-09 00:51:55,952	64122	connection.Servidor	[Thread-0]	Error guardarPersonaje[SQLITE_ERROR] SQL error or missing database (near "select": syntax error)
+ERROR	2016-11-09 00:52:56,509	124679	connection.Servidor	[Thread-0]	Connection reset
+INFO	2016-11-09 00:53:26,511	0	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+ERROR	2016-11-09 00:53:42,069	15558	connection.Servidor	[Thread-0]	Error guardarPersonaje[SQLITE_ERROR] SQL error or missing database (near "select": syntax error)
+ERROR	2016-11-09 00:54:04,329	37818	connection.Servidor	[Thread-0]	Error guardarPersonaje[SQLITE_ERROR] SQL error or missing database (near "personaje": syntax error)
+INFO	2016-11-09 00:54:20,303	53792	connection.Servidor	[Thread-0]	Cerro la conexion un cliente: /127.0.0.1
+INFO	2016-11-09 00:55:13,566	0	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+ERROR	2016-11-09 00:57:05,535	111969	connection.Servidor	[Thread-0]	Connection reset

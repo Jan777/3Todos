@@ -138,4 +138,30 @@ public class DataBaseOperations {
 		}
 		return personaje;
 	}
+
+	public boolean guardarPersonaje(int idUsuario, String username, String raza, String casta) {
+		PreparedStatement pstmt = null;
+		String queryInsert = "insert into personaje (id_usuario,id_raza,id_casta,nivel,experiencia,vida,energia,ataque,defensa,magia,puntos,potencia,destreza,velocidad)"
+				+ "values (?,(select id_raza from raza ra where ra.raza=?),(select id_casta from casta ca where ca.casta=?),0,0,0,0,0,0,0,0,0,0,0)";
+		String queryUpdate = "update personaje set id_raza=(select id_raza from raza ra where ra.raza=?),id_casta=(select id_raza from casta ca where ca.casta=?) where id_usuario=?";
+		try {
+			conn = SQLConnection.getConnection();
+			if (idUsuario == 0) {
+				pstmt = conn.prepareStatement(queryInsert);
+				pstmt.setInt(1, idUsuario);
+				pstmt.setString(2, raza);
+				pstmt.setString(3, casta);
+			} else {
+				pstmt = conn.prepareStatement(queryUpdate);
+				pstmt.setString(1, raza);
+				pstmt.setString(2, casta);
+				pstmt.setInt(3, idUsuario);
+			}
+			pstmt.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			Loggin.getInstance().error("Error guardarPersonaje" + e.getMessage());
+		}
+		return false;
+	}
 }

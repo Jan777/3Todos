@@ -20,6 +20,7 @@ import entities.MensajePersonaje;
 
 public class EditarPersonaje extends JFrame {
 
+	private static final long serialVersionUID = 7256195715964986642L;
 	private JFrame frmPersonaje;
 	private Login login;
 	private Mensaje msj;
@@ -44,11 +45,11 @@ public class EditarPersonaje extends JFrame {
 		});
 	}
 
-	public EditarPersonaje(Login login, Socket cliente) {
+	public EditarPersonaje() {
 
 	}
 
-	public EditarPersonaje() {
+	public EditarPersonaje(Login login, Socket cliente) {
 		personaje = new MensajePersonaje();
 		msj = new Mensaje();
 
@@ -111,7 +112,7 @@ public class EditarPersonaje extends JFrame {
 		lblCastaElegida.setBounds(286, 172, 110, 14);
 		frmPersonaje.getContentPane().add(lblCastaElegida);
 
-		JButton button = new JButton("Gurdar");
+		JButton button = new JButton("Guardar");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				guardarPersonaje();
@@ -137,11 +138,13 @@ public class EditarPersonaje extends JFrame {
 	private void guardarPersonaje() {
 		int razaItem = comboRaza.getSelectedIndex();
 		int castaItem = comboCasta.getSelectedIndex();
+		String resp="";
 		personaje = new MensajePersonaje(personaje.getIdUsuario(), login.getUsername(), comboRaza.getSelectedItem().toString(), comboCasta.getSelectedItem().toString());
 		if (comboCompleto(razaItem, castaItem)) {
 			msj.setId("guardarPersonaje");
 			msj.setMensaje(gson.toJson(personaje));
 			this.login.enviarMensaje(msj);
+			resp=this.login.leerRespuesta();
 		}
 	}
 

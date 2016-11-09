@@ -3,12 +3,12 @@ package entities;
 import connection.DataBaseOperations;
 
 public class MensajePersonaje {
-	
+
 	private int idUsuario;
 	private String username;
 	private String raza;
 	private String casta;
-	
+
 	public MensajePersonaje(int id,String name,String raza,String casta){
 		this.idUsuario=id;
 		this.username=name;
@@ -17,7 +17,7 @@ public class MensajePersonaje {
 	}
 
 	public MensajePersonaje() {
-		
+
 	}
 
 	public int getIdUsuario() {
@@ -55,5 +55,10 @@ public class MensajePersonaje {
 	public MensajePersonaje getPersonaje() {
 		DataBaseOperations op = new DataBaseOperations();
 		return op.getPersonaje(this.username);
+	}
+
+	public boolean guardarPersonaje() {
+		DataBaseOperations op = new DataBaseOperations();
+		return op.guardarPersonaje(this.idUsuario,this.username,this.raza,this.casta);
 	}
 }
