@@ -146,6 +146,7 @@ public class Login extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					validar();
+					new MenuPrincipal(login);
 				} catch (Exception e1) {
 					Loggin.getInstance().error("Error al validar contrasena "+e1.getMessage());
 				}
