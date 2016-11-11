@@ -98,8 +98,8 @@ public class Mapa {
 	public static float[] isoADosD(float x, float y) {
 		float[] dosD = new float[2];
 
-		dosD[0] = (x / (Piso.ANCHO / 2) + y / (Piso.ALTO / 2)) / 2;
-		dosD[1] = (y / (Piso.ALTO / 2) - (x / (Piso.ANCHO / 2))) / 2;
+		dosD[0] = (x / (Piso.ANCHO / 2) + y / (Piso.ALTO / 6)) / 2;
+		dosD[1] = (y / (Piso.ALTO / 6) - (x / (Piso.ANCHO / 2))) / 2;
 
 		return dosD;
 	}
@@ -108,7 +108,7 @@ public class Mapa {
 		float[] iso = new float[2];
 
 		iso[0] = (x - y) * (Piso.ANCHO / 2);
-		iso[1] = (x + y) * (Piso.ALTO / 2);
+		iso[1] = (x + y) * (Piso.ALTO / 6);
 
 		return iso;
 	}
@@ -116,8 +116,8 @@ public class Mapa {
 	public static int[] mouseATile(float x, float y) {
 		int tile[] = new int[2];
 
-		tile[0] = (int) Math.floor((y / Piso.ALTO) + (x / Piso.ANCHO)) + 1;
-		tile[1] = (int) Math.floor((-x / Piso.ANCHO) + (y / Piso.ALTO)) + 1;
+		tile[0] = (int) Math.floor((y / (Piso.ALTO / 3)) + (x / Piso.ANCHO)) + 1;
+		tile[1] = (int) Math.floor((-x / Piso.ANCHO) + (y / (Piso.ALTO / 3))) + 1;
 
 		return tile;
 	}

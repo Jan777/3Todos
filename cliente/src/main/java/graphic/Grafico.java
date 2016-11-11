@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 public class Grafico {
 	public static BufferedImage pasto;
 	public static BufferedImage agua;
-	public static BufferedImage fondoDelJuego;
+	public static BufferedImage vacio;
 		
 	public static LinkedList<BufferedImage[]> humano = new LinkedList<>();	
 	public static LinkedList<BufferedImage[]> orco = new LinkedList<>();	
@@ -24,6 +24,7 @@ public class Grafico {
 		
 		pasto = cargarSprite("src/main/resources/Pasto.png");
 		agua = cargarSprite("src/main/resources/Agua.png");
+		vacio = cargarSprite("src/main/resources/Vacio.png");
 	}
 
 

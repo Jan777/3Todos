@@ -16,7 +16,8 @@ public class PantallaJuego {
 		pantalla.setResizable(false);
 		pantalla.setSize(ancho,alto);
 		pantalla.setLocationRelativeTo(null);
-		pantalla.getContentPane().setBackground(Color.black);
+		Color lightBlue= new Color(102,178,255,0);
+		pantalla.getContentPane().setBackground(lightBlue);
 		pantalla.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pantalla.setVisible(true);
 		

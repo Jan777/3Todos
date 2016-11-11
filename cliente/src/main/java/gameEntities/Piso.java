@@ -12,9 +12,10 @@ public class Piso {
 	public static Piso[] tiles = new Piso[256];
 	public static Piso pasto = new Piso(Grafico.pasto, 0);
 	public static Piso agua = new Piso(Grafico.agua, 1);
+	public static Piso vacio = new Piso(Grafico.vacio, 2);
 	
 	public static final int ANCHO = 64;
-	public static final int ALTO = 32;
+	public static final int ALTO = 96;
 		
 	public Piso(BufferedImage textura, int id) {
 		this.textura = textura;

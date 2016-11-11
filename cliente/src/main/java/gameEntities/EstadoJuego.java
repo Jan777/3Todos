@@ -15,7 +15,7 @@ public class EstadoJuego extends Estado {
 	public EstadoJuego(Juego juego) {
 		super(juego);
 		mapa = new Mapa(juego, "src/main/resources/mapa1.txt");
-	    personaje = new Personaje(juego, mapa, 64, 64, 0, 0, Grafico.humano, 100);
+	    personaje = new Personaje(juego, mapa, 64, 64, 0, 0, Grafico.orco, 100);
 	}
 
 	@Override
@@ -26,7 +26,6 @@ public class EstadoJuego extends Estado {
 
 	@Override
 	public void graficar(Graphics g) {
-		g.drawImage(Grafico.fondoDelJuego, 0, 0, juego.getAncho(), juego.getAlto(), null);
 		mapa.graficar(g);
 		personaje.graficar(g);
 	}
