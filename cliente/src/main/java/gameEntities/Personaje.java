@@ -189,7 +189,7 @@ public class Personaje {
 			
 			tile = Mapa.mouseATile(auxX, auxY);
 			
-			if (mundo.getTile((int) tile[0], (int) tile[1]).esSolido()) {
+			if (mundo.getTile((int) tile[0], (int) tile[1]).esObstaculo()) {
 				xFinal = x;
 				yFinal = y;
 				auxX = x;

@@ -23,9 +23,9 @@ public class Mapa {
 	private int yMinimo;
 	private int yMaximo;
 
-	public Mapa(Juego juego, String path) {
+	public Mapa(Juego juego, int nroMapa) {
 		this.juego = juego;
-		cargarMundo(path);
+		cargarMundo(nroMapa);
 	}
 
 	public void actualizar() {
@@ -61,8 +61,8 @@ public class Mapa {
 		return t;
 	}
 
-	private void cargarMundo(String path) {
-		String archivo = convertirArchivoAString(path);
+	private void cargarMundo(int nroMapa) {
+		String archivo = convertirArchivoAString(nroMapa);
 		String[] tokens = archivo.split("\\s+");
 		ancho = Integer.parseInt(tokens[0]);
 		alto = Integer.parseInt(tokens[1]);
@@ -78,10 +78,11 @@ public class Mapa {
 		}
 	}
 
-	private String convertirArchivoAString(String path) {
+	private String convertirArchivoAString(int nroMapa) {
 		StringBuilder builder = new StringBuilder();
 
 		try {
+			String path = obtenerPathMapa(nroMapa);
 			BufferedReader br = new BufferedReader(new FileReader(path));
 			String linea;
 
@@ -93,6 +94,18 @@ public class Mapa {
 		}
 
 		return builder.toString();
+	}
+
+	private String obtenerPathMapa(int nroMapa) {
+		String pathMapa = "";
+		
+		switch(nroMapa)
+		{
+			case 1: pathMapa = "src/main/resources/mapa1.txt"; break;
+			case 2: pathMapa = "src/main/resources/mapa2.txt"; break;
+		}
+		
+		return pathMapa;
 	}
 
 	public static float[] isoADosD(float x, float y) {

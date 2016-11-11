@@ -14,7 +14,7 @@ public class EstadoJuego extends Estado {
 
 	public EstadoJuego(Juego juego) {
 		super(juego);
-		mapa = new Mapa(juego, "src/main/resources/mapa1.txt");
+		mapa = new Mapa(juego, 2);
 	    personaje = new Personaje(juego, mapa, 64, 64, 0, 0, Grafico.orco, 100);
 	}
 

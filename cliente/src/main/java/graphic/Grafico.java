@@ -11,6 +11,8 @@ public class Grafico {
 	public static BufferedImage pasto;
 	public static BufferedImage agua;
 	public static BufferedImage vacio;
+	public static BufferedImage arena;
+	public static BufferedImage lava;
 		
 	public static LinkedList<BufferedImage[]> humano = new LinkedList<>();	
 	public static LinkedList<BufferedImage[]> orco = new LinkedList<>();	
@@ -25,6 +27,8 @@ public class Grafico {
 		pasto = cargarSprite("src/main/resources/Pasto.png");
 		agua = cargarSprite("src/main/resources/Agua.png");
 		vacio = cargarSprite("src/main/resources/Vacio.png");
+		arena = cargarSprite("src/main/resources/Arena.png");
+		lava = cargarSprite("src/main/resources/Lava.png");
 	}
 
 
