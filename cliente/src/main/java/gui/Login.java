@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -28,9 +30,11 @@ import com.google.gson.JsonSyntaxException;
 
 import connection.Mensaje;
 import entities.Usuario;
+import utilities.Loggin;
 
 public class Login extends JFrame {
 
+	private static final long serialVersionUID = -6471222468956323219L;
 	private JPanel contentPane;
 	private JTextField txtUsuario;
 	private JPasswordField tpContrasena;
@@ -47,6 +51,7 @@ public class Login extends JFrame {
 	private String ip;
 	private Gson gson;
 	private Mensaje msj;
+	private String username;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -55,13 +60,24 @@ public class Login extends JFrame {
 					Login frame = new Login();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					// Log error iniciar cliente
+					Loggin.getInstance().error("Error al iniciar "+e.getMessage());
 				}
 			}
 		});
 	}
 
-	public Login() {
+	public Socket getCliente() {
+		return cliente;
+	}
+
+	private void cerrarConexion() throws IOException {
+		if (this.cliente != null) {
+			msj.setId("cerrar");
+			enviarMensaje(msj);
+		}
+	}
+
+	public Login(){
 		setTitle("Login");
 		setLogin(this);
 		this.msj = new Mensaje();
@@ -79,8 +95,18 @@ public class Login extends JFrame {
 			in = new DataInputStream(cliente.getInputStream());
 			gson = new Gson();
 		} catch (Exception e) {
-
+	//		Loggin.getInstance().error("Error conexion con servidor "+e.getMessage());
 		}
+
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				try {
+					cerrarConexion();
+				} catch (IOException e1) {
+					Loggin.getInstance().error("Error al cerrar conexion "+e1.getMessage());
+				}
+			}
+		});
 
 		JLabel lblBloodyWars = new JLabel("BloodyWars");
 		lblBloodyWars.setHorizontalAlignment(SwingConstants.CENTER);
@@ -90,7 +116,7 @@ public class Login extends JFrame {
 		lblUsuario = new JLabel("Usuario: ");
 		lblUsuario.setBounds(7, 84, 96, 20);
 		contentPane.add(lblUsuario);
-		lblContrasena = new JLabel("Contraseña: ");
+		lblContrasena = new JLabel("Contrasena: ");
 		lblContrasena.setBounds(7, 108, 96, 20);
 		contentPane.add(lblContrasena);
 
@@ -104,7 +130,11 @@ public class Login extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent key) {
 				if (key.getKeyChar() == key.VK_ENTER)
-					validar();
+					try {
+						validar();
+					} catch (Exception e) {
+						Loggin.getInstance().error("Error al validar contrasena "+e.getMessage());
+					}
 			}
 		});
 		tpContrasena.setBounds(107, 108, 251, 20);
@@ -114,14 +144,23 @@ public class Login extends JFrame {
 		btnIngresar.setBounds(107, 132, 120, 21);
 		btnIngresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				validar();
+				try {
+					//validar();
+					new MenuPrincipal(login);
+				} catch (Exception e1) {
+					Loggin.getInstance().error("Error al validar contrasena "+e1.getMessage());
+				}
 			}
 		});
 		btnIngresar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent key) {
 				if (key.getKeyChar() == key.VK_ENTER)
-					validar();
+					try {
+						validar();
+					} catch (Exception e) {
+						Loggin.getInstance().error("Error al validar contrasena "+e.getMessage());
+					}
 			}
 		});
 		contentPane.add(btnIngresar);
@@ -147,46 +186,60 @@ public class Login extends JFrame {
 
 		btnRegistro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new Registro(login, cliente);
+				try {
+					new Registro(login, cliente);
+				} catch (Exception e) {
+					Loggin.getInstance().error("Error al acceder a Registro "+e.getMessage());
+				}
 			}
 		});
 		btnRegistro.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent key) {
 				if (key.getKeyChar() == key.VK_ENTER)
-					new Registro(login, cliente);
+					try {
+						new Registro(login, cliente);
+					} catch (Exception e) {
+						Loggin.getInstance().error("Error al acceder a Registro "+e.getMessage());
+					}
 			}
 		});
 		contentPane.add(btnRegistro);
 		visible(true);
+
 	}
 
-	protected void validar() {
+	protected void validar(){
 		if (camposCompletos()) {
-
 			Usuario u = new Usuario(txtUsuario.getText(), tpContrasena.getText());
-			String resp="";
+			String resp = "";
 			msj.setId("login");
-			//Envio un usuario como mensaje
+			// Envio un usuario como mensaje
 			msj.setMensaje(gson.toJson(u));
 			enviarMensaje(msj);
 
-			//Leer Respuesta del servidor
+			// Leer Respuesta del servidor
 			resp = leerRespuesta();
 			if(resp.equals("Ok")){
-				//Pasar a la siguiente ventana
+				try {
+					login.setUsername(txtUsuario.getText());
+					new EditarPersonaje(login, cliente);
+					cancelar();
+				} catch (Exception e) {
+					Loggin.getInstance().error("Error al acceder a Editar Personaje "+e.getMessage());
+				}
 			}else{
-				JOptionPane.showMessageDialog(null, "Usuario o contraseña inválido", "Error", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Usuario o contrasena invalido", "Error", JOptionPane.WARNING_MESSAGE);
 				cancelar();
 			}
 		}
 	}
 
-	private String leerRespuesta() {
+	public String leerRespuesta() {
 		try {
 			msj = gson.fromJson(in.readUTF(),Mensaje.class);
 		} catch (JsonSyntaxException | IOException e) {
-			//Error al leer Respuesta del servidor
+			Loggin.getInstance().error("Error al leer respuesta del servidor "+e.getMessage());
 		}
 		return msj.getMensaje();
 	}
@@ -199,10 +252,15 @@ public class Login extends JFrame {
 		return false;
 	}
 
-	private void leerConfig() throws FileNotFoundException {
+	private void leerConfig(){
 		String linea;
 		String[] splitLine;
-		Scanner sc = new Scanner(new File("src\\main\\resources\\App.config"));
+		Scanner sc= null;
+		try {
+			sc = new Scanner(new File("src/main/resources/App.config"));
+		} catch (FileNotFoundException e) {
+			Loggin.getInstance().error("Error leerConfig "+e.getMessage());
+		}
 		linea = sc.nextLine();
 		splitLine = linea.split(":");
 		this.ip = splitLine[1];
@@ -217,7 +275,7 @@ public class Login extends JFrame {
 			out.writeUTF(gson.toJson(msj));
 			out.flush();
 		} catch (Exception e) {
-			// Error enviar mensaje
+			Loggin.getInstance().error("Error enviarMensaje "+e.getMessage());
 		}
 	}
 
@@ -233,5 +291,13 @@ public class Login extends JFrame {
 
 	public void visible(boolean value) {
 		this.setVisible(value);
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 }
