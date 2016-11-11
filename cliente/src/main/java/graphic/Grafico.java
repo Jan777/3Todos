@@ -28,7 +28,7 @@ public class Grafico {
 		agua = cargarSprite("src/main/resources/Agua.png");
 		vacio = cargarSprite("src/main/resources/Vacio.png");
 		arena = cargarSprite("src/main/resources/Arena.png");
-		lava = cargarSprite("src/main/resources/Lava.png");
+		lava = cargarSprite("src/main/resources/LavaConOnda.png");
 	}
 
 
