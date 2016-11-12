@@ -1,0 +1,2 @@
+ERROR	2016-11-07 15:47:58,459	0	gui.Login	[AWT-EventQueue-0]	Error al leer respuesta del servidor Connection reset
+ERROR	2016-11-07 15:47:58,463	4	gui.Login	[AWT-EventQueue-0]	Error al acceder a Editar Personaje java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $
