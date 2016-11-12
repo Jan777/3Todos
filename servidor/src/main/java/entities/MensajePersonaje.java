@@ -59,6 +59,11 @@ public class MensajePersonaje {
 
 	public boolean guardarPersonaje() {
 		DataBaseOperations op = new DataBaseOperations();
-		return op.guardarPersonaje(this.idUsuario,this.username,this.raza,this.casta);
+		return op.guardarPersonaje(this.username,this.raza,this.casta);
+	}
+
+	public boolean actualizarPersonaje(){
+		DataBaseOperations op = new DataBaseOperations();
+		return op.actualizarPersonaje(this.idUsuario,this.raza,this.casta);
 	}
 }

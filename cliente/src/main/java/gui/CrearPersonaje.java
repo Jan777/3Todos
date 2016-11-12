@@ -32,6 +32,7 @@ public class CrearPersonaje extends JFrame {
 	private JLabel lblRazaElegida;
 	private JLabel lblCastaElegida;
 	private MensajePersonaje personaje;
+	private boolean nuevoPersonaje=false;
 
 	/**
 	 * Launch the application.
@@ -143,8 +144,13 @@ public class CrearPersonaje extends JFrame {
 		String resp = this.login.leerRespuesta();
 		personaje = gson.fromJson(resp, MensajePersonaje.class);
 		cargarImagenesPersonaje(personaje.getRaza());
-		comboCasta.setSelectedItem(personaje.getCasta());
-		comboRaza.setSelectedItem(personaje.getRaza());
+		if (personaje.getCasta() != null && personaje.getRaza() != null) {
+			nuevoPersonaje = false;
+			comboCasta.setSelectedItem(personaje.getCasta());
+			comboRaza.setSelectedItem(personaje.getRaza());
+		}else{
+			nuevoPersonaje = true;
+		}
 	}
 
 	private void cargarImagenesPersonaje(String raza) {
@@ -166,7 +172,11 @@ public class CrearPersonaje extends JFrame {
 		personaje = new MensajePersonaje(personaje.getIdUsuario(), login.getUsername(),
 				comboRaza.getSelectedItem().toString(), comboCasta.getSelectedItem().toString());
 		if (comboCompleto(razaItem, castaItem)) {
-			msj.setId("guardarPersonaje");
+			if (nuevoPersonaje) {
+				msj.setId("guardarPersonaje");
+			} else {
+				msj.setId("actualizarPersonaje");
+			}
 			msj.setMensaje(gson.toJson(personaje));
 			this.login.enviarMensaje(msj);
 			resp = this.login.leerRespuesta();

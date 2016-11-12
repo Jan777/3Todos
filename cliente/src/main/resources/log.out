@@ -10,3 +10,5 @@ ERROR	2016-11-12 00:36:08,078	0	gui.Login	[AWT-EventQueue-0]	Error conexion con 
 ERROR	2016-11-12 00:55:34,496	0	gui.Login	[AWT-EventQueue-0]	Error conexion con servidor Connection refused: connect
 ERROR	2016-11-12 00:55:38,770	4274	gui.Login	[AWT-EventQueue-0]	Error al validar contrasena null
 ERROR	2016-11-12 00:55:41,913	7417	gui.Login	[AWT-EventQueue-0]	Error al validar contrasena null
+ERROR	2016-11-12 01:26:12,350	1	gui.Login	[AWT-EventQueue-0]	Error al leer respuesta del servidor Connection reset
+ERROR	2016-11-12 09:32:17,201	0	gui.Login	[AWT-EventQueue-0]	Error al leer respuesta del servidor Connection reset

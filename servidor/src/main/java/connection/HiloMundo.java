@@ -110,14 +110,23 @@ public class HiloMundo extends Thread {
 		}
 		case "obtenerPersonaje": {
 			personaje.setUsername(msj.getMensaje());
-			personaje.getPersonaje();
-			msj.setMensaje(gson.toJson(personaje));
+			msj.setMensaje(gson.toJson(personaje.getPersonaje()));
 			out.writeUTF(gson.toJson(msj));
 			break;
 		}
 		case "guardarPersonaje": {
 			personaje=gson.fromJson(msj.getMensaje(),MensajePersonaje.class);
 			if(personaje.guardarPersonaje()){
+				msj.setMensaje("OK");
+			}else{
+				msj.setMensaje("Error al al persistir datos");;
+			}
+			out.writeUTF(gson.toJson(msj));
+			break;
+		}
+		case "actualizarPersonaje": {
+			personaje=gson.fromJson(msj.getMensaje(),MensajePersonaje.class);
+			if(personaje.actualizarPersonaje()){
 				msj.setMensaje("OK");
 			}else{
 				msj.setMensaje("Error al al persistir datos");;
