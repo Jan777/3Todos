@@ -9,3 +9,33 @@ ERROR	2016-11-09 00:54:04,329	37818	connection.Servidor	[Thread-0]	Error guardar
 INFO	2016-11-09 00:54:20,303	53792	connection.Servidor	[Thread-0]	Cerro la conexion un cliente: /127.0.0.1
 INFO	2016-11-09 00:55:13,566	0	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
 ERROR	2016-11-09 00:57:05,535	111969	connection.Servidor	[Thread-0]	Connection reset
+INFO	2016-11-12 00:29:23,602	1	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+ERROR	2016-11-12 00:29:59,849	36248	connection.Servidor	[Thread-0]	Connection reset
+INFO	2016-11-12 00:32:22,285	178684	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+INFO	2016-11-12 00:32:25,838	182237	connection.Servidor	[Thread-1]	Cerro la conexion un cliente: /127.0.0.1
+INFO	2016-11-12 00:32:40,366	196765	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+ERROR	2016-11-12 00:33:01,208	217607	connection.Servidor	[Thread-2]	Connection reset
+INFO	2016-11-12 00:33:11,506	227905	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+ERROR	2016-11-12 00:33:26,849	243248	connection.Servidor	[Thread-3]	Connection reset
+INFO	2016-11-12 00:37:31,016	0	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+ERROR	2016-11-12 00:38:25,859	54843	connection.Servidor	[Thread-0]	Connection reset
+INFO	2016-11-12 00:39:30,968	0	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+INFO	2016-11-12 00:40:12,834	41866	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+INFO	2016-11-12 00:40:33,320	62352	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+ERROR	2016-11-12 00:41:14,587	103619	connection.Servidor	[Thread-2]	Connection reset
+ERROR	2016-11-12 00:41:18,172	107204	connection.Servidor	[Thread-1]	Connection reset
+ERROR	2016-11-12 00:41:21,404	110436	connection.Servidor	[Thread-0]	Connection reset
+INFO	2016-11-12 00:42:47,205	0	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+ERROR	2016-11-12 00:45:16,365	149160	connection.Servidor	[Thread-0]	Connection reset
+INFO	2016-11-12 00:45:29,720	162515	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+ERROR	2016-11-12 00:46:30,500	223295	connection.Servidor	[Thread-1]	Connection reset
+INFO	2016-11-12 00:47:16,320	269115	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+ERROR	2016-11-12 00:47:40,537	293332	connection.Servidor	[Thread-2]	Connection reset
+INFO	2016-11-12 00:47:47,730	300525	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+ERROR	2016-11-12 00:48:46,004	358799	connection.Servidor	[Thread-3]	Connection reset
+INFO	2016-11-12 00:50:14,636	0	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+ERROR	2016-11-12 00:50:56,107	41471	connection.Servidor	[Thread-0]	Connection reset
+INFO	2016-11-12 00:51:07,373	52737	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+ERROR	2016-11-12 00:53:02,558	167922	connection.Servidor	[Thread-1]	Connection reset
+INFO	2016-11-12 00:56:16,542	0	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+ERROR	2016-11-12 00:59:03,759	167217	connection.Servidor	[Thread-0]	Connection reset

@@ -146,7 +146,6 @@ public class Login extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					validar();
-					new MenuPrincipal(login);
 				} catch (Exception e1) {
 					Loggin.getInstance().error("Error al validar contrasena "+e1.getMessage());
 				}
@@ -223,13 +222,13 @@ public class Login extends JFrame {
 			if(resp.equals("Ok")){
 				try {
 					login.setUsername(txtUsuario.getText());
-					new EditarPersonaje(login, cliente);
+					new MenuPrincipal(login);
 					cancelar();
 				} catch (Exception e) {
 					Loggin.getInstance().error("Error al acceder a Editar Personaje "+e.getMessage());
 				}
 			}else{
-				JOptionPane.showMessageDialog(null, "Usuario o contrasena invalido", "Error", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Usuario o contrasena invalido", "Error", JOptionPane.ERROR_MESSAGE);
 				cancelar();
 			}
 		}
@@ -294,7 +293,7 @@ public class Login extends JFrame {
 	}
 
 	public String getUsername() {
-		return username;
+		return username.toUpperCase();
 	}
 
 	public void setUsername(String username) {

@@ -3,8 +3,6 @@ package gui;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.net.Socket;
 
 import javax.swing.JButton;
@@ -25,8 +23,6 @@ public class EditarPersonaje extends JFrame {
 	private Login login;
 	private Mensaje msj;
 	private Gson gson;
-	private DataOutputStream out;
-	private DataInputStream in;
 	private JComboBox comboRaza;
 	private JComboBox comboCasta;
 	private JLabel lblRazaElegida;
@@ -58,7 +54,7 @@ public class EditarPersonaje extends JFrame {
 		login.visible(false);
 		frmPersonaje = new JFrame();
 		frmPersonaje.setResizable(false);
-		frmPersonaje.setTitle("Seleci�n de Personaje");
+		frmPersonaje.setTitle("Selecion de Personaje");
 		frmPersonaje.setBounds(100, 100, 474, 324);
 		frmPersonaje.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frmPersonaje.getContentPane().setLayout(null);

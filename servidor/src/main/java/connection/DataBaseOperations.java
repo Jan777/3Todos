@@ -143,7 +143,7 @@ public class DataBaseOperations {
 		PreparedStatement pstmt = null;
 		String queryInsert = "insert into personaje (id_usuario,id_raza,id_casta,nivel,experiencia,vida,energia,ataque,defensa,magia,puntos,potencia,destreza,velocidad)"
 				+ "values (?,(select id_raza from raza ra where ra.raza=?),(select id_casta from casta ca where ca.casta=?),0,0,0,0,0,0,0,0,0,0,0)";
-		String queryUpdate = "update personaje set id_raza=(select id_raza from raza ra where ra.raza=?),id_casta=(select id_raza from casta ca where ca.casta=?) where id_usuario=?";
+		String queryUpdate = "update personaje set id_raza=(select id_raza from raza ra where ra.raza=?),id_casta=(select id_casta from casta ca where ca.casta=?) where id_usuario=?";
 		try {
 			conn = SQLConnection.getConnection();
 			if (idUsuario == 0) {

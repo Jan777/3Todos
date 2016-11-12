@@ -110,7 +110,8 @@ public class HiloMundo extends Thread {
 		}
 		case "obtenerPersonaje": {
 			personaje.setUsername(msj.getMensaje());
-			msj.setMensaje(gson.toJson(personaje.getPersonaje()));
+			personaje.getPersonaje();
+			msj.setMensaje(gson.toJson(personaje));
 			out.writeUTF(gson.toJson(msj));
 			break;
 		}
