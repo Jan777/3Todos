@@ -118,6 +118,7 @@ public class HiloMundo extends Thread {
 			personaje=gson.fromJson(msj.getMensaje(),MensajePersonaje.class);
 			if(personaje.guardarPersonaje()){
 				msj.setMensaje("OK");
+				Loggin.getInstance().debug("El usuario "+personaje.getUsername()+" creó su personaje.");
 			}else{
 				msj.setMensaje("Error al al persistir datos");;
 			}
@@ -128,6 +129,7 @@ public class HiloMundo extends Thread {
 			personaje=gson.fromJson(msj.getMensaje(),MensajePersonaje.class);
 			if(personaje.actualizarPersonaje()){
 				msj.setMensaje("OK");
+				Loggin.getInstance().debug("El usuario "+personaje.getUsername()+" modificó su personaje.");
 			}else{
 				msj.setMensaje("Error al al persistir datos");;
 			}

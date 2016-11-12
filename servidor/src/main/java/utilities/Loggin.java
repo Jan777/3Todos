@@ -28,4 +28,8 @@ public class Loggin {
 	public void error(String m) {
 		log.error(m);
 	}
+	
+	public void debug(String m) {
+		log.debug(m);
+	}
 }

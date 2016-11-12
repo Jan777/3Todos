@@ -89,3 +89,15 @@ INFO	2016-11-12 09:36:35,073	0	connection.Servidor	[main]	Se conecto un cliente 
 ERROR	2016-11-12 09:37:17,527	42454	connection.Servidor	[Thread-0]	Connection reset
 INFO	2016-11-12 09:37:35,131	0	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
 ERROR	2016-11-12 09:38:38,754	63623	connection.Servidor	[Thread-0]	Connection reset
+INFO	2016-11-12 13:20:03,614	0	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+ERROR	2016-11-12 13:20:27,350	23736	connection.Servidor	[Thread-0]	Connection reset
+INFO	2016-11-12 13:22:29,763	0	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+ERROR	2016-11-12 13:23:45,510	75747	connection.Servidor	[Thread-0]	Connection reset
+INFO	2016-11-12 13:23:58,443	0	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+ERROR	2016-11-12 13:24:53,722	55279	connection.Servidor	[Thread-0]	Connection reset
+INFO	2016-11-12 13:25:01,082	0	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+INFO	2016-11-12 13:25:07,826	6744	connection.Servidor	[Thread-0]	El usuario GUSTAVO modificó su personaje.
+ERROR	2016-11-12 13:25:30,521	29439	connection.Servidor	[Thread-0]	Connection reset
+INFO	2016-11-12 13:25:37,177	0	connection.Servidor	[main]	Se conecto un cliente /127.0.0.1
+DEBUG	2016-11-12 13:25:43,722	6545	connection.Servidor	[Thread-0]	El usuario GUSTAVO modificó su personaje.
+ERROR	2016-11-12 13:26:05,958	28781	connection.Servidor	[Thread-0]	Connection reset
