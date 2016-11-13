@@ -178,6 +178,11 @@ public class Personaje {
 			} else if (diagonalSupIzq) {
 				dx -= relacion;
 				dy--;
+				if(dx < 0 || dy < 0)
+				{
+					int i = 0;
+					i++;
+				}
 			}
 			
 			auxX += dx;
@@ -188,6 +193,12 @@ public class Personaje {
 			}
 			
 			tile = Mapa.mouseATile(auxX, auxY);
+			
+			if(tile[0] < 0 || tile[0] >= ancho || tile[1] < 0 || tile[1] >= alto)
+			{
+				enMovimiento = false;
+				return;
+			}
 			
 			if (mundo.getTile((int) tile[0], (int) tile[1]).esObstaculo()) {
 				xFinal = x;

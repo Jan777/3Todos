@@ -95,7 +95,7 @@ public class Juego implements Runnable {
 			}
 
 			if (timer >= 1000000000) {
-				pantalla.getFrame().setTitle(tituloJuego + " | " + "FPS: " + fps);
+				pantalla.getFrame().setTitle(tituloJuego);
 				actualizaciones = 0;
 				timer = 0;
 			}
