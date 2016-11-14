@@ -31,11 +31,15 @@ import com.google.gson.JsonSyntaxException;
 import connection.Mensaje;
 import entities.Usuario;
 import utilities.Loggin;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Login extends JFrame {
 
 	private static final long serialVersionUID = -6471222468956323219L;
 	private JPanel contentPane;
+	private Conexion conexion;
 	private JTextField txtUsuario;
 	private JPasswordField tpContrasena;
 	private JLabel lblUsuario;
@@ -52,6 +56,7 @@ public class Login extends JFrame {
 	private Gson gson;
 	private Mensaje msj;
 	private String username;
+	private JButton btnConexion;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -78,7 +83,7 @@ public class Login extends JFrame {
 	}
 
 	public Login(){
-		setTitle("Login");
+		setTitle("BloodyWars - Login");
 		setLogin(this);
 		this.msj = new Mensaje();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -114,18 +119,22 @@ public class Login extends JFrame {
 		contentPane.add(lblBloodyWars);
 
 		lblUsuario = new JLabel("Usuario: ");
+		lblUsuario.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblUsuario.setBounds(7, 84, 96, 20);
 		contentPane.add(lblUsuario);
-		lblContrasena = new JLabel("Contrasena: ");
+		lblContrasena = new JLabel("Contrase\u00F1a: ");
+		lblContrasena.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblContrasena.setBounds(7, 108, 96, 20);
 		contentPane.add(lblContrasena);
 
 		txtUsuario = new JTextField();
+		txtUsuario.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		txtUsuario.setBounds(107, 84, 251, 20);
 		contentPane.add(txtUsuario);
 		txtUsuario.setColumns(10);
 
 		tpContrasena = new JPasswordField();
+		tpContrasena.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		tpContrasena.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent key) {
@@ -141,6 +150,7 @@ public class Login extends JFrame {
 		contentPane.add(tpContrasena);
 
 		btnIngresar = new JButton("Ingresar");
+		btnIngresar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnIngresar.setBounds(107, 132, 120, 21);
 		btnIngresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -165,6 +175,7 @@ public class Login extends JFrame {
 		contentPane.add(btnIngresar);
 
 		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnCancelar.setBounds(237, 132, 121, 21);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -181,7 +192,8 @@ public class Login extends JFrame {
 
 		contentPane.add(btnCancelar);
 		btnRegistro = new JButton("Registrarse");
-		btnRegistro.setBounds(107, 160, 251, 22);
+		btnRegistro.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnRegistro.setBounds(107, 160, 120, 22);
 
 		btnRegistro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -204,6 +216,22 @@ public class Login extends JFrame {
 			}
 		});
 		contentPane.add(btnRegistro);
+		
+		btnConexion = new JButton("Conexi\u00F3n");
+		btnConexion.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnConexion.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				try {
+					abrirConexion();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		
+		btnConexion.setBounds(237, 160, 121, 23);
+		contentPane.add(btnConexion);
 		visible(true);
 
 	}
@@ -298,5 +326,10 @@ public class Login extends JFrame {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	
+	public void abrirConexion() throws FileNotFoundException{
+		Conexion frame = new Conexion(this);	// IMPORTANTE
+		frame.setVisible(true);	
 	}
 }

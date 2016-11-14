@@ -1,14 +1,6 @@
-ERROR	2016-11-11 19:28:47,436	0	gui.Login	[AWT-EventQueue-0]	Error conexion con servidor Connection refused: connect
-ERROR	2016-11-11 19:28:50,200	0	gui.Login	[AWT-EventQueue-0]	Error conexion con servidor Connection refused: connect
-ERROR	2016-11-11 19:30:35,912	0	gui.Login	[AWT-EventQueue-0]	Error conexion con servidor Connection refused: connect
-ERROR	2016-11-11 19:30:36,099	0	gui.Login	[AWT-EventQueue-0]	Error conexion con servidor Connection refused: connect
-ERROR	2016-11-11 23:26:37,788	0	gui.Login	[AWT-EventQueue-0]	Error conexion con servidor Connection refused: connect
-ERROR	2016-11-11 23:31:50,955	0	gui.Login	[AWT-EventQueue-0]	Error conexion con servidor Connection refused: connect
-ERROR	2016-11-11 23:33:42,525	0	gui.Login	[AWT-EventQueue-0]	Error conexion con servidor Connection refused: connect
-ERROR	2016-11-12 00:35:34,912	0	gui.Login	[AWT-EventQueue-0]	Error conexion con servidor Connection refused: connect
-ERROR	2016-11-12 00:36:08,078	0	gui.Login	[AWT-EventQueue-0]	Error conexion con servidor Connection refused: connect
-ERROR	2016-11-12 00:55:34,496	0	gui.Login	[AWT-EventQueue-0]	Error conexion con servidor Connection refused: connect
-ERROR	2016-11-12 00:55:38,770	4274	gui.Login	[AWT-EventQueue-0]	Error al validar contrasena null
-ERROR	2016-11-12 00:55:41,913	7417	gui.Login	[AWT-EventQueue-0]	Error al validar contrasena null
-ERROR	2016-11-12 01:26:12,350	1	gui.Login	[AWT-EventQueue-0]	Error al leer respuesta del servidor Connection reset
-ERROR	2016-11-12 09:32:17,201	0	gui.Login	[AWT-EventQueue-0]	Error al leer respuesta del servidor Connection reset
+ERROR	2016-11-13 23:14:08,074	0	gui.Login	[AWT-EventQueue-0]	Error conexion con servidor Connection refused: connect
+ERROR	2016-11-13 23:14:24,714	0	gui.Login	[AWT-EventQueue-0]	Error conexion con servidor Connection refused: connect
+ERROR	2016-11-13 23:50:46,779	0	gui.Login	[AWT-EventQueue-0]	Error conexion con servidor Connection refused: connect
+ERROR	2016-11-13 23:52:33,353	0	gui.Login	[AWT-EventQueue-0]	Error conexion con servidor Connection refused: connect
+ERROR	2016-11-13 23:53:22,283	0	gui.Login	[AWT-EventQueue-0]	Error conexion con servidor Connection refused: connect
+ERROR	2016-11-13 23:54:16,340	0	gui.Login	[AWT-EventQueue-0]	Error conexion con servidor Connection refused: connect
