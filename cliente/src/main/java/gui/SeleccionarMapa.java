@@ -53,7 +53,7 @@ public class SeleccionarMapa extends JFrame {
 		panel.setLayout(null);
 		
 		JButton btnLlanuraDa = new JButton("");
-		btnLlanuraDa.setIcon(new ImageIcon("src/main/resources/llanura.jpg"));
+		btnLlanuraDa.setIcon(new ImageIcon("src/main/resources/imagenes/llanura.jpg"));
 		btnLlanuraDa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new PantallaDeJuego();
@@ -63,7 +63,7 @@ public class SeleccionarMapa extends JFrame {
 		panel.add(btnLlanuraDa);
 		
 		JButton btnDesiertoNoche = new JButton("");
-		btnDesiertoNoche.setIcon(new ImageIcon("src/main/resources/desierto.jpg"));
+		btnDesiertoNoche.setIcon(new ImageIcon("src/main/resources/imagenes/desierto.jpg"));
 		btnDesiertoNoche.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new PantallaDeJuego();

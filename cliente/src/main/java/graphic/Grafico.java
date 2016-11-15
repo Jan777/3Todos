@@ -20,15 +20,15 @@ public class Grafico {
 	
 	public static void cargar() {
 		
-		humano = cargarSpritePersonaje(51, 60, 10, "src/main/resources/humano.png");
-		elfo = cargarSpritePersonaje(62, 86, 10, "src/main/resources/elfo.png");
-		orco = cargarSpritePersonaje(66, 95, 10, "src/main/resources/orco.png");
+		humano = cargarSpritePersonaje(51, 60, 10, "src/main/resources/imagenes/humano.png");
+		elfo = cargarSpritePersonaje(62, 86, 10, "src/main/resources/imagenes/elfo.png");
+		orco = cargarSpritePersonaje(66, 95, 10, "src/main/resources/imagenes/orco.png");
 		
-		pasto = cargarSprite("src/main/resources/Pasto.png");
-		agua = cargarSprite("src/main/resources/Agua.png");
-		vacio = cargarSprite("src/main/resources/Vacio.png");
-		arena = cargarSprite("src/main/resources/Arena.png");
-		lava = cargarSprite("src/main/resources/LavaConOnda.png");
+		pasto = cargarSprite("src/main/resources/imagenes/Pasto.png");
+		agua = cargarSprite("src/main/resources/imagenes/Agua.png");
+		vacio = cargarSprite("src/main/resources/imagenes/Vacio.png");
+		arena = cargarSprite("src/main/resources/imagenes/Arena.png");
+		lava = cargarSprite("src/main/resources/imagenes/LavaConOnda.png");
 	}
 
 
