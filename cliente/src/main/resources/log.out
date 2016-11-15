@@ -1,6 +1,0 @@
-ERROR	2016-11-13 23:14:08,074	0	gui.Login	[AWT-EventQueue-0]	Error conexion con servidor Connection refused: connect
-ERROR	2016-11-13 23:14:24,714	0	gui.Login	[AWT-EventQueue-0]	Error conexion con servidor Connection refused: connect
-ERROR	2016-11-13 23:50:46,779	0	gui.Login	[AWT-EventQueue-0]	Error conexion con servidor Connection refused: connect
-ERROR	2016-11-13 23:52:33,353	0	gui.Login	[AWT-EventQueue-0]	Error conexion con servidor Connection refused: connect
-ERROR	2016-11-13 23:53:22,283	0	gui.Login	[AWT-EventQueue-0]	Error conexion con servidor Connection refused: connect
-ERROR	2016-11-13 23:54:16,340	0	gui.Login	[AWT-EventQueue-0]	Error conexion con servidor Connection refused: connect

@@ -17,7 +17,7 @@ public class SQLConnection {
 		try {
 			if (conn == null) {
 				String driver = "org.sqlite.JDBC";
-				String url = "jdbc:sqlite:src/main/resources/BloodyWars.db";
+				String url = "jdbc:sqlite:src/main/resources/BaseDeDatos/BloodyWars.db";
 				Class.forName(driver);
 				conn = DriverManager.getConnection(url);
 			}

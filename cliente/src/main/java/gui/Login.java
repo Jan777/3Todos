@@ -250,6 +250,7 @@ public class Login extends JFrame {
 			if(resp.equals("Ok")){
 				try {
 					login.setUsername(txtUsuario.getText());
+					Loggin.getInstance().info("Accedio usuario: "+txtUsuario.getText().toUpperCase());
 					new MenuPrincipal(login);
 					cancelar();
 				} catch (Exception e) {
