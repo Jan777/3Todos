@@ -5,12 +5,17 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import connection.Mensaje;
+import utilities.Loggin;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -21,6 +26,7 @@ public class MenuPrincipal extends JFrame {
 
 	private JPanel contentPane;
 	private Login login;
+	Mensaje msj;
 
 	/**
 	 * Launch the application.
@@ -76,6 +82,15 @@ public class MenuPrincipal extends JFrame {
 		btnJugar.setBounds(97, 124, 221, 60);
 		panel.add(btnJugar);
 		
+		JButton btnCerrarSesin = new JButton("Cerrar sesi\u00F3n");
+		btnCerrarSesin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				salir();
+			}
+		});
+		btnCerrarSesin.setBounds(97, 195, 221, 45);
+		panel.add(btnCerrarSesin);
+		
 		this.setVisible(true);
 	}
 	
@@ -85,5 +100,10 @@ public class MenuPrincipal extends JFrame {
 	
 	private void seleccionarMapa(){
 		new SeleccionarMapa(this);
+	}
+	
+	private void salir() {
+		login.visible(true);
+		this.dispose();
 	}
 }
