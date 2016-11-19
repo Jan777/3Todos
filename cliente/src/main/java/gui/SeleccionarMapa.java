@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import gameEntities.Juego;
+
 import java.awt.GridBagLayout;
 
 import javax.swing.ImageIcon;
@@ -13,6 +16,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
@@ -35,11 +40,13 @@ public class SeleccionarMapa extends JFrame {
 			}
 		});
 	}
+	
+	public SeleccionarMapa(){}
 
 	/**
 	 * Create the frame.
 	 */
-	public SeleccionarMapa() {
+	public SeleccionarMapa(MenuPrincipal menu) {
 		setTitle("Jugar");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 500, 350);
@@ -47,6 +54,14 @@ public class SeleccionarMapa extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		
+		menu.setVisible(false);
+		
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				menu.setVisible(true);
+			}
+		});
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
@@ -56,7 +71,7 @@ public class SeleccionarMapa extends JFrame {
 		btnLlanuraDa.setIcon(new ImageIcon("src/main/resources/imagenes/llanura.jpg"));
 		btnLlanuraDa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new PantallaDeJuego();
+				abrirJuego("llanura");
 			}
 		});
 		btnLlanuraDa.setBounds(125, 50, 250, 100);
@@ -66,7 +81,7 @@ public class SeleccionarMapa extends JFrame {
 		btnDesiertoNoche.setIcon(new ImageIcon("src/main/resources/imagenes/desierto.jpg"));
 		btnDesiertoNoche.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new PantallaDeJuego();
+				abrirJuego("desierto");
 			}
 		});
 		btnDesiertoNoche.setBounds(125, 175, 250, 100);
@@ -79,5 +94,10 @@ public class SeleccionarMapa extends JFrame {
 		panel.add(lblSeleccionaElMapa);
 		
 		this.setVisible(true);
+	}
+	
+	private void abrirJuego(String tipoMapa){
+		Juego juego = new Juego("BloodyWars", 1000, 650, tipoMapa, this);
+		juego.start();
 	}
 }

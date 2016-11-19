@@ -69,7 +69,7 @@ public class MenuPrincipal extends JFrame {
 		JButton btnJugar = new JButton("Jugar");
 		btnJugar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new SeleccionarMapa();
+				seleccionarMapa();
 			}
 		});
 		btnJugar.setFont(new Font("Verdana", Font.PLAIN, 16));
@@ -81,5 +81,9 @@ public class MenuPrincipal extends JFrame {
 	
 	private void crearPersonaje() {
 		new CrearPersonaje(login, this);
+	}
+	
+	private void seleccionarMapa(){
+		new SeleccionarMapa(this);
 	}
 }

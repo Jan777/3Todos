@@ -22,10 +22,15 @@ public class Mapa {
 	private int xMaximo;
 	private int yMinimo;
 	private int yMaximo;
-
+/*
 	public Mapa(Juego juego, int nroMapa) {
 		this.juego = juego;
 		cargarMundo(nroMapa);
+	}*/
+	
+	public Mapa(Juego juego) {
+		this.juego = juego;
+		cargarMundo(juego.getTipoMapa());
 	}
 
 	public void actualizar() {
@@ -61,8 +66,8 @@ public class Mapa {
 		return t;
 	}
 
-	private void cargarMundo(int nroMapa) {
-		String archivo = convertirArchivoAString(nroMapa);
+	private void cargarMundo(String tipoMapa) {
+		String archivo = convertirArchivoAString(tipoMapa);
 		String[] tokens = archivo.split("\\s+");
 		ancho = Integer.parseInt(tokens[0]);
 		alto = Integer.parseInt(tokens[1]);
@@ -78,11 +83,11 @@ public class Mapa {
 		}
 	}
 
-	private String convertirArchivoAString(int nroMapa) {
+	private String convertirArchivoAString(String tipoMapa) {
 		StringBuilder builder = new StringBuilder();
 
 		try {
-			String path = obtenerPathMapa(nroMapa);
+			String path = obtenerPathMapa(tipoMapa);
 			BufferedReader br = new BufferedReader(new FileReader(path));
 			String linea;
 
@@ -96,13 +101,13 @@ public class Mapa {
 		return builder.toString();
 	}
 
-	private String obtenerPathMapa(int nroMapa) {
+	private String obtenerPathMapa(String nroMapa) {
 		String pathMapa = "";
 		
 		switch(nroMapa)
 		{
-			case 1: pathMapa = "src/main/resources/mapas/mapa1.txt"; break;
-			case 2: pathMapa = "src/main/resources/mapas/mapa2.txt"; break;
+			case "llanura": pathMapa = "src/main/resources/mapas/mapa1.txt"; break;
+			case "desierto": pathMapa = "src/main/resources/mapas/mapa2.txt"; break;
 		}
 		
 		return pathMapa;

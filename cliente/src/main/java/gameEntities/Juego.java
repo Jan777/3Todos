@@ -5,6 +5,7 @@ import java.awt.image.BufferStrategy;
 import gameEntities.EstadoJuego;
 import graphic.Grafico;
 import gui.PantallaJuego;
+import gui.SeleccionarMapa;
 
 
 public class Juego implements Runnable {
@@ -19,16 +20,21 @@ public class Juego implements Runnable {
 	private Estado estadoJuego;
 	private EventoMouse manejador;
 	private Camara camara;
+	private String tipoMapa;
+	private SeleccionarMapa frameSelMapa;
 
-	public Juego(final String tituloJuego, final int ancho, final int alto) {
+	public Juego(final String tituloJuego, final int ancho, final int alto, String tipoMapa, SeleccionarMapa frame) {
 		manejador = new EventoMouse();
 		this.tituloJuego = tituloJuego;
 		this.alto = alto;
 		this.ancho = ancho;
+		this.tipoMapa = tipoMapa;
+		this.frameSelMapa = frame;
+		frameSelMapa.setVisible(false);
 	}
 
 	public void iniciar() { 
-		pantalla = new PantallaJuego(tituloJuego, ancho, alto);
+		pantalla = new PantallaJuego(tituloJuego, ancho, alto, tipoMapa, frameSelMapa);
 
 		pantalla.getCanvas().addMouseListener(manejador);
 
@@ -141,5 +147,9 @@ public class Juego implements Runnable {
 	
 	public EstadoJuego getEstadoJuego() {
 		return (EstadoJuego) estadoJuego;
+	}
+	
+	public String getTipoMapa() {
+		return tipoMapa;
 	}
 }
