@@ -23,7 +23,9 @@ import items.*;
 
 public abstract class Personaje implements Peleador {
 
-	protected int vida,
+	protected int 
+				idPersonaje,
+				vida,
 				experiencia,
 				nivel,
 				energia, 
@@ -35,6 +37,14 @@ public abstract class Personaje implements Peleador {
 				velocidad,
 				potencia,
 				puedeAgregarAtaque; // @mauroat - 24/10/16 : Esto se crea para satisfacer la historia de usuario 13-
+
+	public int getIdPersonaje() {
+		return idPersonaje;
+	}
+
+	public void setIdPersonaje(int idPersonaje) {
+		this.idPersonaje = idPersonaje;
+	}
 
 	protected List<Item> mochila;
 	protected Ubicacion ubicacion;
