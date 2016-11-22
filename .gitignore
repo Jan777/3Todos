@@ -2,6 +2,5 @@
 **/.settings
 **/.gradle
 **/bin
+**/Log
 **/build
-
-dominio/src/main/java/dominio/Nivel.java

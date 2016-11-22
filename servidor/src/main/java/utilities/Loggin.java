@@ -4,7 +4,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
-import connection.Servidor;
+import servidor.Servidor;
 
 public class Loggin {
 
@@ -28,7 +28,7 @@ public class Loggin {
 	public void error(String m) {
 		log.error(m);
 	}
-	
+
 	public void debug(String m) {
 		log.debug(m);
 	}
