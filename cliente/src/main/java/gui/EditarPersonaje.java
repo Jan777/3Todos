@@ -22,6 +22,7 @@ import javax.swing.border.EmptyBorder;
 
 import castas.*;
 import cliente.*;
+import cliente.MensajePersonaje;
 import cliente.Usuario;
 import dominio.*;
 import razas.*;

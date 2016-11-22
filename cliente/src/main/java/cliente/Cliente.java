@@ -131,10 +131,10 @@ public class Cliente extends Thread {
 			// ElegirMapa em = new ElegirMapa(paquete, sem);
 			// em.setVisible(true);
 			semaforo.acquire();
-			// pp.setMundo(Integer.parseInt(paquete.getMensaje()));
+			pp.setMundo(Integer.parseInt(paquete.getMensaje()));
 			salida.writeObject(gson.toJson(paquete));
 
-			Juego play = new Juego("BloodyWars", 1024, 768, this, pp, "llanura", "orco");
+			Juego play = new Juego("BloodyWars", 1024, 768, this, pp, "llanura", pp.getRaza());
 			play.start();
 
 		} catch (IOException e) {
