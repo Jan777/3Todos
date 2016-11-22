@@ -294,8 +294,8 @@ public class Personaje {
 		drawX = (int) (x - juego.getCamara().getxOffset());
 		drawY = (int) (y - juego.getCamara().getyOffset());
 		g.drawImage(getFrameAnimacionActual(), drawX, drawY, ancho, alto, null);
-		g.setColor(Color.BLUE); 
-	    g.drawString("Cristian", drawX + 10, drawY - 12);
+		g.setColor(Color.WHITE); 
+	    g.drawString(this.juego.getNickName(), drawX + 10, drawY - 12);
 	}
 
 	private BufferedImage getFrameAnimacionActual() {

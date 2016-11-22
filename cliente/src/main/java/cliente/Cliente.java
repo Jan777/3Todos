@@ -132,9 +132,10 @@ public class Cliente extends Thread {
 			// em.setVisible(true);
 			semaforo.acquire();
 			pp.setMundo(Integer.parseInt(paquete.getMensaje()));
+			pp.setNick(usuario.getNombre_usuario());
 			salida.writeObject(gson.toJson(paquete));
 
-			Juego play = new Juego("BloodyWars", 1024, 768, this, pp, "llanura", pp.getRaza());
+			Juego play = new Juego("BloodyWars", 1024, 768, this, pp, "llanura");
 			play.start();
 
 		} catch (IOException e) {

@@ -21,6 +21,7 @@ public class Juego implements Runnable {
 	private BufferStrategy bs; // Estrategia para graficar mediante buffers (Primero se "grafica" en el/los buffer/s y finalmente en el canvas)
 	private Graphics g;
 	private String raza;
+	private String nickName;
 
 	// Estados
 	private Estado estadoJuego;
@@ -47,13 +48,14 @@ public class Juego implements Runnable {
 	    handlerMouse = new Mouse(); 
 	  } 
 	
-	public Juego(final String nombre, final int ancho, final int alto, Cliente cliente, MensajePersonaje pp, String tipoMapa, String raza) {
+	public Juego(final String nombre, final int ancho, final int alto, Cliente cliente, MensajePersonaje pp, String tipoMapa) {
 		this.NOMBRE = nombre;
 		this.ALTO = alto;
 		this.ANCHO = ancho;
 		this.cliente = cliente;
-		this.raza = raza;
+		this.raza = pp.getRaza();
 	    this.setTipoMapa(tipoMapa); 
+	    this.nickName = pp.getNick();
 		pp.setDireccion(6);
 		pp.setFrame(0);
 		this.paquetePersonaje = pp;
@@ -207,5 +209,13 @@ public class Juego implements Runnable {
 
 	public void setRaza(String raza) {
 		this.raza = raza;
+	}
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	} 
 }
