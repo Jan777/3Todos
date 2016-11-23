@@ -220,8 +220,7 @@ public class DBControlador {
 			result = st.executeQuery();
 			int idPersonaje = result.getInt("ID_USUARIO");
 
-			st = connect.prepareStatement("SELECT P.RAZA,P.CASTA "
-					+ "FROM PERSONAJE P INNER JOIN RAZA R ON P.ID_RAZA=R.ID_RAZA INNER JOIN CASTA C ON C.ID_CASTA=P.ID_CASTA WHERE p.id_usuario=?");
+			st = connect.prepareStatement("SELECT P.RAZA,P.CASTA FROM PERSONAJE P WHERE p.id_usuario=?");
 			st.setInt(1, idPersonaje);
 			result = st.executeQuery();
 			String casta = result.getString("CASTA");
@@ -247,18 +246,17 @@ public class DBControlador {
 			PreparedStatement st = connect.prepareStatement("select ID_USUARIO from USUARIO where NOMBRE = ?");
 			st.setString(1, user.getNombre_usuario().toUpperCase());
 			result = st.executeQuery();
-			int idPersonaje = result.getInt("ID_USUARIO");
+			int idUsuario = result.getInt("ID_USUARIO");
 
-			st = connect.prepareStatement("SELECT P.RAZA,P.CASTA "
-					+ "FROM PERSONAJE P INNER JOIN RAZA R ON P.ID_RAZA=R.ID_RAZA INNER JOIN CASTA C ON C.ID_CASTA=P.ID_CASTA WHERE p.id_usuario=?");
-			st.setInt(1, idPersonaje);
+			st = connect.prepareStatement("SELECT P.RAZA,P.CASTA FROM PERSONAJE P WHERE p.id_usuario=?");
+			st.setInt(1, idUsuario);
 			result = st.executeQuery();
 			String casta = result.getString("CASTA");
 			String raza = result.getString("RAZA");
 
 			MensajePersonaje personaje = new MensajePersonaje();
 
-			personaje.setIdPersonaje(idPersonaje);
+			personaje.setIdPersonaje(idUsuario);
 			personaje.setRaza(raza);
 			personaje.setCasta(casta);
 
@@ -269,5 +267,4 @@ public class DBControlador {
 		}
 		return new MensajePersonaje(-1, null, null, -1, -1, -1, null);
 	}
-	
 }

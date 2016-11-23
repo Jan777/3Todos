@@ -41,11 +41,12 @@ public class EditarPersonaje extends JFrame {
 	private MenuPrincipal mp;
 
 	// Crear personaje desde 0
-	public EditarPersonaje(final Personaje p1, final Personaje p2, final Personaje p3, final Usuario usuario, final Semaphore semaforo, MenuPrincipal menuAnt) {
+	public EditarPersonaje(final Personaje p1, final Personaje p2, final Personaje p3, final Usuario usuario,
+			final Semaphore semaforo, MenuPrincipal menuAnt) {
 		setTitle("Seleccion de Personaje");
 		mp = menuAnt;
 		setResizable(false);
-		//setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		// setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -60,7 +61,7 @@ public class EditarPersonaje extends JFrame {
 
 			}
 		});
-		
+
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
@@ -102,37 +103,37 @@ public class EditarPersonaje extends JFrame {
 
 		JButton button = new JButton("Guardar");
 		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {		
+			public void actionPerformed(ActionEvent arg0) {
 				/*
 				 * CREO UN PERSONAJE CON LA RAZA QUE CORRESPONDA
-				 * */
-				if(comboRaza.getSelectedItem().toString().contentEquals("HUMANO") ){
+				 */
+				if (comboRaza.getSelectedItem().toString().contentEquals("HUMANO")) {
 					p1.setNombre(usuario.getNombre_usuario());
 					p1.setIdPersonaje(usuario.getIdPj());
-					
-					if(comboCasta.getSelectedItem().toString().contentEquals("GUERRERO")){
+
+					if (comboCasta.getSelectedItem().toString().contentEquals("GUERRERO")) {
 						p1.setClase(new Guerrero());
 					} else if (comboCasta.getSelectedItem().toString().contentEquals("HECHICERO")) {
 						p1.setClase(new Hechicero());
 					} else if (comboCasta.getSelectedItem().toString().contentEquals("CHAMAN")) {
 						p1.setClase(new Chaman());
 					}
-				} else if (comboRaza.getSelectedItem().toString().contentEquals("ORCO")){
+				} else if (comboRaza.getSelectedItem().toString().contentEquals("ORCO")) {
 					p2.setNombre(usuario.getNombre_usuario());
 					p2.setIdPersonaje(usuario.getIdPj());
-					
-					if(comboCasta.getSelectedItem().toString().contentEquals("GUERRERO")){
+
+					if (comboCasta.getSelectedItem().toString().contentEquals("GUERRERO")) {
 						p2.setClase(new Guerrero());
 					} else if (comboCasta.getSelectedItem().toString().contentEquals("HECHICERO")) {
 						p2.setClase(new Hechicero());
 					} else if (comboCasta.getSelectedItem().toString().contentEquals("CHAMAN")) {
 						p2.setClase(new Chaman());
 					}
-				} else if (comboRaza.getSelectedItem().toString().contentEquals("ELFO")){
+				} else if (comboRaza.getSelectedItem().toString().contentEquals("ELFO")) {
 					p3.setNombre(usuario.getNombre_usuario());
 					p3.setIdPersonaje(usuario.getIdPj());
-					
-					if(comboCasta.getSelectedItem().toString().contentEquals("GUERRERO")){
+
+					if (comboCasta.getSelectedItem().toString().contentEquals("GUERRERO")) {
 						p3.setClase(new Guerrero());
 					} else if (comboCasta.getSelectedItem().toString().contentEquals("HECHICERO")) {
 						p3.setClase(new Hechicero());
@@ -140,28 +141,28 @@ public class EditarPersonaje extends JFrame {
 						p3.setClase(new Chaman());
 					}
 				}
-												
+
 				semaforo.release();
 				dispose();
-//				guardarPersonaje();
+				// guardarPersonaje();
 			}
 		});
 		button.setBounds(213, 325, 107, 25);
 		panel.add(button);
-		
+
 		this.setVisible(true);
 	}
-	
+
 	/**
 	 * Create the frame.
 	 */
-	
+
 	// Editar personaje ya creado
-	public EditarPersonaje(final Mensaje p, final Semaphore semaforo, final MensajePersonaje pp, MenuPrincipal menuAnt) {
+	public EditarPersonaje(final Mensaje p, final Semaphore semaforo, final MensajePersonaje pp,
+			MenuPrincipal menuAnt) {
 		setTitle("Seleccion de Personaje");
 		setResizable(false);
 		mp = menuAnt;
-		//setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -175,7 +176,7 @@ public class EditarPersonaje extends JFrame {
 				mp.setVisible(true);
 			}
 		});
-		
+
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
@@ -204,10 +205,11 @@ public class EditarPersonaje extends JFrame {
 		comboRaza.setBounds(50, 86, 116, 22);
 		comboRaza.setSelectedItem(pp.getRaza());
 		panel.add(comboRaza);
-
 		comboRaza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				cargarImagenesPersonaje(comboRaza.getSelectedItem().toString());
+				if (comboRaza.getSelectedItem() != null) {
+					cargarImagenesPersonaje(comboRaza.getSelectedItem().toString());
+				}
 			}
 		});
 
@@ -216,39 +218,28 @@ public class EditarPersonaje extends JFrame {
 		comboCasta.setSelectedItem(pp.getCasta());
 		panel.add(comboCasta);
 		cargarCombo();
-
 		JButton button = new JButton("Guardar");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-//				guardarPersonaje();
+				guardarPersonaje();
 			}
 		});
 		button.setBounds(213, 325, 107, 25);
 		panel.add(button);
-		
-//		cargarDatos(p,pp);
+
+		cargarDatos(pp);
 		this.setVisible(true);
 	}
 
-/*
-	private void cargarDatos(Paquete p, PaquetePersonaje pp) {
-//		msj.setId("obtenerPersonaje");
-//		msj.setMensaje(this.login.getUsername());
-//		this.login.enviarMensaje(msj);
-//		String resp = this.login.leerRespuesta();
-//		personaje = gson.fromJson(resp, MensajePersonaje.class);
-		Personaje personaje = null;
-		
-		cargarImagenesPersonaje(pp.getRaza());
-		if (pp.getCasta() != null && personaje.getRaza() != null) {
+	private void cargarDatos(MensajePersonaje pp) {
+		if (pp != null) {
 			nuevoPersonaje = false;
 			comboCasta.setSelectedItem(pp.getCasta());
 			comboRaza.setSelectedItem(pp.getRaza());
-		}else{
-			nuevoPersonaje = true;
+			cargarImagenesPersonaje(pp.getRaza());
 		}
 	}
-*/
+
 	private void cargarImagenesPersonaje(String raza) {
 		if (raza != null && !raza.isEmpty()) {
 			if (raza.contentEquals("HUMANO")) {
@@ -260,38 +251,21 @@ public class EditarPersonaje extends JFrame {
 			}
 		}
 	}
-/*
+
 	private void guardarPersonaje() {
 		int razaItem = comboRaza.getSelectedIndex();
 		int castaItem = comboCasta.getSelectedIndex();
-		String resp = "";
-		personaje = new MensajePersonaje(personaje.getIdUsuario(), login.getUsername(),
-				comboRaza.getSelectedItem().toString(), comboCasta.getSelectedItem().toString());
 		if (comboCompleto(razaItem, castaItem)) {
-			if (nuevoPersonaje) {
-				msj.setId("guardarPersonaje");
-			} else {
-				msj.setId("actualizarPersonaje");
-			}
-			msj.setMensaje(gson.toJson(personaje));
-			this.login.enviarMensaje(msj);
-			resp = this.login.leerRespuesta();
-			if (resp.equals("OK")) {
-				JOptionPane.showMessageDialog(null, "Personaje guardado correctamente", "Personaje Guardado",
-						JOptionPane.INFORMATION_MESSAGE);
-			} else {
-				JOptionPane.showMessageDialog(null, "Error al intentar guadar personaje", "Error",
-						JOptionPane.ERROR_MESSAGE);
-			}
+		
 		}
 	}
-*/
+
 	private boolean comboCompleto(int razaItem, int castaItem) {
-		if (razaItem == 0) {
+		if (razaItem == 0 || razaItem==-1) {
 			JOptionPane.showMessageDialog(null, "Seleccione una Raza", "Error", JOptionPane.ERROR_MESSAGE);
 			return false;
 		} else {
-			if (castaItem == 0) {
+			if (castaItem == 0 ||castaItem==-1) {
 				JOptionPane.showMessageDialog(null, "Seleccione una Casta", "Error", JOptionPane.ERROR_MESSAGE);
 				return false;
 			}
@@ -308,7 +282,6 @@ public class EditarPersonaje extends JFrame {
 		comboCasta.addItem("GUERRERO");
 		comboCasta.addItem("HECHICERO");
 		comboCasta.addItem("CHAMAN");
-//		cargarPersonaje();
 	}
 
 	private void salir() {
