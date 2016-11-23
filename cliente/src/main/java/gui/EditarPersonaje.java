@@ -158,8 +158,7 @@ public class EditarPersonaje extends JFrame {
 	 */
 
 	// Editar personaje ya creado
-	public EditarPersonaje(final Mensaje p, final Semaphore semaforo, final MensajePersonaje pp,
-			MenuPrincipal menuAnt) {
+	public EditarPersonaje(final Mensaje p, final Semaphore semaforo, final MensajePersonaje pp,MenuPrincipal menuAnt) {
 		setTitle("Seleccion de Personaje");
 		setResizable(false);
 		mp = menuAnt;
@@ -221,7 +220,8 @@ public class EditarPersonaje extends JFrame {
 		JButton button = new JButton("Guardar");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				guardarPersonaje();
+				p.setComando("");
+				guardarPersonaje(pp);
 			}
 		});
 		button.setBounds(213, 325, 107, 25);
@@ -252,11 +252,13 @@ public class EditarPersonaje extends JFrame {
 		}
 	}
 
-	private void guardarPersonaje() {
+	private void guardarPersonaje(MensajePersonaje pp) {
 		int razaItem = comboRaza.getSelectedIndex();
 		int castaItem = comboCasta.getSelectedIndex();
 		if (comboCompleto(razaItem, castaItem)) {
-		
+			pp.setCasta(comboCasta.getSelectedItem().toString());
+			pp.setRaza(comboRaza.getSelectedItem().toString());
+			
 		}
 	}
 

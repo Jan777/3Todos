@@ -57,7 +57,6 @@ public class Cliente extends Thread {
 			Personaje p2 = new Orco("");
 			Personaje p3 = new Elfo("");
 
-			
 			MensajePersonaje pp = null;
 
 			while (opcion == false) {
