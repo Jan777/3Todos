@@ -125,7 +125,8 @@ public class RespuestaCliente extends Thread {
 						Servidor.getPersonajes().get(personaje.getIdPersonaje()).setPosY(personaje.getPosY());
 						Servidor.getPersonajes().get(personaje.getIdPersonaje()).setDireccion(personaje.getDireccion());
 						Servidor.getPersonajes().get(personaje.getIdPersonaje()).setFrame(personaje.getFrame());
-						
+						Servidor.getPersonajes().get(personaje.getIdPersonaje()).setAlto(personaje.getAlto());
+						Servidor.getPersonajes().get(personaje.getIdPersonaje()).setAncho(personaje.getAncho());
 						
 						// aca habria que guardar la posicion de un usuario en alguna matriz
 						

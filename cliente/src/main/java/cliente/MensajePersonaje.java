@@ -16,6 +16,8 @@ public class MensajePersonaje extends Mensaje implements Serializable, Cloneable
 	private float posY;
 	private int direccion;
 	private int frame;
+	private int ancho;
+	private int alto;
 	
 
 	public Personaje getPersonaje() {
@@ -112,6 +114,22 @@ public class MensajePersonaje extends Mensaje implements Serializable, Cloneable
 			Loggin.getInstance().error(e.getMessage());
 		}
 		return obj;
+	}
+
+	public int getAncho() {
+		return ancho;
+	}
+
+	public void setAncho(int ancho) {
+		this.ancho = ancho;
+	}
+
+	public int getAlto() {
+		return alto;
+	}
+
+	public void setAlto(int alto) {
+		this.alto = alto;
 	}
 
 

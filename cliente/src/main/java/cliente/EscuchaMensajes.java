@@ -51,6 +51,8 @@ public class EscuchaMensajes extends Thread {
 					personajes.get(personaje.getIdPersonaje()).setPosY(personaje.getPosY());
 					personajes.get(personaje.getIdPersonaje()).setDireccion(personaje.getDireccion());
 					personajes.get(personaje.getIdPersonaje()).setDireccion(personaje.getDireccion());
+					personajes.get(personaje.getIdPersonaje()).setAncho(personaje.getAncho());
+					personajes.get(personaje.getIdPersonaje()).setAlto(personaje.getAlto());
 					semaforo.release();
 					break;
 				}

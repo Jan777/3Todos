@@ -1,6 +1,6 @@
 package juego;
 
-import entidades.Personaje;
+import entidades.PersonajeGrafico;
 
 public class Camara {
 
@@ -14,7 +14,7 @@ public class Camara {
 		this.yOffset = yOffset;
 	}
 	
-	public void Centrar(Personaje e) {
+	public void Centrar(PersonajeGrafico e) {
 		xOffset = e.getX() - juego.getAncho() / 2 + e.getAncho() / 2;
 		yOffset = e.getY() - juego.getAlto() / 2 + e.getAlto() / 2;
 	}
