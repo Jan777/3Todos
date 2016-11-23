@@ -22,7 +22,9 @@ public class Servidor extends Thread {
 	private int puerto;
 	private ObjectOutputStream salida;
 	private ObjectInputStream entrada;
-
+	 
+	
+	
 	public void run() {
 		try {
 			leerConfig();

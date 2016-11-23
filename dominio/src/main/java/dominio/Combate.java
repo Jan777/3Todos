@@ -7,7 +7,7 @@ public class Combate {
 	
 	private static int contadorCombates = 0; 
 	private int idCombate;
-	private int ultimoAtacanteE1,ultimoAtacanteE2; 
+	private int ultimoAtacanteE1, ultimoAtacanteE2; 
 	private String nombre;
 	private int ganador;
 	

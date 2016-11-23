@@ -26,6 +26,8 @@ public class RespuestaCliente extends Thread {
 	private MensajePersonaje personaje;
 	private MensajeDePersonajes mp;
 	private final Gson gson = new Gson();
+	
+	
 
 	public RespuestaCliente(String ip, Socket socket, ObjectInputStream entrada, ObjectOutputStream salida) {
 		this.socket = socket;
@@ -123,11 +125,17 @@ public class RespuestaCliente extends Thread {
 						Servidor.getPersonajes().get(personaje.getIdPersonaje()).setPosY(personaje.getPosY());
 						Servidor.getPersonajes().get(personaje.getIdPersonaje()).setDireccion(personaje.getDireccion());
 						Servidor.getPersonajes().get(personaje.getIdPersonaje()).setFrame(personaje.getFrame());
-	
+						
+						
+						// aca habria que guardar la posicion de un usuario en alguna matriz
+						
+						
+						
+						
 						for (RespuestaCliente conectado : Servidor.getConectados()) {
 							MensajePersonaje pj = (MensajePersonaje) Servidor.getPersonajes().get(personaje.getIdPersonaje()).clone();
 							pj.setComando("movimiento");
-							Loggin.getInstance().info("Al cliente: " + conectado.getId() + " le envio " + gson.toJson(mp));
+//							Loggin.getInstance().info("Al cliente: " + conectado.getId() + " le envio " + gson.toJson(mp));
 							conectado.salida.writeObject(gson.toJson(mp));
 						}
 						break;

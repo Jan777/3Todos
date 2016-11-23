@@ -106,9 +106,9 @@ public class Personaje {
 
 
 	public LinkedList<BufferedImage[]> obtenerAnimacion(String raza) {
-		if(raza == "orco")
+		if(raza == "ORCO")
 			return Grafico.orco;
-		else if(raza == "humano")
+		else if(raza == "HUMANO")
 			return Grafico.humano;
 		else
 			return Grafico.elfo;
