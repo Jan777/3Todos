@@ -7,6 +7,7 @@ import utilities.Loggin;
 
 public class MensajeDePersonajes extends Mensaje implements Serializable, Cloneable {
 
+	private static final long serialVersionUID = 1133889573383281267L;
 	private Map<Integer, MensajePersonaje> personajes;
 
 	public MensajeDePersonajes(){

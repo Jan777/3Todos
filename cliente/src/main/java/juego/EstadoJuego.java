@@ -56,7 +56,7 @@ public class EstadoJuego extends Estado {
 					  //no le cambien el orden a la llamada a la funcion sino no detecta colisiones
 					  if(evaluarColision(aux,personajeActual))
 					  {
-						  Loggin.getInstance().error("colision" + aux.getAlto() + aux.getAncho() + " " + personajeActual.getAlto());
+						  Loggin.getInstance().error("colision" + aux.getIdPersonaje()+ " "+ personajeActual.getIdPersonaje());
 					  }
 						
 			       }
@@ -71,20 +71,20 @@ public class EstadoJuego extends Estado {
 
 	public boolean evaluarColision(MensajePersonaje p, MensajePersonaje aux)
 	{
-		if(aux.getPosX() + aux.getAncho() >= p.getPosX() && aux.getPosX() < p.getPosX() + p.getAncho())
+		if(aux.getIdPersonaje()!=p.getIdPersonaje() && aux.getPosX() + aux.getAncho() >= p.getPosX() && aux.getPosX() < p.getPosX() + p.getAncho())
 		{
 			//Colisiones verticales
-			if(aux.getPosY() + aux.getAlto() >= p.getPosY() && aux.getPosY() < p.getPosY() + p.getAlto())
+			if(aux.getPosY() < p.getPosY() + p.getAlto())
 				return true;
 		}
 		//Colisión de a con b
-		if(aux.getPosX() <= p.getPosX() && aux.getPosX() + aux.getAncho() >= p.getPosX() + p.getAncho())
+		if(aux.getIdPersonaje()!=p.getIdPersonaje() &&aux.getPosX() <= p.getPosX() && aux.getPosX() + aux.getAncho() >= p.getPosX() + p.getAncho())
 		{
 			if(aux.getPosY() <= p.getPosY() && aux.getPosY() + aux.getAlto() >= p.getPosY() + p.getAlto())
 				return true;
 		}
 		//Colisión b con a
-		if(p.getPosX() <= aux.getPosX() && p.getPosX() + p.getAncho() >= aux.getPosX() + aux.getAncho())
+		if(aux.getIdPersonaje()!=p.getIdPersonaje() && p.getPosX() <= aux.getPosX() && p.getPosX() + p.getAncho() >= aux.getPosX() + aux.getAncho())
 		{
 			if(p.getPosY() <= aux.getPosY() && p.getPosY() + p.getAlto() >= aux.getPosY() + aux.getAlto())
 				return true;
