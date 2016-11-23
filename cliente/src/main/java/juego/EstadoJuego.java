@@ -27,7 +27,7 @@ public class EstadoJuego extends Estado {
 			juego.getCliente().getSalida().writeObject(gson.toJson(juego.getPersonaje()));
 			
 		} catch (IOException e) {
-			e.printStackTrace();
+			Loggin.getInstance().error("Error en EstadoJuego "+e.getMessage());
 		}
 	}
 

@@ -37,10 +37,15 @@ public class Cliente extends Thread {
 
 	public Cliente() throws UnknownHostException, IOException {
 		leerConfig();
+		try{
 		cliente = new Socket(this.ip, this.puerto);
 		ip = cliente.getInetAddress().getHostAddress();
 		salida = new ObjectOutputStream(cliente.getOutputStream());
 		entrada = new ObjectInputStream(cliente.getInputStream());
+		}catch(Exception e){
+			JOptionPane.showMessageDialog(null, "Error servidor no iniciado");
+			Loggin.getInstance().error("Error al inciar el cliente, servidor no iniciado");
+		}
 		semaforo = new Semaphore(0);
 		Loggin.getInstance().info("Inicia cliente: "+ip);
 	}
