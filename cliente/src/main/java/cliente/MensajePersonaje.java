@@ -2,6 +2,7 @@ package cliente;
 
 import java.io.Serializable;
 
+import dominio.Personaje;
 import utilities.Loggin;
 
 public class MensajePersonaje extends Mensaje implements Serializable, Cloneable {
@@ -14,7 +15,15 @@ public class MensajePersonaje extends Mensaje implements Serializable, Cloneable
 	private float posY;
 	private int direccion;
 	private int frame;
-	
+	private Personaje personaje;
+
+	public Personaje getPersonaje() {
+		return personaje;
+	}
+
+	public void setPersonaje(Personaje personaje) {
+		this.personaje = personaje;
+	}
 
 	public MensajePersonaje() {
 
