@@ -84,7 +84,7 @@ public class RespuestaCliente extends Thread {
 						if (con.loguearUsuario((Usuario) Cliente.desconversor(msj.getMensaje(), Usuario.class))) {
 							msjA.setMensaje("1");
 							salida.writeObject(gson.toJson(msjA));
-							MensajePersonaje pp = con.getPersonaje((Usuario) Cliente.desconversor(msj.getMensaje(), Usuario.class));
+							MensajePersonaje pp = con.getPersonajeEdit((Usuario) Cliente.desconversor(msj.getMensaje(), Usuario.class));
 							salida.writeObject(gson.toJson(pp));
 						} else {
 							msjA.setMensaje("0");

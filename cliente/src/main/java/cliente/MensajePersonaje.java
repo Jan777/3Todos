@@ -8,6 +8,7 @@ import utilities.Loggin;
 public class MensajePersonaje extends Mensaje implements Serializable, Cloneable {
 
 	private int idPersonaje;
+	private Personaje personaje;
 	private String raza;
 	private String casta;
 	private int mundo;
@@ -15,7 +16,7 @@ public class MensajePersonaje extends Mensaje implements Serializable, Cloneable
 	private float posY;
 	private int direccion;
 	private int frame;
-	private Personaje personaje;
+	
 
 	public Personaje getPersonaje() {
 		return personaje;
@@ -29,13 +30,14 @@ public class MensajePersonaje extends Mensaje implements Serializable, Cloneable
 
 	}
 
-	public MensajePersonaje(int idPersonaje, String raza, String casta, int mundo, float posX, float posY) {
+	public MensajePersonaje(int idPersonaje, String raza, String casta, int mundo, float posX, float posY, Personaje personaje) {
 		this.idPersonaje = idPersonaje;
 		this.raza = raza;
 		this.casta = casta;
 		this.mundo = mundo;
 		this.posX = posX;
 		this.posY = posY;
+		this.personaje = personaje;
 	}
 
 	public int getIdPersonaje() {

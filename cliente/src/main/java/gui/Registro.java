@@ -26,7 +26,7 @@ public class Registro extends JFrame {
 
 	private JPanel contentPane;
 	private JFrame frmRegistro;
-	private JTextField txtUsuario;
+//	private JTextField txtUsuario;
 	private JTextField txtUsuario_1;
 	private JPasswordField txtPassword;
 	private JLabel lblUsuario;
@@ -74,9 +74,9 @@ public class Registro extends JFrame {
 //		lblRepetirPassword.setBounds(22, 108, 165, 29);
 //		frmRegistro.getContentPane().add(lblRepetirPassword);
 
-		txtUsuario = new JTextField();
-		frmRegistro.getContentPane().add(txtUsuario);
-		txtUsuario.setColumns(10);
+//		txtUsuario = new JTextField();
+//		frmRegistro.getContentPane().add(txtUsuario);
+//		txtUsuario.setColumns(10);
 
 		txtPassword = new JPasswordField();
 		txtPassword.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -94,7 +94,7 @@ public class Registro extends JFrame {
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(camposCompletos()){
-					usuario.setNombre_usuario(txtUsuario.getText().toUpperCase());
+					usuario.setNombre_usuario(txtUsuario_1.getText().toUpperCase());
 					usuario.setPassword_usuario(txtPassword.getText());
 					usuario.setAccion("registro");
 					usuario.setOpcion(1);

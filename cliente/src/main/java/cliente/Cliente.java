@@ -24,6 +24,7 @@ import razas.Orco;
 import utilities.Loggin;
 
 public class Cliente extends Thread {
+	
 	private Socket cliente;
 	private String ip;
 	private ObjectInputStream entrada;
@@ -56,7 +57,7 @@ public class Cliente extends Thread {
 			Personaje p2 = new Orco("");
 			Personaje p3 = new Elfo("");
 
-			Personaje personaje = null;
+			
 			MensajePersonaje pp = null;
 
 			while (opcion == false) {

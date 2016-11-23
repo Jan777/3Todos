@@ -37,7 +37,9 @@ public class DBControlador {
 
 	public boolean registrarUsuario(Usuario user) {
 		ResultSet result = null;
-
+//		boolean estadoQuery;
+		int idPersonaje;
+		
 		try {
 			PreparedStatement st1 = connect.prepareStatement("select * from USUARIO where NOMBRE= ?");
 			st1.setString(1, user.getNombre_usuario().toUpperCase());
@@ -45,22 +47,52 @@ public class DBControlador {
 
 			if (!result.next()) {
 
-				PreparedStatement st = connect
-						.prepareStatement("insert into USUARIO (NOMBRE, CONTRASENA) values (?,?)");
+				// 1) INSERTO EL USUARIO
+				PreparedStatement st = connect.prepareStatement("insert into USUARIO (NOMBRE, CONTRASENA) values (?,?)");
 				st.setString(1, user.getNombre_usuario().toUpperCase());
 				st.setString(2, user.getPassword_usuario());
 				st.execute();
-				// USUARIO REGISTRADO
-				return true;
-			} else {
-				// "Ya se usa ese user"
+				ResultSet rs = st.getGeneratedKeys();
+				if(rs != null){
+				
+					// 2) OBTENGO SU ID
+					st = connect.prepareStatement("select ID_USUARIO from USUARIO where NOMBRE = ?");
+					st.setString(1, user.getNombre_usuario().toUpperCase());
+					result = st.executeQuery();
+					idPersonaje = result.getInt("ID_USUARIO");
+					
+					// 3) GENERO UN PERSONAJE CON ESE ID
+					st = connect.prepareStatement(
+							"insert into PERSONAJE (ID_PERSONAJE, ID_USUARIO, NIVEL, EXPERIENCIA, VIDA, ENERGIA, ATAQUE, DEFENSA, "
+									+ "MAGIA, PUNTOS, DESTREZA, VELOCIDAD, POTENCIA  ) values ("+idPersonaje+","+idPersonaje+",1,0,100,100,0,0,0,0,0,0,0)");
+					st.execute();
+					rs = st.getGeneratedKeys();
+					if(rs != null){
+						// 4) ACTUALIZO LA TABLA USUARIO CON EL ID DEL PERSONAJE (MISMO QUE EL USUARIO)
+						
+						st = connect.prepareStatement("UPDATE USUARIO SET ID_PERSONAJE= "+ idPersonaje +" WHERE ID_USUARIO = "+ idPersonaje);
+						st.execute();
+						rs = st.getGeneratedKeys();
+						
+						if(rs != null){
+							return true;	
+						}
+						else 
+							return false;
+					}
+					else 
+						return false;				
+				}
+				else
+					return false;
+			} else {			
 				return false;
 			}
 		} catch (SQLException e) {
 			Loggin.getInstance().error("Error al registrar usuario: " + e.getMessage());
-			// USUARIO REPETIDO
 			return false;
 		}
+		
 
 	}
 
@@ -171,7 +203,7 @@ public class DBControlador {
 	}
 
 	// OJO CON ESTA QUERY QUE BORRA TODOS LOS REGISTROS DE LA TABLA USUARIO
-	public void borrarRegistro() {
+	public void borrarRegistros() {
 		try {
 			PreparedStatement st = connect.prepareStatement("delete from USUARIO");
 			st.executeQuery();
@@ -180,6 +212,35 @@ public class DBControlador {
 		}
 	}
 
+	public MensajePersonaje getPersonajeEdit(Usuario user) {
+		ResultSet result = null;
+		try {
+			PreparedStatement st = connect.prepareStatement("select ID_USUARIO from USUARIO where NOMBRE = ?");
+			st.setString(1, user.getNombre_usuario().toUpperCase());
+			result = st.executeQuery();
+			int idPersonaje = result.getInt("ID_USUARIO");
+
+			st = connect.prepareStatement("SELECT P.RAZA,P.CASTA "
+					+ "FROM PERSONAJE P INNER JOIN RAZA R ON P.ID_RAZA=R.ID_RAZA INNER JOIN CASTA C ON C.ID_CASTA=P.ID_CASTA WHERE p.id_usuario=?");
+			st.setInt(1, idPersonaje);
+			result = st.executeQuery();
+			String casta = result.getString("CASTA");
+			String raza = result.getString("RAZA");
+
+			MensajePersonaje personaje = new MensajePersonaje();
+
+			personaje.setIdPersonaje(idPersonaje);
+			personaje.setRaza(raza);
+			personaje.setCasta(casta);
+
+			return personaje;
+
+		} catch (SQLException ex) {
+			Loggin.getInstance().error("Error en conector: " + ex.getMessage());
+		}
+		return new MensajePersonaje(-1, null, null, -1, -1, -1, null);
+	}
+	
 	public MensajePersonaje getPersonaje(Usuario user) {
 		ResultSet result = null;
 		try {
@@ -206,6 +267,7 @@ public class DBControlador {
 		} catch (SQLException ex) {
 			Loggin.getInstance().error("Error en conector: " + ex.getMessage());
 		}
-		return new MensajePersonaje(-1, null, null, -1, -1, -1);
+		return new MensajePersonaje(-1, null, null, -1, -1, -1, null);
 	}
+	
 }
