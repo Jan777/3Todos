@@ -9,7 +9,8 @@ public class Guerrero extends Casta {
 	 * 
 	 * */
 	public Guerrero(){
-		super.nombre = "Guerrero";
+		super.nombre = "GUERRERO";
+		this.idCasta = 1;
 		this.agregarHabilidad(new Fuerza());
 		this.agregarHabilidad(new Valentia());
 	}

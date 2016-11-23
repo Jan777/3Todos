@@ -49,6 +49,7 @@ public abstract class Personaje implements Peleador {
 	protected List<Item> mochila;
 	protected Ubicacion ubicacion;
 	protected String nombre;
+	protected int idRaza;
 	protected String raza;
 	protected Casta clase;
 	protected Map<String, Ataque> ataques = new HashMap<String, Ataque>(); 
@@ -719,7 +720,13 @@ public abstract class Personaje implements Peleador {
 		this.clase = clase;
 	}
 
+	public int getIdRaza() {
+		return idRaza;
+	}
 
+	public void setIdRaza(int idRaza) {
+		this.idRaza = idRaza;
+	}
 	
 
 

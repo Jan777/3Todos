@@ -6,7 +6,8 @@ public class Humano extends Personaje {
 	
 	public Humano(String nombre){
 		super(nombre);
-		this.setRaza("Humano");
+		this.setRaza("HUMANO");
+		this.idRaza = 1;
 		this.ataque = 15;
 		this.defensa = 5;
 		this.magia = 0;
@@ -14,7 +15,7 @@ public class Humano extends Personaje {
 	
 	public Humano(Personaje p){
 		super(p);
-		this.setRaza("Humano");		
+		this.setRaza("HUMANO");		
 	}
 	
 	@Override

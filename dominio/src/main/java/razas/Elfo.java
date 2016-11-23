@@ -5,7 +5,8 @@ public class Elfo extends Personaje{
 
 	public Elfo(String nombre) {	
 		super(nombre);
-		this.setRaza("Elfo");
+		this.setRaza("ELFO");
+		this.idRaza = 3;
 		this.ataque = 6;
 		this.defensa = 4;
 		this.magia = 10;
@@ -13,7 +14,7 @@ public class Elfo extends Personaje{
 	
 	public Elfo(Personaje p) {
 		super(p);
-		this.setRaza("Elfo");
+		this.setRaza("ELFO");
 	}
 
 	@Override

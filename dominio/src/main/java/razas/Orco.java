@@ -6,7 +6,8 @@ public class Orco extends Personaje{
 
 	public Orco(String username) {
 		super(username);
-		this.setRaza("Orco");
+		this.setRaza("ORCO");
+		this.idRaza = 2;
 		this.ataque = 12;
 		this.defensa = 5;
 		this.magia = 3;
@@ -14,7 +15,7 @@ public class Orco extends Personaje{
 	
 	public Orco(Personaje p) {
 		super(p);
-		this.setRaza("Orco");
+		this.setRaza("ORCO");
 	}
 	
 	@Override

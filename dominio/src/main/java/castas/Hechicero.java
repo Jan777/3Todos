@@ -9,7 +9,8 @@ public class Hechicero extends Casta {
 	 * 
 	 * */
 	public Hechicero(){
-		super.nombre = "Hechicero";
+		super.nombre = "HECHICERO";
+		this.idCasta = 2;
 		this.agregarHabilidad(new Destreza());
 		this.agregarHabilidad(new Inteligencia());
 	}
