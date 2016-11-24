@@ -129,18 +129,16 @@ public class Cliente extends Thread {
 			}
 
 			Semaphore semaforo = new Semaphore(0);
-			// Paquete paquete = new Paquete(null, "mostrarMapas");
 			Mensaje paquete = new Mensaje(null, "menuPrincipal");
 			MenuPrincipal menu = new MenuPrincipal(paquete, semaforo, pp,this);
 			menu.setVisible(true);
-			// ElegirMapa em = new ElegirMapa(paquete, sem);
-			// em.setVisible(true);
+			
 			semaforo.acquire();
 			pp.setMundo(Integer.parseInt(paquete.getMensaje()));
 			pp.setNick(usuario.getNombre_usuario());
 			salida.writeObject(gson.toJson(paquete));
 
-			Juego play = new Juego("BloodyWars", 1024, 768, this, pp, "llanura");
+			Juego play = new Juego("BloodyWars", 1024, 768, this, pp, getNombreMundo(pp.getMundo()));
 			play.start();
 
 		} catch (IOException e) {
@@ -151,6 +149,10 @@ public class Cliente extends Thread {
 			Loggin.getInstance().error("Error ClassNotFoundException: " + e.getMessage());
 		}
 
+	}
+
+	private String getNombreMundo(int mundo) {
+		return mundo==1?"llanura":"desierto";
 	}
 
 	public static void main(String args[]) throws UnknownHostException, IOException {

@@ -18,15 +18,13 @@ public class Servidor extends Thread {
 
 	private static ArrayList<RespuestaCliente> conectados = new ArrayList<>();
 	private static Map<Integer, MensajePersonaje> combatiendo = new HashMap<>();
-	
+
 	private static Map<Integer, MensajePersonaje> personajes = new HashMap<>();
 	private ServerSocket server;
 	private int puerto;
 	private ObjectOutputStream salida;
 	private ObjectInputStream entrada;
-	 
-	
-	
+
 	public void run() {
 		try {
 			leerConfig();
@@ -63,7 +61,6 @@ public class Servidor extends Thread {
 	public static void main(String[] args) {
 		new Servidor().start();
 	}
-	
 
 	private void leerConfig() throws FileNotFoundException {
 		String linea;
@@ -123,6 +120,16 @@ public class Servidor extends Thread {
 		Servidor.personajes = personajes;
 	}
 
-	
-	
+	public void parar() {
+		this.stop();
+		try {
+			for (RespuestaCliente cliente : Servidor.conectados) {
+				cliente.getSalida().close();
+				cliente.getEntrada().close();
+			}
+			server.close();
+		} catch (Exception e) {
+			Loggin.getInstance().error("Error al parar servidor: " + e.getMessage());
+		}
+	}
 }
