@@ -9,7 +9,9 @@ import java.util.concurrent.Semaphore;
 import com.google.gson.Gson;
 
 import cliente.Cliente;
+import cliente.EscuchaMensajes;
 import cliente.Mensaje;
+import cliente.MensajeCombate;
 import cliente.MensajeDePersonajes;
 import cliente.MensajePersonaje;
 import cliente.Usuario;
@@ -23,8 +25,9 @@ public class RespuestaCliente extends Thread {
 	private final ObjectInputStream entrada;
 	private final ObjectOutputStream salida;
 	private String salaCliente;
-	private MensajePersonaje personaje;
-	private MensajeDePersonajes mp;
+	private MensajePersonaje mensajePersonaje;
+	private MensajeDePersonajes mensajeDePersonajes;
+	private MensajeCombate mensajeCombate;
 	private final Gson gson = new Gson();
 	
 	
@@ -106,38 +109,52 @@ public class RespuestaCliente extends Thread {
 						break;
 	
 					case "conectado":
-						personaje = (MensajePersonaje) (gson.fromJson(cadenaLeida, MensajePersonaje.class)).clone();
+						mensajePersonaje = (MensajePersonaje) (gson.fromJson(cadenaLeida, MensajePersonaje.class)).clone();
 	
-						Servidor.getPersonajes().put(personaje.getIdPersonaje(), (MensajePersonaje) personaje.clone());
-	
+						Servidor.getPersonajes().put(mensajePersonaje.getIdPersonaje(), (MensajePersonaje) mensajePersonaje.clone());
+							
 						for (RespuestaCliente conectado : Servidor.getConectados()) {
-							mp = new MensajeDePersonajes(Servidor.getPersonajes());
-							mp.setComando("conectado");
-							conectado.salida.writeObject(gson.toJson(mp));
+							mensajeDePersonajes = new MensajeDePersonajes(Servidor.getPersonajes());
+							mensajeDePersonajes.setComando("conectado");
+							conectado.salida.writeObject(gson.toJson(mensajeDePersonajes));
 						}
 						break;
-	
+					
+					case "colision":
+						mensajePersonaje = (MensajePersonaje) (gson.fromJson(cadenaLeida, MensajePersonaje.class)).clone();
+						Servidor.getCombatiendo().put(mensajePersonaje.getIdPersonaje(), (MensajePersonaje) mensajePersonaje.clone());
+						Servidor.getCombatiendo().put(mensajePersonaje.getIdPersonajeColision(), (MensajePersonaje) mensajePersonaje.clone());
+						
+						
+						
+						mensajeDePersonajes = new MensajeDePersonajes(Servidor.getCombatiendo());
+						mensajeDePersonajes.setComando("colision");
+						
+						for (RespuestaCliente conectado : Servidor.getConectados()) {
+							mensajeDePersonajes = new MensajeDePersonajes(Servidor.getCombatiendo());
+							mensajeDePersonajes.setComando("conectado");
+							conectado.salida.writeObject(gson.toJson(mensajeDePersonajes));
+						}
+						break;
+
+						
 					case "movimiento":
-						personaje = (MensajePersonaje) (gson.fromJson((String) cadenaLeida, MensajePersonaje.class));
-						Loggin.getInstance().info(personaje.getIp() + " recibi movimiento ");
+						mensajePersonaje = (MensajePersonaje) (gson.fromJson((String) cadenaLeida, MensajePersonaje.class));
+						Loggin.getInstance().info(mensajePersonaje.getIp() + " recibi movimiento ");
 						// .clone();
-						Servidor.getPersonajes().get(personaje.getIdPersonaje()).setPosX(personaje.getPosX());
-						Servidor.getPersonajes().get(personaje.getIdPersonaje()).setPosY(personaje.getPosY());
-						Servidor.getPersonajes().get(personaje.getIdPersonaje()).setDireccion(personaje.getDireccion());
-						Servidor.getPersonajes().get(personaje.getIdPersonaje()).setFrame(personaje.getFrame());
-						Servidor.getPersonajes().get(personaje.getIdPersonaje()).setAlto(personaje.getAlto());
-						Servidor.getPersonajes().get(personaje.getIdPersonaje()).setAncho(personaje.getAncho());
+						Servidor.getPersonajes().get(mensajePersonaje.getIdPersonaje()).setPosX(mensajePersonaje.getPosX());
+						Servidor.getPersonajes().get(mensajePersonaje.getIdPersonaje()).setPosY(mensajePersonaje.getPosY());
+						Servidor.getPersonajes().get(mensajePersonaje.getIdPersonaje()).setDireccion(mensajePersonaje.getDireccion());
+						Servidor.getPersonajes().get(mensajePersonaje.getIdPersonaje()).setFrame(mensajePersonaje.getFrame());
+						Servidor.getPersonajes().get(mensajePersonaje.getIdPersonaje()).setAlto(mensajePersonaje.getAlto());
+						Servidor.getPersonajes().get(mensajePersonaje.getIdPersonaje()).setAncho(mensajePersonaje.getAncho());
 						
 						// aca habria que guardar la posicion de un usuario en alguna matriz
 						
-						
-						
-						
 						for (RespuestaCliente conectado : Servidor.getConectados()) {
-							MensajePersonaje pj = (MensajePersonaje) Servidor.getPersonajes().get(personaje.getIdPersonaje()).clone();
+							MensajePersonaje pj = (MensajePersonaje) Servidor.getPersonajes().get(mensajePersonaje.getIdPersonaje()).clone();
 							pj.setComando("movimiento");
-//							Loggin.getInstance().info("Al cliente: " + conectado.getId() + " le envio " + gson.toJson(mp));
-							conectado.salida.writeObject(gson.toJson(mp));
+							conectado.salida.writeObject(gson.toJson(mensajeDePersonajes));
 						}
 						break;
 	
@@ -153,13 +170,13 @@ public class RespuestaCliente extends Thread {
 			salida.close();
 			socket.close();
 
-			Servidor.getPersonajes().remove(personaje.getIdPersonaje());
+			Servidor.getPersonajes().remove(mensajePersonaje.getIdPersonaje());
 			Servidor.getConectados().remove(this);
 
 			for (RespuestaCliente conectado : Servidor.getConectados()) {
-				mp = new MensajeDePersonajes(Servidor.getPersonajes());
-				mp.setComando("conectado");
-				conectado.salida.writeObject(gson.toJson(mp));
+				mensajeDePersonajes = new MensajeDePersonajes(Servidor.getPersonajes());
+				mensajeDePersonajes.setComando("conectado");
+				conectado.salida.writeObject(gson.toJson(mensajeDePersonajes));
 			}
 			
 			Loggin.getInstance().info(msj.getIp() + " se ha desconectado.");
@@ -170,4 +187,39 @@ public class RespuestaCliente extends Thread {
 			Loggin.getInstance().error("Error atencion de peticiones: " + e.getMessage());
 		}
 	}
+
+	public MensajePersonaje getMensajePersonaje() {
+		return mensajePersonaje;
+	}
+
+	public void setMensajePersonaje(MensajePersonaje mensajePersonaje) {
+		this.mensajePersonaje = mensajePersonaje;
+	}
+
+	public MensajeDePersonajes getMensajeDePersonajes() {
+		return mensajeDePersonajes;
+	}
+
+	public void setMensajeDePersonajes(MensajeDePersonajes mensajeDePersonajes) {
+		this.mensajeDePersonajes = mensajeDePersonajes;
+	}
+
+	public MensajeCombate getMensajeCombate() {
+		return mensajeCombate;
+	}
+
+	public void setMensajeCombate(MensajeCombate mensajeCombate) {
+		this.mensajeCombate = mensajeCombate;
+	}
+
+	public ObjectInputStream getEntrada() {
+		return entrada;
+	}
+
+	public ObjectOutputStream getSalida() {
+		return salida;
+	}
+	
+	
+	
 }

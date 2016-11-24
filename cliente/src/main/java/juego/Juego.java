@@ -61,7 +61,6 @@ public class Juego implements Runnable {
 		this.paquetePersonaje = pp;
 		escuchaMensajes = new EscuchaMensajes(cliente);
 		escuchaMensajes.start();
-		
 		handlerMouse = new Mouse();
 	}
 

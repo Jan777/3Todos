@@ -17,6 +17,8 @@ import utilities.Loggin;
 public class Servidor extends Thread {
 
 	private static ArrayList<RespuestaCliente> conectados = new ArrayList<>();
+	private static Map<Integer, MensajePersonaje> combatiendo = new HashMap<>();
+	
 	private static Map<Integer, MensajePersonaje> personajes = new HashMap<>();
 	private ServerSocket server;
 	private int puerto;
@@ -73,4 +75,54 @@ public class Servidor extends Thread {
 		sc.close();
 	}
 
+	public static Map<Integer, MensajePersonaje> getCombatiendo() {
+		return combatiendo;
+	}
+
+	public static void setCombatiendo(Map<Integer, MensajePersonaje> combatiendo) {
+		Servidor.combatiendo = combatiendo;
+	}
+
+	public ServerSocket getServer() {
+		return server;
+	}
+
+	public void setServer(ServerSocket server) {
+		this.server = server;
+	}
+
+	public int getPuerto() {
+		return puerto;
+	}
+
+	public void setPuerto(int puerto) {
+		this.puerto = puerto;
+	}
+
+	public ObjectOutputStream getSalida() {
+		return salida;
+	}
+
+	public void setSalida(ObjectOutputStream salida) {
+		this.salida = salida;
+	}
+
+	public ObjectInputStream getEntrada() {
+		return entrada;
+	}
+
+	public void setEntrada(ObjectInputStream entrada) {
+		this.entrada = entrada;
+	}
+
+	public static void setConectados(ArrayList<RespuestaCliente> conectados) {
+		Servidor.conectados = conectados;
+	}
+
+	public static void setPersonajes(Map<Integer, MensajePersonaje> personajes) {
+		Servidor.personajes = personajes;
+	}
+
+	
+	
 }

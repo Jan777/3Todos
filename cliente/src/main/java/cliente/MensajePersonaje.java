@@ -18,6 +18,9 @@ public class MensajePersonaje extends Mensaje implements Serializable, Cloneable
 	private int frame;
 	private int ancho;
 	private int alto;
+	private boolean colision;
+	private boolean enCombate;
+	private int idPersonajeColision;
 	
 
 	public Personaje getPersonaje() {
@@ -40,6 +43,9 @@ public class MensajePersonaje extends Mensaje implements Serializable, Cloneable
 		this.posX = posX;
 		this.posY = posY;
 		this.personaje = personaje;
+		this.enCombate = false;
+		this.colision = false;
+		
 	}
 
 	public int getIdPersonaje() {
@@ -82,6 +88,32 @@ public class MensajePersonaje extends Mensaje implements Serializable, Cloneable
 		this.posX = posX;
 	}
 
+	
+	
+	public boolean isColision() {
+		return colision;
+	}
+
+	public void setColision(boolean colision) {
+		this.colision = colision;
+	}
+
+	public boolean isEnCombate() {
+		return enCombate;
+	}
+
+	public void setEnCombate(boolean enCombate) {
+		this.enCombate = enCombate;
+	}
+
+	public int getIdPersonajeColision() {
+		return idPersonajeColision;
+	}
+
+	public void setIdPersonajeColision(int idPersonajeColision) {
+		this.idPersonajeColision = idPersonajeColision;
+	}
+
 	public float getPosY() {
 		return posY;
 	}
@@ -89,6 +121,7 @@ public class MensajePersonaje extends Mensaje implements Serializable, Cloneable
 	public void setPosY(float posY) {
 		this.posY = posY;
 	}
+	
 
 	public int getDireccion() {
 		return direccion;

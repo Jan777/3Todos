@@ -16,6 +16,7 @@ public class EscuchaMensajes extends Thread {
 	private ObjectInputStream entrada;
 	private final Gson gson = new Gson();
 	private Map<Integer, MensajePersonaje> personajes;
+	private Map<Integer, MensajePersonaje> combatiendo;
 	private Semaphore semaforo;
 
 	public EscuchaMensajes(Cliente cliente) {
@@ -30,6 +31,7 @@ public class EscuchaMensajes extends Thread {
 			Mensaje paquete;
 			MensajePersonaje personaje;
 			personajes = new HashMap<>();
+			combatiendo = new HashMap<>();
 
 			while (true) {
 
@@ -55,6 +57,13 @@ public class EscuchaMensajes extends Thread {
 					personajes.get(personaje.getIdPersonaje()).setAlto(personaje.getAlto());
 					semaforo.release();
 					break;
+				
+				case "colision":
+					personaje = (MensajePersonaje) gson.fromJson(objetoLeido, Mensaje.class);
+					combatiendo = (Map<Integer, MensajePersonaje>) gson.fromJson(objetoLeido, MensajeDePersonajes.class).getCombatiendo();
+					semaforo.release();
+					break;
+					
 				}
 			}
 		} catch (IOException e) {
@@ -69,4 +78,18 @@ public class EscuchaMensajes extends Thread {
 	public Map<Integer, MensajePersonaje> getPersonajes() {
 		return personajes;
 	}
+
+	public Map<Integer, MensajePersonaje> getCombatiendo() {
+		return combatiendo;
+	}
+
+	public void setCombatiendo(Map<Integer, MensajePersonaje> combatiendo) {
+		this.combatiendo = combatiendo;
+	}
+
+	public void setPersonajes(Map<Integer, MensajePersonaje> personajes) {
+		this.personajes = personajes;
+	}
+	
+	
 }

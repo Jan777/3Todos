@@ -6,6 +6,8 @@ import java.util.Iterator;
 
 import com.google.gson.Gson;
 
+import cliente.Cliente;
+import cliente.Mensaje;
 import cliente.MensajePersonaje;
 import entidades.PersonajeGrafico;
 import mapa.Mapa;
@@ -46,6 +48,7 @@ public class EstadoJuego extends Estado {
 		int key;
 		MensajePersonaje personajeActual;
 		PersonajeGrafico personajeAux;
+		
 		while (it.hasNext()) {
 			key = (int) it.next();
 			personajeActual = juego.getEscuchaMensajes().getPersonajes().get(key);
@@ -54,18 +57,42 @@ public class EstadoJuego extends Estado {
 			       {
 					  MensajePersonaje aux = juego.getEscuchaMensajes().getPersonajes().get(colisiones);
 					  //no le cambien el orden a la llamada a la funcion sino no detecta colisiones
-					  if(evaluarColision(aux,personajeActual))
+					  // @mauroat - 23-11-16: la siguiente condicion es experimental
+					  
+					  // ver como agregar para que este if verifique que el colisionado no este en la lista getCombatiendo
+					  
+					  if(evaluarColision(aux, personajeActual) && !personajeActual.isColision() && !aux.isColision())
 					  {
+						juego.getPersonaje().setEnCombate(true);
+						juego.getPersonaje().setIdPersonajeColision(aux.getIdPersonaje());
+						juego.getPersonaje().setComando("colision");
+						
+						try {
+							juego.getCliente().getSalida().writeObject(gson.toJson(juego.getPersonaje()));
+						} catch (IOException e) {
+							Loggin.getInstance().error(e.getMessage());
+						}
+						
+						/*  
+						  personajeActual.setColision(true);
+						personajeActual.setIdPersonajeColision(aux.getIdPersonaje());
+						//Mensaje paquete = new Mensaje();
+						personajeActual.setMensaje(Personaje.conversor(usuario, usuario.getClass()));
+						salida.writeObject(gson.toJson(paquete));
+						paquete = gson.fromJson((String) entrada.readObject(), Mensaje.class);
+						*/
+						// personajeActual.setComando("colision");
+						
+						// ver como mierda le mando un mensaje al servidor !!!
 						 
-						  
-						  Loggin.getInstance().error("colision" + aux.getIdPersonaje()+ " "+ personajeActual.getIdPersonaje());
+						 Loggin.getInstance().error("Colision entre "+aux.getIdPersonaje()+ " y "+personajeActual.getIdPersonaje());
 					  }
 						
 			       }
 			    }
-			if (personajeActual.getIdPersonaje() != juego.getPersonaje().getIdPersonaje()) {
-				g.drawImage(personaje.obtenerAnimacion(juego.getRaza()).get(personajeActual.getDireccion())[personajeActual.getFrame()], (int) (personajeActual.getPosX() - juego.getCamara().getxOffset() ), (int) (personajeActual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null); 
-		      } 
+				if (personajeActual.getIdPersonaje() != juego.getPersonaje().getIdPersonaje()) {
+					g.drawImage(personaje.obtenerAnimacion(juego.getRaza()).get(personajeActual.getDireccion())[personajeActual.getFrame()], (int) (personajeActual.getPosX() - juego.getCamara().getxOffset() ), (int) (personajeActual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null); 
+				} 
 		}
 		
 		g.drawImage(Grafico.marco, 0, 0, juego.getAncho(), juego.getAlto(), null);
@@ -77,7 +104,7 @@ public class EstadoJuego extends Estado {
 		
 		if(aux.getIdPersonaje()!=p.getIdPersonaje() && aux.getPosX() + aux.getAncho() +tolerancia >= p.getPosX() && aux.getPosX() < p.getPosX() + p.getAncho() +tolerancia)
 		{
-			//Colisiones verticales
+		//Colisiones verticales
 			if(aux.getPosY() < p.getPosY() + p.getAlto())
 				return true;
 		}
