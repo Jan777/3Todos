@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import cliente.Cliente;
 import cliente.Mensaje;
 import cliente.MensajePersonaje;
 import cliente.Usuario;
@@ -37,7 +38,7 @@ public class MenuPrincipal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MenuPrincipal(final Mensaje p, final Semaphore semaforo, final MensajePersonaje pp) {
+	public MenuPrincipal(final Mensaje p, final Semaphore semaforo, final MensajePersonaje pp,final Cliente cli) {
 		setTitle("BloodyWars - Menu Principal");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -54,7 +55,7 @@ public class MenuPrincipal extends JFrame {
 		btnPersonaje.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		btnPersonaje.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EditarPersonaje cpFrm = new EditarPersonaje(p,semaforo,pp,miMismo);
+				EditarPersonaje cpFrm = new EditarPersonaje(p,semaforo,pp,miMismo,cli);
 				cpFrm.setVisible(true);
 				dispose();
 			}

@@ -140,8 +140,7 @@ public class RespuestaCliente extends Thread {
 						
 					case "movimiento":
 						mensajePersonaje = (MensajePersonaje) (gson.fromJson((String) cadenaLeida, MensajePersonaje.class));
-						Loggin.getInstance().info(mensajePersonaje.getIp() + " recibi movimiento ");
-						// .clone();
+						
 						Servidor.getPersonajes().get(mensajePersonaje.getIdPersonaje()).setPosX(mensajePersonaje.getPosX());
 						Servidor.getPersonajes().get(mensajePersonaje.getIdPersonaje()).setPosY(mensajePersonaje.getPosY());
 						Servidor.getPersonajes().get(mensajePersonaje.getIdPersonaje()).setDireccion(mensajePersonaje.getDireccion());
@@ -161,7 +160,18 @@ public class RespuestaCliente extends Thread {
 					case "mostrarMapas":
 						Loggin.getInstance().info("Mapa: " + msj.getMensaje());
 						break;
-
+						
+					case "actualizarPersonaje":
+						con = new DBControlador();
+						con.connect();
+						if(con.actualizarElPersonaje((MensajePersonaje) Cliente.desconversor(msj.getMensaje(), MensajePersonaje.class))){
+							msjA.setMensaje("1");
+							salida.writeObject(gson.toJson(msjA));
+						}else{
+							msjA.setMensaje("0");
+							salida.writeObject(gson.toJson(msjA));
+						}
+						break;
 				}
 				cadenaLeida = (String) entrada.readObject();
 			}

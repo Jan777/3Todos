@@ -267,4 +267,19 @@ public class DBControlador {
 		}
 		return new MensajePersonaje(-1, null, null, -1, -1, -1, null);
 	}
+
+	public boolean actualizarElPersonaje(MensajePersonaje miPersonaje) {
+		int result = 0;
+		try {
+			PreparedStatement st = connect.prepareStatement("update PERSONAJE set CASTA=? , RAZA=? where ID_USUARIO = ?");
+			st.setString(1, miPersonaje.getCasta().toUpperCase());
+			st.setString(2, miPersonaje.getRaza().toUpperCase());
+			st.setInt(3, miPersonaje.getIdPersonaje());
+			result = st.executeUpdate();
+			return result==1;
+		} catch (SQLException ex) {
+			Loggin.getInstance().error("Error en actualizarElPersonaje: " + ex.getMessage());
+			return false;
+		}
+	}
 }

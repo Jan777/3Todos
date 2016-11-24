@@ -131,7 +131,7 @@ public class Cliente extends Thread {
 			Semaphore semaforo = new Semaphore(0);
 			// Paquete paquete = new Paquete(null, "mostrarMapas");
 			Mensaje paquete = new Mensaje(null, "menuPrincipal");
-			MenuPrincipal menu = new MenuPrincipal(paquete, semaforo, pp);
+			MenuPrincipal menu = new MenuPrincipal(paquete, semaforo, pp,this);
 			menu.setVisible(true);
 			// ElegirMapa em = new ElegirMapa(paquete, sem);
 			// em.setVisible(true);
