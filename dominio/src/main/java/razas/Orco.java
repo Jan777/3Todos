@@ -50,7 +50,7 @@ public class Orco extends Personaje{
 	
 		
 	@Override
-	protected Personaje clone() {
+	protected Personaje clone() throws CloneNotSupportedException {
 		Personaje aux = new Orco(this);
 		return aux;
 	}

@@ -39,10 +39,12 @@ public class Equipo {
 	
 
 	
-	public void atacar(Equipo otro){
+	public void atacar(Equipo otro) throws FileNotFoundException {
 		Peleador victima = otro.obtenerProximaVictima();
 		for (Personaje atacante : listaPeleadores) {
 			if(atacante.puedeAtacar()){
+				// ESTO DEBERA CAMBIARSE PARA QUE EL ATACANTE ELIJA SI ATACAR NORMAL
+				// O CON UN ATAQUE
 				atacante.atacar(victima);
 			} else {
 				atacante.setEnergia(atacante.getEnergia()+20);
@@ -51,7 +53,7 @@ public class Equipo {
 		}
 	}
 
-	public void atacar(Generico g){
+	public void atacar(Generico g) throws FileNotFoundException {
 		Peleador victima = g;
 		for (Personaje atacante : listaPeleadores) {
 			if(atacante.puedeAtacar()){
@@ -60,7 +62,8 @@ public class Equipo {
 				atacante.atacar(victima);
 			} else {
 				atacante.setEnergia(atacante.getEnergia()+20);
-			}			
+			}
+			
 		}
 	}
 	
@@ -118,7 +121,7 @@ public class Equipo {
 	 * @mauroat - 07/11/16
 	 * Se fija en la 
 	 * */
-	public void repartirItem(Equipo equipoPerdedor){		
+	public void repartirItem(Equipo equipoPerdedor) throws CloneNotSupportedException {		
 		Random r = new Random();
 		
 		/*
@@ -146,7 +149,7 @@ public class Equipo {
 	 * siempre y cuando esté vivo.
 	 * 
 	 * */
-	public void repartirItem(Generico g) {
+	public void repartirItem(Generico g) throws CloneNotSupportedException {
 		Random r = new Random();
 		
 		/*

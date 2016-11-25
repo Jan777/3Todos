@@ -3,8 +3,6 @@ package dominio;
 import java.io.FileNotFoundException;
 import java.util.Random;
 
-import utilities.Loggin;
-
 public class Combate {
 	
 	private static int contadorCombates = 0; 
@@ -28,7 +26,7 @@ public class Combate {
 	}
 	
 	
-	public void combatir(Equipo e1, Equipo e2) {
+	public void combatir(Equipo e1, Equipo e2) throws FileNotFoundException, CloneNotSupportedException{
 		Random r = new Random();
 		int aux = r.nextInt(2);
 		
@@ -37,47 +35,24 @@ public class Combate {
 		 * */
 		while(e1.quedaAlgunoVivo() && e2.quedaAlgunoVivo() ){
 			if(aux == 1){
-				try {
-					e1.atacar(e2);
-				} catch (FileNotFoundException e) {
-					Loggin.getInstance().error("Error en la clase Combate: "+e);					
-				}
-				try {
-					e2.atacar(e1);
-				} catch (FileNotFoundException e) {
-					Loggin.getInstance().error("Error en la clase Combate: "+e);
-				}
+				e1.atacar(e2);
+				e2.atacar(e1);
 			} else {
-				try {
-					e2.atacar(e1);
-				} catch (FileNotFoundException e) {
-					Loggin.getInstance().error("Error en la clase Combate: "+e);
-				}
-				try {
-					e1.atacar(e2);
-				} catch (FileNotFoundException e) {
-					Loggin.getInstance().error("Error en la clase Combate: "+e);
-				}
+				e2.atacar(e1);
+				e1.atacar(e2);
 			}		
 		}
 
 		if(e1.quedaAlgunoVivo()){
 			this.ganador = 1;
 			e1.repartirExperiencia(e2.calcularExperiencia());
-			try {
-				e1.repartirItem(e2);
-			} catch (CloneNotSupportedException e) {
-				Loggin.getInstance().error("Error en la clase Combate: "+e);
-			}
-		
+			e1.repartirItem(e2);
+			//e2.desequiparEquipo();
 		}	else if(e2.quedaAlgunoVivo()){
 			this.ganador = 2;
 			e2.repartirExperiencia(e1.calcularExperiencia());
-			try {
-				e2.repartirItem(e1);
-			} catch (CloneNotSupportedException e) {
-				Loggin.getInstance().error("Error en la clase Combate: "+e);				
-			}
+			e2.repartirItem(e1);
+			//e1.desequiparEquipo();
 		}
 	}
 
@@ -96,6 +71,8 @@ public class Combate {
 			e.desequiparEquipo();
 		}
 	}
+	
+	
 	
 	
 	private int getProximoCombate(){
