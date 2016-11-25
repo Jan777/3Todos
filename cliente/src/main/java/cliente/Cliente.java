@@ -106,12 +106,12 @@ public class Cliente extends Thread {
 				case "estadoRegistro":
 					if (paquete.getMensaje().equals("1")) {
 						salida.writeObject(gson.toJson(paquete));
-						JOptionPane.showMessageDialog(null, "Registro exitoso");
-						opcion = true;
+						JOptionPane.showMessageDialog(null, "Registro exitoso, por favor vuelva a loguearse para verificar su usuario");
+						opcion = false;
 
 					} else {
 						if (paquete.getMensaje().equals("0"))
-							JOptionPane.showMessageDialog(null, "No se pudo registrar");
+							JOptionPane.showMessageDialog(null, "No se pudo registrar, inténtelo nuevamente");
 						opcion = false;
 					}
 					break;
