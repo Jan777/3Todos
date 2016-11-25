@@ -9,12 +9,14 @@ import java.util.concurrent.Semaphore;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import cliente.Usuario;
 import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+import javax.swing.BoxLayout;
 
 public class Splash extends JFrame {
 
@@ -39,6 +41,7 @@ public class Splash extends JFrame {
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		miMismo = this;
@@ -70,6 +73,12 @@ public class Splash extends JFrame {
 		lblNewLabel.setIcon(new ImageIcon(Splash.class.getResource("/imagenes/logo.png")));
 		lblNewLabel.setBounds(47, 54, 345, 88);
 		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setIcon(new ImageIcon(Login.class.getResource("/imagenes/bloody_wall.jpg")));
+		lblNewLabel_1.setBounds(0, 11, 500, 500);
+		contentPane.add(lblNewLabel_1);
 	}
 }
 

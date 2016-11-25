@@ -32,6 +32,8 @@ import com.google.gson.Gson;
 import cliente.Usuario;
 import utilities.Loggin;
 import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.SystemColor;
 
 public class Login extends JFrame {
 
@@ -68,15 +70,19 @@ public class Login extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 504, 275);
 		contentPane = new JPanel();
+		contentPane.setBackground(SystemColor.menu);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		lblUsuario = new JLabel("Usuario: ");
+		lblUsuario.setForeground(new Color(255, 255, 255));
 		lblUsuario.setFont(new Font("OCR A Extended", Font.PLAIN, 11));
+		
 		lblUsuario.setBounds(7, 122, 96, 20);
 		contentPane.add(lblUsuario);
 		lblContrasena = new JLabel("Contrase\u00F1a: ");
+		lblContrasena.setForeground(new Color(255, 255, 255));
 		lblContrasena.setFont(new Font("OCR A Extended", Font.PLAIN, 11));
 		lblContrasena.setBounds(7, 153, 96, 20);
 		contentPane.add(lblContrasena);
@@ -144,6 +150,12 @@ public class Login extends JFrame {
 		lblNewLabel.setIcon(new ImageIcon(Login.class.getResource("/imagenes/logo.png")));
 		lblNewLabel.setBounds(79, 32, 360, 79);
 		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setIcon(new ImageIcon(Login.class.getResource("/imagenes/bloody_wall.jpg")));
+		lblNewLabel_1.setBounds(0, 11, 500, 500);
+		contentPane.add(lblNewLabel_1);
 		visible(true);
 
 	}

@@ -44,7 +44,8 @@ public class FrameServidor extends JFrame {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				serv.parar();
+				if(serv != null)
+					serv.parar();
 			}
 		});
 
