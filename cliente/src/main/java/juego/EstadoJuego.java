@@ -22,7 +22,7 @@ public class EstadoJuego extends Estado {
 	public EstadoJuego(Juego juego) {
 		super(juego);
 		mapa = new Mapa(juego); 
-	    personaje = new PersonajeGrafico(juego, mapa, 50, 50, 0, 0, 100); 
+	    personaje = new PersonajeGrafico(juego, mapa, 64, 64, 0, 0, 100); 
 	 
 		try {
 			juego.getPersonaje().setComando("conectado");
@@ -74,7 +74,7 @@ public class EstadoJuego extends Estado {
 						 
 					
 				if (personajeActual.getIdPersonaje() != juego.getPersonaje().getIdPersonaje()) {
-					g.drawImage(personaje.obtenerAnimacion(juego.getRaza()).get(personajeActual.getDireccion())[personajeActual.getFrame()], (int) (personajeActual.getPosX() - juego.getCamara().getxOffset() ), (int) (personajeActual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null); 
+					g.drawImage(personaje.obtenerAnimacion(personajeActual.getRaza()).get(personajeActual.getDireccion())[personajeActual.getFrame()], (int) (personajeActual.getPosX() - juego.getCamara().getxOffset() ), (int) (personajeActual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null); 
 				} 
 		}
 		
