@@ -1,5 +1,7 @@
 package razas;
 
+import java.util.List;
+
 import dominio.*;
 
 public class Orco extends Personaje{
@@ -11,6 +13,29 @@ public class Orco extends Personaje{
 		this.ataque = 12;
 		this.defensa = 5;
 		this.magia = 3;
+	}
+	
+	public Orco(int idPersonaje, String nombre, int vida, int energia, int experiencia, int nivel, int puntos, 
+			int puedeAgregarAtaque,	int destreza, int velocidad, int potencia, Casta clase, List<Item> mochila)	{
+		super(nombre);
+		this.idPersonaje = idPersonaje;
+		this.nombre = nombre;
+		this.vida = vida;
+		this.energia = energia;
+		this.setRaza("ORCO");
+		this.idRaza = 2;
+		this.ataque = 12;
+		this.defensa = 5;
+		this.magia = 3;
+		this.experiencia = experiencia;
+		this.nivel = nivel;	
+		this.puntos = puntos;
+		this.puedeAgregarAtaque = puedeAgregarAtaque;
+		this.destreza = destreza;
+		this.velocidad = velocidad;
+		this.potencia = potencia;
+		this.clase = clase;	
+		this.mochila = mochila;
 	}
 	
 	public Orco(Personaje p) {

@@ -19,10 +19,30 @@ public class HumanoTest {
 		Assert.assertEquals(100, h.getVida());
 		Assert.assertEquals(1, h.getNivel());
 		Assert.assertEquals(0, h.getExperiencia());
-		Assert.assertEquals(10, h.calcularPuntosDeAtaque());
-		Assert.assertEquals(10, h.calcularPuntosDeDefensa());
+		Assert.assertEquals(15, h.calcularPuntosDeAtaque());
+		Assert.assertEquals(5, h.calcularPuntosDeDefensa());
 		Assert.assertEquals(0, h.calcularPuntosDeMagia());
-		Assert.assertEquals("Humano", h.getRaza());
-		Assert.assertEquals("Guerrero", h.getClase().getNombre());		
+		Assert.assertEquals("HUMANO", h.getRaza());
+		Assert.assertEquals("GUERRERO", h.getClase().getNombre());		
+	}
+	
+	@Test
+	public void crearOrcoConOtrosParametros(){
+		Personaje e = new Humano(1,"Agente Smith",100,100,0,1,0,0,0,0,0, new Guerrero(), null);
+			
+		Assert.assertEquals("Agente Smith", e.getNombre());
+		Assert.assertEquals(100, e.getEnergia());
+		Assert.assertEquals(100, e.getVida());
+		Assert.assertEquals(1, e.getNivel());
+		Assert.assertEquals(0, e.getExperiencia());
+		Assert.assertEquals(15, e.calcularPuntosDeAtaque());
+		Assert.assertEquals(5, e.calcularPuntosDeDefensa());
+		Assert.assertEquals(0, e.calcularPuntosDeMagia());
+		Assert.assertEquals(0, e.getDestreza());
+		Assert.assertEquals(0, e.getPuedeAgregarAtaque());
+		Assert.assertEquals(0, e.getVelocidad());
+		
+		Assert.assertEquals("HUMANO", e.getRaza());
+		Assert.assertEquals("GUERRERO", e.getClase().getNombre());
 	}
 }
