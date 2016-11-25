@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.Scanner;
 import java.util.concurrent.Semaphore;
 
@@ -15,8 +14,8 @@ import javax.swing.JOptionPane;
 import com.google.gson.Gson;
 
 import dominio.Personaje;
-import gui.Splash;
 import gui.MenuPrincipal;
+import gui.Splash;
 import juego.Juego;
 import razas.Elfo;
 import razas.Humano;
@@ -24,7 +23,7 @@ import razas.Orco;
 import utilities.Loggin;
 
 public class Cliente extends Thread {
-	
+
 	private Socket cliente;
 	private String ip;
 	private ObjectInputStream entrada;
@@ -35,19 +34,19 @@ public class Cliente extends Thread {
 	private int puerto;
 	private final Gson gson = new Gson();
 
-	public Cliente() throws UnknownHostException, IOException {
+	public Cliente(){
 		leerConfig();
-		try{
-		cliente = new Socket(this.ip, this.puerto);
-		ip = cliente.getInetAddress().getHostAddress();
-		salida = new ObjectOutputStream(cliente.getOutputStream());
-		entrada = new ObjectInputStream(cliente.getInputStream());
-		}catch(Exception e){
+		try {
+			cliente = new Socket(this.ip, this.puerto);
+			ip = cliente.getInetAddress().getHostAddress();
+			salida = new ObjectOutputStream(cliente.getOutputStream());
+			entrada = new ObjectInputStream(cliente.getInputStream());
+		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Error servidor no iniciado");
 			Loggin.getInstance().error("Error al inciar el cliente, servidor no iniciado");
 		}
 		semaforo = new Semaphore(0);
-		Loggin.getInstance().info("Inicia cliente: "+ip);
+		Loggin.getInstance().info("Inicia cliente: " + ip);
 	}
 
 	public void run() {
@@ -75,64 +74,64 @@ public class Cliente extends Thread {
 				paquete.setMensaje(Cliente.conversor(usuario, usuario.getClass()));
 
 				switch (usuario.getAccion()) {
-					case "login":
-						paquete.setComando("login");
-						break;	
-					case "registro":
-						paquete.setComando("registrar");
-						break;					
-					case "salir":
-						paquete.setComando("salir");
-						break;
-					case "cerrar":
-						paquete.setComando("cerrar");
-						break;
+				case "login":
+					paquete.setComando("login");
+					break;
+				case "registro":
+					paquete.setComando("registrar");
+					break;
+				case "salir":
+					paquete.setComando("salir");
+					break;
+				case "cerrar":
+					paquete.setComando("cerrar");
+					break;
 				}
 
 				salida.writeObject(gson.toJson(paquete));
 				paquete = gson.fromJson((String) entrada.readObject(), Mensaje.class);
 
 				switch (paquete.getComando()) {
-					case "estadoLogin":
-						if (paquete.getMensaje().equals("1")) {
-							pp = gson.fromJson((String) entrada.readObject(), MensajePersonaje.class);
-							opcion = true;
-						} else {
-							if (paquete.getMensaje().equals("0"))
-								JOptionPane.showMessageDialog(null, "Error en nombre de usuario o contraseña");
-							opcion = false;
-						}
-						break;
-					
-					case "estadoRegistro":
-						if (paquete.getMensaje().equals("1")) {
-							salida.writeObject(gson.toJson(paquete));
-							JOptionPane.showMessageDialog(null, "Registro exitoso");
-							opcion = true;
-	
-						} else {
-							if (paquete.getMensaje().equals("0"))
-								JOptionPane.showMessageDialog(null, "No se pudo registrar");
-							opcion = false;
-						}
-						break;
-		
-					case "salir":
+				case "estadoLogin":
+					if (paquete.getMensaje().equals("1")) {
+						pp = gson.fromJson((String) entrada.readObject(), MensajePersonaje.class);
 						opcion = true;
-						break;
-	
-					case "cerrar":
+					} else {
+						if (paquete.getMensaje().equals("0"))
+							JOptionPane.showMessageDialog(null, "Error en nombre de usuario o contraseña");
 						opcion = false;
-						break;
+					}
+					break;
+
+				case "estadoRegistro":
+					if (paquete.getMensaje().equals("1")) {
+						salida.writeObject(gson.toJson(paquete));
+						JOptionPane.showMessageDialog(null, "Registro exitoso");
+						opcion = true;
+
+					} else {
+						if (paquete.getMensaje().equals("0"))
+							JOptionPane.showMessageDialog(null, "No se pudo registrar");
+						opcion = false;
+					}
+					break;
+
+				case "salir":
+					opcion = true;
+					break;
+
+				case "cerrar":
+					opcion = false;
+					break;
 				}
 
 			}
 
 			Semaphore semaforo = new Semaphore(0);
 			Mensaje paquete = new Mensaje(null, "menuPrincipal");
-			MenuPrincipal menu = new MenuPrincipal(paquete, semaforo, pp,this);
+			MenuPrincipal menu = new MenuPrincipal(paquete, semaforo, pp, this);
 			menu.setVisible(true);
-			
+
 			semaforo.acquire();
 			pp.setMundo(Integer.parseInt(paquete.getMensaje()));
 			pp.setNick(usuario.getNombre_usuario());
@@ -152,12 +151,16 @@ public class Cliente extends Thread {
 	}
 
 	private String getNombreMundo(int mundo) {
-		return mundo==1?"llanura":"desierto";
+		return mundo == 1 ? "llanura" : "desierto";
 	}
 
-	public static void main(String args[]) throws UnknownHostException, IOException {
-		Cliente cliente = new Cliente();
-		cliente.start();
+	public static void main(String args[]){
+		try{
+			Cliente cliente = new Cliente();
+			cliente.start();
+		}catch(Exception e){
+			Loggin.getInstance().error("Error iniciar cliente: "+e.getMessage());
+		}
 	}
 
 	private void leerConfig() {

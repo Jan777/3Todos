@@ -1,7 +1,6 @@
 package servidor;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
@@ -18,7 +17,6 @@ public class Servidor extends Thread {
 
 	private static ArrayList<RespuestaCliente> conectados = new ArrayList<>();
 	private static Map<Integer, MensajePersonaje> combatiendo = new HashMap<>();
-
 	private static Map<Integer, MensajePersonaje> personajes = new HashMap<>();
 	private ServerSocket server;
 	private int puerto;
@@ -38,15 +36,15 @@ public class Servidor extends Thread {
 				ipRemota = cliente.getInetAddress().getHostAddress();
 				Loggin.getInstance().info(ipRemota + " se ha conectado");
 
-					ObjectOutputStream salida = new ObjectOutputStream(cliente.getOutputStream());
-				
-			
+				ObjectOutputStream salida = new ObjectOutputStream(cliente.getOutputStream());
+
 				ObjectInputStream entrada = new ObjectInputStream(cliente.getInputStream());
 
 				RespuestaCliente atencion = new RespuestaCliente(ipRemota, cliente, entrada, salida);
 				atencion.start();
-				synchronized(conectados){
-				conectados.add(atencion);}
+				synchronized (conectados) {
+					conectados.add(atencion);
+				}
 			}
 		} catch (Exception e) {
 			Loggin.getInstance().error("Error en servidor: " + e.getMessage());
@@ -65,14 +63,18 @@ public class Servidor extends Thread {
 		new Servidor().start();
 	}
 
-	private void leerConfig() throws FileNotFoundException {
+	private void leerConfig() {
 		String linea;
 		String[] splitLine;
-		Scanner sc = new Scanner(new File("ServerApp.config"));
-		linea = sc.nextLine();
-		splitLine = linea.split(":");
-		this.puerto = Integer.parseInt(splitLine[1]);
-		sc.close();
+		try {
+			Scanner sc = new Scanner(new File("ServerApp.config"));
+			linea = sc.nextLine();
+			splitLine = linea.split(":");
+			this.puerto = Integer.parseInt(splitLine[1]);
+			sc.close();
+		} catch (Exception e) {
+			Loggin.getInstance().error("Error al leer config " + e.getMessage());
+		}
 	}
 
 	public synchronized static Map<Integer, MensajePersonaje> getCombatiendo() {
@@ -103,7 +105,7 @@ public class Servidor extends Thread {
 		return salida;
 	}
 
-	public  void setSalida(ObjectOutputStream salida) {
+	public void setSalida(ObjectOutputStream salida) {
 		this.salida = salida;
 	}
 
@@ -111,7 +113,7 @@ public class Servidor extends Thread {
 		return entrada;
 	}
 
-	public  void setEntrada(ObjectInputStream entrada) {
+	public void setEntrada(ObjectInputStream entrada) {
 		this.entrada = entrada;
 	}
 

@@ -2,27 +2,21 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.FlowLayout;
-import javax.swing.JButton;
-import java.awt.Font;
-import javax.swing.JSplitPane;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import java.awt.GridLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
+
+import utilities.Loggin;
 
 public class Combate extends JFrame {
 
+	private static final long serialVersionUID = 7687024501999321838L;
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -30,7 +24,7 @@ public class Combate extends JFrame {
 					Combate frame = new Combate();
 					frame.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					Loggin.getInstance().error("Error iniciar combate "+e.getMessage());
 				}
 			}
 		});
@@ -65,5 +59,4 @@ public class Combate extends JFrame {
 		JLabel lblNewLabel_1 = new JLabel("Jugadores Equipo 2");
 		panel.add(lblNewLabel_1, BorderLayout.EAST);
 	}
-
 }

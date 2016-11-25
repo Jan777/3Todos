@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.IOException;
 import java.util.concurrent.Semaphore;
 
 import javax.swing.ImageIcon;
@@ -30,6 +29,7 @@ import utilities.Loggin;
 
 public class EditarPersonaje extends JFrame {
 
+	private static final long serialVersionUID = 4086294890156447655L;
 	private JPanel contentPane;
 	private MenuPrincipal menu;
 	private JComboBox<String> comboRaza;

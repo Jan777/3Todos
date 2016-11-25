@@ -3,6 +3,8 @@ package cliente;
 import java.io.Serializable;
 
 public class Mensaje implements Serializable {
+	
+	private static final long serialVersionUID = -4202478779889131246L;
 	private String mensaje;
 	private String nick;
 	private String ip;
@@ -68,5 +70,4 @@ public class Mensaje implements Serializable {
 	public String getComando() {
 		return comando;
 	}
-
 }

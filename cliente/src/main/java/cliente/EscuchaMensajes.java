@@ -90,6 +90,4 @@ public class EscuchaMensajes extends Thread {
 	public void setPersonajes(Map<Integer, MensajePersonaje> personajes) {
 		this.personajes = personajes;
 	}
-	
-	
 }

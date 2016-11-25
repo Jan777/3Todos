@@ -1,15 +1,14 @@
 package cliente;
 
 import java.io.Serializable;
-import java.util.concurrent.Semaphore;
 
 public class Usuario implements Serializable{
 
+	private static final long serialVersionUID = 6943439087501030283L;
 	private String nombre_usuario;
 	private String password_usuario;
 	private int opcion;
 	private int idPj;
-	//private Semaphore semaforo;
 	private String accion;
 	
 	public Usuario(String nombre_usuario, String password_usuario, int idPj) {
@@ -17,11 +16,10 @@ public class Usuario implements Serializable{
 		this.password_usuario = password_usuario;
 		this.opcion=-1;
 		this.idPj=idPj;
-		//this.semaforo = new Semaphore(0);
 	}
 
 	public Usuario() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public String getNombre_usuario() {
@@ -48,13 +46,6 @@ public class Usuario implements Serializable{
 		this.idPj = idPj;
 	}
 
-	/*public Semaphore getSemaforo() {
-		return semaforo;
-	}
-
-	public void setSemaforo(Semaphore semaforo) {
-		this.semaforo = semaforo;
-	}*/
 	
 	public int getOpcion() {
 		return opcion;
@@ -70,9 +61,6 @@ public class Usuario implements Serializable{
 
 	public void setAccion(String accion) {
 		this.accion = accion;
-	}
-	
-	
-	
+	}	
 }
 

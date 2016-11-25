@@ -7,6 +7,7 @@ import utilities.Loggin;
 
 public class MensajePersonaje extends Mensaje implements Serializable, Cloneable {
 
+	private static final long serialVersionUID = 3341436791467937324L;
 	private int idPersonaje;
 	private Personaje personaje;
 	private String raza;
@@ -163,10 +164,6 @@ public class MensajePersonaje extends Mensaje implements Serializable, Cloneable
 
 	public void setAlto(int alto) {
 		this.alto = alto;
-	}
-
-
-
-	
+	}	
 }
 
