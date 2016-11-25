@@ -52,26 +52,12 @@ public class EstadoJuego extends Estado {
 		while (it.hasNext()) {
 			key = (int) it.next();
 			personajeActual = juego.getEscuchaMensajes().getPersonajes().get(key);
-			for (Integer colisiones : juego.getEscuchaMensajes().getPersonajes().keySet()) {
-				  if(colisiones.intValue() != key)
-			       {
-					  MensajePersonaje aux = juego.getEscuchaMensajes().getPersonajes().get(colisiones);
+			
 					  //no le cambien el orden a la llamada a la funcion sino no detecta colisiones
 					  // @mauroat - 23-11-16: la siguiente condicion es experimental
 					  
 					  // ver como agregar para que este if verifique que el colisionado no este en la lista getCombatiendo
-					  
-					  if(evaluarColision(aux, personajeActual) && !personajeActual.isColision() && !aux.isColision())
-					  {
-						juego.getPersonaje().setEnCombate(true);
-						juego.getPersonaje().setIdPersonajeColision(aux.getIdPersonaje());
-						juego.getPersonaje().setComando("colision");
-						
-						try {
-							juego.getCliente().getSalida().writeObject(gson.toJson(juego.getPersonaje()));
-						} catch (IOException e) {
-							Loggin.getInstance().error(e.getMessage());
-						}
+					
 						
 						/*  
 						  personajeActual.setColision(true);
@@ -85,11 +71,8 @@ public class EstadoJuego extends Estado {
 						
 						// ver como mierda le mando un mensaje al servidor !!!
 						 
-						 Loggin.getInstance().error("Colision entre "+aux.getIdPersonaje()+ " y "+personajeActual.getIdPersonaje());
-					  }
-						
-			       }
-			    }
+						 
+					
 				if (personajeActual.getIdPersonaje() != juego.getPersonaje().getIdPersonaje()) {
 					g.drawImage(personaje.obtenerAnimacion(juego.getRaza()).get(personajeActual.getDireccion())[personajeActual.getFrame()], (int) (personajeActual.getPosX() - juego.getCamara().getxOffset() ), (int) (personajeActual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null); 
 				} 
@@ -97,7 +80,7 @@ public class EstadoJuego extends Estado {
 		
 		g.drawImage(Grafico.marco, 0, 0, juego.getAncho(), juego.getAlto(), null);
 	}
-
+  
 	public boolean evaluarColision(MensajePersonaje p, MensajePersonaje aux)
 	{
 		int tolerancia = 5;

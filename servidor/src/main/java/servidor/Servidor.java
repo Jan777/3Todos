@@ -38,23 +38,26 @@ public class Servidor extends Thread {
 				ipRemota = cliente.getInetAddress().getHostAddress();
 				Loggin.getInstance().info(ipRemota + " se ha conectado");
 
-				ObjectOutputStream salida = new ObjectOutputStream(cliente.getOutputStream());
+					ObjectOutputStream salida = new ObjectOutputStream(cliente.getOutputStream());
+				
+			
 				ObjectInputStream entrada = new ObjectInputStream(cliente.getInputStream());
 
 				RespuestaCliente atencion = new RespuestaCliente(ipRemota, cliente, entrada, salida);
 				atencion.start();
-				conectados.add(atencion);
+				synchronized(conectados){
+				conectados.add(atencion);}
 			}
 		} catch (Exception e) {
 			Loggin.getInstance().error("Error en servidor: " + e.getMessage());
 		}
 	}
 
-	public static ArrayList<RespuestaCliente> getConectados() {
+	public static synchronized ArrayList<RespuestaCliente> getConectados() {
 		return conectados;
 	}
 
-	public static Map<Integer, MensajePersonaje> getPersonajes() {
+	public static synchronized Map<Integer, MensajePersonaje> getPersonajes() {
 		return personajes;
 	}
 
@@ -72,7 +75,7 @@ public class Servidor extends Thread {
 		sc.close();
 	}
 
-	public static Map<Integer, MensajePersonaje> getCombatiendo() {
+	public synchronized static Map<Integer, MensajePersonaje> getCombatiendo() {
 		return combatiendo;
 	}
 
@@ -100,7 +103,7 @@ public class Servidor extends Thread {
 		return salida;
 	}
 
-	public void setSalida(ObjectOutputStream salida) {
+	public  void setSalida(ObjectOutputStream salida) {
 		this.salida = salida;
 	}
 
@@ -108,15 +111,15 @@ public class Servidor extends Thread {
 		return entrada;
 	}
 
-	public void setEntrada(ObjectInputStream entrada) {
+	public  void setEntrada(ObjectInputStream entrada) {
 		this.entrada = entrada;
 	}
 
-	public static void setConectados(ArrayList<RespuestaCliente> conectados) {
+	public synchronized static void setConectados(ArrayList<RespuestaCliente> conectados) {
 		Servidor.conectados = conectados;
 	}
 
-	public static void setPersonajes(Map<Integer, MensajePersonaje> personajes) {
+	public synchronized static void setPersonajes(Map<Integer, MensajePersonaje> personajes) {
 		Servidor.personajes = personajes;
 	}
 

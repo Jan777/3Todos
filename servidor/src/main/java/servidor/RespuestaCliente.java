@@ -149,11 +149,13 @@ public class RespuestaCliente extends Thread {
 						Servidor.getPersonajes().get(mensajePersonaje.getIdPersonaje()).setAncho(mensajePersonaje.getAncho());
 						
 						// aca habria que guardar la posicion de un usuario en alguna matriz
-						
+						synchronized (Servidor.getConectados())
+						{
 						for (RespuestaCliente conectado : Servidor.getConectados()) {
 							MensajePersonaje pj = (MensajePersonaje) Servidor.getPersonajes().get(mensajePersonaje.getIdPersonaje()).clone();
 							pj.setComando("movimiento");
 							conectado.salida.writeObject(gson.toJson(mensajeDePersonajes));
+						}
 						}
 						break;
 	
