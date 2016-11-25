@@ -55,7 +55,7 @@ public class Humano extends Personaje {
 	}
 
 	@Override
-	protected Personaje clone() throws CloneNotSupportedException {
+	protected Personaje clone(){
 		Personaje aux = new Humano(this);
 		return aux;
 	}
