@@ -14,7 +14,7 @@ package criterios_aceptacion;
 	 * al mismo relacionado con las opciones de personajes que haya seleccionado en Raza y Casta. 
 	 ***/
 	public void historia01Criterio01_Test(){
-		
+		// Este criterio no es testeable
 	}
 	
 
@@ -23,6 +23,6 @@ package criterios_aceptacion;
 	 * pantalla para poder editar Raza y Casta de su personaje. 
 	 ***/
 	public void historia01Criterio02_Test(){
-		
+		//Este criterio no es testeable
 	}
 }

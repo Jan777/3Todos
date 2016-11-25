@@ -9,7 +9,6 @@ import items.*;
 import razas.*;
 
 
-// OK
 
 /***
  * 

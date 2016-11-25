@@ -8,8 +8,6 @@ import dominio.*;
 import items.*;
 import razas.*;
 
-// Esta todo OK salvo por el hecho que no se como indicar que el personaje se dirige a una zona segura.
-
 
 /***
  * 

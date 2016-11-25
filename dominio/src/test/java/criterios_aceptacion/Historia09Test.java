@@ -11,9 +11,6 @@ import dominio.*;
 import razas.*;
 
 
-// OK
-
-
 /***
  * 
  * 9)	Como Personaje, quiero encontrarme con otros personajes en el mismo mundo.

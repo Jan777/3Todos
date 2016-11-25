@@ -10,8 +10,6 @@ import items.*;
 import razas.*;
 
 
-// Agregado criterio 3 y 4, faltan 1 y 2
-// criterio 3 parecido al criterio 1 de historia de usuario 7
 
 /***
  * 

@@ -9,8 +9,6 @@ import habilidades.*;
 import items.*;
 import razas.*;
 
-// OK
-
 
 /***
  * 

@@ -12,14 +12,6 @@ import items.*;
 import razas.*;
 
 
-/*
- * @mauroat - 07/11/16
- * El error que tengo en el metodo equipo.repartirItems es que los punteros iniciales de p1, p2, etc
- * No se actualizan al decorator. Solo el equipo actualiza su referencia.
- * 
- * */
-
-
 /***
  * 
  * 11)	Como Personaje, quiero combatir contra otros jugadores.

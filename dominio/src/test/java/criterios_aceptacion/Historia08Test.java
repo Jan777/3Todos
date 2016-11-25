@@ -8,8 +8,6 @@ import dominio.*;
 import habilidades.*;
 import razas.*;
 
-// OK
-
 
 /***
  * 

@@ -10,8 +10,6 @@ import items.*;
 import razas.*;
 
 
-// Agregado criterio 1 y 3.
-// Falta 2
 
 /***
  * 
@@ -118,10 +116,7 @@ public class Historia07Test {
 	
 	@Test
 	public void historia07Criterio02_Test() {
-		/*
-		 * @mauroat - 24/10/16:
-		 * Creo odavía no puede probarse
-		 * */
+		// No testeable
 		
 	}
 	

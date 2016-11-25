@@ -11,8 +11,6 @@ import dominio.*;
 import razas.*;
 
 
-// Falta ultimo assert en criterio 1
-
 /***
  * 
  * 10)	 Como Personaje, quiero aliarme con otro personaje.

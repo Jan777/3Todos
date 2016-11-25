@@ -12,8 +12,6 @@ import java.io.FileNotFoundException;
 import org.junit.Assert;
 import org.junit.Test;
 
-// OK
-
 /***
  * 
  * 3)	 Atacar personajes. 
