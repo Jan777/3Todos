@@ -33,30 +33,58 @@ public class Historia05Test {
 	
 	@Test
 	public void historia05Criterio01_Test() throws FileNotFoundException, CloneNotSupportedException {
-		Personaje orco = new Orco("Orcazo");
-		Personaje humano1 = new Humano("Humanazo");
-		Personaje elfo1 = new Elfo("Elfazo");
-		Personaje elfo2 = new Elfo("Elfazito");
-			
-		for (int i = 0; i<9;i++)			
-			orco.atacar(humano1);
-		orco.serEnergizado();
-		for (int i = 0; i<6;i++)			
-			orco.atacar(elfo1);
-		orco.serEnergizado();
-		for (int i = 0; i<6;i++)			
-			orco.atacar(elfo2);
-		orco.serEnergizado();
-		for (int i = 0; i<6;i++)			
-			orco.atacar(elfo2);
-		orco.serEnergizado();
-		for (int i = 0; i<6;i++)			
-			orco.atacar(elfo2);
+		Personaje p1 = new Humano("CarlosTevez");
+		p1.setClase(new Guerrero());
+		p1.setUbicacion(new Ubicacion(0,1));
 		
-		// El orco sube de nivel y gana experiencia
-		Assert.assertEquals(210, orco.getExperiencia());
-		Assert.assertEquals(2, orco.getNivel());
-		Assert.assertEquals(2, orco.getPuntos());
+		Personaje p2 = new Humano("Dalessandra");
+		p2.setClase(new Guerrero());
+		p2.setUbicacion(new Ubicacion(0,4));
+		
+		Personaje p3 = new Humano("Romagnola");
+		p3.setClase(new Guerrero());
+		p3.setUbicacion(new Ubicacion(1,4));
+		
+		Personaje p4 = new Humano("Romagnola");
+		p4.setClase(new Guerrero());
+		p4.setUbicacion(new Ubicacion(1,6));
+		
+		p2.formarAlianzaCon(p3);
+		p3.formarAlianzaCon(p4);
+		
+		Equipo e1 = new Equipo(p1);
+		Equipo e2 = new Equipo(p2);
+		
+		Random r = new Random();
+		int aux = r.nextInt(2);
+		
+		/*
+		 * Equipo 1 ataca siempre al equipo 2
+		 * */
+		while(e2.quedaAlgunoVivo()){			
+			e1.atacar(e2);			
+		}
+
+		if(e2.quedaAlgunoVivo()){
+			e2.repartirExperiencia(e1.calcularExperiencia());
+			e2.repartirItem(e1);
+		}
+		
+		
+		
+		/*
+		 * El personaje p1 sube de nivel
+		 * */
+		Assert.assertEquals(1, p1.getNivel());
+		
+		
+		/*
+		 * El personaje p1 acumula 2 puntos por subir de nivel
+		 * */
+		
+		Assert.assertEquals(2, p1.getPuntos());
+		
+
 		
 	}
 	
