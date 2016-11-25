@@ -23,7 +23,7 @@ public class PuñoDragonTest {
 		
 		// Lescano ataca a Collins con furia sangrienta, debe disminuir su energia y disminuir la vida del atacado
 		h1.atacar(h2,h1.getAtaque("Puño Dragón"));
-		Assert.assertEquals(100-10-8, h1.getEnergia());
-		Assert.assertEquals(100-10-8+10, h2.getVida());
+		Assert.assertEquals(77, h1.getEnergia());
+		Assert.assertEquals(82, h2.getVida());
 	}
 }

@@ -3,23 +3,23 @@ package castas;
 import org.junit.Assert;
 import org.junit.Test;
 
-import dominio.*;
-import habilidades.*;
-import razas.*;
+import dominio.Personaje;
+import habilidades.Destreza;
+import razas.Orco;
 
-public class GuerreroTest {
-
+public class ChamanTest {
+	
 	@Test
 	public void guerreroConstructorTest(){
 		Personaje p = new Orco("Willy");
-		p.setClase(new Guerrero());
-		Assert.assertEquals("GUERRERO", p.getNombreClase());
+		p.setClase(new Chaman());
+		Assert.assertEquals("CHAMAN", p.getNombreClase());
 	}
 	
 	@Test
 	public void guerreroAgregarAtaques(){
 		Personaje p = new Orco("Willy");
-		p.setClase(new Guerrero());
+		p.setClase(new Chaman());
 		p.getClase().agregarHabilidad(new Destreza());
 		p.getClase().getHabilidades();
 	}

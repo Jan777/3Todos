@@ -24,8 +24,8 @@ public class FuriaSangrientaTest {
 		
 		// Lescano ataca a Collins con furia sangrienta, debe disminuir su energia y disminuir la vida del atacado
 		h1.atacar(h2,h1.getAtaque("Furia sangrienta"));
-		Assert.assertEquals(100-10-9, h1.getEnergia());
-		Assert.assertEquals(100-10-9+10, h2.getVida());
+		Assert.assertEquals(76, h1.getEnergia());
+		Assert.assertEquals(81, h2.getVida());
 	}
 	
 }

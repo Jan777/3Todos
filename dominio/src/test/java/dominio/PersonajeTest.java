@@ -26,8 +26,8 @@ public class PersonajeTest {
 		
 		// Humano - Valores estandar de Ataque (10) , Defensa (10) y Magia (0)
 		Assert.assertEquals("Humanito 1", h.getNombre());
-		Assert.assertEquals("Humano",h.getRaza());
-		Assert.assertEquals("Guerrero", h.getClase().getNombre());
+		Assert.assertEquals("HUMANO",h.getRaza());
+		Assert.assertEquals("GUERRERO", h.getClase().getNombre());
 		Assert.assertEquals(100,h.getVida());
 		Assert.assertEquals(0,h.getExperiencia());
 		Assert.assertEquals(15,h.calcularPuntosDeAtaque());
@@ -37,8 +37,8 @@ public class PersonajeTest {
 			
 		// Elfo - Valores estandar de Ataque (5) , Defensa (5) y Magia (10)		
 		Assert.assertEquals("Elfito 2", e.getNombre());
-		Assert.assertEquals("Elfo", e.getRaza());
-		Assert.assertEquals("Hechicero", e.getClase().getNombre());
+		Assert.assertEquals("ELFO", e.getRaza());
+		Assert.assertEquals("HECHICERO", e.getClase().getNombre());
 		Assert.assertEquals(1, e.getNivel());
 		Assert.assertEquals(6,e.calcularPuntosDeAtaque());
 		Assert.assertEquals(4,e.calcularPuntosDeDefensa());
@@ -47,8 +47,8 @@ public class PersonajeTest {
 		
 		// Orco - Valores estandar de Ataque (12) , Defensa (5) y Magia (3)
 		Assert.assertEquals("Orquito 3", o.getNombre());
-		Assert.assertEquals("Orco", o.getRaza());
-		Assert.assertEquals("Chaman", o.getClase().getNombre());
+		Assert.assertEquals("ORCO", o.getRaza());
+		Assert.assertEquals("CHAMAN", o.getClase().getNombre());
 		Assert.assertEquals(5,o.calcularPuntosDeDefensa());
 		Assert.assertEquals(3,o.calcularPuntosDeMagia());
 		Assert.assertEquals(12, o.calcularPuntosDeAtaque());

@@ -10,5 +10,6 @@
 	<classpathentry kind="lib" path="src/main/resources/gson-2.8.0.jar"/>
 	<classpathentry kind="lib" path="src/main/resources/sqlite-jdbc-3.15.1.jar"/>
 	<classpathentry kind="lib" path="src/main/resources/log4j-1.2.15.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

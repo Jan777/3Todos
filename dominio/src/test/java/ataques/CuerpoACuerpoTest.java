@@ -24,8 +24,8 @@ public class CuerpoACuerpoTest {
 		
 		// Lescano ataca a Collins con cuerpo a cuerpo, debe disminuir su energia y disminuir la vida del atacado
 		h1.atacar(h2,h1.getAtaque("Cuerpo a cuerpo"));
-		Assert.assertEquals(100-10-5, h1.getEnergia());
-		Assert.assertEquals(100-10-5+10, h2.getVida());
+		Assert.assertEquals(100-10-5-5, h1.getEnergia());
+		Assert.assertEquals(100-10-5, h2.getVida());
 	}
 	
 }

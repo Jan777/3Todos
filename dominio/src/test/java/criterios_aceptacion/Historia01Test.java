@@ -1,5 +1,4 @@
 package criterios_aceptacion;
-// Falta todo
 
 /***
  * 

@@ -20,8 +20,8 @@ public class CuracionTest {
 		// disminuir la vida del atacado
 	
 		h1.atacar(h2,h1.getAtaque("Curacion"));
-		Assert.assertEquals(100-10, h1.getEnergia());
-		Assert.assertEquals(100+20, h2.getVida());
+		Assert.assertEquals(85, h1.getEnergia());
+		Assert.assertEquals(100, h2.getVida());
 		
 	}
 	

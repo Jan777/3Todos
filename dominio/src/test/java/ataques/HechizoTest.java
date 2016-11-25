@@ -24,7 +24,7 @@ public class HechizoTest {
 		
 		// Lescano ataca a Collins con gancho de goro, debe disminuir su energia y disminuir la vida del atacado
 		e1.atacar(e2,e1.getAtaque("Hechizo"));
-		Assert.assertEquals(100-5-6, e1.getEnergia());
-		Assert.assertEquals(100-5-6+5, e2.getVida());
+		Assert.assertEquals(100-5-6-1, e1.getEnergia());
+		Assert.assertEquals(100-5-6+5-2, e2.getVida());
 	}
 }

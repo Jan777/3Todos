@@ -24,7 +24,7 @@ public class GanchoDeGoroTest {
 		
 		// Lescano ataca a Collins con gancho de goro, debe disminuir su energia y disminuir la vida del atacado
 		h1.atacar(h2,h1.getAtaque("Gancho de Goro"));
-		Assert.assertEquals(100-10-12, h1.getEnergia());
-		Assert.assertEquals(100-10-12+10, h2.getVida());
+		Assert.assertEquals(100-10-12-5, h1.getEnergia());
+		Assert.assertEquals(100-10-12+10-10, h2.getVida());
 	}
 }
