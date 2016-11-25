@@ -55,4 +55,11 @@ public class ServidorTest {
 		db.actualizarElPersonaje(dejarOriginal);
 	}
 	
+	@Test
+	public void conectadosTest(){
+		Servidor server = new Servidor();
+		server.start();
+		Assert.assertTrue(server.getConectados().isEmpty());
+		
+	}
 }
