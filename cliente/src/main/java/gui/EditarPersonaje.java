@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.google.gson.Gson;
@@ -26,6 +27,8 @@ import cliente.Cliente;
 import cliente.Mensaje;
 import cliente.MensajePersonaje;
 import utilities.Loggin;
+import java.awt.Color;
+import java.awt.Font;
 
 public class EditarPersonaje extends JFrame {
 
@@ -64,14 +67,20 @@ public class EditarPersonaje extends JFrame {
 		panel.setLayout(null);
 
 		JLabel lblSeleccioneSuPersonaje = new JLabel("Seleccione su personaje:");
-		lblSeleccioneSuPersonaje.setBounds(50, 32, 153, 14);
+		lblSeleccioneSuPersonaje.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
+		lblSeleccioneSuPersonaje.setForeground(Color.RED);
+		lblSeleccioneSuPersonaje.setBounds(50, 32, 216, 14);
 		panel.add(lblSeleccioneSuPersonaje);
 
 		JLabel lblRaza = new JLabel("Raza");
+		lblRaza.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
+		lblRaza.setForeground(Color.RED);
 		lblRaza.setBounds(50, 61, 46, 14);
 		panel.add(lblRaza);
 
 		JLabel lblCasta = new JLabel("Casta: ");
+		lblCasta.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
+		lblCasta.setForeground(Color.RED);
 		lblCasta.setBounds(50, 190, 57, 14);
 		panel.add(lblCasta);
 
@@ -101,6 +110,7 @@ public class EditarPersonaje extends JFrame {
 		panel.add(comboCasta);
 		cargarCombo();
 		JButton button = new JButton("Guardar");
+		button.setFont(new Font("OCR A Extended", Font.PLAIN, 13));
 		button.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
@@ -122,6 +132,12 @@ public class EditarPersonaje extends JFrame {
 		});
 		button.setBounds(213, 325, 107, 25);
 		panel.add(button);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setIcon(new ImageIcon(Login.class.getResource("/imagenes/bloody_wall.jpg")));
+		lblNewLabel_1.setBounds(0, 0, 584, 454);
+		panel.add(lblNewLabel_1);
 
 		cargarDatos(pp);
 		this.setVisible(true);

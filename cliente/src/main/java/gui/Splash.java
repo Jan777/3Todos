@@ -77,7 +77,7 @@ public class Splash extends JFrame {
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setIcon(new ImageIcon(Login.class.getResource("/imagenes/bloody_wall.jpg")));
-		lblNewLabel_1.setBounds(0, 11, 500, 500);
+		lblNewLabel_1.setBounds(0, -12, 500, 523);
 		contentPane.add(lblNewLabel_1);
 	}
 }

@@ -154,7 +154,7 @@ public class Login extends JFrame {
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setIcon(new ImageIcon(Login.class.getResource("/imagenes/bloody_wall.jpg")));
-		lblNewLabel_1.setBounds(0, 11, 500, 500);
+		lblNewLabel_1.setBounds(0, -23, 500, 534);
 		contentPane.add(lblNewLabel_1);
 		visible(true);
 

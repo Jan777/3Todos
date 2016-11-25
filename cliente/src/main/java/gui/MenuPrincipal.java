@@ -97,6 +97,12 @@ public class MenuPrincipal extends JFrame {
 		lblNewLabel.setBounds(10, 11, 404, 79);
 		panel.add(lblNewLabel);
 		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setIcon(new ImageIcon(Login.class.getResource("/imagenes/bloody_wall.jpg")));
+		lblNewLabel_1.setBounds(-12, -10, 450, 279);
+		panel.add(lblNewLabel_1);
+		
 		this.setVisible(true);
 	}
 	

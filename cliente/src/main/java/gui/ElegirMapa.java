@@ -8,10 +8,12 @@ import java.util.concurrent.Semaphore;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import cliente.Mensaje;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 public class ElegirMapa extends JFrame {
 
@@ -58,6 +60,12 @@ public class ElegirMapa extends JFrame {
 		});
 		btnNewButton_1.setBounds(97, 132, 237, 59);
 		contentPane.add(btnNewButton_1);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setIcon(new ImageIcon(Login.class.getResource("/imagenes/bloody_wall.jpg")));
+		lblNewLabel_1.setBounds(0, -12, 446, 283);
+		contentPane.add(lblNewLabel_1);
 		this.setVisible(true);
 	}
 }
