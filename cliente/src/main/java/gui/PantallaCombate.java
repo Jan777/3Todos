@@ -56,7 +56,7 @@ public class PantallaCombate extends JFrame {
 	public PantallaCombate(final Juego juego, MensajePersonaje mp) {
 		
 		// CREO MI PERSONAJE
-		
+		this.setTitle("BloodyWars - ¡Combate!");
 		if(juego.getPersonaje().getRaza().equals("ORCO")){
 			p1 = new Orco(juego.getPersonaje().getIdPersonaje(),juego.getPersonaje().getNick());
 		} else if(juego.getPersonaje().getRaza().equals("HUMANO")){
@@ -92,7 +92,7 @@ public class PantallaCombate extends JFrame {
 		}
 		
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 677, 383);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -112,6 +112,8 @@ public class PantallaCombate extends JFrame {
 					textFieldEnergia.setText(String.valueOf(p1.getEnergia()));
 					textFieldEnergiaEnemigo.setText(String.valueOf(pEnemigo.getEnergia()));
 					btnAtacar.setEnabled(false);
+					gson.toJson(p1.getIdPersonaje(),Integer.class);
+					
 					// aca envio mensaje					
 				}
 				
