@@ -15,6 +15,16 @@ public class Orco extends Personaje{
 		this.magia = 3;
 	}
 	
+	public Orco(int idPersonaje, String nombre) {	
+		super(nombre);
+		this.idPersonaje = idPersonaje;
+		this.setRaza("ORCO");
+		this.idRaza = 1;
+		this.ataque = 15;
+		this.defensa = 5;
+		this.magia = 0;
+	}
+	
 	public Orco(int idPersonaje, String nombre, int vida, int energia, int experiencia, int nivel, int puntos, 
 			int puedeAgregarAtaque,	int destreza, int velocidad, int potencia, Casta clase, List<Item> mochila)	{
 		super(nombre);

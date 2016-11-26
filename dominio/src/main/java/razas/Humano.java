@@ -15,6 +15,16 @@ public class Humano extends Personaje {
 		this.magia = 0;
 	}
 	
+	public Humano(int idPersonaje, String nombre) {	
+		super(nombre);
+		this.idPersonaje = idPersonaje;
+		this.setRaza("HUMANO");
+		this.idRaza = 1;
+		this.ataque = 15;
+		this.defensa = 5;
+		this.magia = 0;
+	}
+	
 	public Humano(int idPersonaje, String nombre, int vida, int energia, int experiencia, int nivel, int puntos, 
 			int puedeAgregarAtaque,	int destreza, int velocidad, int potencia, Casta clase, List<Item> mochila)	{
 		super(nombre);

@@ -14,6 +14,16 @@ public class Elfo extends Personaje{
 		this.magia = 10;
 	}
 	
+	public Elfo(int idPersonaje, String nombre) {	
+		super(nombre);
+		this.idPersonaje = idPersonaje;
+		this.setRaza("ELFO");
+		this.idRaza = 3;
+		this.ataque = 6;
+		this.defensa = 4;
+		this.magia = 10;
+	}
+	
 	public Elfo(int idPersonaje, String nombre, int vida, int energia, int experiencia, int nivel, int puntos, 
 			int puedeAgregarAtaque,	int destreza, int velocidad, int potencia, Casta clase, List<Item> mochila)	{
 		super(nombre);

@@ -10,6 +10,7 @@ import cliente.Cliente;
 import cliente.Mensaje;
 import cliente.MensajePersonaje;
 import entidades.PersonajeGrafico;
+import gui.PantallaCombate;
 import mapa.Mapa;
 import utilities.Loggin;
 
@@ -18,6 +19,7 @@ public class EstadoJuego extends Estado {
 	private PersonajeGrafico personaje;
 	private Mapa mapa;
 	private final Gson gson = new Gson();
+	private boolean colision = false;
 
 	public EstadoJuego(Juego juego) {
 		super(juego);
@@ -53,7 +55,13 @@ public class EstadoJuego extends Estado {
 			key = (int) it.next();
 			personajeActual = juego.getEscuchaMensajes().getPersonajes().get(key);
 			
-					  //no le cambien el orden a la llamada a la funcion sino no detecta colisiones
+			if(evaluarColision(juego.getPersonaje(),personajeActual) && colision == false)	{
+				PantallaCombate pc = new PantallaCombate(juego,personajeActual);
+				pc.setVisible(true);
+				colision = true;
+			}
+			
+			//no le cambien el orden a la llamada a la funcion sino no detecta colisiones
 					  // @mauroat - 23-11-16: la siguiente condicion es experimental
 					  
 					  // ver como agregar para que este if verifique que el colisionado no este en la lista getCombatiendo

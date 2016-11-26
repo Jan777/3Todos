@@ -373,9 +373,10 @@ public abstract class Personaje implements Peleador {
 	private int experienciaRequerida(int nivel) {
 		try{
 
-			Properties niveles = new Properties();
-			niveles.load(new FileInputStream("config/niveles.properties"));
-			return Integer.parseInt(niveles.getProperty(String.valueOf(nivel)));
+//			Properties niveles = new Properties();
+//			niveles.load(new FileInputStream("config/niveles.properties"));
+			return 200;
+//			return Integer.parseInt(niveles.getProperty(String.valueOf(nivel)));
 		} catch(Exception e){
 			e.printStackTrace();
 		} 
