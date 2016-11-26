@@ -23,4 +23,13 @@ public class ChamanTest {
 		p.getClase().agregarHabilidad(new Destreza());
 		p.getClase().getHabilidades();
 	}
+	
+	@Test
+	public void guerreroAgregarAtaques2(){
+		Personaje p = new Orco("Willy");
+		p.setClase(new Chaman());
+		p.getClase().agregarHabilidad(new Destreza());
+		p.getClase().getIdCasta();
+	}
+	
 }

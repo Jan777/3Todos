@@ -42,12 +42,5 @@ public abstract class Habilidad {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	
-	
-	
-	
-	
-	
+	}	
 }
