@@ -154,11 +154,11 @@ public class EditarPersonaje extends JFrame {
 	private void cargarImagenesPersonaje(String raza) {
 		if (raza != null && !raza.isEmpty()) {
 			if (raza.contentEquals("HUMANO")) {
-				lblRazaElegida.setIcon(new ImageIcon("src/main/resources/imagenes/personajes/humano_short.png"));
+				lblRazaElegida.setIcon(new ImageIcon("resources/imagenes/personajes/humano_short.png"));
 			} else if (raza.contentEquals("ELFO")) {
-				lblRazaElegida.setIcon(new ImageIcon("src/main/resources/imagenes/personajes/elfo_short.png"));
+				lblRazaElegida.setIcon(new ImageIcon("resources/imagenes/personajes/elfo_short.png"));
 			} else if (raza.contentEquals("ORCO")) {
-				lblRazaElegida.setIcon(new ImageIcon("src/main/resources/imagenes/personajes/orco_short.png"));
+				lblRazaElegida.setIcon(new ImageIcon("resources/imagenes/personajes/orco_short.png"));
 			}
 		}
 	}

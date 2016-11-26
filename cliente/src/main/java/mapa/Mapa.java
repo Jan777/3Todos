@@ -136,8 +136,8 @@ public class Mapa {
 		     
 		    switch(nroMapa) 
 		    { 
-		      case "llanura": pathMapa = "src/main/resources/mapas/mapa1.txt"; break; 
-		      case "desierto": pathMapa = "src/main/resources/mapas/mapa2.txt"; break; 
+		      case "llanura": pathMapa = "resources/mapas/mapa1.txt"; break; 
+		      case "desierto": pathMapa = "resources/mapas/mapa2.txt"; break; 
 		    } 
 		     
 		    return pathMapa; 

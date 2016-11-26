@@ -29,22 +29,22 @@ public class Grafico {
 
 	public static void cargar() {
 
-		humano = cargarSpritePersonaje(51, 60, 10, "src/main/resources/imagenes/humano.png");
-		elfo = cargarSpritePersonaje(62, 86, 10, "src/main/resources/imagenes/elfo.png");
-		orco = cargarSpritePersonaje(66, 95, 10, "src/main/resources/imagenes/orco.png");
+		humano = cargarSpritePersonaje(51, 60, 10, "resources/imagenes/humano.png");
+		elfo = cargarSpritePersonaje(62, 86, 10, "resources/imagenes/elfo.png");
+		orco = cargarSpritePersonaje(66, 95, 10, "resources/imagenes/orco.png");
 
-		pasto = cargarSprite("src/main/resources/imagenes/Pasto.png");
-		agua = cargarSprite("src/main/resources/imagenes/Agua.png");
-		vacio = cargarSprite("src/main/resources/imagenes/Vacio.png");
-		arena = cargarSprite("src/main/resources/imagenes/Arena.png");
-		lava = cargarSprite("src/main/resources/imagenes/LavaConOnda.png");
-		fondo = cargarSprite("src/main/resources/imagenes/fondo.jpg");
-		marco = cargarSprite("src/main/resources/imagenes/marco.png");
-		piedra = cargarSprite("src/main/resources/imagenes/Piedra.png");
-		calle = cargarSprite("src/main/resources/imagenes/Calle.png");
-		calleArriba = cargarSprite("src/main/resources/imagenes/CalleArriba.png");
-		calleAbajo = cargarSprite("src/main/resources/imagenes/CalleAbajo.png");
-		calleMedia = cargarSprite("src/main/resources/imagenes/CalleMedia.png");
+		pasto = cargarSprite("resources/imagenes/Pasto.png");
+		agua = cargarSprite("resources/imagenes/Agua.png");
+		vacio = cargarSprite("resources/imagenes/Vacio.png");
+		arena = cargarSprite("resources/imagenes/Arena.png");
+		lava = cargarSprite("resources/imagenes/LavaConOnda.png");
+		fondo = cargarSprite("resources/imagenes/fondo.jpg");
+		marco = cargarSprite("resources/imagenes/marco.png");
+		piedra = cargarSprite("resources/imagenes/Piedra.png");
+		calle = cargarSprite("resources/imagenes/Calle.png");
+		calleArriba = cargarSprite("resources/imagenes/CalleArriba.png");
+		calleAbajo = cargarSprite("resources/imagenes/CalleAbajo.png");
+		calleMedia = cargarSprite("resources/imagenes/CalleMedia.png");
 	}
 
 	private static BufferedImage cargarSprite(String pathSprite) {

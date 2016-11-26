@@ -1,7 +1,4 @@
 package juego;
-import javax.sound.sampled.AudioFileFormat;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 

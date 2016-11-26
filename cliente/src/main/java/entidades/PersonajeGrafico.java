@@ -314,7 +314,7 @@ public class PersonajeGrafico {
 
 	private Image obtenerImagenCuadro() {
 		try {
-			return ImageIO.read(new File(("src/main/resources/imagenes/cuadro.jpg")));
+			return ImageIO.read(new File(("resources/imagenes/cuadro.jpg")));
 		} catch (IOException e) {
 			Loggin.getInstance().error("Error ObtenerImagenCuadro: "+e.getMessage());
 		}
@@ -326,19 +326,19 @@ public class PersonajeGrafico {
 		if (raza != null && !raza.isEmpty()) {
 			if (raza.contentEquals("HUMANO")) {
 				try {
-					return ImageIO.read(new File(("src/main/resources/imagenes/personajes/humano_short.png")));
+					return ImageIO.read(new File(("resources/imagenes/personajes/humano_short.png")));
 				} catch (IOException e) {
 					Loggin.getInstance().error("Error ObtenerImagenRaza: "+e.getMessage());
 				}
 			} else if (raza.contentEquals("ELFO")) {
 				try {
-					return ImageIO.read(new File(("src/main/resources/imagenes/personajes/elfo_short.png")));
+					return ImageIO.read(new File(("resources/imagenes/personajes/elfo_short.png")));
 				} catch (IOException e) {
 					Loggin.getInstance().error("Error ObtenerImagenRaza: "+e.getMessage());
 				}
 			} else if (raza.contentEquals("ORCO")) {
 				try {
-					return ImageIO.read(new File(("src/main/resources/imagenes/personajes/orco_short.png")));
+					return ImageIO.read(new File(("resources/imagenes/personajes/orco_short.png")));
 				} catch (IOException e) {
 					Loggin.getInstance().error("Error ObtenerImagenRaza: "+e.getMessage());
 				}
