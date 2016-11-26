@@ -1,5 +1,7 @@
 package cliente;
 
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,6 +11,11 @@ import java.net.Socket;
 import java.util.Scanner;
 import java.util.concurrent.Semaphore;
 
+import javax.rmi.CORBA.Util;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JOptionPane;
 
 import com.google.gson.Gson;
@@ -138,14 +145,24 @@ public class Cliente extends Thread {
 			salida.writeObject(gson.toJson(paquete));
 
 			Juego play = new Juego("BloodyWars", 1024, 768, this, pp, getNombreMundo(pp.getMundo()));
+			Clip sonido = AudioSystem.getClip();
+			sonido.open(AudioSystem.getAudioInputStream(new File(Util.class.getResource("/wav/got.wav").getFile())));
+			sonido.start();
+			sonido.loop(Clip.LOOP_CONTINUOUSLY);
+			
 			play.start();
-
 		} catch (IOException e) {
 			Loggin.getInstance().error("Error Cliente: " + e.getMessage());
 		} catch (InterruptedException e) {
 			Loggin.getInstance().error("Error InterruptedException: " + e.getMessage());
 		} catch (ClassNotFoundException e) {
 			Loggin.getInstance().error("Error ClassNotFoundException: " + e.getMessage());
+		} catch (LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedAudioFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}
