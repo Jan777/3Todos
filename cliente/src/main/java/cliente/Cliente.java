@@ -1,7 +1,5 @@
 package cliente;
 
-import java.applet.Applet;
-import java.applet.AudioClip;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -158,11 +156,9 @@ public class Cliente extends Thread {
 		} catch (ClassNotFoundException e) {
 			Loggin.getInstance().error("Error ClassNotFoundException: " + e.getMessage());
 		} catch (LineUnavailableException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Loggin.getInstance().error("Error LineUnavailableException: "+ e.getMessage());
 		} catch (UnsupportedAudioFileException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Loggin.getInstance().error("Error UnsupportedAudioFileException: "+ e.getMessage());
 		}
 
 	}
