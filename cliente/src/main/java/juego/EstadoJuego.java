@@ -81,7 +81,7 @@ public class EstadoJuego extends Estado {
   
 	public boolean evaluarColision(MensajePersonaje p, MensajePersonaje aux)
 	{
-		int tolerancia = 5;
+		int tolerancia = 3;
 		
 		if(aux.getIdPersonaje()!=p.getIdPersonaje() && aux.getPosX() + aux.getAncho() +tolerancia >= p.getPosX() && aux.getPosX() < p.getPosX() + p.getAncho() +tolerancia)
 		{
