@@ -118,8 +118,6 @@ public class PantallaCombate extends JFrame {
 					pEnemigo.setEnergia(pEnemigo.getEnergia()+25);					
 				}
 				
-				
-				
 				textFieldVidaEnemigo.setText(String.valueOf(pEnemigo.getVida()));	
 				textFieldEnergia.setText(String.valueOf(p1.getEnergia()));
 				
@@ -136,11 +134,8 @@ public class PantallaCombate extends JFrame {
 					btnAtacar.setEnabled(false);
 				}
 				
-//				btnAtacar.setEnabled(false);
 				gson.toJson(p1.getIdPersonaje(),Integer.class);
 				if(!pEnemigo.estaVivo()){
-					// enviar mensaje al servidor avisando que termino la pelea y declarar al ganador
-					// el muerto tiene que reaparecer en otra parte del mapa 
 					JOptionPane.showMessageDialog(null, "El combate finalizó: usted fue el ganador!");
 					juego.getPersonaje().setPosX(0);
 					juego.getPersonaje().setPosY(1536);
@@ -213,6 +208,18 @@ public class PantallaCombate extends JFrame {
 		labelEnergiaEnemigo.setBounds(381, 102, 72, 14);
 		panel.add(labelEnergiaEnemigo);
 		
+		JLabel lblAvataryo = new JLabel();
+		
+		lblAvataryo.setBounds(33, 165, 158, 101);
+		panel.add(lblAvataryo);
+		lblAvataryo.setVisible(true);
+		
+		
+		JLabel lblAvatarEnemigo = new JLabel("");
+		lblAvatarEnemigo.setBounds(381, 165, 157, 101);
+		panel.add(lblAvatarEnemigo);
+		lblAvatarEnemigo.setVisible(true);
+		
 		textFieldVida = new JTextField();
 		textFieldVida.setBounds(105, 75, 86, 20);
 		panel.add(textFieldVida);
@@ -246,32 +253,20 @@ public class PantallaCombate extends JFrame {
 		lblNewLabel_2.setIcon(new ImageIcon(Login.class.getResource("/imagenes/fondoPelea.jpg")));
 		lblNewLabel_2.setBounds(0, 0, 652, 333);
 		panel.add(lblNewLabel_2);
-		
-		JLabel lblAvataryo = new JLabel("avatarYo");
-		if(pEnemigo.getRaza().equals("ORCO")){
+		if(p1.getRaza().equals("ORCO")){
 			lblAvataryo.setIcon(new ImageIcon(Login.class.getResource("/imagenes/personajes/orco_short.png")));
-		} else if (pEnemigo.getRaza().equals("ELFO")){
+		} else if (p1.getRaza().equals("ELFO")){
 			lblAvataryo.setIcon(new ImageIcon(Login.class.getResource("/imagenes/personajes/elfo_short.png")));
-		} else {
+		} else if (p1.getRaza().equals("HUMANO")){
 			lblAvataryo.setIcon(new ImageIcon(Login.class.getResource("/imagenes/personajes/humano_short.png")));
 		}
-		
-		lblAvataryo.setBounds(33, 165, 158, 101);
-		panel.add(lblAvataryo);
-		lblAvataryo.setVisible(true);
-		
-		
-		JLabel lblAvatarEnemigo = new JLabel("");
 		if(pEnemigo.getRaza().equals("ORCO")){
 			lblAvatarEnemigo.setIcon(new ImageIcon(Login.class.getResource("/imagenes/personajes/orco_short.png")));
 		} else if (pEnemigo.getRaza().equals("ELFO")){
 			lblAvatarEnemigo.setIcon(new ImageIcon(Login.class.getResource("/imagenes/personajes/elfo_short.png")));
-		} else {
+		} else if (pEnemigo.getRaza().equals("HUMANO")){
 			lblAvatarEnemigo.setIcon(new ImageIcon(Login.class.getResource("/imagenes/personajes/humano_short.png")));
 		}
-		lblAvatarEnemigo.setBounds(381, 165, 157, 101);
-		panel.add(lblAvatarEnemigo);
-		lblAvatarEnemigo.setVisible(true);
 
 	}
 }
