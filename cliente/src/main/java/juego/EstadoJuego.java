@@ -68,12 +68,9 @@ public class EstadoJuego extends Estado {
 			if(evaluarColision(juego.getPersonaje(),personajeActual) && !juego.getPersonaje().isEnCombate())	{
 				juego.getPersonaje().setEnCombate(true);
 				PantallaCombate pc = new PantallaCombate(juego,personajeActual);
-				pc.setVisible(true);
-					
+				pc.setVisible(true);				
 			}
-		
-							 
-					
+				
 			if (personajeActual.getIdPersonaje() != juego.getPersonaje().getIdPersonaje()) {
 				g.drawImage(personaje.obtenerAnimacion(personajeActual.getRaza()).get(personajeActual.getDireccion())[personajeActual.getFrame()], (int) (personajeActual.getPosX() - juego.getCamara().getxOffset() ), (int) (personajeActual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null); 
 			} 

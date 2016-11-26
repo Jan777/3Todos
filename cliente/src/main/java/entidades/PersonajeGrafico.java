@@ -307,9 +307,9 @@ public class PersonajeGrafico {
 		g.drawString("CASTA: GUERRERO", 410, 55);
 		g.drawString("NIVEL: 1", 410, 70);
 		g.setColor(Color.RED); 
-		Font myFont = new Font ("Comic Sans MS", Font.BOLD, 16);
+		Font myFont = new Font ("OCR A Extended", Font.BOLD, 16);
 		g.setFont (myFont);
-	    g.drawString(this.juego.getNickName(), drawX + 10, drawY - 10);
+	    g.drawString(this.juego.getNickName().toUpperCase(), drawX + 10, drawY - 10);
 	}
 
 	private Image obtenerImagenCuadro() {
