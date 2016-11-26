@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -21,6 +22,7 @@ import razas.*;
 import utilities.Loggin;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.JTextField;
@@ -93,37 +95,66 @@ public class PantallaCombate extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 677, 383);
+		setBounds(100, 100, 689, 398);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-//		if( el mensaje recibido dice que es mi turno ...){
-//		btnAtacar.setVisible(true)
-		
 		JButton btnAtacar = new JButton("ATACAR!");
 		btnAtacar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(pEnemigo.estaVivo() && p1.puedeAtacar()){
-					p1.atacar(pEnemigo);
-					textFieldVida.setText(String.valueOf(p1.getVida()));
-					textFieldVidaEnemigo.setText(String.valueOf(pEnemigo.getVida()));
-					textFieldEnergia.setText(String.valueOf(p1.getEnergia()));
-					textFieldEnergiaEnemigo.setText(String.valueOf(pEnemigo.getEnergia()));
-					btnAtacar.setEnabled(false);
-					gson.toJson(p1.getIdPersonaje(),Integer.class);
-					
-					// aca envio mensaje					
+					p1.atacar(pEnemigo);									
+				} 
+				else if(pEnemigo.estaVivo() && !p1.puedeAtacar()){
+					p1.setEnergia(p1.getEnergia()+25);					
 				}
 				
+				if(p1.estaVivo() && pEnemigo.puedeAtacar()){
+					pEnemigo.atacar(p1);
+									
+				} else if(p1.estaVivo() && !pEnemigo.puedeAtacar()){
+					pEnemigo.setEnergia(pEnemigo.getEnergia()+25);					
+				}
+				
+				
+				
+				textFieldVidaEnemigo.setText(String.valueOf(pEnemigo.getVida()));	
+				textFieldEnergia.setText(String.valueOf(p1.getEnergia()));
+				
+				try {
+					TimeUnit.SECONDS.sleep(2);
+				} catch (InterruptedException e) {
+					Loggin.getInstance().error(e.getMessage());
+				}
+				
+				textFieldEnergiaEnemigo.setText(String.valueOf(pEnemigo.getEnergia()));
+				textFieldVida.setText(String.valueOf(p1.getVida()));
+				
+				if(p1.getEnergia() < p1.calcularPuntosDeAtaque()){
+					btnAtacar.setEnabled(false);
+				}
+				
+//				btnAtacar.setEnabled(false);
+				gson.toJson(p1.getIdPersonaje(),Integer.class);
 				if(!pEnemigo.estaVivo()){
 					// enviar mensaje al servidor avisando que termino la pelea y declarar al ganador
 					// el muerto tiene que reaparecer en otra parte del mapa 
+					JOptionPane.showMessageDialog(null, "El combate finalizó: usted fue el ganador!");
+					juego.getPersonaje().setPosX(0);
+					juego.getPersonaje().setPosY(1536);
+					juego.getPersonaje().setEnCombate(false);
+					dispose();
 				}
 					
 				if(!p1.estaVivo()){
 					// idem pero conmigo
+					JOptionPane.showMessageDialog(null, "El combate finalizó: usted fue derrotado!");
+					juego.getPersonaje().setPosX(0);
+					juego.getPersonaje().setPosY(1536);
+					juego.getPersonaje().setEnCombate(false);
+					dispose();
 				}
 			}
 		});
@@ -134,6 +165,7 @@ public class PantallaCombate extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 //				deshabilito el boton de atacar y aviso al servidor
+				p1.serEnergizado();
 				btnAtacar.setEnabled(false);
 			}
 		});
@@ -226,6 +258,8 @@ public class PantallaCombate extends JFrame {
 		
 		lblAvataryo.setBounds(33, 165, 158, 101);
 		panel.add(lblAvataryo);
+		lblAvataryo.setVisible(true);
+		
 		
 		JLabel lblAvatarEnemigo = new JLabel("");
 		if(pEnemigo.getRaza().equals("ORCO")){
@@ -237,6 +271,7 @@ public class PantallaCombate extends JFrame {
 		}
 		lblAvatarEnemigo.setBounds(381, 165, 157, 101);
 		panel.add(lblAvatarEnemigo);
+		lblAvatarEnemigo.setVisible(true);
 
 	}
 }

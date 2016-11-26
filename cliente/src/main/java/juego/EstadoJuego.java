@@ -19,7 +19,7 @@ public class EstadoJuego extends Estado {
 	private PersonajeGrafico personaje;
 	private Mapa mapa;
 	private final Gson gson = new Gson();
-	private boolean colision = false;
+	final boolean colision = false;
 	private int spawnX;
 	private int spawnY;
 
@@ -65,35 +65,18 @@ public class EstadoJuego extends Estado {
 			key = (int) it.next();
 			personajeActual = juego.getEscuchaMensajes().getPersonajes().get(key);
 			
-			if(evaluarColision(juego.getPersonaje(),personajeActual) && colision == false)	{
+			if(evaluarColision(juego.getPersonaje(),personajeActual) && !juego.getPersonaje().isEnCombate())	{
+				juego.getPersonaje().setEnCombate(true);
 				PantallaCombate pc = new PantallaCombate(juego,personajeActual);
 				pc.setVisible(true);
-				colision = true;
+					
 			}
-			
-			//no le cambien el orden a la llamada a la funcion sino no detecta colisiones
-					  // @mauroat - 23-11-16: la siguiente condicion es experimental
-					  
-					  // ver como agregar para que este if verifique que el colisionado no este en la lista getCombatiendo
+		
+							 
 					
-						
-						/*  
-						  personajeActual.setColision(true);
-						personajeActual.setIdPersonajeColision(aux.getIdPersonaje());
-						//Mensaje paquete = new Mensaje();
-						personajeActual.setMensaje(Personaje.conversor(usuario, usuario.getClass()));
-						salida.writeObject(gson.toJson(paquete));
-						paquete = gson.fromJson((String) entrada.readObject(), Mensaje.class);
-						*/
-						// personajeActual.setComando("colision");
-						
-						// ver como mierda le mando un mensaje al servidor !!!
-						 
-						 
-					
-				if (personajeActual.getIdPersonaje() != juego.getPersonaje().getIdPersonaje()) {
-					g.drawImage(personaje.obtenerAnimacion(personajeActual.getRaza()).get(personajeActual.getDireccion())[personajeActual.getFrame()], (int) (personajeActual.getPosX() - juego.getCamara().getxOffset() ), (int) (personajeActual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null); 
-				} 
+			if (personajeActual.getIdPersonaje() != juego.getPersonaje().getIdPersonaje()) {
+				g.drawImage(personaje.obtenerAnimacion(personajeActual.getRaza()).get(personajeActual.getDireccion())[personajeActual.getFrame()], (int) (personajeActual.getPosX() - juego.getCamara().getxOffset() ), (int) (personajeActual.getPosY() - juego.getCamara().getyOffset()), 64, 64, null); 
+			} 
 		}
 		
 		g.drawImage(Grafico.marco, 0, 0, juego.getAncho(), juego.getAlto(), null);
