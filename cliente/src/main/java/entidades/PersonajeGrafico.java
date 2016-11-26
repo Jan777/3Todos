@@ -1,10 +1,16 @@
 package entidades;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 import com.google.gson.Gson;
 
@@ -294,9 +300,57 @@ public class PersonajeGrafico {
 		drawX = (int) (x - juego.getCamara().getxOffset());
 		drawY = (int) (y - juego.getCamara().getyOffset());
 		g.drawImage(getFrameAnimacionActual(), drawX, drawY, ancho, alto, null);
+		g.drawImage(obtenerImagenCuadro(), 300, 0, 300, 90, null);
+		g.drawImage(obtenerImagenRaza(this.juego.getRaza()), 310, 0, 90, 90, null);
 		g.setColor(Color.WHITE); 
-	    g.drawString(this.juego.getNickName(), drawX + 10, drawY - 12);
+		g.drawString("RAZA: " + this.juego.getRaza(), 410, 40);
+		g.drawString("CASTA: GUERRERO", 410, 55);
+		g.drawString("NIVEL: 1", 410, 70);
+		g.setColor(Color.RED); 
+		Font myFont = new Font ("Comic Sans MS", Font.BOLD, 16);
+		g.setFont (myFont);
+	    g.drawString(this.juego.getNickName(), drawX + 10, drawY - 10);
 	}
+
+	private Image obtenerImagenCuadro() {
+		try {
+			return ImageIO.read(new File(("src/main/resources/imagenes/cuadro.jpg")));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
+	private Image obtenerImagenRaza(String raza){
+		if (raza != null && !raza.isEmpty()) {
+			if (raza.contentEquals("HUMANO")) {
+				try {
+					return ImageIO.read(new File(("src/main/resources/imagenes/personajes/humano_short.png")));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else if (raza.contentEquals("ELFO")) {
+				try {
+					return ImageIO.read(new File(("src/main/resources/imagenes/personajes/elfo_short.png")));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else if (raza.contentEquals("ORCO")) {
+				try {
+					return ImageIO.read(new File(("src/main/resources/imagenes/personajes/orco_short.png")));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return null;
+	}
+
 
 	private BufferedImage getFrameAnimacionActual() {
 		if (movimientoHacia == horizontalIzq) {

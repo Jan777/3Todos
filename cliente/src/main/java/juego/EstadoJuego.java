@@ -20,11 +20,14 @@ public class EstadoJuego extends Estado {
 	private Mapa mapa;
 	private final Gson gson = new Gson();
 	private boolean colision = false;
+	private int spawnX;
+	private int spawnY;
 
 	public EstadoJuego(Juego juego) {
 		super(juego);
-		mapa = new Mapa(juego); 
-	    personaje = new PersonajeGrafico(juego, mapa, 64, 64, 0, 0, 100); 
+		mapa = new Mapa(juego);
+		setearUbicacionRandom();
+	    personaje = new PersonajeGrafico(juego, mapa, 64, 64, spawnX, spawnY, 100); 
 	 
 		try {
 			juego.getPersonaje().setComando("conectado");
@@ -33,6 +36,13 @@ public class EstadoJuego extends Estado {
 		} catch (IOException e) {
 			Loggin.getInstance().error("Error en EstadoJuego "+e.getMessage());
 		}
+	}
+
+	private void setearUbicacionRandom() {
+		int[][] ubicaciones = {{0,0},{-768,352},{-1568,752},{-800,1136},{0,1536},{768,352},{1368,752},{800,1136}};
+		int fila = (int) (Math.random() * 7) + 1;
+		this.spawnX = ubicaciones[fila][0];
+		this.spawnY = ubicaciones[fila][1];
 	}
 
 	@Override

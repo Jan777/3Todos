@@ -15,7 +15,12 @@ public class Tile {
 	public static Tile agua = new Tile(Grafico.agua, 1, true); 
 	public static Tile vacio = new Tile(Grafico.vacio, 2, true); 
 	public static Tile arena = new Tile(Grafico.arena, 3, false); 
-	public static Tile lava = new Tile(Grafico.lava, 4, true); 
+	public static Tile lava = new Tile(Grafico.lava, 4, true);  
+	public static Tile piedra = new Tile(Grafico.piedra, 5, true); 
+	public static Tile calle = new Tile(Grafico.calle, 6, false); 
+	public static Tile calleArriba = new Tile(Grafico.calleArriba, 7, false); 
+	public static Tile calleAbajo = new Tile(Grafico.calleAbajo, 8, false); 
+	public static Tile calleMedia = new Tile(Grafico.calleMedia, 9, false); 
 	   
 	public static final int ANCHO = 64;
 	public static final int ALTO = 96;

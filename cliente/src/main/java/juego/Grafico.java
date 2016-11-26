@@ -17,6 +17,11 @@ public class Grafico {
 	public static BufferedImage lava;
 	public static BufferedImage fondo;
 	public static BufferedImage marco;
+	public static BufferedImage piedra;
+	public static BufferedImage calle;
+	public static BufferedImage calleArriba;
+	public static BufferedImage calleAbajo;
+	public static BufferedImage calleMedia;
 
 	public static LinkedList<BufferedImage[]> humano = new LinkedList<>();
 	public static LinkedList<BufferedImage[]> orco = new LinkedList<>();
@@ -35,6 +40,11 @@ public class Grafico {
 		lava = cargarSprite("src/main/resources/imagenes/LavaConOnda.png");
 		fondo = cargarSprite("src/main/resources/imagenes/fondo.jpg");
 		marco = cargarSprite("src/main/resources/imagenes/marco.png");
+		piedra = cargarSprite("src/main/resources/imagenes/Piedra.png");
+		calle = cargarSprite("src/main/resources/imagenes/Calle.png");
+		calleArriba = cargarSprite("src/main/resources/imagenes/CalleArriba.png");
+		calleAbajo = cargarSprite("src/main/resources/imagenes/CalleAbajo.png");
+		calleMedia = cargarSprite("src/main/resources/imagenes/CalleMedia.png");
 	}
 
 	private static BufferedImage cargarSprite(String pathSprite) {
